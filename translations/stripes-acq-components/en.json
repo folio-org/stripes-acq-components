@@ -1,4 +1,7 @@
 {
+  "filter.false": "No",
+  "filter.true": "Yes",
+
   "label.sourceFilter": "Source",
 
   "sources.api": "API",
