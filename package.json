@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "prop-types": "^15.7.2",
+    "react-intl": "^2.9.0",
     "redux-form": "^7.4.2"
   },
   "peerDependencies": {
