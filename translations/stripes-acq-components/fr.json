@@ -1,0 +1,9 @@
+{
+    "label.sourceFilter": "Source",
+    "sources.api": "API",
+    "sources.edi": "EDI",
+    "sources.marc": "MARC",
+    "sources.user": "User",
+    "filter.false": "No",
+    "filter.true": "Yes"
+}
