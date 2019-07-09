@@ -1,0 +1,9 @@
+{
+    "label.sourceFilter": "المصدر",
+    "sources.api": "API",
+    "sources.edi": "EDI",
+    "sources.marc": "مارك",
+    "sources.user": "المستخدم",
+    "filter.false": "لا",
+    "filter.true": "نعم"
+}
