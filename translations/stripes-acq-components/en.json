@@ -4,6 +4,7 @@
 
   "label.emptyValue": " ",
   "label.sourceFilter": "Source",
+  "label.acqUnits": "Acquisition units",
 
   "sources.api": "API",
   "sources.edi": "EDI",
