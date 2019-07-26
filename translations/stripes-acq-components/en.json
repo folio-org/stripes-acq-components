@@ -2,6 +2,7 @@
   "filter.false": "No",
   "filter.true": "Yes",
 
+  "label.emptyValue": " ",
   "label.sourceFilter": "Source",
 
   "sources.api": "API",
