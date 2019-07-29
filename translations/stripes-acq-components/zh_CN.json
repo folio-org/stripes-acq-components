@@ -1,9 +1,10 @@
 {
-    "label.sourceFilter": "Source",
+    "label.sourceFilter": "来源",
     "sources.api": "API",
     "sources.edi": "EDI",
     "sources.marc": "MARC",
-    "sources.user": "User",
-    "filter.false": "No",
-    "filter.true": "Yes"
+    "sources.user": "用户",
+    "filter.false": "否",
+    "filter.true": "是",
+    "label.emptyValue": " "
 }
