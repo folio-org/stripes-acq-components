@@ -8,5 +8,7 @@
   "sources.api": "API",
   "sources.edi": "EDI",
   "sources.marc": "MARC",
-  "sources.user": "User"
+  "sources.user": "User",
+
+  "validation.required": "Required!"
 }
