@@ -6,5 +6,6 @@
     "sources.user": "Usuário",
     "filter.false": "Não",
     "filter.true": "Sim",
-    "label.emptyValue": " "
+    "label.emptyValue": " ",
+    "validation.required": "Obrigatório!"
 }
