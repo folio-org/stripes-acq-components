@@ -6,5 +6,6 @@
     "sources.user": "المستخدم",
     "filter.false": "لا",
     "filter.true": "نعم",
-    "label.emptyValue": "."
+    "label.emptyValue": ".",
+    "validation.required": "مطلوب!"
 }
