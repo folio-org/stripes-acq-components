@@ -36,6 +36,9 @@
     "react": "*"
   },
   "stripes": {
-    "type": ""
+    "type": "",
+    "okapiInterfaces": {
+      "acquisitions-units": "1.0"
+    }
   }
 }
