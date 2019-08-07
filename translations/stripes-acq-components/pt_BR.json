@@ -7,5 +7,6 @@
     "filter.false": "Não",
     "filter.true": "Sim",
     "label.emptyValue": " ",
-    "validation.required": "Obrigatório!"
+    "validation.required": "Obrigatório!",
+    "label.acqUnits": "Unidades de aquisição"
 }

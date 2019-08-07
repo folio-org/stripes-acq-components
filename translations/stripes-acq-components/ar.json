@@ -7,5 +7,6 @@
     "filter.false": "لا",
     "filter.true": "نعم",
     "label.emptyValue": ".",
-    "validation.required": "مطلوب!"
+    "validation.required": "مطلوب!",
+    "label.acqUnits": "وحدات التزويد"
 }
