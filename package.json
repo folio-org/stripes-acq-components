@@ -25,6 +25,7 @@
     "react": "^16.8.6"
   },
   "dependencies": {
+    "@folio/react-intl-safe-html": "^1.0.3",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
