@@ -29,6 +29,7 @@
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
+    "react-dropzone": "^9.0.0",
     "react-intl": "^2.9.0",
     "redux-form": "^7.4.2"
   },
