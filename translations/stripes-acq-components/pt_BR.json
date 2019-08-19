@@ -8,5 +8,7 @@
     "filter.true": "Sim",
     "label.emptyValue": " ",
     "validation.required": "Obrigatório!",
-    "label.acqUnits": "Unidades de aquisição"
+    "label.acqUnits": "Unidades de aquisição",
+    "fileUploader.dropFile": "Drag and drop to upload a document",
+    "fileUploader.selectFile": "or choose file"
 }

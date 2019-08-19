@@ -8,5 +8,7 @@
     "filter.true": "Yes",
     "label.emptyValue": " ",
     "validation.required": "Required!",
-    "label.acqUnits": "Acquisition units"
+    "label.acqUnits": "Acquisition units",
+    "fileUploader.dropFile": "Drag and drop to upload a document",
+    "fileUploader.selectFile": "or choose file"
 }
