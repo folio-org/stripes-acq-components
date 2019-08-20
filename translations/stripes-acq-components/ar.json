@@ -9,6 +9,6 @@
     "label.emptyValue": ".",
     "validation.required": "مطلوب!",
     "label.acqUnits": "وحدات التزويد",
-    "fileUploader.dropFile": "Drag and drop to upload a document",
-    "fileUploader.selectFile": "or choose file"
+    "fileUploader.dropFile": "قم بالسحب والإفلات لتحميل الوثيقة",
+    "fileUploader.selectFile": "أو اختر ملف"
 }
