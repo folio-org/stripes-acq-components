@@ -9,6 +9,6 @@
     "label.emptyValue": " ",
     "validation.required": "Obrigatório!",
     "label.acqUnits": "Unidades de aquisição",
-    "fileUploader.dropFile": "Drag and drop to upload a document",
-    "fileUploader.selectFile": "or choose file"
+    "fileUploader.dropFile": "Arraste e solte para fazer o upload de um documento",
+    "fileUploader.selectFile": "ou escolha o arquivo"
 }
