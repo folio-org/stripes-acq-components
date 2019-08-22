@@ -3,7 +3,8 @@
   "extends": "@folio/eslint-config-stripes",
   "plugins": [
     "filenames",
-    "no-only-tests"
+    "no-only-tests",
+    "react-hooks"
   ],
   "rules": {
     "filenames/match-exported": "error",
@@ -117,6 +118,8 @@
       3
     ],
     "no-only-tests/no-only-tests": "error",
-    "no-constant-condition": "error"
+    "no-constant-condition": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }
