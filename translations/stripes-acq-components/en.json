@@ -9,6 +9,7 @@
   "fileUploader.dropFile": "Drag and drop to upload a document",
   "fileUploader.selectFile": "or choose file",
 
+  "fundDistribution.addBtn": "Add",
 
   "sources.api": "API",
   "sources.edi": "EDI",
