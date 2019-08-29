@@ -10,5 +10,10 @@
     "validation.required": "Required!",
     "label.acqUnits": "Acquisition units",
     "fileUploader.dropFile": "Drag and drop to upload a document",
+    "modal.noSourceYet": "no source yet",
+    "modal.totalSelected": "Total selected: {count}",
+    "button.close": "Close",
+    "button.save": "Save",
+    "modal.resultsHeader": "Search results",
     "fileUploader.selectFile": "or choose file"
 }
