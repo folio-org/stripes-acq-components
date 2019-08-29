@@ -1,4 +1,7 @@
 {
+  "button.close": "Close",
+  "button.save": "Save",
+
   "filter.false": "No",
   "filter.true": "Yes",
 
@@ -9,6 +12,9 @@
   "fileUploader.dropFile": "Drag and drop to upload a document",
   "fileUploader.selectFile": "or choose file",
 
+  "modal.resultsHeader": "Search results",
+  "modal.noSourceYet": "No source yet",
+  "modal.totalSelected": "Total selected: {count}",
 
   "sources.api": "API",
   "sources.edi": "EDI",
