@@ -1,4 +1,7 @@
 {
+  "button.close": "Close",
+  "button.save": "Save",
+
   "filter.false": "No",
   "filter.true": "Yes",
 
@@ -15,6 +18,10 @@
   "fundDistribution.encumbrance": "Encumbrance",
   "fundDistribution.id": "Fund ID",
   "fundDistribution.percent": "Percent",
+
+  "modal.resultsHeader": "Search results",
+  "modal.noSourceYet": "No source yet",
+  "modal.totalSelected": "Total selected: {count}",
 
   "sources.api": "API",
   "sources.edi": "EDI",
