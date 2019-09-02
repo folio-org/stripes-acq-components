@@ -1,0 +1,3 @@
+.fundDistributionAmount + .fundDistributionAmount:before {
+  content: ', ';
+}
