@@ -10,5 +10,16 @@
     "validation.required": "مطلوب!",
     "label.acqUnits": "وحدات التزويد",
     "fileUploader.dropFile": "قم بالسحب والإفلات لتحميل الوثيقة",
-    "fileUploader.selectFile": "أو اختر ملف"
+    "fileUploader.selectFile": "أو اختر ملف",
+    "button.close": "غلق",
+    "button.save": "حفظ",
+    "modal.resultsHeader": "نتائج البحث",
+    "modal.noSourceYet": "لا يوجد مصدر بعد",
+    "modal.totalSelected": "إجمالي المحدد: {count}",
+    "fundDistribution.addBtn": "Add fund distribution",
+    "fundDistribution.amount": "Amount",
+    "fundDistribution.code": "Code",
+    "fundDistribution.encumbrance": "Encumbrance",
+    "fundDistribution.id": "Fund ID",
+    "fundDistribution.percent": "Percent"
 }
