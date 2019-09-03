@@ -12,6 +12,13 @@
   "fileUploader.dropFile": "Drag and drop to upload a document",
   "fileUploader.selectFile": "or choose file",
 
+  "fundDistribution.addBtn": "Add fund distribution",
+  "fundDistribution.amount": "Amount",
+  "fundDistribution.code": "Code",
+  "fundDistribution.encumbrance": "Encumbrance",
+  "fundDistribution.id": "Fund ID",
+  "fundDistribution.percent": "Percent",
+
   "modal.resultsHeader": "Search results",
   "modal.noSourceYet": "No source yet",
   "modal.totalSelected": "Total selected: {count}",
