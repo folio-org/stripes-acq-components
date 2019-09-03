@@ -10,5 +10,16 @@
     "validation.required": "Required!",
     "label.acqUnits": "Acquisition units",
     "fileUploader.dropFile": "Drag and drop to upload a document",
-    "fileUploader.selectFile": "or choose file"
+    "fileUploader.selectFile": "or choose file",
+    "button.close": "Close",
+    "button.save": "Save",
+    "modal.resultsHeader": "Search results",
+    "modal.noSourceYet": "No source yet",
+    "modal.totalSelected": "Total selected: {count}",
+    "fundDistribution.addBtn": "Add fund distribution",
+    "fundDistribution.amount": "Amount",
+    "fundDistribution.code": "Code",
+    "fundDistribution.encumbrance": "Encumbrance",
+    "fundDistribution.id": "Fund ID",
+    "fundDistribution.percent": "Percent"
 }
