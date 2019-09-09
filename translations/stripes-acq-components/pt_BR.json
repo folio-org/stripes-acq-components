@@ -16,10 +16,10 @@
     "modal.resultsHeader": "Resultados da pesquisa",
     "modal.noSourceYet": "Nenhuma fonte ainda",
     "modal.totalSelected": "Total selecionado: {count}",
-    "fundDistribution.addBtn": "Add fund distribution",
-    "fundDistribution.amount": "Amount",
-    "fundDistribution.code": "Code",
-    "fundDistribution.encumbrance": "Encumbrance",
-    "fundDistribution.id": "Fund ID",
-    "fundDistribution.percent": "Percent"
+    "fundDistribution.addBtn": "Adicionar distribuição de fundos",
+    "fundDistribution.amount": "Quantia",
+    "fundDistribution.code": "Código",
+    "fundDistribution.encumbrance": "Oneração",
+    "fundDistribution.id": "ID do fundo",
+    "fundDistribution.percent": "Porcentagem"
 }

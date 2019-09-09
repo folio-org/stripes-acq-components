@@ -16,10 +16,10 @@
     "modal.resultsHeader": "نتائج البحث",
     "modal.noSourceYet": "لا يوجد مصدر بعد",
     "modal.totalSelected": "إجمالي المحدد: {count}",
-    "fundDistribution.addBtn": "Add fund distribution",
-    "fundDistribution.amount": "Amount",
-    "fundDistribution.code": "Code",
-    "fundDistribution.encumbrance": "Encumbrance",
-    "fundDistribution.id": "Fund ID",
-    "fundDistribution.percent": "Percent"
+    "fundDistribution.addBtn": "إضافة توزيع تمويل",
+    "fundDistribution.amount": "المبلغ",
+    "fundDistribution.code": "رمز",
+    "fundDistribution.encumbrance": "رهن",
+    "fundDistribution.id": "معرّف التمويل",
+    "fundDistribution.percent": "في المائة"
 }
