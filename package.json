@@ -1,6 +1,6 @@
 {
   "name": "@folio/stripes-acq-components",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Component library for Stripes Acquisitions modules",
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
@@ -44,7 +44,8 @@
   "stripes": {
     "type": "",
     "okapiInterfaces": {
-      "acquisitions-units": "1.0"
+      "acquisitions-units": "1.0",
+      "finance-storage.funds": "2.0"
     }
   }
 }
