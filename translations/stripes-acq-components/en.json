@@ -1,4 +1,6 @@
 {
+  "addtagFor": "Add tag for: {filterValue}",
+
   "button.close": "Close",
   "button.save": "Save",
 
@@ -8,6 +10,7 @@
   "label.emptyValue": " ",
   "label.sourceFilter": "Source",
   "label.acqUnits": "Acquisition units",
+  "label.tags": "Tags",
 
   "fileUploader.dropFile": "Drag and drop to upload a document",
   "fileUploader.selectFile": "or choose file",
