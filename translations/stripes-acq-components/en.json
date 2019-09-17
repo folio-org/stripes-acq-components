@@ -31,5 +31,9 @@
   "sources.marc": "MARC",
   "sources.user": "User",
 
+  "searchAndFilter": "Search & filter",
+  "search": "Search",
+  "resetAllFilters": "Reset all",
+
   "validation.required": "Required!"
 }
