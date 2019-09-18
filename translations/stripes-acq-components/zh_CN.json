@@ -21,5 +21,10 @@
     "fundDistribution.code": "代码",
     "fundDistribution.encumbrance": "预支",
     "fundDistribution.id": "经费ID",
-    "fundDistribution.percent": "百分比"
+    "fundDistribution.percent": "百分比",
+    "addtagFor": "Add tag for: {filterValue}",
+    "label.tags": "Tags",
+    "searchAndFilter": "Search & filter",
+    "search": "Search",
+    "resetAllFilters": "Reset all"
 }
