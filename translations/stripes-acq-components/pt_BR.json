@@ -21,5 +21,10 @@
     "fundDistribution.code": "Código",
     "fundDistribution.encumbrance": "Oneração",
     "fundDistribution.id": "ID do fundo",
-    "fundDistribution.percent": "Porcentagem"
+    "fundDistribution.percent": "Porcentagem",
+    "addtagFor": "Add tag for: {filterValue}",
+    "label.tags": "Tags",
+    "searchAndFilter": "Search & filter",
+    "search": "Search",
+    "resetAllFilters": "Reset all"
 }

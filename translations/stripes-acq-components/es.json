@@ -21,5 +21,10 @@
     "fundDistribution.code": "Código",
     "fundDistribution.encumbrance": "Gravamen",
     "fundDistribution.id": "ID del fondo",
-    "fundDistribution.percent": "Porcentaje"
+    "fundDistribution.percent": "Porcentaje",
+    "addtagFor": "Add tag for: {filterValue}",
+    "label.tags": "Tags",
+    "searchAndFilter": "Search & filter",
+    "search": "Search",
+    "resetAllFilters": "Reset all"
 }

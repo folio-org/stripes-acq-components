@@ -21,5 +21,10 @@
     "fundDistribution.code": "رمز",
     "fundDistribution.encumbrance": "رهن",
     "fundDistribution.id": "معرّف التمويل",
-    "fundDistribution.percent": "في المائة"
+    "fundDistribution.percent": "في المائة",
+    "addtagFor": "Add tag for: {filterValue}",
+    "label.tags": "Tags",
+    "searchAndFilter": "Search & filter",
+    "search": "Search",
+    "resetAllFilters": "Reset all"
 }
