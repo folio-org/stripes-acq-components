@@ -22,9 +22,9 @@
     "fundDistribution.encumbrance": "رهن",
     "fundDistribution.id": "معرّف التمويل",
     "fundDistribution.percent": "في المائة",
-    "addtagFor": "Add tag for: {filterValue}",
-    "label.tags": "Tags",
-    "searchAndFilter": "Search & filter",
-    "search": "Search",
-    "resetAllFilters": "Reset all"
+    "addtagFor": "إضافة وسم لـ: {filterValue}",
+    "label.tags": "وسوم",
+    "searchAndFilter": "بحث وتنقيح",
+    "search": "بحث",
+    "resetAllFilters": "إعادة تعيين الكل"
 }
