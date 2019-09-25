@@ -7,7 +7,7 @@
     "filter.false": "No",
     "filter.true": "Si",
     "label.emptyValue": " ",
-    "validation.required": "Required!",
+    "validation.required": "Obbligatorio!",
     "label.acqUnits": "Acquisition units",
     "fileUploader.dropFile": "Drag and drop to upload a document",
     "fileUploader.selectFile": "or choose file",
