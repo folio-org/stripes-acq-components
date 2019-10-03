@@ -4,3 +4,4 @@ export { default as configUnits } from './units';
 export { default as configTags } from './tags';
 export { default as configFunds } from './funds';
 export { default as configMemberships } from './memberships';
+export * from './utils';
