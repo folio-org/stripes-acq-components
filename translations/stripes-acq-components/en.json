@@ -26,6 +26,15 @@
   "modal.noSourceYet": "No source yet",
   "modal.totalSelected": "Total selected: {count}",
 
+  "paymentMethod.cash": "Cash",
+  "paymentMethod.card": "Credit card",
+  "paymentMethod.eft": "EFT",
+  "paymentMethod.depAccount": "Deposit account",
+  "paymentMethod.physicalCheck": "Physical check",
+  "paymentMethod.bankDraft": "Bank draft",
+  "paymentMethod.internalTransfer": "Internal transfer",
+  "paymentMethod.other": "Other",
+
   "sources.api": "API",
   "sources.edi": "EDI",
   "sources.marc": "MARC",
