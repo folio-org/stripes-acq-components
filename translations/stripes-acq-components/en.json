@@ -50,5 +50,6 @@
   "search": "Search",
   "resetAllFilters": "Reset all",
 
+  "validation.fundDistributionType": "All distributions should be the same type",
   "validation.required": "Required!"
 }
