@@ -51,5 +51,6 @@
   "resetAllFilters": "Reset all",
 
   "validation.fundDistributionType": "All distributions should be the same type",
+  "validation.shouldBeEqualToTotalAmount": "The percentage or amount(s) should be equal 100% of the total",
   "validation.required": "Required!"
 }
