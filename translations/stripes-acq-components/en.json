@@ -24,7 +24,6 @@
   "fundDistribution.value": "Value",
   "fundDistribution.type": "Select adjustment",
   "fundDistribution.type.sign.percent": "%",
-  "fundDistribution.type.sign.amount": "$",
   "fundDistribution.type.percent": "Percent",
   "fundDistribution.type.amount": "Amount",
   "fundDistribution.remainingAmount": "Remaining amount to be distributed: {remainingAmount}",
