@@ -1,5 +1,5 @@
 {
-  "addtagFor": "Add tag for: {filterValue}",
+  "addTagFor": "Add tag for: {filterValue}",
   "showTags": "Show tags",
 
   "button.close": "Close",
@@ -7,6 +7,7 @@
 
   "filter.false": "No",
   "filter.true": "Yes",
+  "filter.tags": "Tags",
 
   "label.emptyValue": " ",
   "label.sourceFilter": "Source",
