@@ -47,7 +47,7 @@
     "okapiInterfaces": {
       "acquisitions-units": "1.0",
       "configuration": "2.0",
-      "finance-storage.funds": "2.0",
+      "finance.funds": "1.0",
       "tags": "1.0"
     }
   }
