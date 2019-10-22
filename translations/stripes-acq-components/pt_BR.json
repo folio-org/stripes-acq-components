@@ -21,7 +21,6 @@
     "fundDistribution.code": "Código",
     "fundDistribution.encumbrance": "Oneração",
     "fundDistribution.id": "ID do fundo",
-    "addtagFor": "Adicionar tag para: {filterValue}",
     "label.tags": "Tags",
     "searchAndFilter": "Pesquisar & filtrar",
     "search": "Pesquisa",
@@ -37,9 +36,12 @@
     "fundDistribution.value": "Valor",
     "fundDistribution.type": "Selecione o ajuste",
     "fundDistribution.type.sign.percent": "%",
-    "fundDistribution.type.sign.amount": "$",
     "fundDistribution.type.percent": "Porcentagem",
     "fundDistribution.type.amount": "Quantia",
     "fundDistribution.remainingAmount": "Valor remanescente a ser distribuído: {remainingAmount}",
-    "validation.fundDistributionType": "Todas as distribuições devem ser do mesmo tipo"
+    "validation.fundDistributionType": "Todas as distribuições devem ser do mesmo tipo",
+    "validation.shouldBeEqualToTotalAmount": "A porcentagem ou quantia(s) devem ser igual a 100% do total",
+    "showTags": "Mostrar tags",
+    "addTagFor": "Adicionar tag para: {filterValue}",
+    "filter.tags": "Tags"
 }
