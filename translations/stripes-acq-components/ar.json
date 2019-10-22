@@ -21,7 +21,6 @@
     "fundDistribution.code": "رمز",
     "fundDistribution.encumbrance": "رهن",
     "fundDistribution.id": "معرّف التمويل",
-    "addtagFor": "إضافة وسم لـ: {filterValue}",
     "label.tags": "وسوم",
     "searchAndFilter": "بحث وتنقيح",
     "search": "بحث",
@@ -37,9 +36,12 @@
     "fundDistribution.value": "القيمة",
     "fundDistribution.type": "اختر التعديل",
     "fundDistribution.type.sign.percent": "٪",
-    "fundDistribution.type.sign.amount": "$",
     "fundDistribution.type.percent": "في المائة",
     "fundDistribution.type.amount": "المبلغ",
     "fundDistribution.remainingAmount": "المبلغ المتبقي الذي سيتم توزيعه: {remainingAmount}",
-    "validation.fundDistributionType": "يجب أن تكون جميع التوزيعات من نفس النوع"
+    "validation.fundDistributionType": "يجب أن تكون جميع التوزيعات من نفس النوع",
+    "validation.shouldBeEqualToTotalAmount": "يجب أن تساوي النسبة المئوية أو الكمية  100٪ من المجموع",
+    "showTags": "عرض الوسوم",
+    "addTagFor": "إضافة وسم لـ: {filterValue}",
+    "filter.tags": "وسوم"
 }
