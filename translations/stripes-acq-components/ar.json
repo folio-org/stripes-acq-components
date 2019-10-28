@@ -43,5 +43,6 @@
     "validation.shouldBeEqualToTotalAmount": "يجب أن تساوي النسبة المئوية أو الكمية  100٪ من المجموع",
     "showTags": "عرض الوسوم",
     "addTagFor": "إضافة وسم لـ: {filterValue}",
-    "filter.tags": "وسوم"
+    "filter.tags": "وسوم",
+    "fundDistribution.name": "تمويل"
 }

@@ -43,5 +43,6 @@
     "validation.shouldBeEqualToTotalAmount": "百分比或金额应等于总数的100％",
     "showTags": "显示标签",
     "addTagFor": "添加标签： {filterValue}",
-    "filter.tags": "标签"
+    "filter.tags": "标签",
+    "fundDistribution.name": "Fund"
 }
