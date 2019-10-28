@@ -43,5 +43,6 @@
     "validation.shouldBeEqualToTotalAmount": "The percentage or amount(s) should be equal 100% of the total",
     "showTags": "Show tags",
     "addTagFor": "Add tag for: {filterValue}",
-    "filter.tags": "Tags"
+    "filter.tags": "Tags",
+    "fundDistribution.name": "Fund"
 }
