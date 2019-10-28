@@ -10,17 +10,16 @@ const SCHEMA_NAME = 'funds';
 
 const configFunds = server => {
   server.get(FUNDS_API, ({ funds }, request) => {
-    if (request.queryParams.query) {
-      const cqlParser = new CQLParser();
+    const cqlParser = new CQLParser();
 
-      cqlParser.parse(request.queryParams.query);
+    cqlParser.parse(request.queryParams.query);
+    const { field, term } = cqlParser.tree;
 
-      return funds.where({
-        id: cqlParser.tree.term,
-      });
-    } else {
-      return [];
+    if (field && term && field !== 'cql.allRecords') {
+      return funds.where({ [field]: term });
     }
+
+    return funds.all();
   });
   server.get(`${FUNDS_API}/:id`, createGetById(SCHEMA_NAME));
   server.post(FUNDS_API, createPost(SCHEMA_NAME));
