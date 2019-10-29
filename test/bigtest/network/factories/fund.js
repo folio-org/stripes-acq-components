@@ -5,4 +5,6 @@ export default Factory.extend({
   name: faker.finance.accountName,
   code: faker.finance.account,
   fundStatus: 'Active',
+  allocatedFromIds: [],
+  allocatedToIds: [],
 });
