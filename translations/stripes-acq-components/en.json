@@ -29,6 +29,7 @@
   "fundDistribution.type.percent": "Percent",
   "fundDistribution.type.amount": "Amount",
   "fundDistribution.remainingAmount": "Remaining amount to be distributed: {remainingAmount}",
+  "fundDistribution.adjustmentDescription": "Adjustment",
 
   "modal.resultsHeader": "Search results",
   "modal.noSourceYet": "No source yet",
