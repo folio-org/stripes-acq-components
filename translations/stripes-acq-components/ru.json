@@ -10,7 +10,7 @@
     "validation.required": "Обязательно!",
     "label.acqUnits": "Acquisition units",
     "fileUploader.dropFile": "Drag and drop to upload a document",
-    "fileUploader.selectFile": "or choose file",
+    "fileUploader.selectFile": "или выберите файл",
     "button.close": "Закрыть",
     "button.save": "Сохранить",
     "modal.resultsHeader": "Результаты поиска",
