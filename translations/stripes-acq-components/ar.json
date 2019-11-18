@@ -476,5 +476,6 @@
     "data.languages.yid": "اليديشية",
     "data.languages.yor": "اليوروبية",
     "data.languages.zha": "التشوانغية",
-    "data.languages.zul": "الزولوية"
+    "data.languages.zul": "الزولوية",
+    "validation.fundDistribution.uniqueFunds": "لا يمكن أن يكون لديك عدة توزيعات لنفس التمويل"
 }

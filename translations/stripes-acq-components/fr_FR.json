@@ -4,8 +4,8 @@
     "sources.edi": "EDI",
     "sources.marc": "MARC",
     "sources.user": "User",
-    "filter.false": "No",
-    "filter.true": "Yes",
+    "filter.false": "Non",
+    "filter.true": "Oui",
     "label.emptyValue": " ",
     "validation.required": "Required!",
     "label.acqUnits": "Acquisition units",
@@ -22,8 +22,8 @@
     "fundDistribution.encumbrance": "Encumbrance",
     "fundDistribution.id": "Fund ID",
     "label.tags": "Tags",
-    "searchAndFilter": "Search & filter",
-    "search": "Search",
+    "searchAndFilter": "Rechercher et filtrer",
+    "search": "Rechercher",
     "resetAllFilters": "Reset all",
     "paymentMethod.cash": "Cash",
     "paymentMethod.card": "Credit card",
@@ -476,5 +476,6 @@
     "data.languages.yid": "Yiddish",
     "data.languages.yor": "Yoruba",
     "data.languages.zha": "Zhuang",
-    "data.languages.zul": "Zulu"
+    "data.languages.zul": "Zulu",
+    "validation.fundDistribution.uniqueFunds": "You can not have multiple distributions for the same fund."
 }

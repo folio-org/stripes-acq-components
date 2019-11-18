@@ -476,5 +476,6 @@
     "data.languages.yid": "Yiddish",
     "data.languages.yor": "Yoruba",
     "data.languages.zha": "Zhuang",
-    "data.languages.zul": "Zulú"
+    "data.languages.zul": "Zulú",
+    "validation.fundDistribution.uniqueFunds": "You can not have multiple distributions for the same fund."
 }
