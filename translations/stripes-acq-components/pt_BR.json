@@ -476,5 +476,6 @@
     "data.languages.yid": "Iídiche",
     "data.languages.yor": "Ioruba",
     "data.languages.zha": "Zhuang",
-    "data.languages.zul": "Zulu"
+    "data.languages.zul": "Zulu",
+    "validation.fundDistribution.uniqueFunds": "Você não pode ter várias distribuições para o mesmo fundo."
 }
