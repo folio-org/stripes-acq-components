@@ -13,6 +13,9 @@ export default Factory.extend({
     fundStatus: 'Active',
     allocatedFromIds: [],
     allocatedToIds: [],
+    tags: {
+      tagList: [],
+    },
   }),
   groupIds: [],
 });
