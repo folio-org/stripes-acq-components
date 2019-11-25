@@ -477,5 +477,6 @@
     "data.languages.yor": "Yoruba",
     "data.languages.zha": "Zhuang",
     "data.languages.zul": "Zulú",
-    "validation.fundDistribution.uniqueFunds": "You can not have multiple distributions for the same fund."
+    "validation.fundDistribution.uniqueFunds": "You can not have multiple distributions for the same fund.",
+    "data.countries.UMI": "US Minor Outlying Islands"
 }
