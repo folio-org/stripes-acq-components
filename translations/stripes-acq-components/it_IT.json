@@ -28,7 +28,7 @@
     "paymentMethod.cash": "Cash",
     "paymentMethod.card": "Credit card",
     "paymentMethod.eft": "EFT",
-    "paymentMethod.depAccount": "Deposit account",
+    "paymentMethod.depAccount": "Conto deposito",
     "paymentMethod.physicalCheck": "Physical check",
     "paymentMethod.bankDraft": "Bank draft",
     "paymentMethod.internalTransfer": "Internal transfer",
@@ -478,5 +478,5 @@
     "data.languages.zha": "Zhuang",
     "data.languages.zul": "Zulu",
     "validation.fundDistribution.uniqueFunds": "You can not have multiple distributions for the same fund.",
-    "data.countries.UMI": "US Minor Outlying Islands"
+    "data.countries.UMI": "Isole minori esterne degli Stati Uniti"
 }
