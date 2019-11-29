@@ -35,3 +35,5 @@ yarn.lock
 # Stripescli
 .stripesclirc
 stripes.config.js.local
+
+junit.xml
