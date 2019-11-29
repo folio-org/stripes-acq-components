@@ -4,8 +4,12 @@
   "plugins": [
     "filenames",
     "no-only-tests",
-    "react-hooks"
+    "react-hooks",
+    "jest"
   ],
+  "env": {
+    "jest/globals": true
+  },
   "rules": {
     "filenames/match-exported": "error",
     "key-spacing": [

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="9" failures="0" time="7.824">
+  <testsuite name="filterArrayValues" errors="0" failures="0" skipped="0" timestamp="2019-11-29T11:48:32" time="0.433" tests="4">
+    <testcase classname="filterArrayValues should return { renderedItems } with initial options when value is not defined" name="filterArrayValues should return { renderedItems } with initial options when value is not defined" time="0.004">
+    </testcase>
+    <testcase classname="filterArrayValues should return { renderedItems } with filtered options for lowercased value" name="filterArrayValues should return { renderedItems } with filtered options for lowercased value" time="0.001">
+    </testcase>
+    <testcase classname="filterArrayValues should return { renderedItems } with filtered options for uppercased value" name="filterArrayValues should return { renderedItems } with filtered options for uppercased value" time="0.001">
+    </testcase>
+    <testcase classname="filterArrayValues should return { renderedItems } with filtered options for mixed value" name="filterArrayValues should return { renderedItems } with filtered options for mixed value" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="AcqCheckboxFilter component" errors="0" failures="0" skipped="0" timestamp="2019-11-29T11:48:32" time="3.926" tests="5">
+    <testcase classname="AcqCheckboxFilter component should display passed title" name="AcqCheckboxFilter component should display passed title" time="0.067">
+    </testcase>
+    <testcase classname="AcqCheckboxFilter component should be closed by default" name="AcqCheckboxFilter component should be closed by default" time="0.063">
+    </testcase>
+    <testcase classname="AcqCheckboxFilter component should be opened by default when closedByDefault=false prop is passed" name="AcqCheckboxFilter component should be opened by default when closedByDefault=false prop is passed" time="0.021">
+    </testcase>
+    <testcase classname="AcqCheckboxFilter component should render all passed options" name="AcqCheckboxFilter component should render all passed options" time="0.016">
+    </testcase>
+    <testcase classname="AcqCheckboxFilter component should invoke onChange callback when click is happened" name="AcqCheckboxFilter component should invoke onChange callback when click is happened" time="0.024">
+    </testcase>
+  </testsuite>
+</testsuites>
