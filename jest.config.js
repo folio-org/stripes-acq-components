@@ -1,23 +1,25 @@
+const path = require('path');
+
 const esModules = ['@folio'].join('|');
 
 module.exports = {
   collectCoverageFrom: [
-    '**/lib/**/*.{js,jsx}',
+    '**/(lib|src)/**/*.{js,jsx}',
     '!**/node_modules/**',
     '!**/test/**',
   ],
-  coverageDirectory: '<rootDir>/artifacts/coverage/',
+  coverageDirectory: './artifacts/coverage/',
   coverageReporters: ['lcov'],
   reporters: ['jest-junit', 'default'],
   transform: {
-    '^.+\\.(js|jsx)$': '<rootDir>/test/jest/jest-transformer.js',
+    '^.+\\.(js|jsx)$': path.join(__dirname, './test/jest/jest-transformer.js'),
   },
   transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
   moduleNameMapper: {
     '^.+\\.(css)$': '<rootDir>/node_modules/jest-css-modules',
     '^.+\\.(svg)$': 'identity-obj-proxy',
   },
-  testMatch: ['<rootDir>/lib/**/?(*.)test.{js,jsx}'],
+  testMatch: ['<rootDir>/(lib|src)/**/?(*.)test.{js,jsx}'],
   testPathIgnorePatterns: ['/node_modules/'],
-  setupFiles: ['<rootDir>/test/jest/setupTests.js'],
+  setupFiles: [path.join(__dirname, './test/jest/setupTests.js')],
 };
