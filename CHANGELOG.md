@@ -1,5 +1,27 @@
 # Change history for stripes-acq-components
 
+## [1.3.0](https://github.com/folio-org/stripes-acq-components/tree/v1.3.0) (2019-12-04)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v1.2.0...v1.3.0)
+
+### Stories
+* [UIF-101](https://issues.folio.org/browse/UIF-101) FolioFormattedTime component to display datetime fields
+* [UIF-79](https://issues.folio.org/browse/UIF-79) FieldTags common component
+* [UIF-96](https://issues.folio.org/browse/UIF-96) Acq list components and utils
+* [UIOR-365](https://issues.folio.org/browse/UIOR-365) Support isDeleted property of Acq units
+* [UIOR-5](https://issues.folio.org/browse/UIOR-5) Tags components
+* [UIOR-370](https://issues.folio.org/browse/UIOR-370) FundDistributionField component updates, CurrencySymbol component
+* [UIOR-377](https://issues.folio.org/browse/UIOR-377) batchFetch util
+* [UIOR-275](https://issues.folio.org/browse/UIOR-275) AcqTagsFilter component
+* [UIOR-425](https://issues.folio.org/browse/UIOR-425) FundDistributionView component updates
+* [UIF-34](https://issues.folio.org/browse/UIF-34) react-final-form components
+* [UIF-98](https://issues.folio.org/browse/UIF-98) showCallout util
+* [UINV-87](https://issues.folio.org/browse/UINV-87) multiple distributions for the same Fund validation
+* [UINV-41](https://issues.folio.org/browse/UINV-87) unit tests with Jest
+
+### Bug Fixes
+* [UIOR-356](https://issues.folio.org/browse/UIOR-356) Options for select in alphabetic order
+* [UIORGS-84](https://issues.folio.org/browse/UIORGS-84) Add translatable payment methods options
+
 ## [1.2.0](https://github.com/folio-org/stripes-acq-components/tree/v1.2.0) (2019-09-11)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v1.1.0...v1.2.0)
 
