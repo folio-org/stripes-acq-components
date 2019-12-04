@@ -19,7 +19,7 @@
     "fundDistribution.addBtn": "Ajouter une répartition budgétaire",
     "fundDistribution.amount": "Montant",
     "fundDistribution.code": "Code",
-    "fundDistribution.encumbrance": "Encumbrance",
+    "fundDistribution.encumbrance": "Provision/charge (encumbrance)",
     "fundDistribution.id": "N° d'identification du budget",
     "label.tags": "Mots-clés",
     "searchAndFilter": "Rechercher et filtrer",
