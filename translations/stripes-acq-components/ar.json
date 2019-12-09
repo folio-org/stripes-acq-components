@@ -478,5 +478,6 @@
     "data.languages.zha": "التشوانغية",
     "data.languages.zul": "الزولوية",
     "validation.fundDistribution.uniqueFunds": "لا يمكن أن يكون لديك عدة توزيعات لنفس التمويل",
-    "data.countries.UMI": "جزر الولايات المتحدة الصغيرة"
+    "data.countries.UMI": "جزر الولايات المتحدة الصغيرة",
+    "validation.cantBeNegativeOrEmpty": "Can not be negative or empty"
 }

@@ -19,7 +19,7 @@
     "fundDistribution.addBtn": "Ajouter une répartition budgétaire",
     "fundDistribution.amount": "Montant",
     "fundDistribution.code": "Code",
-    "fundDistribution.encumbrance": "Encumbrance",
+    "fundDistribution.encumbrance": "Provision/charge (encumbrance)",
     "fundDistribution.id": "N° d'identification du budget",
     "label.tags": "Mots-clés",
     "searchAndFilter": "Rechercher et filtrer",
@@ -40,7 +40,7 @@
     "fundDistribution.type.amount": "Montant",
     "fundDistribution.remainingAmount": "Montant restant à distribuer: {remainingAmount}",
     "validation.fundDistributionType": "All distributions should be the same type",
-    "validation.shouldBeEqualToTotalAmount": "The percentage or amount(s) should be equal 100% of the total",
+    "validation.shouldBeEqualToTotalAmount": "Le pourcentage ou le montant doit être égal à 100% du total",
     "showTags": "Afficher les mots-clés",
     "addTagFor": "Ajouter un mot-clé pour: {filterValue}",
     "filter.tags": "Mots-clés",
@@ -478,5 +478,6 @@
     "data.languages.zha": "Zhuang",
     "data.languages.zul": "Zoulou",
     "validation.fundDistribution.uniqueFunds": "Vous ne pouvez pas avoir plusieurs distributions pour le même poste budgétaire.",
-    "data.countries.UMI": "Îles mineures éloignées des États-Unis"
+    "data.countries.UMI": "Îles mineures éloignées des États-Unis",
+    "validation.cantBeNegativeOrEmpty": "Can not be negative or empty"
 }
