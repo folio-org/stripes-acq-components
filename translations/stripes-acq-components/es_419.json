@@ -478,5 +478,6 @@
     "data.languages.zha": "Zhuang",
     "data.languages.zul": "Zulu",
     "validation.fundDistribution.uniqueFunds": "You can not have multiple distributions for the same fund.",
-    "data.countries.UMI": "US Minor Outlying Islands"
+    "data.countries.UMI": "US Minor Outlying Islands",
+    "validation.cantBeNegativeOrEmpty": "Can not be negative or empty"
 }

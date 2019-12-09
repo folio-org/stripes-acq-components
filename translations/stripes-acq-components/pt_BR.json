@@ -478,5 +478,6 @@
     "data.languages.zha": "Zhuang",
     "data.languages.zul": "Zulu",
     "validation.fundDistribution.uniqueFunds": "Você não pode ter várias distribuições para o mesmo fundo.",
-    "data.countries.UMI": "Ilhas Menores Distantes dos EUA"
+    "data.countries.UMI": "Ilhas Menores Distantes dos EUA",
+    "validation.cantBeNegativeOrEmpty": "Can not be negative or empty"
 }
