@@ -1,5 +1,17 @@
 # Change history for stripes-acq-components
 
+## [1.3.1](https://github.com/folio-org/stripes-acq-components/tree/v1.3.1) (in progress)
+[Full Changelog](https://github.com/folio-org/ui-invoice/compare/v1.3.0...v1.3.1)
+
+### Stories
+* [UIORGS-122](https://issues.folio.org/browse/UIORGS-122) Organization view pane: Update contact people view
+
+### Bug Fixes
+* [UIOR-464](https://issues.folio.org/browse/UIOR-464) Calculation of estimated price in cost details sometimes blocks POLs from being created/saved
+* [UIPFPOL-3](https://issues.folio.org/browse/UIPFPOL-3) Return focus after lookup modal is closed without selection
+* [ERM-620](https://issues.folio.org/browse/ERM-620) Agreement edit/new: return focus to the lookup button when a lookup modal is closed
+* [UINV-94](https://issues.folio.org/browse/UINV-94) Not able to create invoice lines with $0 subtotal
+
 ## [1.3.0](https://github.com/folio-org/stripes-acq-components/tree/v1.3.0) (2019-12-04)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v1.2.0...v1.3.0)
 
