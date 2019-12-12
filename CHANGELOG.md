@@ -1,7 +1,7 @@
 # Change history for stripes-acq-components
 
-## [1.3.1](https://github.com/folio-org/stripes-acq-components/tree/v1.3.1) (in progress)
-[Full Changelog](https://github.com/folio-org/ui-invoice/compare/v1.3.0...v1.3.1)
+## [1.3.1](https://github.com/folio-org/stripes-acq-components/tree/v1.3.1) (2019-12-12)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v1.3.0...v1.3.1)
 
 ### Stories
 * [UIORGS-122](https://issues.folio.org/browse/UIORGS-122) Organization view pane: Update contact people view
