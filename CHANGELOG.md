@@ -1,5 +1,11 @@
 # Change history for stripes-acq-components
 
+## [1.3.2](https://github.com/folio-org/stripes-acq-components/tree/v1.3.2) (In progress)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v1.3.1...v1.3.2)
+
+### Bug Fixes
+* [UIOR-478](https://issues.folio.org/browse/UIOR-478) Invoices from the previous order is shown
+
 ## [1.3.1](https://github.com/folio-org/stripes-acq-components/tree/v1.3.1) (2019-12-12)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v1.3.0...v1.3.1)
 
