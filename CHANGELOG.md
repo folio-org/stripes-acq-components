@@ -1,10 +1,11 @@
 # Change history for stripes-acq-components
 
-## [1.3.2](https://github.com/folio-org/stripes-acq-components/tree/v1.3.2) (In progress)
+## [1.3.2](https://github.com/folio-org/stripes-acq-components/tree/v1.3.2) (2019-12-18)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v1.3.1...v1.3.2)
 
 ### Bug Fixes
 * [UIOR-478](https://issues.folio.org/browse/UIOR-478) Invoices from the previous order is shown
+* [UIOR-460](https://issues.folio.org/browse/UIOR-460) Capture cost information and fund distributions in the currency selected at POL
 
 ## [1.3.1](https://github.com/folio-org/stripes-acq-components/tree/v1.3.1) (2019-12-12)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v1.3.0...v1.3.1)
