@@ -447,6 +447,11 @@
   "label.sourceFilter": "Source",
   "label.acqUnits": "Acquisition units",
   "label.tags": "Tags",
+  "label.contributor": "Contributor",
+  "label.contributorType": "Contributor type",
+  "label.productId": "Product ID",
+  "label.qualifier": "Qualifier",
+  "label.productIdType": "Product ID type",
 
   "fileUploader.dropFile": "Drag and drop to upload a document",
   "fileUploader.selectFile": "or choose file",
