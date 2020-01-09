@@ -479,5 +479,12 @@
     "data.languages.zul": "Zulu",
     "validation.fundDistribution.uniqueFunds": "You can not have multiple distributions for the same fund.",
     "data.countries.UMI": "Isole minori esterne degli Stati Uniti",
-    "validation.cantBeNegativeOrEmpty": "Can not be negative or empty"
+    "validation.cantBeNegativeOrEmpty": "Can not be negative or empty",
+    "label.contributor": "Contributor",
+    "label.contributorType": "Contributor type",
+    "label.productId": "Product ID",
+    "label.qualifier": "Qualifier",
+    "label.productIdType": "Product ID type",
+    "FormFooter.cancel": "Cancel",
+    "FormFooter.save": "Save & close"
 }
