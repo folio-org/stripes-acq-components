@@ -455,7 +455,8 @@
 
   "fileUploader.dropFile": "Drag and drop to upload a document",
   "fileUploader.selectFile": "or choose file",
-
+  "FormFooter.cancel": "Cancel",
+  "FormFooter.save": "Save & close",
   "fundDistribution.addBtn": "Add fund distribution",
   "fundDistribution.amount": "Amount",
   "fundDistribution.code": "Code",
