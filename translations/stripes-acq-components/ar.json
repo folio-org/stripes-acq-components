@@ -479,5 +479,12 @@
     "data.languages.zul": "الزولوية",
     "validation.fundDistribution.uniqueFunds": "لا يمكن أن يكون لديك عدة توزيعات لنفس التمويل",
     "data.countries.UMI": "جزر الولايات المتحدة الصغيرة",
-    "validation.cantBeNegativeOrEmpty": "لا يمكن أن يكون سالبًا أو فارغًا"
+    "validation.cantBeNegativeOrEmpty": "لا يمكن أن يكون سالبًا أو فارغًا",
+    "label.contributor": "Contributor",
+    "label.contributorType": "Contributor type",
+    "label.productId": "Product ID",
+    "label.qualifier": "Qualifier",
+    "label.productIdType": "Product ID type",
+    "FormFooter.cancel": "Cancel",
+    "FormFooter.save": "Save & close"
 }

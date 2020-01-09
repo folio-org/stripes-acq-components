@@ -29,7 +29,7 @@
     "paymentMethod.card": "信用卡",
     "paymentMethod.eft": "EFT",
     "paymentMethod.depAccount": "存款账户",
-    "paymentMethod.physicalCheck": "物理检查",
+    "paymentMethod.physicalCheck": "实体检查",
     "paymentMethod.bankDraft": "银行汇票",
     "paymentMethod.internalTransfer": "内部转移",
     "paymentMethod.other": "其他",
@@ -479,5 +479,12 @@
     "data.languages.zul": "祖鲁语",
     "validation.fundDistribution.uniqueFunds": "同一经费不能有多个分配。",
     "data.countries.UMI": "美国本土外小岛屿",
-    "validation.cantBeNegativeOrEmpty": "Can not be negative or empty"
+    "validation.cantBeNegativeOrEmpty": "不能是负数或空",
+    "label.contributor": "Contributor",
+    "label.contributorType": "Contributor type",
+    "label.productId": "Product ID",
+    "label.qualifier": "Qualifier",
+    "label.productIdType": "Product ID type",
+    "FormFooter.cancel": "Cancel",
+    "FormFooter.save": "Save & close"
 }

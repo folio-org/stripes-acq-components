@@ -479,5 +479,12 @@
     "data.languages.zul": "Zulu",
     "validation.fundDistribution.uniqueFunds": "Você não pode ter várias distribuições para o mesmo fundo.",
     "data.countries.UMI": "Ilhas Menores Distantes dos EUA",
-    "validation.cantBeNegativeOrEmpty": "Não pode ser negativo ou vazio"
+    "validation.cantBeNegativeOrEmpty": "Não pode ser negativo ou vazio",
+    "label.contributor": "Colaborador",
+    "label.contributorType": "Tipo de colaborador",
+    "label.productId": "ID do produto",
+    "label.qualifier": "Qualificador",
+    "label.productIdType": "Tipo de ID do produto",
+    "FormFooter.cancel": "Cancel",
+    "FormFooter.save": "Save & close"
 }

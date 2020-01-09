@@ -479,5 +479,12 @@
     "data.languages.zul": "Zulú",
     "validation.fundDistribution.uniqueFunds": "No puede tener varias distribuciones para el mismo fondo.",
     "data.countries.UMI": "Islas Ultramarinas Menores de EE.UU.",
-    "validation.cantBeNegativeOrEmpty": "No puede ser negativo o vacío"
+    "validation.cantBeNegativeOrEmpty": "No puede ser negativo o vacío",
+    "label.contributor": "Contributor",
+    "label.contributorType": "Contributor type",
+    "label.productId": "Product ID",
+    "label.qualifier": "Qualifier",
+    "label.productIdType": "Product ID type",
+    "FormFooter.cancel": "Cancel",
+    "FormFooter.save": "Save & close"
 }
