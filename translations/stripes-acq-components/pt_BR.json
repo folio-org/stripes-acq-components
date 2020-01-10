@@ -485,6 +485,6 @@
     "label.productId": "ID do produto",
     "label.qualifier": "Qualificador",
     "label.productIdType": "Tipo de ID do produto",
-    "FormFooter.cancel": "Cancel",
-    "FormFooter.save": "Save & close"
+    "FormFooter.cancel": "Cancelar",
+    "FormFooter.save": "Salvar e fechar"
 }
