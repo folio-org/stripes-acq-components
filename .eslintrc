@@ -3,8 +3,6 @@
   "extends": "@folio/eslint-config-stripes",
   "plugins": [
     "filenames",
-    "no-only-tests",
-    "react-hooks",
     "jest"
   ],
   "env": {
@@ -81,10 +79,6 @@
       "error",
       "tag-aligned"
     ],
-    "react/jsx-wrap-multilines": [
-      "error",
-      "parens-new-line"
-    ],
     "no-this-before-super": "error",
     "prefer-object-spread": "error",
     "jsx-quotes": [
@@ -122,9 +116,6 @@
       "error",
       3
     ],
-    "no-only-tests/no-only-tests": "error",
-    "no-constant-condition": "error",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "no-constant-condition": "error"
   }
 }
