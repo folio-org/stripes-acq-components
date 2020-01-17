@@ -116,6 +116,8 @@
       "error",
       3
     ],
-    "no-constant-condition": "error"
+    "no-constant-condition": "error",
+    "react/state-in-constructor": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }
