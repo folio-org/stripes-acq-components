@@ -480,11 +480,11 @@
     "validation.fundDistribution.uniqueFunds": "Vous ne pouvez pas avoir plusieurs distributions pour le même poste budgétaire.",
     "data.countries.UMI": "Îles mineures éloignées des États-Unis",
     "validation.cantBeNegativeOrEmpty": "Can not be negative or empty",
-    "label.contributor": "Contributor",
-    "label.contributorType": "Contributor type",
-    "label.productId": "Product ID",
+    "label.contributor": "Contributeur",
+    "label.contributorType": "Type de contributeur",
+    "label.productId": "Identifiant Produit",
     "label.qualifier": "Qualifier",
     "label.productIdType": "Product ID type",
-    "FormFooter.cancel": "Cancel",
-    "FormFooter.save": "Save & close"
+    "FormFooter.cancel": "Annuler",
+    "FormFooter.save": "Sauvegarder et fermer"
 }
