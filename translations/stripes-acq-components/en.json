@@ -493,6 +493,9 @@
   "search": "Search",
   "resetAllFilters": "Reset all",
 
+  "filter.organization.lookup": "Organization look-up",
+  "filter.organization.lookupNoSupport": "Organization look-up is not supported",
+
   "validation.fundDistributionType": "All distributions should be the same type",
   "validation.fundDistribution.uniqueFunds": "You can not have multiple distributions for the same fund.",
   "validation.shouldBeEqualToTotalAmount": "The percentage or amount(s) should be equal 100% of the total",
