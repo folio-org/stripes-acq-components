@@ -496,6 +496,18 @@
   "filter.organization.lookup": "Organization look-up",
   "filter.organization.lookupNoSupport": "Organization look-up is not supported",
 
+  "order.status.closed": "Closed",
+  "order.status.open": "Open",
+  "order.status.pending": "Pending",
+
+  "order.type.oneTime": "One-Time",
+  "order.type.ongoing": "Ongoing",
+
+  "order.format.electronicResource": "Electronic Resource",
+  "order.format.physicalResource": "Physical Resource",
+  "order.format.PEMix": "P/E Mix",
+  "order.format.other": "Other",
+
   "validation.fundDistributionType": "All distributions should be the same type",
   "validation.fundDistribution.uniqueFunds": "You can not have multiple distributions for the same fund.",
   "validation.shouldBeEqualToTotalAmount": "The percentage or amount(s) should be equal 100% of the total",
