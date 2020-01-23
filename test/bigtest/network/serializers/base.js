@@ -1,4 +1,4 @@
-import { RestSerializer } from '@bigtest/mirage';
+import { RestSerializer } from 'miragejs';
 
 const { isArray } = Array;
 

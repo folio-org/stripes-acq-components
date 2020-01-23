@@ -1,4 +1,4 @@
-import { camelize } from '@bigtest/mirage';
+import camelCase from 'lodash/camelCase';
 
 export const buildMirageModules = context => (
   context.keys().reduce((acc, modulePath) => {
@@ -9,7 +9,7 @@ export const buildMirageModules = context => (
     if (moduleType === 'configs') return acc;
 
     if (moduleName && moduleName !== 'index.js') {
-      const moduleKey = camelize(moduleName.replace('.js', ''));
+      const moduleKey = camelCase(moduleName.replace('.js', ''));
 
       return Object.assign(acc, {
         [moduleType]: {

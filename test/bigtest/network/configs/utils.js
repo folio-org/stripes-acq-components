@@ -1,4 +1,4 @@
-import { Response } from '@bigtest/mirage';
+import { Response } from 'miragejs';
 
 export const createPut = (schemaName) => (schema, request) => {
   const id = request.params.id;
