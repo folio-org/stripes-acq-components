@@ -6,7 +6,7 @@ export const createPut = (schemaName) => (schema, request) => {
 
   schema[schemaName].find(id).update(attrs);
 
-  return null;
+  return attrs;
 };
 
 export const createPost = (schemaName) => (schema, request) => {

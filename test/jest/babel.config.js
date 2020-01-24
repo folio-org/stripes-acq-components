@@ -1,13 +1,14 @@
 module.exports = {
   'presets': [
-    ['env', {
-      useBuiltIns: 'entry',
-    }],
-    'stage-2',
-    'react',
+    '@babel/preset-env',
+    '@babel/preset-react',
   ],
   'plugins': [
-    'transform-decorators-legacy',
-    ['transform-runtime', { polyfill: false }],
+    '@babel/plugin-proposal-class-properties',
+    [
+      '@babel/plugin-proposal-decorators',
+      { decoratorsBeforeExport: false },
+    ],
+    '@babel/plugin-transform-runtime',
   ],
 };
