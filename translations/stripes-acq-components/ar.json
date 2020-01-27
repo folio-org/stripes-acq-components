@@ -486,5 +486,16 @@
     "label.qualifier": "مؤهل",
     "label.productIdType": "نوع معرّف المنتج",
     "FormFooter.cancel": "إلغاء",
-    "FormFooter.save": "حفظ وإغلاق"
+    "FormFooter.save": "حفظ وإغلاق",
+    "filter.organization.lookup": "بحث المؤسسة",
+    "filter.organization.lookupNoSupport": "بحث المؤسسة غير مدعوم",
+    "order.status.closed": "مغلق",
+    "order.status.open": "مفتوح",
+    "order.status.pending": "قيد الانتظار",
+    "order.type.oneTime": "مرة واحدة",
+    "order.type.ongoing": "جاري",
+    "order.format.electronicResource": "مورد إلكتروني",
+    "order.format.physicalResource": "مورد مادي",
+    "order.format.PEMix": "مزيج من المادي/الإلكتروني",
+    "order.format.other": "أخرى"
 }

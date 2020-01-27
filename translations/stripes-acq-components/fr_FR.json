@@ -483,8 +483,19 @@
     "label.contributor": "Contributeur",
     "label.contributorType": "Type de contributeur",
     "label.productId": "Identifiant Produit",
-    "label.qualifier": "Qualifier",
-    "label.productIdType": "Product ID type",
+    "label.qualifier": "Qualificatif",
+    "label.productIdType": "Type d'ID du produit",
     "FormFooter.cancel": "Annuler",
-    "FormFooter.save": "Sauvegarder et fermer"
+    "FormFooter.save": "Sauvegarder et fermer",
+    "filter.organization.lookup": "Recherche d'organisation",
+    "filter.organization.lookupNoSupport": "La recherche d'organisation n'est pas prise en charge",
+    "order.status.closed": "Fermé",
+    "order.status.open": "Ouvert",
+    "order.status.pending": "En attente",
+    "order.type.oneTime": "Une fois",
+    "order.type.ongoing": "En cours",
+    "order.format.electronicResource": "Ressource électronique",
+    "order.format.physicalResource": "Ressource physique",
+    "order.format.PEMix": "Mix papier/e-",
+    "order.format.other": "Autre"
 }

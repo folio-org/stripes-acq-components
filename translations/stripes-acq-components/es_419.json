@@ -486,5 +486,16 @@
     "label.qualifier": "Qualifier",
     "label.productIdType": "Product ID type",
     "FormFooter.cancel": "Cancel",
-    "FormFooter.save": "Save & close"
+    "FormFooter.save": "Save & close",
+    "filter.organization.lookup": "Organization look-up",
+    "filter.organization.lookupNoSupport": "Organization look-up is not supported",
+    "order.status.closed": "Cerrado",
+    "order.status.open": "Abierto",
+    "order.status.pending": "Pendiente",
+    "order.type.oneTime": "Una vez",
+    "order.type.ongoing": "Ongoing",
+    "order.format.electronicResource": "Recurso electrónico",
+    "order.format.physicalResource": "Recurso físico",
+    "order.format.PEMix": "P/E Mix",
+    "order.format.other": "Otro"
 }
