@@ -1,9 +1,9 @@
 # Change history for stripes-acq-components
 
-## [1.4.0](#) (In progress)
-[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v1.3.2...v1.4.0)
+## (IN PROGRESS)
 
 ### Stories
+* [UIORGS-112](https://issues.folio.org/browse/UIORGS-112) disable sorting on checkboxes, pass sortable columns
 * [UIREC-32](https://issues.folio.org/browse/UIREC-32) Add piece for a title
 * [UIREC-28](https://issues.folio.org/browse/UIREC-28) Add Title for receiving/check-in
 * [UIREC-27](https://issues.folio.org/browse/UIREC-27) View title in receiving area
