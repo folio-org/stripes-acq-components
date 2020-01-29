@@ -6,4 +6,5 @@ export { default as configFunds } from './funds';
 export { default as configMemberships } from './memberships';
 export { default as configMaterialTypes } from './materialTypes';
 export { default as configLocations } from './locations';
+export { default as configLines } from './lines';
 export * from './utils';
