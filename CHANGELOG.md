@@ -3,6 +3,7 @@
 ## (IN PROGRESS)
 
 ### Stories
+* [UIOR-472](https://issues.folio.org/browse/UIOR-472) Display encumbered value on POL for orders made in currency other than system currency
 * [UIORGS-112](https://issues.folio.org/browse/UIORGS-112) disable sorting on checkboxes, pass sortable columns
 * [UIREC-32](https://issues.folio.org/browse/UIREC-32) Add piece for a title
 * [UIREC-28](https://issues.folio.org/browse/UIREC-28) Add Title for receiving/check-in
