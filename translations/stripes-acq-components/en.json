@@ -470,6 +470,8 @@
   "fundDistribution.type.amount": "Amount",
   "fundDistribution.remainingAmount": "Remaining amount to be distributed: {remainingAmount}",
   "fundDistribution.adjustmentDescription": "Adjustment",
+  "fundDistribution.initialEncumbrance": "Initial encumbrance",
+  "fundDistribution.currentEncumbrance": "Current encumbrance",
 
   "modal.resultsHeader": "Search results",
   "modal.noSourceYet": "No source yet",
