@@ -480,12 +480,12 @@
     "validation.fundDistribution.uniqueFunds": "You can not have multiple distributions for the same fund.",
     "data.countries.UMI": "Isole minori esterne degli Stati Uniti",
     "validation.cantBeNegativeOrEmpty": "Can not be negative or empty",
-    "label.contributor": "Contributor",
-    "label.contributorType": "Contributor type",
-    "label.productId": "Product ID",
-    "label.qualifier": "Qualifier",
-    "label.productIdType": "Product ID type",
-    "FormFooter.cancel": "Cancel",
+    "label.contributor": "Contributore",
+    "label.contributorType": "Tipologia contributore",
+    "label.productId": "ID prodotto",
+    "label.qualifier": "Qualificatore",
+    "label.productIdType": "Tipologia ID prodotto",
+    "FormFooter.cancel": "Annulla",
     "FormFooter.save": "Save & close",
     "filter.organization.lookup": "Ricerca dell'organizzazione",
     "filter.organization.lookupNoSupport": "Ricerca dell'organizzazione non supportata",
@@ -497,5 +497,7 @@
     "order.format.electronicResource": "Risorsa elettronica",
     "order.format.physicalResource": "Risorsa fisica",
     "order.format.PEMix": "Mix fisico/elettronico",
-    "order.format.other": "Altro"
+    "order.format.other": "Altro",
+    "fundDistribution.initialEncumbrance": "Impegno di spesa iniziale",
+    "fundDistribution.currentEncumbrance": "Impegno di spesa corrente"
 }
