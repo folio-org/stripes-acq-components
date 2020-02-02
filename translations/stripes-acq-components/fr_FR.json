@@ -497,5 +497,7 @@
     "order.format.electronicResource": "Ressource électronique",
     "order.format.physicalResource": "Ressource physique",
     "order.format.PEMix": "Mix papier/e-",
-    "order.format.other": "Autre"
+    "order.format.other": "Autre",
+    "fundDistribution.initialEncumbrance": "Initial encumbrance",
+    "fundDistribution.currentEncumbrance": "Current encumbrance"
 }

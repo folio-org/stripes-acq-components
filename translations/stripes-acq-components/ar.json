@@ -497,5 +497,7 @@
     "order.format.electronicResource": "مورد إلكتروني",
     "order.format.physicalResource": "مورد مادي",
     "order.format.PEMix": "مزيج من المادي/الإلكتروني",
-    "order.format.other": "أخرى"
+    "order.format.other": "أخرى",
+    "fundDistribution.initialEncumbrance": "Initial encumbrance",
+    "fundDistribution.currentEncumbrance": "Current encumbrance"
 }

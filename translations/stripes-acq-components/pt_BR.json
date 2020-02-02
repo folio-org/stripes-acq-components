@@ -497,5 +497,7 @@
     "order.format.electronicResource": "Recurso eletrônico",
     "order.format.physicalResource": "Recurso físico",
     "order.format.PEMix": "Ambos físico e eletrônico",
-    "order.format.other": "Outros"
+    "order.format.other": "Outros",
+    "fundDistribution.initialEncumbrance": "Onus inicial",
+    "fundDistribution.currentEncumbrance": "Oneração atual"
 }
