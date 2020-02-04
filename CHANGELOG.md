@@ -3,6 +3,7 @@
 ## (IN PROGRESS)
 
 ### Stories
+* [UINV-114](https://issues.folio.org/browse/UINV-114) calculatePOLEstimatedPrice util
 * [UIOR-358](https://issues.folio.org/browse/UIOR-358) OrganizationValue component
 * [UIOR-472](https://issues.folio.org/browse/UIOR-472) Display encumbered value on POL for orders made in currency other than system currency
 * [UIORGS-112](https://issues.folio.org/browse/UIORGS-112) disable sorting on checkboxes, pass sortable columns
