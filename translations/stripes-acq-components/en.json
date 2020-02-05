@@ -1,6 +1,9 @@
 {
   "addTagFor": "Add tag for: {filterValue}",
   "showTags": "Show tags",
+  "tagWasAdded": "Tag was added",
+  "tagWasNotAdded": "Tag was not added",
+  "newTagWasNotCreated": "New tag was not created",
 
   "button.close": "Close",
   "button.save": "Save",
