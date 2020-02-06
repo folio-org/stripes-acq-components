@@ -479,7 +479,7 @@
     "data.languages.zul": "Zoulou",
     "validation.fundDistribution.uniqueFunds": "Vous ne pouvez pas avoir plusieurs distributions pour le même poste budgétaire.",
     "data.countries.UMI": "Îles mineures éloignées des États-Unis",
-    "validation.cantBeNegativeOrEmpty": "Can not be negative or empty",
+    "validation.cantBeNegativeOrEmpty": "Ne peut pas être négatif ou vide",
     "label.contributor": "Contributeur",
     "label.contributorType": "Type de contributeur",
     "label.productId": "Identifiant Produit",
@@ -498,6 +498,10 @@
     "order.format.physicalResource": "Ressource physique",
     "order.format.PEMix": "Mix papier/e-",
     "order.format.other": "Autre",
-    "fundDistribution.initialEncumbrance": "Initial encumbrance",
-    "fundDistribution.currentEncumbrance": "Current encumbrance"
+    "fundDistribution.initialEncumbrance": "Provision initiale",
+    "fundDistribution.currentEncumbrance": "Provision actuelle",
+    "organization": "Organisation",
+    "tagWasAdded": "Le mot-clé a été ajouté",
+    "tagWasNotAdded": "Le mot-clé n'a pas été ajouté",
+    "newTagWasNotCreated": "Le nouveau mot-clé n'a a pas été ajouté"
 }

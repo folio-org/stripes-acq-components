@@ -499,5 +499,9 @@
     "order.format.PEMix": "P/E Mix",
     "order.format.other": "Other",
     "fundDistribution.initialEncumbrance": "Initial encumbrance",
-    "fundDistribution.currentEncumbrance": "Current encumbrance"
+    "fundDistribution.currentEncumbrance": "Current encumbrance",
+    "organization": "Organization",
+    "tagWasAdded": "Tag was added",
+    "tagWasNotAdded": "Tag was not added",
+    "newTagWasNotCreated": "New tag was not created"
 }
