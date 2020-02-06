@@ -499,5 +499,9 @@
     "order.format.PEMix": "Ambos físico e eletrônico",
     "order.format.other": "Outros",
     "fundDistribution.initialEncumbrance": "Onus inicial",
-    "fundDistribution.currentEncumbrance": "Oneração atual"
+    "fundDistribution.currentEncumbrance": "Oneração atual",
+    "organization": "Organização",
+    "tagWasAdded": "A tag foi adicionada",
+    "tagWasNotAdded": "A tag não foi adicionada",
+    "newTagWasNotCreated": "Nova tag não foi criada"
 }
