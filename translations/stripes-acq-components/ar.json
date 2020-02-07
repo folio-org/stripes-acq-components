@@ -499,5 +499,9 @@
     "order.format.PEMix": "مزيج من المادي/الإلكتروني",
     "order.format.other": "أخرى",
     "fundDistribution.initialEncumbrance": "Initial encumbrance",
-    "fundDistribution.currentEncumbrance": "Current encumbrance"
+    "fundDistribution.currentEncumbrance": "Current encumbrance",
+    "organization": "المؤسسة",
+    "tagWasAdded": "Tag was added",
+    "tagWasNotAdded": "Tag was not added",
+    "newTagWasNotCreated": "تم إنشاء وسم جديد"
 }
