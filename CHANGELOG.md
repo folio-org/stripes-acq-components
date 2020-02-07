@@ -10,6 +10,8 @@
 * [UIREC-28](https://issues.folio.org/browse/UIREC-28) Add Title for receiving/check-in
 * [UIREC-27](https://issues.folio.org/browse/UIREC-27) View title in receiving area
 
+### Bug Fixes
+* [UIORGS-147](https://issues.folio.org/browse/UIORGS-147) Country filter not working
 
 ## [1.3.2](https://github.com/folio-org/stripes-acq-components/tree/v1.3.2) (2019-12-18)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v1.3.1...v1.3.2)
