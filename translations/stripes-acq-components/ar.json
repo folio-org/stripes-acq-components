@@ -501,7 +501,7 @@
     "fundDistribution.initialEncumbrance": "التكلفة المبدئية",
     "fundDistribution.currentEncumbrance": "التكلفة الحالية",
     "organization": "المؤسسة",
-    "tagWasAdded": "Tag was added",
-    "tagWasNotAdded": "Tag was not added",
+    "tagWasAdded": "تمت إضافة الوسم",
+    "tagWasNotAdded": "لم تتم إضافة الوسم",
     "newTagWasNotCreated": "تم إنشاء وسم جديد"
 }
