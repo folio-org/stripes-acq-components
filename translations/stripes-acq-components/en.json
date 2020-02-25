@@ -514,6 +514,13 @@
   "order.format.PEMix": "P/E Mix",
   "order.format.other": "Other",
 
+  "receiving.itemStatus.In process": "In process",
+  "receiving.itemStatus.On order": "On order",
+  "receiving.itemStatus.Available": "Available",
+  "receiving.itemStatus.In transit": "In transit",
+  "receiving.itemStatus.Order closed": "Order closed",
+  "receiving.itemStatus.Undefined": "Undefined",
+
   "validation.fundDistributionType": "All distributions should be the same type",
   "validation.fundDistribution.uniqueFunds": "You can not have multiple distributions for the same fund.",
   "validation.shouldBeEqualToTotalAmount": "The percentage or amount(s) should be equal 100% of the total",
