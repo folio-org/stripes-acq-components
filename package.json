@@ -23,7 +23,7 @@
     "@babel/preset-react": "^7.7.4",
     "@bigtest/interactor": "^0.9.3",
     "@folio/eslint-config-stripes": "^5.0.0",
-    "@folio/stripes": "^2.7.4",
+    "@folio/stripes": "^3.0.0",
     "@folio/stripes-cli": "^1.11.0",
     "@testing-library/react": "^9.3.2",
     "babel-eslint": "^10.0.1",
@@ -38,7 +38,9 @@
     "miragejs": "^0.1.32",
     "react": "^16.8.6",
     "react-dom": "^16.5.1",
-    "react-hot-loader": "^4.3.12"
+    "react-hot-loader": "^4.3.12",
+    "react-intl": "^2.9.0",
+    "react-router-dom": "^4.3.1"
   },
   "dependencies": {
     "@folio/react-intl-safe-html": "^1.0.3",
@@ -51,14 +53,15 @@
     "query-string": "^6.1.0",
     "react-dropzone": "^9.0.0",
     "react-final-form": "^6.3.0",
-    "react-intl": "^2.9.0",
     "react-redux": "5.1.1",
     "redux-form": "^7.4.2"
   },
   "peerDependencies": {
-    "@folio/stripes": "^2.12.0",
-    "eslint": "^6.2.1",
-    "react": "*"
+    "@folio/stripes": "^3.0.0",
+    "react": "*",
+    "react-intl": "^2.9.0",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1"
   },
   "stripes": {
     "type": "",
