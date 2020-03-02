@@ -278,7 +278,7 @@
     "data.countries.TUV": "Tuvalu",
     "data.countries.UGA": "Ouganda",
     "data.countries.UKR": "Ukraine",
-    "data.countries.ARE": "Emirats Arabes Unis",
+    "data.countries.ARE": "Émirats Arabes Unis",
     "data.countries.GBR": "Royaume-Uni",
     "data.countries.USA": "États-Unis",
     "data.countries.URY": "Uruguay",
@@ -362,8 +362,8 @@
     "data.languages.ibo": "Igbo",
     "data.languages.ipk": "Inupiaq",
     "data.languages.ido": "Ido",
-    "data.languages.isl": "islandais",
-    "data.languages.ita": "italien",
+    "data.languages.isl": "Islandais",
+    "data.languages.ita": "Italien",
     "data.languages.iku": "Inuktitut",
     "data.languages.jpn": "Japonais",
     "data.languages.jav": "Javanais",
@@ -503,5 +503,11 @@
     "organization": "Organisation",
     "tagWasAdded": "Le mot-clé a été ajouté",
     "tagWasNotAdded": "Le mot-clé n'a pas été ajouté",
-    "newTagWasNotCreated": "Le nouveau mot-clé n'a a pas été ajouté"
+    "newTagWasNotCreated": "Le nouveau mot-clé n'a pas été ajouté",
+    "receiving.itemStatus.In process": "En cours",
+    "receiving.itemStatus.On order": "Sur/en commande",
+    "receiving.itemStatus.Available": "Disponible",
+    "receiving.itemStatus.In transit": "En transit",
+    "receiving.itemStatus.Order closed": "Commande close",
+    "receiving.itemStatus.Undefined": "Indéfini"
 }

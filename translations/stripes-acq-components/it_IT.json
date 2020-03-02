@@ -503,5 +503,11 @@
     "organization": "Organizzazione",
     "tagWasAdded": "Il tag è stato aggiunto",
     "tagWasNotAdded": "Il tag non è stato aggiunto",
-    "newTagWasNotCreated": "Il nuovo tag non è stato creato"
+    "newTagWasNotCreated": "Il nuovo tag non è stato creato",
+    "receiving.itemStatus.In process": "In process",
+    "receiving.itemStatus.On order": "On order",
+    "receiving.itemStatus.Available": "Available",
+    "receiving.itemStatus.In transit": "In transit",
+    "receiving.itemStatus.Order closed": "Order closed",
+    "receiving.itemStatus.Undefined": "Undefined"
 }
