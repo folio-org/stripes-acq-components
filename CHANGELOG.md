@@ -3,6 +3,7 @@
 ## (IN PROGRESS)
 
 ### Stories
+* [UINV-124](https://issues.folio.org/browse/UINV-124) FieldOrganization component
 * [UINV-118](https://issues.folio.org/browse/UINV-118) AcqList buildDateRangeQuery util
 * [UIOR-358](https://issues.folio.org/browse/UIOR-358) OrganizationValue component
 * [UIOR-472](https://issues.folio.org/browse/UIOR-472) Display encumbered value on POL for orders made in currency other than system currency
