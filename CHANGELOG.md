@@ -3,6 +3,7 @@
 ## (IN PROGRESS)
 
 ### Stories
+* [UINV-60](https://issues.folio.org/browse/UINV-60) Improve Location filter on the Titles list to use location look-up
 * [UINV-124](https://issues.folio.org/browse/UINV-124) FieldOrganization component
 * [UINV-118](https://issues.folio.org/browse/UINV-118) AcqList buildDateRangeQuery util
 * [UIOR-358](https://issues.folio.org/browse/UIOR-358) OrganizationValue component
