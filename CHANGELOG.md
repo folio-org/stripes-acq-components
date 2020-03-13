@@ -3,6 +3,15 @@
 ## (IN PROGRESS)
 
 ### Stories
+
+### Bug fixes
+
+## [2.0.0](https://github.com/folio-org/stripes-acq-components/tree/v2.0.0) (2020-03-13)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v1.3.2...v2.0.0)
+
+* bump the @folio/stripes peer to v3.0.0
+
+### Stories
 * [UINV-60](https://issues.folio.org/browse/UINV-60) Improve Location filter on the Titles list to use location look-up
 * [UINV-124](https://issues.folio.org/browse/UINV-124) FieldOrganization component
 * [UINV-118](https://issues.folio.org/browse/UINV-118) AcqList buildDateRangeQuery util
