@@ -5,6 +5,7 @@
 ### Stories
 
 ### Bug fixes
+* [UIREC-66](https://issues.folio.org/browse/UIREC-66) POL details displaying under Title information accordion
 * [UIREC-59](https://issues.folio.org/browse/UIREC-59) Improve Select location dropdown to use only select Location plugin
 
 ## [2.0.1](https://github.com/folio-org/stripes-acq-components/tree/v2.0.1) (2020-03-13)
