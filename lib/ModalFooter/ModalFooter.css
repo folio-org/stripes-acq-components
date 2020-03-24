@@ -1,0 +1,20 @@
+@import '@folio/stripes-components/lib/variables';
+
+.modalFooterContent {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.renderStart {
+  flex: 1;
+}
+
+.renderEnd {
+  display: flex;
+
+  & > * {
+    margin-left: var(--gutter) !important;
+  }
+}
