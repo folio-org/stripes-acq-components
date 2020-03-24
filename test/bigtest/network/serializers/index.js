@@ -7,3 +7,4 @@ export { default as TagSerializer } from './tag';
 export { default as LocationSerializer } from './location';
 export { default as MaterialTypeSerializer } from './material-type';
 export { default as LineSerializer } from './line';
+export { default as orderSerializer } from './order';
