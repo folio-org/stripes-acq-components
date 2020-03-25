@@ -5,6 +5,7 @@
 ### Stories
 
 ### Bug fixes
+* [UIORGS-155](https://issues.folio.org/browse/UIORGS-155) Country codes are handled inconsistently in organization vs. contact addresses
 * [UIREC-67](https://issues.folio.org/browse/UIREC-67) Add ModalFooter with right buttons alignment
 * [UIREC-66](https://issues.folio.org/browse/UIREC-66) POL details displaying under Title information accordion
 * [UIREC-59](https://issues.folio.org/browse/UIREC-59) Improve Select location dropdown to use only select Location plugin
