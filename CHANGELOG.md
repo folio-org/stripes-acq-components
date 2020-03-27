@@ -1,8 +1,11 @@
 # Change history for stripes-acq-components
 
 ## (IN PROGRESS)
-
 ### Stories
+### Bug fixes
+
+## [2.0.1](https://github.com/folio-org/stripes-acq-components/tree/v2.0.2) (2020-03-27)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.0.1...v2.0.2)
 
 ### Bug fixes
 * [UIORGS-155](https://issues.folio.org/browse/UIORGS-155) Country codes are handled inconsistently in organization vs. contact addresses
