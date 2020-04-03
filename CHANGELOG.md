@@ -1,7 +1,7 @@
 # Change history for stripes-acq-components
 
 ## (IN PROGRESS)
-* `useResultStatusMessage` hook
+* `ResultStatusMessage` component to show query status in the Results pane of AcqList
 
 ### Stories
 ### Bug fixes
