@@ -1,10 +1,13 @@
 # Change history for stripes-acq-components
 
 ## (IN PROGRESS)
+* `ResultStatusMessage` component to show query status in the Results pane of AcqList
+
 ### Stories
 ### Bug fixes
+* [UIF-190](https://issues.folio.org/browse/UIF-190) pass query params to extend
 
-## [2.0.1](https://github.com/folio-org/stripes-acq-components/tree/v2.0.2) (2020-03-27)
+## [2.0.2](https://github.com/folio-org/stripes-acq-components/tree/v2.0.2) (2020-03-27)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.0.1...v2.0.2)
 
 ### Bug fixes
