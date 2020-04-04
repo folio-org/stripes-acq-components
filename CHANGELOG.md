@@ -5,6 +5,7 @@
 
 ### Stories
 ### Bug fixes
+* [UINV-127](https://issues.folio.org/browse/UINV-127) Accessibility Error: Form elements must have labels
 * [UIF-190](https://issues.folio.org/browse/UIF-190) pass query params to extend
 
 ## [2.0.2](https://github.com/folio-org/stripes-acq-components/tree/v2.0.2) (2020-03-27)
