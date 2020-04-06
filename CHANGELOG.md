@@ -1,9 +1,14 @@
 # Change history for stripes-acq-components
 
 ## (IN PROGRESS)
+### Stories
+### Bug fixes
+
+## [2.0.3](https://github.com/folio-org/stripes-acq-components/tree/v2.0.3) (2020-04-06)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.0.2...v2.0.3)
+
 * `ResultStatusMessage` component to show query status in the Results pane of AcqList
 
-### Stories
 ### Bug fixes
 * [UINV-127](https://issues.folio.org/browse/UINV-127) Accessibility Error: Form elements must have labels
 * [UIF-190](https://issues.folio.org/browse/UIF-190) pass query params to extend
