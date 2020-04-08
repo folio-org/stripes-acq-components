@@ -501,6 +501,8 @@
   "organization": "Organization",
   "filter.organization.lookup": "Organization look-up",
   "filter.organization.lookupNoSupport": "Organization look-up is not supported",
+  "filter.user.lookup": "User look-up",
+  "filter.user.lookupNoSupport": "user look-up is not supported",
 
   "order.status.closed": "Closed",
   "order.status.open": "Open",
