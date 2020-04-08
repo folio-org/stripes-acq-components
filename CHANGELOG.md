@@ -2,6 +2,8 @@
 
 ## (IN PROGRESS)
 ### Stories
+* [UIOR-516](https://issues.folio.org/browse/UIOR-516) PluggableUserFilter component
+
 ### Bug fixes
 
 ## [2.0.3](https://github.com/folio-org/stripes-acq-components/tree/v2.0.3) (2020-04-06)
