@@ -509,5 +509,7 @@
     "receiving.itemStatus.Available": "متاح",
     "receiving.itemStatus.In transit": "في النقل",
     "receiving.itemStatus.Order closed": "تم إغلاق الطلبية",
-    "receiving.itemStatus.Undefined": "غير معرّف"
+    "receiving.itemStatus.Undefined": "غير معرّف",
+    "filter.user.lookup": "User look-up",
+    "filter.user.lookupNoSupport": "user look-up is not supported"
 }

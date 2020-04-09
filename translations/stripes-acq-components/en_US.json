@@ -489,8 +489,6 @@
     "FormFooter.save": "Save & close",
     "filter.organization.lookup": "Organization look-up",
     "filter.organization.lookupNoSupport": "Organization look-up is not supported",
-    "filter.user.lookup": "User look-up",
-    "filter.user.lookupNoSupport": "user look-up is not supported",
     "order.status.closed": "Closed",
     "order.status.open": "Open",
     "order.status.pending": "Pending",
@@ -511,5 +509,7 @@
     "receiving.itemStatus.Available": "Available",
     "receiving.itemStatus.In transit": "In transit",
     "receiving.itemStatus.Order closed": "Order closed",
-    "receiving.itemStatus.Undefined": "Undefined"
+    "receiving.itemStatus.Undefined": "Undefined",
+    "filter.user.lookup": "User look-up",
+    "filter.user.lookupNoSupport": "user look-up is not supported"
 }

@@ -509,5 +509,7 @@
     "receiving.itemStatus.Available": "Disponible",
     "receiving.itemStatus.In transit": "En transit",
     "receiving.itemStatus.Order closed": "Commande close",
-    "receiving.itemStatus.Undefined": "Indéfini"
+    "receiving.itemStatus.Undefined": "Indéfini",
+    "filter.user.lookup": "User look-up",
+    "filter.user.lookupNoSupport": "user look-up is not supported"
 }

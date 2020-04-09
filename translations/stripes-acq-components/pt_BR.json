@@ -24,7 +24,7 @@
     "label.tags": "Tags",
     "searchAndFilter": "Pesquisar & filtrar",
     "search": "Pesquisa",
-    "resetAllFilters": "Reiniciar tudo",
+    "resetAllFilters": "Retirar filtros",
     "paymentMethod.cash": "Dinheiro",
     "paymentMethod.card": "Cartão de crédito",
     "paymentMethod.eft": "EFT",
@@ -509,5 +509,7 @@
     "receiving.itemStatus.Available": "Disponível",
     "receiving.itemStatus.In transit": "Em trânsito",
     "receiving.itemStatus.Order closed": "Pedido encerrado",
-    "receiving.itemStatus.Undefined": "Indefinido"
+    "receiving.itemStatus.Undefined": "Indefinido",
+    "filter.user.lookup": "Consulta de usuário",
+    "filter.user.lookupNoSupport": "a consulta do usuário não é suportada"
 }
