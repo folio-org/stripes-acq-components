@@ -1,10 +1,12 @@
 # Change history for stripes-acq-components
 
 ## (IN PROGRESS)
+
+## [2.0.4](https://github.com/folio-org/stripes-acq-components/tree/v2.0.4) (2020-04-09)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.0.3...v2.0.4)
+
 ### Stories
 * [UIOR-516](https://issues.folio.org/browse/UIOR-516) PluggableUserFilter component
-
-### Bug fixes
 
 ## [2.0.3](https://github.com/folio-org/stripes-acq-components/tree/v2.0.3) (2020-04-06)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.0.2...v2.0.3)

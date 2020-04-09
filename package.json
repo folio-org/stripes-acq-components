@@ -1,6 +1,6 @@
 {
   "name": "@folio/stripes-acq-components",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Component library for Stripes Acquisitions modules",
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
@@ -62,10 +62,10 @@
     "@folio/stripes": "^3.0.0",
     "react": "*",
     "react-intl": "^2.9.0",
-    "react-redux": "^5.1.1",
+    "react-redux": "*",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "redux": "^3.7.2"
+    "redux": "*"
   },
   "stripes": {
     "type": "",
