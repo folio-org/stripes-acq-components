@@ -510,6 +510,6 @@
     "receiving.itemStatus.In transit": "传送中",
     "receiving.itemStatus.Order closed": "订单已关闭",
     "receiving.itemStatus.Undefined": "未定义",
-    "filter.user.lookup": "User look-up",
-    "filter.user.lookupNoSupport": "user look-up is not supported"
+    "filter.user.lookup": "用户查询",
+    "filter.user.lookupNoSupport": "不支持用户查询"
 }
