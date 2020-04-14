@@ -7,3 +7,4 @@ export { default as locationFactory } from './location';
 export { default as materialTypeFactory } from './material-type';
 export { default as lineFactory } from './line';
 export { default as orderFactory } from './order';
+export { default as configFactory } from './config';
