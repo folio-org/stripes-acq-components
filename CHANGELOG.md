@@ -1,6 +1,8 @@
 # Change history for stripes-acq-components
 
 ## (IN PROGRESS)
+### Stories
+* [UINV-138](https://issues.folio.org/browse/UINV-138) Align actions icons in table to right hand side of view pane(s)
 
 ## [2.0.4](https://github.com/folio-org/stripes-acq-components/tree/v2.0.4) (2020-04-09)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.0.3...v2.0.4)
