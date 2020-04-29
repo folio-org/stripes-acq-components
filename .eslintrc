@@ -10,6 +10,7 @@
   },
   "rules": {
     "import/prefer-default-export": "off",
+    "import/no-anonymous-default-export": "error",
     "filenames/match-exported": "error",
     "key-spacing": [
       "error",
