@@ -1,3 +1,4 @@
 .alignLastColToEnd > div:last-of-type {
   margin-left: auto;
+  width: auto !important;
 }
