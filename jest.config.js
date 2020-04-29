@@ -20,7 +20,7 @@ module.exports = {
     '^.+\\.(css)$': '<rootDir>/node_modules/jest-css-modules',
     '^.+\\.(svg)$': 'identity-obj-proxy',
   },
-  testMatch: ['<rootDir>/(lib|src)/**/?(*.)test.{js,jsx}'],
+  testMatch: ['**/(lib|src)/**/?(*.)test.{js,jsx}'],
   testPathIgnorePatterns: ['/node_modules/'],
   setupFiles: [path.join(__dirname, './test/jest/setupTests.js')],
 };
