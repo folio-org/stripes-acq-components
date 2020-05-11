@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 ### Stories
+* [UIREC-42](https://issues.folio.org/browse/UIREC-42) Filter Titles by piece status and Acq unit
 * [UIF-202](https://issues.folio.org/browse/UIF-202) Add default sorting param to AcqList
 * [UINV-123](https://issues.folio.org/browse/UINV-123) Add "Export to accounting" toggle to Adjustments
 * [UINV-138](https://issues.folio.org/browse/UINV-138) Align actions icons in table to right hand side of view pane(s)
