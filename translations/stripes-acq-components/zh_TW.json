@@ -12,7 +12,7 @@
     "fileUploader.dropFile": "拖放上傳檔案",
     "fileUploader.selectFile": "或是選擇檔案",
     "button.close": "關閉",
-    "button.save": "保存",
+    "button.save": "儲存",
     "modal.resultsHeader": "查詢結果",
     "modal.noSourceYet": "尚无来源",
     "modal.totalSelected": "已選總數：{count}",
