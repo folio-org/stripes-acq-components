@@ -18,7 +18,7 @@
     "modal.totalSelected": "已選總數：{count}",
     "fundDistribution.addBtn": "新增經費分配",
     "fundDistribution.amount": "金额",
-    "fundDistribution.code": "代码",
+    "fundDistribution.code": "代碼",
     "fundDistribution.encumbrance": "预支",
     "fundDistribution.id": "經費 ID",
     "label.tags": "Tags",
