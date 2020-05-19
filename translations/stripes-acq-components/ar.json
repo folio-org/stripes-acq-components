@@ -19,7 +19,7 @@
     "fundDistribution.addBtn": "إضافة توزيع تمويل",
     "fundDistribution.amount": "المبلغ",
     "fundDistribution.code": "رمز",
-    "fundDistribution.encumbrance": "رهن",
+    "fundDistribution.encumbrance": "تكلفة",
     "fundDistribution.id": "معرّف التمويل",
     "label.tags": "وسوم",
     "searchAndFilter": "بحث وتنقيح",
@@ -511,5 +511,10 @@
     "receiving.itemStatus.Order closed": "تم إغلاق الطلبية",
     "receiving.itemStatus.Undefined": "غير معرّف",
     "filter.user.lookup": "بحث المستخدم",
-    "filter.user.lookupNoSupport": "بحث المستخدم غير مدعوم"
+    "filter.user.lookupNoSupport": "بحث المستخدم غير مدعوم",
+    "piece.pieceFormat.electronic": "Electronic",
+    "piece.pieceFormat.physical": "Physical",
+    "piece.pieceFormat.other": "Other",
+    "piece.pieceStatus.expected": "Expected",
+    "piece.pieceStatus.received": "Received"
 }

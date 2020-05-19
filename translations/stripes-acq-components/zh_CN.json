@@ -511,5 +511,10 @@
     "receiving.itemStatus.Order closed": "订单已关闭",
     "receiving.itemStatus.Undefined": "未定义",
     "filter.user.lookup": "用户查询",
-    "filter.user.lookupNoSupport": "不支持用户查询"
+    "filter.user.lookupNoSupport": "不支持用户查询",
+    "piece.pieceFormat.electronic": "Electronic",
+    "piece.pieceFormat.physical": "Physical",
+    "piece.pieceFormat.other": "Other",
+    "piece.pieceStatus.expected": "Expected",
+    "piece.pieceStatus.received": "Received"
 }
