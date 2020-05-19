@@ -511,5 +511,10 @@
     "receiving.itemStatus.Order closed": "Pedido cerrado",
     "receiving.itemStatus.Undefined": "Indefinido",
     "filter.user.lookup": "User look-up",
-    "filter.user.lookupNoSupport": "user look-up is not supported"
+    "filter.user.lookupNoSupport": "user look-up is not supported",
+    "piece.pieceFormat.electronic": "Electronic",
+    "piece.pieceFormat.physical": "Physical",
+    "piece.pieceFormat.other": "Other",
+    "piece.pieceStatus.expected": "Expected",
+    "piece.pieceStatus.received": "Received"
 }
