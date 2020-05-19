@@ -9,5 +9,8 @@ export { default as configLocations } from './locations';
 export { default as configLines } from './lines';
 export { default as configOrders } from './orders';
 export { default as configConfigs } from './configs';
+export * from './configItems';
+export * from './configPieces';
+export * from './configRequests';
 export * from './transactions';
 export * from './utils';

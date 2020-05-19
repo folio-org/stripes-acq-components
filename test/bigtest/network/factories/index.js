@@ -8,3 +8,6 @@ export { default as materialTypeFactory } from './material-type';
 export { default as lineFactory } from './line';
 export { default as orderFactory } from './order';
 export { default as configFactory } from './config';
+export { default as pieceFactory } from './piece';
+export { default as itemFactory } from './item';
+export { default as requestFactory } from './request';
