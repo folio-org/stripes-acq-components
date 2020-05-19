@@ -489,6 +489,12 @@
   "paymentMethod.internalTransfer": "Internal transfer",
   "paymentMethod.other": "Other",
 
+  "piece.pieceFormat.electronic": "Electronic",
+  "piece.pieceFormat.physical": "Physical",
+  "piece.pieceFormat.other": "Other",
+  "piece.pieceStatus.expected": "Expected",
+  "piece.pieceStatus.received": "Received",
+
   "sources.api": "API",
   "sources.edi": "EDI",
   "sources.marc": "MARC",

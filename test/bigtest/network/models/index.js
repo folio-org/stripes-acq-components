@@ -7,3 +7,6 @@ export { default as locationModel } from './location';
 export { default as materialTypeModel } from './material-type';
 export { default as orderModel } from './order';
 export { default as configModel } from './config';
+export { default as pieceModel } from './piece';
+export { default as itemModel } from './item';
+export { default as requestModel } from './request';
