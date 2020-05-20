@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 ### Stories
+* [UIORGS-178](https://issues.folio.org/browse/UIORGS-178) Redirect API calls from mod-organizations-storage to 
 * [UIOR-444](https://issues.folio.org/browse/UIOR-444) common constants for Piece, BigTest config
 * Update to stripes v4
 * [UIREC-42](https://issues.folio.org/browse/UIREC-42) Filter Titles by piece status and Acq unit
