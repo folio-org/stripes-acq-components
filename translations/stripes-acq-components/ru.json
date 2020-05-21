@@ -516,5 +516,5 @@
     "piece.pieceFormat.physical": "Physical",
     "piece.pieceFormat.other": "Other",
     "piece.pieceStatus.expected": "Expected",
-    "piece.pieceStatus.received": "Received"
+    "piece.pieceStatus.received": "Получено"
 }
