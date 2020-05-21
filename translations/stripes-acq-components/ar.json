@@ -512,9 +512,9 @@
     "receiving.itemStatus.Undefined": "غير معرّف",
     "filter.user.lookup": "بحث المستخدم",
     "filter.user.lookupNoSupport": "بحث المستخدم غير مدعوم",
-    "piece.pieceFormat.electronic": "Electronic",
-    "piece.pieceFormat.physical": "Physical",
-    "piece.pieceFormat.other": "Other",
-    "piece.pieceStatus.expected": "Expected",
-    "piece.pieceStatus.received": "Received"
+    "piece.pieceFormat.electronic": "إلكتروني",
+    "piece.pieceFormat.physical": "مادي",
+    "piece.pieceFormat.other": "أخرى",
+    "piece.pieceStatus.expected": "متوقع",
+    "piece.pieceStatus.received": "تم استلامه"
 }
