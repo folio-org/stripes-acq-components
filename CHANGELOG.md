@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 ### Stories
+* [UIORGS-78](https://issues.folio.org/browse/UIORGS-78) pass `id` to `AcqUnitsField`
 * [UIOR-564](https://issues.folio.org/browse/UIOR-564) pass initialFilterState prop to S&SQ
 * [UIORGS-178](https://issues.folio.org/browse/UIORGS-178) Redirect API calls from mod-organizations-storage to
 * [UIOR-444](https://issues.folio.org/browse/UIOR-444) common constants for Piece, BigTest config
