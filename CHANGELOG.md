@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 ### Stories
+* [UIREC-47](https://issues.folio.org/browse/UIREC-47) Create/lookup instance from receiving Title when not using instance lookup
 * [UIORGS-78](https://issues.folio.org/browse/UIORGS-78) pass `id` to `AcqUnitsField`
 * [UIOR-564](https://issues.folio.org/browse/UIOR-564) pass initialFilterState prop to S&SQ
 * [UIORGS-178](https://issues.folio.org/browse/UIORGS-178) Redirect API calls from mod-organizations-storage to
