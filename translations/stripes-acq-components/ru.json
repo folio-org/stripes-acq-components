@@ -512,9 +512,9 @@
     "receiving.itemStatus.Undefined": "Undefined",
     "filter.user.lookup": "User look-up",
     "filter.user.lookupNoSupport": "user look-up is not supported",
-    "piece.pieceFormat.electronic": "Electronic",
-    "piece.pieceFormat.physical": "Physical",
-    "piece.pieceFormat.other": "Other",
-    "piece.pieceStatus.expected": "Expected",
+    "piece.pieceFormat.electronic": "Электронный",
+    "piece.pieceFormat.physical": "Физический",
+    "piece.pieceFormat.other": "Другой",
+    "piece.pieceStatus.expected": "Ожидаемый",
     "piece.pieceStatus.received": "Получено"
 }
