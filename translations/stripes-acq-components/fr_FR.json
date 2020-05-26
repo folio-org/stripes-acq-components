@@ -3,7 +3,7 @@
     "sources.api": "API",
     "sources.edi": "EDI",
     "sources.marc": "MARC",
-    "sources.user": "Adhérent",
+    "sources.user": "Utilisateur",
     "filter.false": "Non",
     "filter.true": "Oui",
     "label.emptyValue": " ",
@@ -510,11 +510,11 @@
     "receiving.itemStatus.In transit": "En transit",
     "receiving.itemStatus.Order closed": "Commande close",
     "receiving.itemStatus.Undefined": "Indéfini",
-    "filter.user.lookup": "User look-up",
+    "filter.user.lookup": "Recherche d'utilisateur",
     "filter.user.lookupNoSupport": "user look-up is not supported",
-    "piece.pieceFormat.electronic": "Electronic",
-    "piece.pieceFormat.physical": "Physical",
-    "piece.pieceFormat.other": "Other",
-    "piece.pieceStatus.expected": "Expected",
-    "piece.pieceStatus.received": "Received"
+    "piece.pieceFormat.electronic": "Électronique",
+    "piece.pieceFormat.physical": "Physique",
+    "piece.pieceFormat.other": "Autre",
+    "piece.pieceStatus.expected": "Attendu",
+    "piece.pieceStatus.received": "Reçu(e)"
 }
