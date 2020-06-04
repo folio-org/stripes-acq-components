@@ -516,5 +516,6 @@
     "piece.pieceFormat.physical": "Físico",
     "piece.pieceFormat.other": "Outros",
     "piece.pieceStatus.expected": "Esperado",
-    "piece.pieceStatus.received": "Recebido"
+    "piece.pieceStatus.received": "Recebido",
+    "validation.cantContainSpaces": "Espaços não são permitidos"
 }
