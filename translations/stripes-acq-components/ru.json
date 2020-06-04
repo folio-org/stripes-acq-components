@@ -516,5 +516,6 @@
     "piece.pieceFormat.physical": "Физический",
     "piece.pieceFormat.other": "Другой",
     "piece.pieceStatus.expected": "Ожидаемый",
-    "piece.pieceStatus.received": "Получено"
+    "piece.pieceStatus.received": "Получено",
+    "validation.cantContainSpaces": "Использование пробелов не допускается"
 }

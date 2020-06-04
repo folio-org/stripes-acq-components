@@ -516,5 +516,6 @@
     "piece.pieceFormat.physical": "مادي",
     "piece.pieceFormat.other": "أخرى",
     "piece.pieceStatus.expected": "متوقع",
-    "piece.pieceStatus.received": "تم استلامه"
+    "piece.pieceStatus.received": "تم استلامه",
+    "validation.cantContainSpaces": "المسافات غير مسموح بها"
 }
