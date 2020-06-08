@@ -68,9 +68,6 @@
     "react-router-dom": "^4.3.1",
     "redux": "*"
   },
-  "resolutions": {
-    "keyboardjs": "~2.5.1"
-  },
   "stripes": {
     "actsAs": [""],
     "okapiInterfaces": {
