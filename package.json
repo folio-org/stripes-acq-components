@@ -7,7 +7,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=8.9.4"
+    "node": ">=10"
   },
   "repository": "folio-org/stripes-acq-components",
   "scripts": {
@@ -39,7 +39,6 @@
     "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-dom": "^16.5.1",
-    "react-hot-loader": "^4.3.12",
     "react-intl": "^4.5.1",
     "react-redux": "^5.1.1",
     "react-router": "^4.3.1",
@@ -56,6 +55,7 @@
     "query-string": "^6.1.0",
     "react-dropzone": "^9.0.0",
     "react-final-form": "^6.3.0",
+    "react-hot-loader": "^4.3.12",
     "redux-form": "^7.4.2"
   },
   "peerDependencies": {
