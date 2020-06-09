@@ -22,6 +22,6 @@ export default interactor(class MultiSelectionInteractor {
   optionCount = count('[class*=multiSelectOptionList---] li');
   valueCount = count('[class*=valueChipRoot---]');
   clickControl = clickable('[class*=multiSelectControl---]');
-  fillFilter = fillable('[class*=multiSelectInput---]');
+  fillFilter = fillable('[class*=multiSelectFilterField---]');
   options = collection('[class*=multiSelectOption---]', OptionInteractor);
 });
