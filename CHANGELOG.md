@@ -2,6 +2,11 @@
 
 ## (IN PROGRESS)
 
+## [2.1.1](https://github.com/folio-org/stripes-acq-components/tree/v2.1.1) (2020-06-11)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.1.0...v2.1.1)
+
+* remove `okapiInterfaces` from `stripes`;
+
 ## [2.1.0](https://github.com/folio-org/stripes-acq-components/tree/v2.1.0) (2020-06-11)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.0.4...v2.1.0)
 
