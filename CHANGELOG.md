@@ -1,6 +1,10 @@
 # Change history for stripes-acq-components
 
 ## (IN PROGRESS)
+
+## [2.1.0](https://github.com/folio-org/stripes-acq-components/tree/v2.1.0) (2020-06-11)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.0.4...v2.1.0)
+
 ### Stories
 * [UIOR-530](https://issues.folio.org/browse/UIOR-530) Improve Select location dropdown to use only select Location plugin
 * [UIREC-90](https://issues.folio.org/browse/UIREC-90) Update select location workflow for Piece creation/edit
