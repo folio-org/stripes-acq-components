@@ -1,6 +1,6 @@
 {
   "name": "@folio/stripes-acq-components",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Component library for Stripes Acquisitions modules",
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
@@ -69,18 +69,6 @@
     "redux": "*"
   },
   "stripes": {
-    "actsAs": [""],
-    "okapiInterfaces": {
-      "acquisitions-units": "1.1",
-      "configuration": "2.0",
-      "contributor-name-types": "1.2",
-      "finance.funds": "1.0",
-      "finance.transactions": "2.0 3.0",
-      "identifier-types": "1.2",
-      "locations": "3.0",
-      "material-types": "2.2",
-      "organizations.organizations": "1.0",
-      "tags": "1.0"
-    }
+    "actsAs": [""]
   }
 }
