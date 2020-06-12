@@ -2,6 +2,11 @@
 
 ## (IN PROGRESS)
 
+## [2.1.2](https://github.com/folio-org/stripes-acq-components/tree/v2.1.2) (2020-06-12)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.1.1...v2.1.2)
+
+* fix multiselect interactor;
+
 ## [2.1.1](https://github.com/folio-org/stripes-acq-components/tree/v2.1.1) (2020-06-11)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.1.0...v2.1.1)
 
