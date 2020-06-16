@@ -5,6 +5,9 @@
 ### Stories
 * [UIOR-417](https://issues.folio.org/browse/UIOR-417) useLocalStorageFilters hook
 
+### Bug fixes
+* [UIOR-522](https://issues.folio.org/browse/UIOR-522) Accessibility Error: ARIA attributes must conform to valid values
+
 ## [2.1.2](https://github.com/folio-org/stripes-acq-components/tree/v2.1.2) (2020-06-12)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.1.1...v2.1.2)
 
