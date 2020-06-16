@@ -25,6 +25,7 @@
     "@folio/eslint-config-stripes": "^5.0.0",
     "@folio/stripes": "^4.0.0",
     "@folio/stripes-cli": "^1.11.0",
+    "@testing-library/dom": "^7.16.1",
     "@testing-library/react": "^9.3.2",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^25.1.0",
@@ -47,6 +48,7 @@
   },
   "dependencies": {
     "@folio/react-intl-safe-html": "^2.0.0",
+    "@rehooks/local-storage": "^2.4.0",
     "classnames": "^2.2.5",
     "dom-helpers": "^3.4.0",
     "final-form": "^4.18.2",
