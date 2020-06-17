@@ -5,6 +5,8 @@
   "tagWasNotAdded": "Tag was not added",
   "newTagWasNotCreated": "New tag was not created",
 
+  "no-ui-plugin-find-user": "[no user-selection plugin]",
+
   "button.close": "Close",
   "button.save": "Save",
 
