@@ -477,6 +477,7 @@
   "fundDistribution.currentEncumbrance": "Current encumbrance",
 
   "modal.resultsHeader": "Search results",
+  "modal.selectAll": "Select all",
   "modal.noSourceYet": "No source yet",
   "modal.totalSelected": "Total selected: {count}",
 
