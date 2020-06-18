@@ -517,5 +517,6 @@
     "piece.pieceFormat.other": "Other",
     "piece.pieceStatus.expected": "Expected",
     "piece.pieceStatus.received": "Received",
-    "validation.cantContainSpaces": "Spaces aren't allowed"
+    "validation.cantContainSpaces": "Spaces aren't allowed",
+    "no-ui-plugin-find-user": "[no user-selection plugin]"
 }
