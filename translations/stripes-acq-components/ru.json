@@ -517,5 +517,6 @@
     "piece.pieceFormat.other": "Другой",
     "piece.pieceStatus.expected": "Ожидаемый",
     "piece.pieceStatus.received": "Получено",
-    "validation.cantContainSpaces": "Использование пробелов не допускается"
+    "validation.cantContainSpaces": "Использование пробелов не допускается",
+    "no-ui-plugin-find-user": "[no user-selection plugin]"
 }

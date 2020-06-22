@@ -517,5 +517,6 @@
     "piece.pieceFormat.other": "أخرى",
     "piece.pieceStatus.expected": "متوقع",
     "piece.pieceStatus.received": "تم استلامه",
-    "validation.cantContainSpaces": "المسافات غير مسموح بها"
+    "validation.cantContainSpaces": "المسافات غير مسموح بها",
+    "no-ui-plugin-find-user": "[لا يوجد برنامج مساعد لتحديد المستخدم]"
 }
