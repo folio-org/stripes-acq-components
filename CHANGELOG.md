@@ -9,6 +9,7 @@
 * [UIOR-524](https://issues.folio.org/browse/UIOR-524) Accessibility Error: Form elements must have labels
 * [UIOR-523](https://issues.folio.org/browse/UIOR-523) Accessibility Error: Buttons must have discernible text
 * [UIOR-522](https://issues.folio.org/browse/UIOR-522) Accessibility Error: ARIA attributes must conform to valid values
+* [UIORGS-173](https://issues.folio.org/browse/UIORGS-173) Accessibility Error: Added aria-label for "Select all"-checkbox in the find record modal
 
 ## [2.1.2](https://github.com/folio-org/stripes-acq-components/tree/v2.1.2) (2020-06-12)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.1.1...v2.1.2)
