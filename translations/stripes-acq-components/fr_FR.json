@@ -518,5 +518,6 @@
     "piece.pieceStatus.expected": "Attendu",
     "piece.pieceStatus.received": "Reçu(e)",
     "validation.cantContainSpaces": "Les espaces ne sont pas autorisés",
-    "no-ui-plugin-find-user": "[no user-selection plugin]"
+    "no-ui-plugin-find-user": "[no user-selection plugin]",
+    "modal.selectAll": "Sélectionner tout"
 }

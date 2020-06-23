@@ -518,5 +518,6 @@
     "piece.pieceStatus.expected": "预期的",
     "piece.pieceStatus.received": "收到",
     "validation.cantContainSpaces": "不允许有空格",
-    "no-ui-plugin-find-user": "[no user-selection plugin]"
+    "no-ui-plugin-find-user": "[no user-selection plugin]",
+    "modal.selectAll": "Select all"
 }
