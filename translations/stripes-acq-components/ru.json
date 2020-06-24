@@ -9,7 +9,7 @@
     "label.emptyValue": " ",
     "validation.required": "Обязательно!",
     "label.acqUnits": "Acquisition units",
-    "fileUploader.dropFile": "Drag and drop to upload a document",
+    "fileUploader.dropFile": "Чтобы загрузить документ, перетащите и оставьте",
     "fileUploader.selectFile": "или выберите файл",
     "button.close": "Закрыть",
     "button.save": "Сохранить",
