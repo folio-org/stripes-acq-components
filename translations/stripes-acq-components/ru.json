@@ -518,6 +518,6 @@
     "piece.pieceStatus.expected": "Ожидаемый",
     "piece.pieceStatus.received": "Получено",
     "validation.cantContainSpaces": "Использование пробелов не допускается",
-    "no-ui-plugin-find-user": "[no user-selection plugin]",
+    "no-ui-plugin-find-user": "[нет плагина для выбора пользователя]",
     "modal.selectAll": "Выбрать все"
 }
