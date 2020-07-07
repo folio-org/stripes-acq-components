@@ -3,6 +3,7 @@
 ## (IN PROGRESS)
 
 ### Stories
+* [UINV-161](https://issues.folio.org/browse/UINV-161) Alert user when adding pol to invoice that has a different currency or vendor that the invoice
 * [UIOR-417](https://issues.folio.org/browse/UIOR-417) useLocalStorageFilters hook
 
 ### Bug fixes
