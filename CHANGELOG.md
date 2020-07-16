@@ -8,6 +8,7 @@
 * [UIOR-417](https://issues.folio.org/browse/UIOR-417) useLocalStorageFilters hook
 
 ### Bug fixes
+* [UISACQCOMP-2](https://issues.folio.org/browse/UISACQCOMP-2) ACQ - CurrencySelect values are not translated
 * [UIORGS-157](https://issues.folio.org/browse/UIORGS-157) Accessibility error: IDs of active elements must be unique
 * [UIOR-524](https://issues.folio.org/browse/UIOR-524) Accessibility Error: Form elements must have labels
 * [UIOR-523](https://issues.folio.org/browse/UIOR-523) Accessibility Error: Buttons must have discernible text
