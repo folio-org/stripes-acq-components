@@ -23,7 +23,7 @@
     "@babel/preset-react": "^7.7.4",
     "@bigtest/interactor": "^0.9.3",
     "@folio/eslint-config-stripes": "^5.0.0",
-    "@folio/stripes": "^4.0.0",
+    "@folio/stripes": "^5.0.0",
     "@folio/stripes-cli": "^1.11.0",
     "@testing-library/dom": "^7.16.1",
     "@testing-library/react": "^9.3.2",
@@ -42,8 +42,8 @@
     "react-dom": "^16.5.1",
     "react-intl": "^4.5.1",
     "react-redux": "^5.1.1",
-    "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "redux": "^3.7.2"
   },
   "dependencies": {
@@ -62,13 +62,13 @@
     "redux-form": "^7.4.2"
   },
   "peerDependencies": {
-    "@folio/stripes": "^4.0.0",
+    "@folio/stripes": "^5.0.0",
     "moment": "^2.24.0",
     "react": "*",
     "react-intl": "^4.5.1",
     "react-redux": "*",
-    "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "redux": "*"
   },
   "stripes": {
