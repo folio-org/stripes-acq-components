@@ -3,6 +3,7 @@
 ## (IN PROGRESS)
 
 ### Stories
+* [UIOR-586](https://issues.folio.org/browse/UIOR-586) Update subheading of the Orders landing page Search results pane
 * [UIOR-561](https://issues.folio.org/browse/UIOR-561) Migrate to react-final-form
 * [UINV-161](https://issues.folio.org/browse/UINV-161) Alert user when adding pol to invoice that has a different currency or vendor that the invoice
 * [UIOR-417](https://issues.folio.org/browse/UIOR-417) useLocalStorageFilters hook
