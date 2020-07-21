@@ -6,7 +6,7 @@
     "sources.user": "Utilisateur",
     "filter.false": "Non",
     "filter.true": "Oui",
-    "label.emptyValue": " ",
+    "label.emptyValue": ".",
     "validation.required": "Obligatoire",
     "label.acqUnits": "Unités d'acquisition",
     "fileUploader.dropFile": "Glisser-déposer pour télécharger un document",
