@@ -2,6 +2,8 @@
 
 ## (IN PROGRESS)
 
+* respect `disabled` prop in filter component. Refs UIOR-586
+
 ### Stories
 * [UIOR-586](https://issues.folio.org/browse/UIOR-586) Update subheading of the Orders landing page Search results pane
 * [UIOR-561](https://issues.folio.org/browse/UIOR-561) Migrate to react-final-form
