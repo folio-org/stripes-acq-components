@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* `useList` component with leveraged common logic for list pages. Refs UIOR-586
 * respect `disabled` prop in filter component. Refs UIOR-586
 
 ### Stories
