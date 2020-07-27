@@ -8,7 +8,7 @@
     "filter.true": "Да",
     "label.emptyValue": " ",
     "validation.required": "Обязательно!",
-    "label.acqUnits": "Acquisition units",
+    "label.acqUnits": "Единицы комплектования",
     "fileUploader.dropFile": "Чтобы загрузить документ, перетащите и оставьте",
     "fileUploader.selectFile": "или выберите файл",
     "button.close": "Закрыть",
