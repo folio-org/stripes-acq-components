@@ -1,0 +1,3 @@
+.noPaddingBottom > div {
+  padding-bottom: 0;
+}
