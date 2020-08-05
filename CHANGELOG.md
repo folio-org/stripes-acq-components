@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* add `showBrackets` prop in `AmountWithCurrencyField` to show amount in brackets for negative values
 * `AcqEndOfList` component for manual use of EoL marker from stripes-component.
 * `useList` component with leveraged common logic for list pages. Refs UIOR-586
 * respect `disabled` prop in filter component. Refs UIOR-586
