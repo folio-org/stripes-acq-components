@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Select expense class for Order & Invoice Fund distribution. Refs UIF-213
 * add `showBrackets` prop in `AmountWithCurrencyField` to show amount in brackets for negative values
 * `AcqEndOfList` component for manual use of EoL marker from stripes-component.
 * `useList` component with leveraged common logic for list pages. Refs UIOR-586
