@@ -34,7 +34,7 @@
     "paymentMethod.internalTransfer": "Внутренний трансфер",
     "paymentMethod.other": "Другое",
     "fundDistribution.value": "Значение",
-    "fundDistribution.type": "Select adjustment",
+    "fundDistribution.type": "Type",
     "fundDistribution.type.sign.percent": "%",
     "fundDistribution.type.percent": "Процент",
     "fundDistribution.type.amount": "Amount",
@@ -519,5 +519,6 @@
     "piece.pieceStatus.received": "Получено",
     "validation.cantContainSpaces": "Использование пробелов не допускается",
     "no-ui-plugin-find-user": "[нет плагина для выбора пользователя]",
-    "modal.selectAll": "Выбрать все"
+    "modal.selectAll": "Выбрать все",
+    "fundDistribution.expenseClass": "Expense class"
 }
