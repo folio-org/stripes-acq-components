@@ -34,7 +34,7 @@
     "paymentMethod.internalTransfer": "Internal transfer",
     "paymentMethod.other": "その他",
     "fundDistribution.value": "値",
-    "fundDistribution.type": "Select adjustment",
+    "fundDistribution.type": "Type",
     "fundDistribution.type.sign.percent": "%",
     "fundDistribution.type.percent": "Percent",
     "fundDistribution.type.amount": "Amount",
@@ -519,5 +519,6 @@
     "piece.pieceStatus.received": "Received",
     "validation.cantContainSpaces": "Spaces aren't allowed",
     "no-ui-plugin-find-user": "[no user-selection plugin]",
-    "modal.selectAll": "Select all"
+    "modal.selectAll": "Select all",
+    "fundDistribution.expenseClass": "Expense class"
 }

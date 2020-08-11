@@ -34,7 +34,7 @@
     "paymentMethod.internalTransfer": "Transferência interna",
     "paymentMethod.other": "Outros",
     "fundDistribution.value": "Valor",
-    "fundDistribution.type": "Selecione o ajuste",
+    "fundDistribution.type": "Tipo",
     "fundDistribution.type.sign.percent": "%",
     "fundDistribution.type.percent": "Porcentagem",
     "fundDistribution.type.amount": "Quantia",
@@ -519,5 +519,6 @@
     "piece.pieceStatus.received": "Recebido",
     "validation.cantContainSpaces": "Espaços não são permitidos",
     "no-ui-plugin-find-user": "[nenhum plugin de seleção de usuário]",
-    "modal.selectAll": "Selecionar tudo"
+    "modal.selectAll": "Selecionar tudo",
+    "fundDistribution.expenseClass": "Classe de despesa"
 }
