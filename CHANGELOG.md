@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Customize column names for sorting. Refs UIORGS-197
 * Move payment status constant. Refs UINV-173
 * Select expense class for Order & Invoice Fund distribution. Refs UIF-213
 * add `showBrackets` prop in `AmountWithCurrencyField` to show amount in brackets for negative values
