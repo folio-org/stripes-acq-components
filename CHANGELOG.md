@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Add URL validation. Refs UIOR-556
 * Customize column names for sorting. Refs UIORGS-197
 * Move payment status constant. Refs UINV-173
 * Select expense class for Order & Invoice Fund distribution. Refs UIF-213

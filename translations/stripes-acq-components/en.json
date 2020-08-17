@@ -536,6 +536,7 @@
   "validation.cantContainSpaces": "Spaces aren't allowed",
   "validation.fundDistributionType": "All distributions should be the same type",
   "validation.fundDistribution.uniqueFunds": "You can not have multiple distributions for the same fund.",
+  "validation.invalidURL": "URL is not valid",
   "validation.shouldBeEqualToTotalAmount": "The percentage or amount(s) should be equal 100% of the total",
   "validation.required": "Required!",
   "validation.cantBeNegativeOrEmpty": "Can not be negative or empty"
