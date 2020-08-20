@@ -504,10 +504,10 @@
     "tagWasAdded": "Il tag è stato aggiunto",
     "tagWasNotAdded": "Il tag non è stato aggiunto",
     "newTagWasNotCreated": "Il nuovo tag non è stato creato",
-    "receiving.itemStatus.In process": "In process",
-    "receiving.itemStatus.On order": "On order",
-    "receiving.itemStatus.Available": "Available",
-    "receiving.itemStatus.In transit": "In transit",
+    "receiving.itemStatus.In process": "In lavorazione",
+    "receiving.itemStatus.On order": "In acquisizione",
+    "receiving.itemStatus.Available": "Disponibile",
+    "receiving.itemStatus.In transit": "In transito",
     "receiving.itemStatus.Order closed": "Order closed",
     "receiving.itemStatus.Undefined": "Undefined",
     "filter.user.lookup": "User look-up",
@@ -516,9 +516,10 @@
     "piece.pieceFormat.physical": "Physical",
     "piece.pieceFormat.other": "Other",
     "piece.pieceStatus.expected": "Expected",
-    "piece.pieceStatus.received": "Received",
+    "piece.pieceStatus.received": "Ricevuto",
     "validation.cantContainSpaces": "Spaces aren't allowed",
     "no-ui-plugin-find-user": "[no user-selection plugin]",
     "modal.selectAll": "Select all",
-    "fundDistribution.expenseClass": "Expense class"
+    "fundDistribution.expenseClass": "Expense class",
+    "validation.invalidURL": "URL is not valid"
 }
