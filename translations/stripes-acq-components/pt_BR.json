@@ -520,5 +520,6 @@
     "validation.cantContainSpaces": "Espaços não são permitidos",
     "no-ui-plugin-find-user": "[nenhum plugin de seleção de usuário]",
     "modal.selectAll": "Selecionar tudo",
-    "fundDistribution.expenseClass": "Classe de despesa"
+    "fundDistribution.expenseClass": "Classe de despesa",
+    "validation.invalidURL": "URL is not valid"
 }

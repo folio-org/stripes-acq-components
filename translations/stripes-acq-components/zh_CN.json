@@ -520,5 +520,6 @@
     "validation.cantContainSpaces": "不允许有空格",
     "no-ui-plugin-find-user": "[没有用户选择插件]",
     "modal.selectAll": "全选",
-    "fundDistribution.expenseClass": "Expense class"
+    "fundDistribution.expenseClass": "Expense class",
+    "validation.invalidURL": "URL is not valid"
 }

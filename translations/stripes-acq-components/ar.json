@@ -520,5 +520,6 @@
     "validation.cantContainSpaces": "المسافات غير مسموح بها",
     "no-ui-plugin-find-user": "[لا يوجد برنامج مساعد لتحديد المستخدم]",
     "modal.selectAll": "تحديد الكل",
-    "fundDistribution.expenseClass": "فئة المصروفات"
+    "fundDistribution.expenseClass": "فئة المصروفات",
+    "validation.invalidURL": "عنوان URL غير صالح"
 }
