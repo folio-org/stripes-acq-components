@@ -521,5 +521,5 @@
     "no-ui-plugin-find-user": "[nenhum plugin de seleção de usuário]",
     "modal.selectAll": "Selecionar tudo",
     "fundDistribution.expenseClass": "Classe de despesa",
-    "validation.invalidURL": "URL is not valid"
+    "validation.invalidURL": "URL não válida"
 }
