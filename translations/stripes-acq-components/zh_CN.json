@@ -521,5 +521,5 @@
     "no-ui-plugin-find-user": "[没有用户选择插件]",
     "modal.selectAll": "全选",
     "fundDistribution.expenseClass": "Expense class",
-    "validation.invalidURL": "URL is not valid"
+    "validation.invalidURL": "URL 无效"
 }
