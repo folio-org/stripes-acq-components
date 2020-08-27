@@ -34,7 +34,7 @@
     "paymentMethod.internalTransfer": "内部转移",
     "paymentMethod.other": "其他",
     "fundDistribution.value": "值",
-    "fundDistribution.type": "选择调整",
+    "fundDistribution.type": "类型",
     "fundDistribution.type.sign.percent": "％",
     "fundDistribution.type.percent": "百分比",
     "fundDistribution.type.amount": "金额",
@@ -520,6 +520,6 @@
     "validation.cantContainSpaces": "不允许有空格",
     "no-ui-plugin-find-user": "[没有用户选择插件]",
     "modal.selectAll": "全选",
-    "fundDistribution.expenseClass": "Expense class",
+    "fundDistribution.expenseClass": "支出类别",
     "validation.invalidURL": "URL 无效"
 }
