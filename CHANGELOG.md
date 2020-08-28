@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Leverage common Notes route components. Refs UIORGS-184
 * Add URL validation. Refs UIOR-556
 * Customize column names for sorting. Refs UIORGS-197
 * Move payment status constant. Refs UINV-173
