@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Leverage code for client-side sorting, `FrontendSortingMCL`. Refs UINV-178
 * Leverage common Notes route components. Refs UIORGS-184
 * Add URL validation. Refs UIOR-556
 * Customize column names for sorting. Refs UIORGS-197
