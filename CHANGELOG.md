@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Fix `Datepicker` clears value for redux-form. Refs UINV-181
 * Update fund distribution UX. Refs UIF-245
 * Leverage code for client-side sorting, `FrontendSortingMCL`. Refs UINV-178
 * Leverage common Notes route components. Refs UIORGS-184
