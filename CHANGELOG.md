@@ -2,7 +2,8 @@
 
 ## (IN PROGRESS)
 
-* Display ACqUnits as NoValue if no units selected. Refs UIORGS-201
+* Add mocks and display `AmountWithCurrencyField` as `NoValue` if no value is provided. Refs UIF-251
+* Display AcqUnits as `NoValue` if no units selected. Refs UIORGS-201
 * Fix `Datepicker` clears value for redux-form. Refs UINV-181
 * Update fund distribution UX. Refs UIF-245
 * Leverage code for client-side sorting, `FrontendSortingMCL`. Refs UINV-178
