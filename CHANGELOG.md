@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Provide non-interact mode to some components. Refs UIOR-606
 * Add mocks and display `AmountWithCurrencyField` as `NoValue` if no value is provided. Refs UIF-251
 * Display AcqUnits as `NoValue` if no units selected. Refs UIORGS-201
 * Fix `Datepicker` clears value for redux-form. Refs UINV-181
