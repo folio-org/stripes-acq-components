@@ -17,6 +17,8 @@
 * `AcqEndOfList` component for manual use of EoL marker from stripes-component.
 * `useList` component with leveraged common logic for list pages. Refs UIOR-586
 * respect `disabled` prop in filter component. Refs UIOR-586
+* `TextFilter` component. Refs UICIRCLOG-4
+* `react-intl` jest mock. Refs UICIRCLOG-17
 
 ### Stories
 * [UIOR-586](https://issues.folio.org/browse/UIOR-586) Update subheading of the Orders landing page Search results pane
