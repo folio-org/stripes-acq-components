@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Display disabled `FieldSelect` as `KeyValue`. Refs UIF-251
 * Provide non-interact mode to some components. Refs UIOR-606
 * Add mocks and display `AmountWithCurrencyField` as `NoValue` if no value is provided. Refs UIF-251
 * Display AcqUnits as `NoValue` if no units selected. Refs UIORGS-201
