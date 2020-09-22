@@ -34,7 +34,7 @@
     "paymentMethod.internalTransfer": "تحويل داخلي",
     "paymentMethod.other": "أخرى",
     "fundDistribution.value": "القيمة",
-    "fundDistribution.type": "اختر التعديل",
+    "fundDistribution.type": "النوع",
     "fundDistribution.type.sign.percent": "٪",
     "fundDistribution.type.percent": "في المائة",
     "fundDistribution.type.amount": "المبلغ",
