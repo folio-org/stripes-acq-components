@@ -19,6 +19,7 @@ module.exports = {
   moduleNameMapper: {
     '^.+\\.(css)$': '<rootDir>/node_modules/jest-css-modules',
     '^.+\\.(svg)$': 'identity-obj-proxy',
+    'ky': 'ky/umd',
   },
   testMatch: ['**/(lib|src)/**/?(*.)test.{js,jsx}'],
   testPathIgnorePatterns: ['/node_modules/'],
