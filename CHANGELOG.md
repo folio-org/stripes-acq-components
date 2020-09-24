@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Wrappers for control components to provide non-interactive mode and tooltip. Refs UIOR-607
 * Display disabled `FieldSelect` as `KeyValue`. Refs UIF-251
 * Provide non-interact mode to some components. Refs UIOR-606
 * Add mocks and display `AmountWithCurrencyField` as `NoValue` if no value is provided. Refs UIF-251
