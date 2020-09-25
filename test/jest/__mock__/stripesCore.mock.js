@@ -8,7 +8,7 @@ jest.mock('@folio/stripes/core', () => {
     config: {},
     currency: 'USD',
     hasInterface: () => true,
-    hasPerm: () => true,
+    hasPerm: jest.fn().mockReturnValue(true),
     locale: 'en-US',
     logger: {
       log: () => { },
@@ -70,6 +70,8 @@ jest.mock('@folio/stripes/core', () => {
 
       return <Component {...rest} mutator={fakeMutator} resources={fakeResources} stripes={fakeStripes} />;
     },
+
+    useStripes: () => STRIPES,
 
     withStripes: Component => ({ stripes, ...rest }) => {
       const fakeStripes = stripes || STRIPES;
