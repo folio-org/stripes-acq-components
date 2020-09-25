@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Allow user to use multiple expense class from same fund on one invoice line or POL. Refs UIF-253
 * Wrappers for control components to provide non-interactive mode and tooltip. Refs UIOR-607
 * Display disabled `FieldSelect` as `KeyValue`. Refs UIF-251
 * Provide non-interact mode to some components. Refs UIOR-606
