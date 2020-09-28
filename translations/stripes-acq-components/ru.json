@@ -477,7 +477,7 @@
     "data.languages.yor": "Йоруба",
     "data.languages.zha": "Чжуанский язык",
     "data.languages.zul": "Зулусский",
-    "validation.fundDistribution.uniqueFunds": "You can not have multiple distributions for the same fund.",
+    "validation.fundDistribution.uniqueFunds": "You can not have multiple distributions for the same fund with the same expense class.",
     "data.countries.UMI": "US Minor Outlying Islands",
     "validation.cantBeNegativeOrEmpty": "Can not be negative or empty",
     "label.contributor": "Contributor",

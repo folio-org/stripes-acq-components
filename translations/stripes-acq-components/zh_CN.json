@@ -477,7 +477,7 @@
     "data.languages.yor": "约鲁巴语",
     "data.languages.zha": "壮语",
     "data.languages.zul": "祖鲁语",
-    "validation.fundDistribution.uniqueFunds": "同一经费不能有多个分配。",
+    "validation.fundDistribution.uniqueFunds": "同一支出类别的同一经费不能有多个分配。",
     "data.countries.UMI": "美国本土外小岛屿",
     "validation.cantBeNegativeOrEmpty": "不能是负数或空",
     "label.contributor": "贡献者",
