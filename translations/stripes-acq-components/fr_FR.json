@@ -511,7 +511,7 @@
     "receiving.itemStatus.Order closed": "Commande close",
     "receiving.itemStatus.Undefined": "Indéfini",
     "filter.user.lookup": "Recherche d'utilisateur",
-    "filter.user.lookupNoSupport": "user look-up is not supported",
+    "filter.user.lookupNoSupport": "la recherche d'utilisateur n'est pas prise en charge",
     "piece.pieceFormat.electronic": "Électronique",
     "piece.pieceFormat.physical": "Physique",
     "piece.pieceFormat.other": "Autre",
