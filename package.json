@@ -52,6 +52,7 @@
     "classnames": "^2.2.5",
     "dom-helpers": "^3.4.0",
     "final-form": "^4.18.2",
+    "final-form-arrays": "^3.0.2",
     "lodash": "^4.17.11",
     "prop-types": "^15.7.2",
     "query-string": "^6.1.0",

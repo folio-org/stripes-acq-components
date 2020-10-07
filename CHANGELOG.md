@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* fix tags with caps. Refs MODORDERS-433
 * separate coverage dir for Jest
 * Allow user to use multiple expense class from same fund on one invoice line or POL. Refs UIF-253
 * Wrappers for control components to provide non-interactive mode and tooltip. Refs UIOR-607
