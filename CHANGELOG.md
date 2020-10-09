@@ -2,6 +2,9 @@
 
 ## (IN PROGRESS)
 
+## [2.2.0](https://github.com/folio-org/stripes-acq-components/tree/v2.2.0) (2020-10-09)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.1.2...v2.2.0)
+
 * fix tags with caps. Refs MODORDERS-433
 * separate coverage dir for Jest
 * Allow user to use multiple expense class from same fund on one invoice line or POL. Refs UIF-253
