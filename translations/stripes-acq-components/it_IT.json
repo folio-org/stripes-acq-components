@@ -508,7 +508,7 @@
     "receiving.itemStatus.On order": "In acquisizione",
     "receiving.itemStatus.Available": "Disponibile",
     "receiving.itemStatus.In transit": "In transito",
-    "receiving.itemStatus.Order closed": "Order closed",
+    "receiving.itemStatus.Order closed": "Ordine chiuso",
     "receiving.itemStatus.Undefined": "Undefined",
     "filter.user.lookup": "User look-up",
     "filter.user.lookupNoSupport": "user look-up is not supported",
