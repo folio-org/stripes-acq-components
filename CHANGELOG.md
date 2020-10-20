@@ -2,6 +2,8 @@
 
 ## (IN PROGRESS)
 
+* Filtering not working on Receiving. Refs UIREC-101
+
 ## [2.2.0](https://github.com/folio-org/stripes-acq-components/tree/v2.2.0) (2020-10-09)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.1.2...v2.2.0)
 
