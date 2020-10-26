@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Focus resultsPaneTitleRef after data response has come in AcqList. Refs UIORGS-208
 * Filtering not working on Receiving. Refs UIREC-101
 
 ## [2.2.0](https://github.com/folio-org/stripes-acq-components/tree/v2.2.0) (2020-10-09)
