@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Add aria-label to select item checkbox. Refs UIPFINT-14.
 * Focus resultsPaneTitleRef after data response has come in AcqList. Refs UIORGS-208
 * Filtering not working on Receiving. Refs UIREC-101
 

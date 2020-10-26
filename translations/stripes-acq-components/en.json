@@ -481,6 +481,8 @@
 
   "modal.resultsHeader": "Search results",
   "modal.selectAll": "Select all",
+  "modal.selectItem": "{value} checkbox",
+  "modal.selectItemDefault": "record {value} checkbox",
   "modal.noSourceYet": "No source yet",
   "modal.totalSelected": "Total selected: {count}",
 
