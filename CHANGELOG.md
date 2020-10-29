@@ -2,6 +2,8 @@
 
 ## (IN PROGRESS)
 
+* Migrate Organization and Contact Forms to React-final-form. Refs UIORGS-200.
+
 ## [2.2.1](https://github.com/folio-org/stripes-acq-components/tree/v2.2.1) (2020-10-29)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.2.0...v2.2.1)
 
