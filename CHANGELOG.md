@@ -2,6 +2,9 @@
 
 ## (IN PROGRESS)
 
+## [2.2.1](https://github.com/folio-org/stripes-acq-components/tree/v2.2.1) (2020-10-29)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.2.0...v2.2.1)
+
 * Add aria-label to select item checkbox. Refs UIPFINT-14.
 * Focus resultsPaneTitleRef after data response has come in AcqList. Refs UIORGS-208
 * Filtering not working on Receiving. Refs UIREC-101
