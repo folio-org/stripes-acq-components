@@ -521,5 +521,7 @@
     "no-ui-plugin-find-user": "[没有用户选择插件]",
     "modal.selectAll": "全选",
     "fundDistribution.expenseClass": "支出类别",
-    "validation.invalidURL": "URL 无效"
+    "validation.invalidURL": "URL 无效",
+    "modal.selectItem": "{value}复选框",
+    "modal.selectItemDefault": "记录{value}复选框"
 }

@@ -521,5 +521,7 @@
     "no-ui-plugin-find-user": "[nenhum plugin de seleção de usuário]",
     "modal.selectAll": "Selecionar tudo",
     "fundDistribution.expenseClass": "Classe de despesa",
-    "validation.invalidURL": "URL não válida"
+    "validation.invalidURL": "URL não válida",
+    "modal.selectItem": "{value} caixa de seleção",
+    "modal.selectItemDefault": "caixa de seleção do registro {value}"
 }
