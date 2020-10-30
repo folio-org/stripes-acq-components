@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Filter selection cursor highlights (focus) are persisted and distracting for the user. Refs UISACQCOMP-7
 * Migrate Organization and Contact Forms to React-final-form. Refs UIORGS-200.
 
 ## [2.2.1](https://github.com/folio-org/stripes-acq-components/tree/v2.2.1) (2020-10-29)
