@@ -521,5 +521,7 @@
     "no-ui-plugin-find-user": "[нет плагина для выбора пользователя]",
     "modal.selectAll": "Выбрать все",
     "fundDistribution.expenseClass": "Expense class",
-    "validation.invalidURL": "URL is not valid"
+    "validation.invalidURL": "URL is not valid",
+    "modal.selectItem": "{value} checkbox",
+    "modal.selectItemDefault": "record {value} checkbox"
 }

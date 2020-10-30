@@ -521,5 +521,7 @@
     "no-ui-plugin-find-user": "[사용자 선택 플러그인 없음]",
     "modal.selectAll": "모두 선택",
     "fundDistribution.expenseClass": "비용 클래스",
-    "validation.invalidURL": "URL이 유효하지 않습니다"
+    "validation.invalidURL": "URL이 유효하지 않습니다",
+    "modal.selectItem": "{value} checkbox",
+    "modal.selectItemDefault": "record {value} checkbox"
 }

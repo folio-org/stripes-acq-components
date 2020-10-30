@@ -477,7 +477,7 @@
     "data.languages.yor": "اليوروبية",
     "data.languages.zha": "التشوانغية",
     "data.languages.zul": "الزولوية",
-    "validation.fundDistribution.uniqueFunds": "لا يمكن أن يكون لديك عدة توزيعات لنفس التمويل",
+    "validation.fundDistribution.uniqueFunds": "لا يمكن أن يكون لديك عدة توزيعات لنفس التمويل بنفس فئة المصروفات.",
     "data.countries.UMI": "جزر الولايات المتحدة الصغيرة",
     "validation.cantBeNegativeOrEmpty": "لا يمكن أن يكون سالبًا أو فارغًا",
     "label.contributor": "المساهم",
@@ -521,5 +521,7 @@
     "no-ui-plugin-find-user": "[لا يوجد برنامج مساعد لتحديد المستخدم]",
     "modal.selectAll": "تحديد الكل",
     "fundDistribution.expenseClass": "فئة المصروفات",
-    "validation.invalidURL": "عنوان URL غير صالح"
+    "validation.invalidURL": "عنوان URL غير صالح",
+    "modal.selectItem": "مربع تحديد {value}",
+    "modal.selectItemDefault": "مربع تحديد {value} التسجيلة"
 }

@@ -521,5 +521,7 @@
     "no-ui-plugin-find-user": "[no user-selection plugin]",
     "modal.selectAll": "Sélectionner tout",
     "fundDistribution.expenseClass": "Expense class",
-    "validation.invalidURL": "L'URL n'est pas valide"
+    "validation.invalidURL": "L'URL n'est pas valide",
+    "modal.selectItem": "Case à cocher {value}",
+    "modal.selectItemDefault": "case à cocher - enregistrement {value}"
 }
