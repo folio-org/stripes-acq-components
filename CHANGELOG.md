@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Fix Invoice date filters are off set by timezone somehow. Refs UINV-202
 * Filter selection cursor highlights (focus) are persisted and distracting for the user. Refs UISACQCOMP-7
 * Migrate Organization and Contact Forms to React-final-form. Refs UIORGS-200.
 
