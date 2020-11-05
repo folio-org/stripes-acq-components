@@ -10,7 +10,7 @@
     "validation.required": "Required!",
     "label.acqUnits": "購入ユニット",
     "fileUploader.dropFile": "ドラッグ&ドロップでドキュメントをアップロード",
-    "fileUploader.selectFile": "or choose file",
+    "fileUploader.selectFile": "またはファイルを選択",
     "button.close": "閉じる",
     "button.save": "保存",
     "modal.resultsHeader": "Search results",
