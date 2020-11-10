@@ -2,6 +2,9 @@
 
 ## (IN PROGRESS)
 
+## [2.2.2](https://github.com/folio-org/stripes-acq-components/tree/v2.2.2) (2020-11-10)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.2.1...v2.2.2)
+
 * Fix Invoice date filters are off set by timezone somehow. Refs UINV-202
 * Filter selection cursor highlights (focus) are persisted and distracting for the user. Refs UISACQCOMP-7
 * Migrate Organization and Contact Forms to React-final-form. Refs UIORGS-200.
