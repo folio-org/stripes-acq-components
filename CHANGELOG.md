@@ -2,6 +2,8 @@
 
 ## (IN PROGRESS)
 
+* Update invoice CRUD permissions. Refs UINV-199.
+
 ## [2.2.3](https://github.com/folio-org/stripes-acq-components/tree/v2.2.3) (2020-11-18)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.2.2...v2.2.3)
 

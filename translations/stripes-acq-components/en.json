@@ -486,6 +486,8 @@
   "modal.noSourceYet": "No source yet",
   "modal.totalSelected": "Total selected: {count}",
 
+  "noPermissionsMessage": "You do not have permissions for this page.",
+
   "paymentMethod.cash": "Cash",
   "paymentMethod.card": "Credit card",
   "paymentMethod.eft": "EFT",
