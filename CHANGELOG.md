@@ -2,6 +2,9 @@
 
 ## (IN PROGRESS)
 
+## [2.2.3](https://github.com/folio-org/stripes-acq-components/tree/v2.2.3) (2020-11-18)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.2.2...v2.2.3)
+
 * Unable to view PO Line when accessing via Agreements app. Refs UISACQCOMP-10
 
 ## [2.2.2](https://github.com/folio-org/stripes-acq-components/tree/v2.2.2) (2020-11-10)
