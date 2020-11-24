@@ -523,5 +523,6 @@
     "fundDistribution.expenseClass": "Classe de despesa",
     "validation.invalidURL": "URL não válida",
     "modal.selectItem": "{value} caixa de seleção",
-    "modal.selectItemDefault": "caixa de seleção do registro {value}"
+    "modal.selectItemDefault": "caixa de seleção do registro {value}",
+    "noPermissionsMessage": "Você não tem permissões para esta página."
 }

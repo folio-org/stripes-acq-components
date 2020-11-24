@@ -523,5 +523,6 @@
     "fundDistribution.expenseClass": "فئة المصروفات",
     "validation.invalidURL": "عنوان URL غير صالح",
     "modal.selectItem": "مربع تحديد {value}",
-    "modal.selectItemDefault": "مربع تحديد {value} التسجيلة"
+    "modal.selectItemDefault": "مربع تحديد {value} التسجيلة",
+    "noPermissionsMessage": "ليس لديك صلاحيات لهذه الصفحة."
 }

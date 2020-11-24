@@ -523,5 +523,6 @@
     "fundDistribution.expenseClass": "Expense class",
     "validation.invalidURL": "L'URL n'est pas valide",
     "modal.selectItem": "Case à cocher {value}",
-    "modal.selectItemDefault": "case à cocher - enregistrement {value}"
+    "modal.selectItemDefault": "case à cocher - enregistrement {value}",
+    "noPermissionsMessage": "You do not have permissions for this page."
 }
