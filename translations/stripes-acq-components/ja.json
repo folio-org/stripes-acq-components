@@ -41,7 +41,7 @@
     "fundDistribution.remainingAmount": "Remaining amount to be distributed: {remainingAmount}",
     "validation.fundDistributionType": "All distributions should be the same type",
     "validation.shouldBeEqualToTotalAmount": "The percentage or amount(s) should be equal 100% of the total",
-    "showTags": "Show tags",
+    "showTags": "タグを表示",
     "addTagFor": "タグの追加： {filterValue}",
     "filter.tags": "タグ",
     "fundDistribution.name": "ファンド",
@@ -523,5 +523,6 @@
     "fundDistribution.expenseClass": "Expense class",
     "validation.invalidURL": "URL is not valid",
     "modal.selectItem": "{value} checkbox",
-    "modal.selectItemDefault": "record {value} checkbox"
+    "modal.selectItemDefault": "record {value} checkbox",
+    "noPermissionsMessage": "You do not have permissions for this page."
 }

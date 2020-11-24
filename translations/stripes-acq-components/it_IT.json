@@ -523,5 +523,6 @@
     "fundDistribution.expenseClass": "Expense class",
     "validation.invalidURL": "URL is not valid",
     "modal.selectItem": "{value} checkbox",
-    "modal.selectItemDefault": "record {value} checkbox"
+    "modal.selectItemDefault": "record {value} checkbox",
+    "noPermissionsMessage": "You do not have permissions for this page."
 }
