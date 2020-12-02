@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Add actionMenu prop to ResultsPane. Refs UIOR-631.
 * Update invoice CRUD permissions. Refs UINV-199.
 
 ## [2.2.3](https://github.com/folio-org/stripes-acq-components/tree/v2.2.3) (2020-11-18)
