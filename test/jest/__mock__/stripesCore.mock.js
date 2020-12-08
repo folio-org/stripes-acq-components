@@ -81,5 +81,8 @@ jest.mock('@folio/stripes/core', () => {
 
     // eslint-disable-next-line react/prop-types
     Pluggable: props => <>{props.children}</>,
+
+    // eslint-disable-next-line react/prop-types
+    IfPermission: props => <>{props.children}</>,
   };
 }, { virtual: true });
