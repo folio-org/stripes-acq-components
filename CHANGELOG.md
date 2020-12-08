@@ -2,7 +2,7 @@
 
 ## (IN PROGRESS)
 
-* Propagate ...props in TextFilter to TextField
+* Propagate ...rest props in TextFilter to TextField
 * Add actionMenu prop to ResultsPane. Refs UIOR-631.
 * Update invoice CRUD permissions. Refs UINV-199.
 
