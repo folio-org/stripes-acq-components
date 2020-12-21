@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Add personal data disclosure form. Refs UISACQCOMP-13.
 * Make global __mocks__ be used in submodules
 * Propagate ...rest props in TextFilter to TextField
 * Add actionMenu prop to ResultsPane. Refs UIOR-631.
