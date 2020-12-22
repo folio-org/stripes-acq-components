@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Change CQL query `=` to `==`. Refs UICIRCLOG-33.
 * Add personal data disclosure form. Refs UISACQCOMP-13.
 * Make global __mocks__ be used in submodules
 * Propagate ...rest props in TextFilter to TextField
