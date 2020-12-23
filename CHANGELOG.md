@@ -9,6 +9,7 @@
 * Propagate ...rest props in TextFilter to TextField
 * Add actionMenu prop to ResultsPane. Refs UIOR-631.
 * Update invoice CRUD permissions. Refs UINV-199.
+* Reformat dates to match date format across FOLIO. UISACQCOMP-15.
 
 ## [2.2.3](https://github.com/folio-org/stripes-acq-components/tree/v2.2.3) (2020-11-18)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.2.2...v2.2.3)
