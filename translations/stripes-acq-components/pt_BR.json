@@ -6,7 +6,7 @@
     "sources.user": "Usuário",
     "filter.false": "Não",
     "filter.true": "Sim",
-    "label.emptyValue": " ",
+    "label.emptyValue": ".",
     "validation.required": "Obrigatório!",
     "label.acqUnits": "Unidades de aquisição",
     "fileUploader.dropFile": "Arraste e solte para fazer o upload de um documento",
