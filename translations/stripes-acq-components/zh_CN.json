@@ -524,5 +524,5 @@
     "validation.invalidURL": "URL 无效",
     "modal.selectItem": "{value}复选框",
     "modal.selectItemDefault": "记录{value}复选框",
-    "noPermissionsMessage": "You do not have permissions for this page."
+    "noPermissionsMessage": "没有此页面的权限。"
 }
