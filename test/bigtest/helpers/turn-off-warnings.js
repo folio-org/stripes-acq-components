@@ -5,7 +5,7 @@ const error = console.error;
 const blacklist = [
   /"defaultRichTextElements" was specified/,
 ];
-const blacklist_errors = [
+const blacklistErrors = [
   /Missing message:/,
 ];
 
@@ -18,7 +18,7 @@ export default function turnOffWarnings() {
   };
 
   console.error = function (...args) {
-    if (blacklist_errors.some(rx => rx.test(args[0]))) {
+    if (blacklistErrors.some(rx => rx.test(args[0]))) {
       return;
     }
     error.apply(console, args);
