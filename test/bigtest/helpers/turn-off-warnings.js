@@ -1,10 +1,12 @@
 /* eslint-disable no-console */
 
 const warn = console.warn;
+const error = console.error;
 const blacklist = [
-  /componentWillReceiveProps has been renamed/,
-  /componentWillUpdate has been renamed/,
-  /componentWillMount has been renamed/,
+  /"defaultRichTextElements" was specified/,
+];
+const blacklist_errors = [
+  /Missing message:/,
 ];
 
 export default function turnOffWarnings() {
@@ -13,5 +15,12 @@ export default function turnOffWarnings() {
       return;
     }
     warn.apply(console, args);
+  };
+
+  console.error = function (...args) {
+    if (blacklist_errors.some(rx => rx.test(args[0]))) {
+      return;
+    }
+    error.apply(console, args);
   };
 }
