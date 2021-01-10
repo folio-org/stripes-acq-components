@@ -17,7 +17,7 @@ module.exports = {
   },
   transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
   moduleNameMapper: {
-    '^.+\\.(css)$': '<rootDir>/node_modules/jest-css-modules',
+    '^.+\\.(css)$': 'identity-obj-proxy',
     '^.+\\.(svg)$': 'identity-obj-proxy',
     'ky': 'ky/umd',
   },
