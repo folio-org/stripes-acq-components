@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* bump stripes v6
 * Call change org on clear field. UINV-169
 * Fix all select lists with dynamic required prop. UIF-274
 * Change CQL query `=` to `==`. Refs UICIRCLOG-33.
