@@ -516,7 +516,7 @@
     "piece.pieceFormat.physical": "Physical",
     "piece.pieceFormat.other": "Other",
     "piece.pieceStatus.expected": "Expected",
-    "piece.pieceStatus.received": "Received",
+    "piece.pieceStatus.received": "Inventarisiert",
     "validation.cantContainSpaces": "Spaces aren't allowed",
     "no-ui-plugin-find-user": "[no user-selection plugin]",
     "modal.selectAll": "Select all",
