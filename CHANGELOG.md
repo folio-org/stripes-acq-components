@@ -3,7 +3,7 @@
 ## (IN PROGRESS)
 
 * Fix Accessibility problems for PluginFindRecordModal Component. UISACQCOMP-9
-* bump stripes v6
+* bump stripes v6. UIOR-650
 * Call change org on clear field. UINV-169
 * Fix all select lists with dynamic required prop. UIF-274
 * Change CQL query `=` to `==`. Refs UICIRCLOG-33.
