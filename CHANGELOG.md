@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Update format date and format time. Refs UIOR-645.
 * Fix Accessibility problems for PluginFindRecordModal Component. UISACQCOMP-9
 * bump stripes v6. UIOR-650
 * Call change org on clear field. UINV-169
