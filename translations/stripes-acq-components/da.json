@@ -26,7 +26,7 @@
     "search": "Search",
     "resetAllFilters": "Reset all",
     "paymentMethod.cash": "Cash",
-    "paymentMethod.card": "Credit card",
+    "paymentMethod.card": "Kreditkort",
     "paymentMethod.eft": "EFT",
     "paymentMethod.depAccount": "Deposit account",
     "paymentMethod.physicalCheck": "Physical check",
