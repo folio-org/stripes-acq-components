@@ -478,6 +478,7 @@
   "fundDistribution.adjustmentDescription": "Adjustment",
   "fundDistribution.initialEncumbrance": "Initial encumbrance",
   "fundDistribution.currentEncumbrance": "Current encumbrance",
+  "fundDistribution.unavailableFund": "<Unavailable fund name>",
 
   "modal.resultsHeader": "Search results",
   "modal.selectAll": "Select all",
