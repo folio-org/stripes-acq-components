@@ -444,6 +444,13 @@
   "data.languages.zha": "Zhuang",
   "data.languages.zul": "Zulu",
 
+  "currency": "Currency",
+  "currentExchangeRate": "Current exchange rate",
+  "useSetExchangeRate": "Use set exchange rate",
+  "useSetExchangeRate.tooltip": "Choose another currency to interact with this field",
+  "setExchangeRate": "Set exchange rate",
+  "setExchangeRate.tooltip": "Check use set exchange rate to interact with this field",
+
   "filter.false": "No",
   "filter.true": "Yes",
   "filter.tags": "Tags",
