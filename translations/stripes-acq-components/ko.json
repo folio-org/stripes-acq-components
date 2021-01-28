@@ -524,5 +524,6 @@
     "validation.invalidURL": "URL이 유효하지 않습니다",
     "modal.selectItem": "{value} checkbox",
     "modal.selectItemDefault": "record {value} checkbox",
-    "noPermissionsMessage": "You do not have permissions for this page."
+    "noPermissionsMessage": "You do not have permissions for this page.",
+    "fundDistribution.unavailableFund": "<Unavailable fund name>"
 }

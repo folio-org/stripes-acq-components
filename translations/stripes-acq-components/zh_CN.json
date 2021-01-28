@@ -524,5 +524,6 @@
     "validation.invalidURL": "URL 无效",
     "modal.selectItem": "{value}复选框",
     "modal.selectItemDefault": "记录{value}复选框",
-    "noPermissionsMessage": "没有此页面的权限。"
+    "noPermissionsMessage": "没有此页面的权限。",
+    "fundDistribution.unavailableFund": "<Unavailable fund name>"
 }

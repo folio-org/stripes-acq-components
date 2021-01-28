@@ -524,5 +524,6 @@
     "validation.invalidURL": "URL ist nicht gültig",
     "modal.selectItem": "{value} Checkbox",
     "modal.selectItemDefault": "Datensatz {value} Checkbox",
-    "noPermissionsMessage": "Sie verfügen nicht über Berechtigungen für diese Seite."
+    "noPermissionsMessage": "Sie verfügen nicht über Berechtigungen für diese Seite.",
+    "fundDistribution.unavailableFund": "<Unavailable fund name>"
 }
