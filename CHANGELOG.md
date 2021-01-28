@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Prevent user from applying Funds from other acquisitions units for encumbrance or payment. Refs UIOR-618
 * Update format date and format time. Refs UIOR-645.
 * Fix Accessibility problems for PluginFindRecordModal Component. UISACQCOMP-9
 * bump stripes v6. UIOR-650
