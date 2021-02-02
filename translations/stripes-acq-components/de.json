@@ -525,5 +525,11 @@
     "modal.selectItem": "{value} Checkbox",
     "modal.selectItemDefault": "Datensatz {value} Checkbox",
     "noPermissionsMessage": "Sie verfügen nicht über Berechtigungen für diese Seite.",
-    "fundDistribution.unavailableFund": "<Unavailable fund name>"
+    "fundDistribution.unavailableFund": "<Unavailable fund name>",
+    "currency": "Currency",
+    "currentExchangeRate": "Current exchange rate",
+    "useSetExchangeRate": "Use set exchange rate",
+    "useSetExchangeRate.tooltip": "Choose another currency to interact with this field",
+    "setExchangeRate": "Set exchange rate",
+    "setExchangeRate.tooltip": "Check use set exchange rate to interact with this field"
 }
