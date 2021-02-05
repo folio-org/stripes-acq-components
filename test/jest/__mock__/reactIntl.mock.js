@@ -2,7 +2,8 @@ import React from 'react';
 
 jest.mock('react-intl', () => {
   const intl = {
-    formatDate: (value) => value,
+    formatDate: (value) => (value ? value.substring(0, 10) : value),
+    formatDisplayName: (value) => value,
     formatMessage: ({ id }) => id,
   };
 
