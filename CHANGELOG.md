@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Reformat dates to match date format across FOLIO (based on selected locale). Refs UISACQCOMP-16
 * Set exchange rate manually for purchase order line. Refs UIOR-610.
 * Prevent user from applying Funds from other acquisitions units for encumbrance or payment. Refs UIOR-618
 * Update format date and format time. Refs UIOR-645.
