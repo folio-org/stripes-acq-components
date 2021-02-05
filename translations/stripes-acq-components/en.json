@@ -551,5 +551,6 @@
   "validation.invalidURL": "URL is not valid",
   "validation.shouldBeEqualToTotalAmount": "The percentage or amount(s) should be equal 100% of the total",
   "validation.required": "Required!",
+  "validation.shouldBePositive": "Should be positive",
   "validation.cantBeNegativeOrEmpty": "Can not be negative or empty"
 }
