@@ -545,6 +545,15 @@
   "receiving.itemStatus.Order closed": "Order closed",
   "receiving.itemStatus.Undefined": "Undefined",
 
+  "referenceNumbers.addReferenceNumbers": "Add vendor reference number",
+  "referenceNumbers.refNumber": "Vendor reference number",
+  "referenceNumbers.refNumberType": "Vendor reference type",
+  "referenceNumbers.refNumberType.subscriptionRefNumber": "Vendor subscription reference number",
+  "referenceNumbers.refNumberType.internalNumber": "Vendor internal number",
+  "referenceNumbers.refNumberType.continuationRefNumber": "Vendor continuation reference number",
+  "referenceNumbers.refNumberType.refNumber": "Vendor reference type",
+  "referenceNumbers.refNumberType.titleNumber": "Vendor title number",
+
   "validation.cantContainSpaces": "Spaces aren't allowed",
   "validation.fundDistributionType": "All distributions should be the same type",
   "validation.fundDistribution.uniqueFunds": "You can not have multiple distributions for the same fund with the same expense class.",
