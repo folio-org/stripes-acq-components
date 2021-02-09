@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Make POL vendor reference number and type repeatable, paired fields. Refs UIOR-519, UINV-165.
 * Add positive number validation. Refs UIF-280
 * Reformat dates to match date format across FOLIO (based on selected locale). Refs UISACQCOMP-16
 * Set exchange rate manually for purchase order line. Refs UIOR-610.
