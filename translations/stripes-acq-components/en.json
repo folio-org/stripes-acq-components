@@ -551,7 +551,7 @@
   "referenceNumbers.refNumberType.subscriptionRefNumber": "Vendor subscription reference number",
   "referenceNumbers.refNumberType.internalNumber": "Vendor internal number",
   "referenceNumbers.refNumberType.continuationRefNumber": "Vendor continuation reference number",
-  "referenceNumbers.refNumberType.refNumber": "Vendor reference type",
+  "referenceNumbers.refNumberType.refNumber": "Vendor reference number",
   "referenceNumbers.refNumberType.titleNumber": "Vendor title number",
 
   "validation.cantContainSpaces": "Spaces aren't allowed",
