@@ -532,7 +532,7 @@
     "useSetExchangeRate.tooltip": "اختر عملة أخرى للتفاعل مع هذا الحقل",
     "setExchangeRate": "تعيين سعر الصرف",
     "setExchangeRate.tooltip": "تحقق من استخدام سعر الصرف المحدد للتفاعل مع هذا الحقل",
-    "validation.shouldBePositive": "يجب أن يكون موجبًا",
+    "validation.shouldBePositive": "يجب أن يكون المبلغ رقماً موجباً",
     "referenceNumbers.addReferenceNumbers": "إضافة رقم  المورّد المرجعي",
     "referenceNumbers.refNumber": "رقم المورّد المرجعي",
     "referenceNumbers.refNumberType": "نوع المورّد المرجعي",
