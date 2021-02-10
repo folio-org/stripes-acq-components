@@ -525,5 +525,20 @@
     "modal.selectItem": "{value} checkbox",
     "modal.selectItemDefault": "record {value} checkbox",
     "noPermissionsMessage": "You do not have permissions for this page.",
-    "fundDistribution.unavailableFund": "<Unavailable fund name>"
+    "fundDistribution.unavailableFund": "<Unavailable fund name>",
+    "currency": "Currency",
+    "currentExchangeRate": "Current exchange rate",
+    "useSetExchangeRate": "Use set exchange rate",
+    "useSetExchangeRate.tooltip": "Choose another currency to interact with this field",
+    "setExchangeRate": "Set exchange rate",
+    "setExchangeRate.tooltip": "Check use set exchange rate to interact with this field",
+    "validation.shouldBePositive": "Should be positive",
+    "referenceNumbers.addReferenceNumbers": "Add vendor reference number",
+    "referenceNumbers.refNumber": "Vendor reference number",
+    "referenceNumbers.refNumberType": "Vendor reference type",
+    "referenceNumbers.refNumberType.subscriptionRefNumber": "Vendor subscription reference number",
+    "referenceNumbers.refNumberType.internalNumber": "Vendor internal number",
+    "referenceNumbers.refNumberType.continuationRefNumber": "Vendor continuation reference number",
+    "referenceNumbers.refNumberType.refNumber": "Vendor reference type",
+    "referenceNumbers.refNumberType.titleNumber": "Vendor title number"
 }
