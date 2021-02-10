@@ -70,7 +70,7 @@ jest.mock('@folio/stripes/core', () => {
 
       return <Component {...rest} mutator={fakeMutator} resources={fakeResources} stripes={fakeStripes} />;
     },
-    
+
     useOkapiKy: jest.fn(),
 
     useStripes: () => STRIPES,
