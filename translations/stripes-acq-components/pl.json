@@ -539,6 +539,6 @@
     "referenceNumbers.refNumberType.subscriptionRefNumber": "Vendor subscription reference number",
     "referenceNumbers.refNumberType.internalNumber": "Vendor internal number",
     "referenceNumbers.refNumberType.continuationRefNumber": "Vendor continuation reference number",
-    "referenceNumbers.refNumberType.refNumber": "Vendor reference number",
+    "referenceNumbers.refNumberType.refNumber": "Vendor order reference number",
     "referenceNumbers.refNumberType.titleNumber": "Vendor title number"
 }
