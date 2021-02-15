@@ -5,7 +5,7 @@
     "sources.marc": "MARC",
     "sources.user": "Utente",
     "filter.false": "No",
-    "filter.true": "Si",
+    "filter.true": "Sì",
     "label.emptyValue": " ",
     "validation.required": "Obbligatorio!",
     "label.acqUnits": "Unità di acquisizione",

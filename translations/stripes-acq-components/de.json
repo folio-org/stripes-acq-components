@@ -3,7 +3,7 @@
     "sources.api": "API",
     "sources.edi": "EDI",
     "sources.marc": "MARC",
-    "sources.user": "User",
+    "sources.user": "Person",
     "filter.false": "No",
     "filter.true": "Yes",
     "label.emptyValue": " ",
