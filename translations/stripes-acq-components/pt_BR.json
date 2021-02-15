@@ -526,7 +526,7 @@
     "modal.selectItemDefault": "caixa de seleção do registro {value}",
     "noPermissionsMessage": "Você não tem permissões para esta página.",
     "fundDistribution.unavailableFund": "<Unavailable fund name>",
-    "currency": "Currency",
+    "currency": "Moeda",
     "currentExchangeRate": "Current exchange rate",
     "useSetExchangeRate": "Use set exchange rate",
     "useSetExchangeRate.tooltip": "Choose another currency to interact with this field",
