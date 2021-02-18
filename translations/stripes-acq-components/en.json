@@ -444,6 +444,7 @@
   "data.languages.zha": "Zhuang",
   "data.languages.zul": "Zulu",
 
+  "exchangeRate": "Exchange rate",
   "currency": "Currency",
   "currentExchangeRate": "Current exchange rate",
   "useSetExchangeRate": "Use set exchange rate",
