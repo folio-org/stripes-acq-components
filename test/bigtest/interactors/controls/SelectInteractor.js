@@ -24,6 +24,7 @@ export default interactor(class SelectInteractor {
 
   selectAndBlur(val) {
     return this
+      .focusSelect()
       .selectOption(val)
       .blur('select');
   }

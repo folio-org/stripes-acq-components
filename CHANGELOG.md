@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Fix onBlur prop for FieldDatepicker (RFF). Refs UIF-289.
 * Centralizing country and language data in stripes components. Refs UISACQCOMP-18.
 * Add Extended Info accordion to Invoice View screen. Refs UINV-222.
 * Make POL vendor reference number and type repeatable, paired fields. Refs UIOR-519, UINV-165.
