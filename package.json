@@ -11,7 +11,9 @@
   },
   "repository": "folio-org/stripes-acq-components",
   "scripts": {
-    "test": "jest --ci --coverage",
+    "test:unit:report": "cp -r ./artifacts/coverage-jest ./artifacts/coverage",
+    "test:unit": "jest --ci --coverage && yarn run test:unit:report",
+    "test": "yarn run test:unit",
     "lint": "eslint ."
   },
   "devDependencies": {
@@ -28,6 +30,7 @@
     "@testing-library/jest-dom": "^5.11.1",
     "@testing-library/react": "^11.0.2",
     "@testing-library/react-hooks": "^5.0.3",
+    "@testing-library/user-event": "^12.8.1",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^26.3.0",
     "eslint": "^7.8.1",
@@ -37,7 +40,7 @@
     "faker": "^5.1.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.4.2",
-    "jest-junit": "^12.0.0",
+    "jest-junit": "^11.1.0",
     "miragejs": "^0.1.32",
     "moment": "^2.24.0",
     "react": "^16.0.0",
