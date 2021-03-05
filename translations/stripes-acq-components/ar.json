@@ -74,7 +74,7 @@
     "newTagWasNotCreated": "تم إنشاء وسم جديد",
     "receiving.itemStatus.In process": "في المعالجة",
     "receiving.itemStatus.On order": "في الطلب",
-    "receiving.itemStatus.Available": "متاح",
+    "receiving.itemStatus.Available": "متاحة",
     "receiving.itemStatus.In transit": "في النقل",
     "receiving.itemStatus.Order closed": "تم إغلاق الطلبية",
     "receiving.itemStatus.Undefined": "غير معرّف",
