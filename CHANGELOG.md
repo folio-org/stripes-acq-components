@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Fix Orders and Order lines grids initially display "No results found. Please check your filters." rather than "Loading...". Refs UIOR-657.
 * Fix onBlur prop for FieldDatepicker (RFF). Refs UIF-289.
 * Centralizing country and language data in stripes components. Refs UISACQCOMP-18.
 * Add Extended Info accordion to Invoice View screen. Refs UINV-222.
