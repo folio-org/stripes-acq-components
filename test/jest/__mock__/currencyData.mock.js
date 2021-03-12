@@ -7,5 +7,12 @@ jest.mock('currency-codes/data', () => ({
       digits: 2,
       number: '840',
     },
+    {
+      code: 'BYN',
+      countries: [],
+      currency: 'Rubles',
+      digits: 2,
+      number: '841',
+    },
   ],
 }));
