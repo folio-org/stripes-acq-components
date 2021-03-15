@@ -2,6 +2,9 @@
 
 ## (IN PROGRESS)
 
+## [2.3.0](https://github.com/folio-org/stripes-acq-components/tree/v2.3.0) (2021-03-15)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.2.3...v2.3.0)
+
 * Fix Orders and Order lines grids initially display "No results found. Please check your filters." rather than "Loading...". Refs UIOR-657.
 * Fix onBlur prop for FieldDatepicker (RFF). Refs UIF-289.
 * Centralizing country and language data in stripes components. Refs UISACQCOMP-18.
