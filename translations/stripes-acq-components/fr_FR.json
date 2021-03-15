@@ -94,11 +94,11 @@
     "modal.selectItemDefault": "case à cocher - enregistrement {value}",
     "noPermissionsMessage": "You do not have permissions for this page.",
     "fundDistribution.unavailableFund": "<Unavailable fund name>",
-    "currency": "Currency",
-    "currentExchangeRate": "Current exchange rate",
-    "useSetExchangeRate": "Use set exchange rate",
+    "currency": "Devise",
+    "currentExchangeRate": "Taux de change actuel",
+    "useSetExchangeRate": "Utiliser le taux de change défini",
     "useSetExchangeRate.tooltip": "Choose another currency to interact with this field",
-    "setExchangeRate": "Set exchange rate",
+    "setExchangeRate": "Définir le taux de change",
     "setExchangeRate.tooltip": "Check use set exchange rate to interact with this field",
     "validation.shouldBePositive": "Le montant doit être un nombre positif",
     "referenceNumbers.addReferenceNumbers": "Add vendor reference number",
@@ -109,5 +109,5 @@
     "referenceNumbers.refNumberType.continuationRefNumber": "Vendor continuation reference number",
     "referenceNumbers.refNumberType.refNumber": "Numéro de référence de commande fournisseur",
     "referenceNumbers.refNumberType.titleNumber": "Vendor title number",
-    "exchangeRate": "Exchange rate"
+    "exchangeRate": "Taux de change"
 }
