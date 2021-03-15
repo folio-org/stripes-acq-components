@@ -13,6 +13,7 @@
   "scripts": {
     "test:unit:report": "cp -r ./artifacts/coverage-jest ./artifacts/coverage",
     "test:unit": "jest --ci --coverage && yarn run test:unit:report",
+    "test:unit:watch": "jest --ci --coverage --watch",
     "test": "yarn run test:unit",
     "lint": "eslint ."
   },
