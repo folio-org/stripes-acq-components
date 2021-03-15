@@ -6,7 +6,7 @@
     "sources.user": "Użytkownik",
     "filter.false": "Nie",
     "filter.true": "Tak",
-    "label.emptyValue": " ",
+    "label.emptyValue": ".",
     "validation.required": "Wymagany!",
     "label.acqUnits": "Działy gromadzenia",
     "fileUploader.dropFile": "Przeciągnij i upuść, aby przesłać dokument",
