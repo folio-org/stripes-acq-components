@@ -100,7 +100,7 @@
     "useSetExchangeRate.tooltip": "Escolha outra moeda para interagir com este campo",
     "setExchangeRate": "Definir taxa de câmbio",
     "setExchangeRate.tooltip": "Escolha outra taxa de câmbio para interagir com este campo",
-    "validation.shouldBePositive": "Amount must be a positive number",
+    "validation.shouldBePositive": "O valor deve ser um número positivo",
     "referenceNumbers.addReferenceNumbers": "Adicionar número de referência do fornecedor",
     "referenceNumbers.refNumber": "Número de referência do fornecedor",
     "referenceNumbers.refNumberType": "Tipo de referência do fornecedor",
