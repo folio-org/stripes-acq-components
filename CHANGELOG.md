@@ -2,6 +2,8 @@
 
 ## (IN PROGRESS)
 
+* Fix Cannot split funds on a PO with an odd number of pennies as the cost. Refs UISACQCOMP-17
+
 ## [2.3.0](https://github.com/folio-org/stripes-acq-components/tree/v2.3.0) (2021-03-15)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.2.3...v2.3.0)
 
