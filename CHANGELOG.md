@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* Add Ongoing to the POL filters. Refs UIOR-688.
 * Fix Cannot split funds on a PO with an odd number of pennies as the cost. Refs UISACQCOMP-17
 
 ## [2.3.0](https://github.com/folio-org/stripes-acq-components/tree/v2.3.0) (2021-03-15)
