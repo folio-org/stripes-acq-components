@@ -2,6 +2,11 @@
 
 ## (IN PROGRESS)
 
+## [2.3.2](https://github.com/folio-org/stripes-acq-components/tree/v2.3.2) (2021-04-13)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.3.1...v2.3.2)
+
+* Check the date picker in orders and invoices. Fix displaying dates in UTC0. Refs UISACQCOMP-23.
+
 ## [2.3.1](https://github.com/folio-org/stripes-acq-components/tree/v2.3.1) (2021-04-07)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.3.0...v2.3.1)
 
