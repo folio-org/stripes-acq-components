@@ -2,6 +2,8 @@
 
 ## (IN PROGRESS)
 
+* Resizable Panes. Refs UISACQCOMP-24.
+
 ## [2.3.2](https://github.com/folio-org/stripes-acq-components/tree/v2.3.2) (2021-04-13)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.3.1...v2.3.2)
 
@@ -13,7 +15,6 @@
 * Add Ongoing to the POL filters. Refs UIOR-688.
 * Fix Cannot split funds on a PO with an odd number of pennies as the cost. Refs UISACQCOMP-17
 * Attaching file to invoice doesn't work properly when user clicks Choose file Refs UISACQCOMP-22.
-* Resizable Panes. Refs UISACQCOMP-24.
 
 ## [2.3.0](https://github.com/folio-org/stripes-acq-components/tree/v2.3.0) (2021-03-15)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.2.3...v2.3.0)
