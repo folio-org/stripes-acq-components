@@ -93,7 +93,7 @@
     "modal.selectItem": "{value} checkbox",
     "modal.selectItemDefault": "record {value} checkbox",
     "noPermissionsMessage": "You do not have permissions for this page.",
-    "fundDistribution.unavailableFund": "<Unavailable fund name>",
+    "fundDistribution.unavailableFund": "<b>Unavailable fund name</b>",
     "currency": "Currency",
     "currentExchangeRate": "Current exchange rate",
     "useSetExchangeRate": "Use set exchange rate",
