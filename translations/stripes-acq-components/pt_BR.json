@@ -93,7 +93,7 @@
     "modal.selectItem": "{value} caixa de seleção",
     "modal.selectItemDefault": "caixa de seleção do registro {value}",
     "noPermissionsMessage": "Você não tem permissões para esta página.",
-    "fundDistribution.unavailableFund": "<Unavailable fund name>",
+    "fundDistribution.unavailableFund": "<b>Unavailable fund name</b>",
     "currency": "Moeda",
     "currentExchangeRate": "Taxa de câmbio atual",
     "useSetExchangeRate": "Usar taxa de câmbio definida",
