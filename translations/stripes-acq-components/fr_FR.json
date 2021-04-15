@@ -93,7 +93,7 @@
     "modal.selectItem": "Case à cocher {value}",
     "modal.selectItemDefault": "case à cocher - enregistrement {value}",
     "noPermissionsMessage": "You do not have permissions for this page.",
-    "fundDistribution.unavailableFund": "<poste budgétaire indisponible>",
+    "fundDistribution.unavailableFund": "<b>poste budgétaire indisponible</b>",
     "currency": "Devise",
     "currentExchangeRate": "Taux de change actuel",
     "useSetExchangeRate": "Utiliser le taux de change défini",
