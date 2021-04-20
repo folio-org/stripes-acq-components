@@ -93,7 +93,7 @@
     "modal.selectItem": "مربع تحديد {value}",
     "modal.selectItemDefault": "مربع تحديد {value} التسجيلة",
     "noPermissionsMessage": "ليس لديك صلاحيات لهذه الصفحة.",
-    "fundDistribution.unavailableFund": "<b>Unavailable fund name</b>",
+    "fundDistribution.unavailableFund": "<b>اسم تمويل غير متاح</b>",
     "currency": "العملة",
     "currentExchangeRate": "سعر الصرف الحالي",
     "useSetExchangeRate": "استخدام سعر الصرف المحدد",
