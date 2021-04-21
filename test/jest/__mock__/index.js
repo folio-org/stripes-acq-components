@@ -1,5 +1,6 @@
 import './currencyData.mock';
 import './documentCreateRange.mock';
+import './localStorage.mock';
 import './matchMedia.mock';
 import './reactIntl.mock';
 import './stripesConfig.mock';
