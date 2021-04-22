@@ -5,6 +5,11 @@
 * Resizable Panes. Refs UISACQCOMP-24.
 * Acquisition units restrictions hook. Refs UISACQCOMP-27.
 
+## [2.3.3](https://github.com/folio-org/stripes-acq-components/tree/v2.3.3) (2021-04-22)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.3.2...v2.3.3)
+
+* Fix onCancel prop for FormFooter. Refs UISACQCOMP-28.
+
 ## [2.3.2](https://github.com/folio-org/stripes-acq-components/tree/v2.3.2) (2021-04-13)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.3.1...v2.3.2)
 
