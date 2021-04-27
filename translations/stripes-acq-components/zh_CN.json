@@ -93,7 +93,7 @@
     "modal.selectItem": "{value}复选框",
     "modal.selectItemDefault": "记录{value}复选框",
     "noPermissionsMessage": "没有此页面的权限。",
-    "fundDistribution.unavailableFund": "<b>Unavailable fund name</b>",
+    "fundDistribution.unavailableFund": "<b>不可用的经费名称</b>",
     "currency": "货币",
     "currentExchangeRate": "当前汇率",
     "useSetExchangeRate": "使用设定汇率",
