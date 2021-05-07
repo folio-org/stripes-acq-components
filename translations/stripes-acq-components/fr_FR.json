@@ -92,7 +92,7 @@
     "validation.invalidURL": "L'URL n'est pas valide",
     "modal.selectItem": "Case à cocher {value}",
     "modal.selectItemDefault": "case à cocher - enregistrement {value}",
-    "noPermissionsMessage": "You do not have permissions for this page.",
+    "noPermissionsMessage": "Vous ne disposez pas des autorisations pour cette page.",
     "fundDistribution.unavailableFund": "<b>poste budgétaire indisponible</b>",
     "currency": "Devise",
     "currentExchangeRate": "Taux de change actuel",
