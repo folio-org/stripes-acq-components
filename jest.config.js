@@ -1,10 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const path = require('path');
 
-const esModules = [
-  '@folio',
-  'ky', // https://github.com/sindresorhus/ky/issues/170
-].join('|');
+const esModules = ['@folio'].join('|');
 
 module.exports = {
   collectCoverageFrom: [
@@ -18,11 +15,11 @@ module.exports = {
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': path.join(__dirname, './test/jest/jest-transformer.js'),
   },
-  transformIgnorePatterns: [`/node_modules/(?!(${esModules}))`],
+  transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
   moduleNameMapper: {
     '^.+\\.(css)$': 'identity-obj-proxy',
     '^.+\\.(svg)$': 'identity-obj-proxy',
-    'ky': 'ky/distribution', // https://github.com/sindresorhus/ky/issues/340
+    'ky': 'ky/umd',
   },
   testMatch: ['**/(lib|src)/**/?(*.)test.{js,jsx}'],
   testPathIgnorePatterns: ['/node_modules/', '/test/ui-testing/', '/test/bigtest/'],
