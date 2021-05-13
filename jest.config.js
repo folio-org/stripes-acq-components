@@ -13,7 +13,7 @@ module.exports = {
   coverageReporters: ['lcov'],
   reporters: ['jest-junit', 'default'],
   transform: {
-    '^.+\\.(js|jsx)$': path.join(__dirname, './test/jest/jest-transformer.js'),
+    '^.+\\.(js|jsx|ts|tsx)$': path.join(__dirname, './test/jest/jest-transformer.js'),
   },
   transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
   moduleNameMapper: {
