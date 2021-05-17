@@ -1,4 +1,5 @@
 {
+  "appMenu.keyboardShortcuts": "Keyboard shortcuts",
   "addTagFor": "Add tag for: {filterValue}",
   "showTags": "Show tags",
   "tagWasAdded": "Tag was added",
@@ -120,6 +121,20 @@
   "referenceNumbers.refNumberType.continuationRefNumber": "Vendor continuation reference number",
   "referenceNumbers.refNumberType.refNumber": "Vendor order reference number",
   "referenceNumbers.refNumberType.titleNumber": "Vendor title number",
+
+  "shortcut.new": "Create a new record",
+  "shortcut.edit": "Edit a record",
+  "shortcut.save": "Save a record",
+  "shortcut.expandCollapse": "Expand or collapse an accordion",
+  "shortcut.expandAll": "Expand all accordions",
+  "shortcut.collapseAll": "Collapse all accordions",
+  "shortcut.search": "Go to Search & Filter pane",
+  "shortcut.close": "Close a modal or pop-up",
+  "shortcut.copy": "Copy",
+  "shortcut.cut": "Cut",
+  "shortcut.paste": "Paste",
+  "shortcut.find": "Find",
+  "shortcut.openShortcutModal": "View keyboard shortcuts list",
 
   "validation.cantContainSpaces": "Spaces aren't allowed",
   "validation.fundDistributionType": "All distributions should be the same type",
