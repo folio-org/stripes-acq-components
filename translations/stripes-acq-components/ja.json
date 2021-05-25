@@ -13,7 +13,7 @@
     "fileUploader.selectFile": "またはファイルを選択",
     "button.close": "閉じる",
     "button.save": "保存",
-    "modal.resultsHeader": "Search results",
+    "modal.resultsHeader": "検索結果",
     "modal.noSourceYet": "No source yet",
     "modal.totalSelected": "選択済合計： {count}",
     "fundDistribution.addBtn": "Add fund distribution",
