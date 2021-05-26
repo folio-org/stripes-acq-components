@@ -19,12 +19,13 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "@babel/core": "^7.8.0",
+    "@babel/core": "^7.9.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/plugin-proposal-decorators": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
-    "@babel/preset-react": "^7.7.4",
+    "@babel/preset-react": "^7.9.0",
+    "@babel/preset-typescript": "^7.13.0",
     "@bigtest/interactor": "^0.9.3",
     "@folio/eslint-config-stripes": "^5.0.0",
     "@folio/stripes": "^6.0.0",
