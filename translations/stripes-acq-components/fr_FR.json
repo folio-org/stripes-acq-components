@@ -39,7 +39,7 @@
     "fundDistribution.type.percent": "Pourcentage",
     "fundDistribution.type.amount": "Montant",
     "fundDistribution.remainingAmount": "Montant restant à distribuer: {remainingAmount}",
-    "validation.fundDistributionType": "All distributions should be the same type",
+    "validation.fundDistributionType": "Toutes les distributions doivent être du même type",
     "validation.shouldBeEqualToTotalAmount": "Le pourcentage ou le montant doit être égal à 100% du total",
     "showTags": "Afficher les mots-clés",
     "addTagFor": "Ajouter un mot-clé pour: {filterValue}",
