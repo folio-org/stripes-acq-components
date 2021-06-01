@@ -61,7 +61,7 @@
     "order.status.open": "Aperto",
     "order.status.pending": "In attesa",
     "order.type.oneTime": "Una tantum",
-    "order.type.ongoing": "In corso",
+    "order.type.ongoing": "Continuativo",
     "order.format.electronicResource": "Risorsa elettronica",
     "order.format.physicalResource": "Risorsa fisica",
     "order.format.PEMix": "Mix fisico/elettronico",
