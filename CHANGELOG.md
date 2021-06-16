@@ -2,10 +2,15 @@
 
 ## (IN PROGRESS)
 
+## [2.4.0](https://github.com/folio-org/stripes-acq-components/tree/v2.4.0) (2021-06-16)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.3.3...v2.4.0)
+
 * Resizable Panes. Refs UISACQCOMP-24.
 * Acquisition units restrictions hook. Refs UISACQCOMP-27.
 * support batchFetch in react-query. Refs UISACQCOMP-30.
 * Create common command list for Keyboard shortcut Modal. Refs UISACQCOMP-32.
+* Compile Translation Files into AST Format. Refs UISACQCOMP-25.
+* Create HTML template for Printing order. Refs UISACQCOMP-26.
 
 ## [2.3.3](https://github.com/folio-org/stripes-acq-components/tree/v2.3.3) (2021-04-22)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.3.2...v2.3.3)
