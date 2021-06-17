@@ -1,4 +1,7 @@
-global.document.createRange = () => ({
+// TODO: check if it can be totally removed
+global.document.originalCreateRange = global.document.createRange;
+
+global.document.mockCreateRange = () => ({
   setStart: () => {},
   setEnd: () => {},
   commonAncestorContainer: {
@@ -6,3 +9,5 @@ global.document.createRange = () => ({
     ownerDocument: document,
   },
 });
+
+global.document.createRange = global.document.mockCreateRange;
