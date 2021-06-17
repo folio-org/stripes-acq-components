@@ -91,7 +91,7 @@
     "fundDistribution.expenseClass": "Classe di spesa",
     "validation.invalidURL": "URL non valida",
     "modal.selectItem": "Casella di controllo {value}",
-    "modal.selectItemDefault": "casella di controllo record {valore}",
+    "modal.selectItemDefault": "casella di controllo record {value}",
     "noPermissionsMessage": "Non disponi delle autorizzazioni per questa pagina.",
     "fundDistribution.unavailableFund": "<b>Nome del fondo non disponibile</b>",
     "currency": "Valuta",
