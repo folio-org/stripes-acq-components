@@ -4,6 +4,7 @@
 
 * Expense classes are not in alpha order on POL create/edit screen. Refs UISACQCOMP-33.
 * Search error in acquisition unit component on PO. Refs UISACQCOMP-34.
+* Cannot allocate or transfer cents as system considers them negative numbers. Refs UISACQCOMP-36.
 
 ## [2.4.0](https://github.com/folio-org/stripes-acq-components/tree/v2.4.0) (2021-06-16)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.3.3...v2.4.0)
