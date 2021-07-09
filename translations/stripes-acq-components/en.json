@@ -136,6 +136,10 @@
   "shortcut.find": "Find",
   "shortcut.openShortcutModal": "View keyboard shortcuts list",
 
+  "holding.createFromLocation": "Create new holdings for location",
+  "holding.label": "Select holdings",
+  "location.label": "Name (code)",
+
   "validation.cantContainSpaces": "Spaces aren't allowed",
   "validation.fundDistributionType": "All distributions should be the same type",
   "validation.fundDistribution.uniqueFunds": "You can not have multiple distributions for the same fund with the same expense class.",
