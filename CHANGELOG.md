@@ -2,6 +2,11 @@
 
 ## (IN PROGRESS)
 
+## [2.4.2](https://github.com/folio-org/stripes-acq-components/tree/v2.4.2) (2021-07-29)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.4.1...v2.4.2)
+
+* Invoice level Fund Distribution not showing amount. Refs UISACQCOMP-41.
+
 ## [2.4.1](https://github.com/folio-org/stripes-acq-components/tree/v2.4.1) (2021-07-21)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.4.0...v2.4.1)
 
