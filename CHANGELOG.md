@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* POL lookup by vendor ref number for invoice line is not working. UISACQCOMP-42.
 ## [2.4.2](https://github.com/folio-org/stripes-acq-components/tree/v2.4.2) (2021-07-29)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.4.1...v2.4.2)
 
