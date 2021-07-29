@@ -4,7 +4,11 @@
 
 * Support trigerless mode for lookup plugins. Refs UISACQCOMP-35.
 * Component to handle holdings and locations. Refs UISACQCOMP-40.
-* POL lookup by vendor ref number for invoice line is not working. UISACQCOMP-42.
+
+## [2.4.3](https://github.com/folio-org/stripes-acq-components/tree/v2.4.3) (2021-07-30)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.4.2...v2.4.3)
+
+* POL lookup by vendor ref number for invoice line is not working. UISACQCOMP-42.)
 
 ## [2.4.2](https://github.com/folio-org/stripes-acq-components/tree/v2.4.2) (2021-07-29)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.4.1...v2.4.2)
