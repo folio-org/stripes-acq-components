@@ -1,6 +1,6 @@
 {
   "name": "@folio/stripes-acq-components",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "Component library for Stripes Acquisitions modules",
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
@@ -28,7 +28,7 @@
     "@babel/preset-typescript": "^7.13.0",
     "@bigtest/interactor": "^0.9.3",
     "@folio/eslint-config-stripes": "^5.0.0",
-    "@folio/stripes": "^6.0.0",
+    "@folio/stripes": "^6.2.0",
     "@folio/stripes-cli": "^2.0.0",
     "@formatjs/cli": "^4.2.6",
     "@testing-library/jest-dom": "^5.11.1",
@@ -72,7 +72,7 @@
     "redux-form": "^8.3.0"
   },
   "peerDependencies": {
-    "@folio/stripes": "^6.0.0",
+    "@folio/stripes": "^6.2.0",
     "moment": "^2.24.0",
     "react": "*",
     "react-intl": "^5.7.1",
