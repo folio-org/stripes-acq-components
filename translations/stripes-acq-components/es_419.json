@@ -87,7 +87,7 @@
     "piece.pieceStatus.received": "Recibido",
     "validation.cantContainSpaces": "No se permiten espacios",
     "no-ui-plugin-find-user": "[no user-selection plugin]",
-    "modal.selectAll": "Select all",
+    "modal.selectAll": "Seleccionar todo",
     "fundDistribution.expenseClass": "Expense class",
     "validation.invalidURL": "URL is not valid",
     "modal.selectItem": "{value} checkbox",
