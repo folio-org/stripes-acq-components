@@ -5,6 +5,7 @@
 * Support trigerless mode for lookup plugins. Refs UISACQCOMP-35.
 * Component to handle holdings and locations. Refs UISACQCOMP-40.
 * Use mod-orders for piece queries. Refs UISACQCOMP-46.
+* The order is saved with empty fields under the "Vendor" accordion. Refs UISACQCOMP-45.
 
 ## [2.4.3](https://github.com/folio-org/stripes-acq-components/tree/v2.4.3) (2021-07-30)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.4.2...v2.4.3)
