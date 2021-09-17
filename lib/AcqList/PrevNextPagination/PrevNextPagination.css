@@ -1,0 +1,8 @@
+.prevNextPaginationContainer {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  align-content: center;
+  padding: 10px;
+}

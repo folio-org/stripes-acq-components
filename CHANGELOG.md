@@ -10,6 +10,7 @@
 * increment stripes to v7. Refs UISACQCOMP-50.
 * Display order line locations on piece form. Refs UISACQCOMP-53.
 * Ability to use scroll position of MCL row. Refs UISACQCOMP-54.
+* Implement MCL Next/Previous pagination. Refs UISACQCOMP-55.
 
 ## [2.4.3](https://github.com/folio-org/stripes-acq-components/tree/v2.4.3) (2021-07-30)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.4.2...v2.4.3)
