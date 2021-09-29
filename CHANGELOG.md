@@ -12,6 +12,7 @@
 * Ability to use scroll position of MCL row. Refs UISACQCOMP-54.
 * Implement MCL Next/Previous pagination. Refs UISACQCOMP-55.
 * Add default label for "Acquisition unit" filter. Refs UISACQCOMP-56.
+* Can no longer create POL with Price of 0. Refs UISACQCOMP-57.
 
 ## [2.4.3](https://github.com/folio-org/stripes-acq-components/tree/v2.4.3) (2021-07-30)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.4.2...v2.4.3)
