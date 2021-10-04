@@ -2,10 +2,14 @@
 
 ## (IN PROGRESS)
 
+## [3.0.0](https://github.com/folio-org/stripes-acq-components/tree/v3.0.0) (2021-10-04)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.4.3...v3.0.0)
+
 * Support trigerless mode for lookup plugins. Refs UISACQCOMP-35.
 * Component to handle holdings and locations. Refs UISACQCOMP-40.
 * Use mod-orders for piece queries. Refs UISACQCOMP-46.
 * The order is saved with empty fields under the "Vendor" accordion. Refs UISACQCOMP-45.
+* In AcqDateRangeFilter propagate `...rest` props to DateRangeFilter. Refs UISACQCOMP-48.
 * Select should display defined form value in non-interactive mode. Refs UISACQCOMP-49.
 * increment stripes to v7. Refs UISACQCOMP-50.
 * Display order line locations on piece form. Refs UISACQCOMP-53.
