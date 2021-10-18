@@ -3,6 +3,7 @@
 ## (IN PROGRESS)
 
 * Display "Invalid reference" when Holdings ID is not valid. UISACQCOMP-59.
+* Clear selected location state if the value of the "locationId" field is not specified. Refs UISACQCOMP-60.
 
 ## [3.0.0](https://github.com/folio-org/stripes-acq-components/tree/v3.0.0) (2021-10-04)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.4.3...v3.0.0)
