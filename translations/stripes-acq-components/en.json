@@ -56,6 +56,8 @@
   "fundDistribution.currentEncumbrance": "Current encumbrance",
   "fundDistribution.unavailableFund": "<b>Unavailable fund name</b>",
 
+  "invalidReference": "Invalid reference",
+
   "modal.resultsHeader": "Search results",
   "modal.selectAll": "Select all",
   "modal.selectItem": "{value} checkbox",
