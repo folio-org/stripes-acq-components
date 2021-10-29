@@ -4,6 +4,7 @@
 
 * Display "Invalid reference" when Holdings ID is not valid. UISACQCOMP-59.
 * Display "Invalid reference" when vendor is not valid. UISACQCOMP-61.
+* Add 4 "Acquisition methods" to enumeration list. UISACQCOMP-62.
 
 ## [3.0.0](https://github.com/folio-org/stripes-acq-components/tree/v3.0.0) (2021-10-04)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v2.4.3...v3.0.0)
