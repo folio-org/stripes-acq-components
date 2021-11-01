@@ -128,5 +128,6 @@
     "holding.createFromLocation": "Criar novas holdings para localização",
     "holding.label": "Selecionar holdings",
     "location.label": "Nome (código)",
-    "validation.shouldBePositiveAmount": "O montante deve ser um número positivo"
+    "validation.shouldBePositiveAmount": "O montante deve ser um número positivo",
+    "invalidReference": "Invalid reference"
 }

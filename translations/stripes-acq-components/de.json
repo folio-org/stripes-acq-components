@@ -128,5 +128,6 @@
     "holding.createFromLocation": "Neue Bestände für den Standort anlegen",
     "holding.label": "Bestand auswählen",
     "location.label": "Name (Code)",
-    "validation.shouldBePositiveAmount": "Betrag muss eine positive Zahl sein"
+    "validation.shouldBePositiveAmount": "Betrag muss eine positive Zahl sein",
+    "invalidReference": "Invalid reference"
 }

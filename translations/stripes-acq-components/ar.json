@@ -128,5 +128,6 @@
     "holding.createFromLocation": "إنشاء مقتنيات جديدة للموقع",
     "holding.label": "حدد المقتنيات",
     "location.label": "الاسم (كود)",
-    "validation.shouldBePositiveAmount": "يجب أن يكون المبلغ رقماً موجباً"
+    "validation.shouldBePositiveAmount": "يجب أن يكون المبلغ رقماً موجباً",
+    "invalidReference": "Invalid reference"
 }
