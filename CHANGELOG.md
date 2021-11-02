@@ -2,6 +2,9 @@
 
 ## (IN PROGRESS)
 
+## [3.0.1](https://github.com/folio-org/stripes-acq-components/tree/v3.0.1) (2021-11-02)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.0.0...v3.0.1)
+
 * Display "Invalid reference" when Holdings ID is not valid. UISACQCOMP-59.
 * Display "Invalid reference" when vendor is not valid. UISACQCOMP-61.
 
