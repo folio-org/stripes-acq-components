@@ -129,5 +129,5 @@
     "holding.label": "Selecionar holdings",
     "location.label": "Nome (código)",
     "validation.shouldBePositiveAmount": "O montante deve ser um número positivo",
-    "invalidReference": "Invalid reference"
+    "invalidReference": "Referência inválida"
 }
