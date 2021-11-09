@@ -129,5 +129,5 @@
     "holding.label": "حدد المقتنيات",
     "location.label": "الاسم (كود)",
     "validation.shouldBePositiveAmount": "يجب أن يكون المبلغ رقماً موجباً",
-    "invalidReference": "Invalid reference"
+    "invalidReference": "مرجع غير صالح"
 }
