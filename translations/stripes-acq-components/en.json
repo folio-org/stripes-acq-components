@@ -151,5 +151,19 @@
   "validation.required": "Required!",
   "validation.shouldBePositiveAmount": "Amount must be a positive number",
   "validation.shouldBePositive": "Should be positive",
-  "validation.cantBeNegativeOrEmpty": "Can not be negative or empty"
+  "validation.cantBeNegativeOrEmpty": "Can not be negative or empty",
+
+  "acquisition_method.approvalPlan": "Approval plan",
+  "acquisition_method.dda": "Demand driven acquisitions (DDA)",
+  "acquisition_method.depository": "Depository",
+  "acquisition_method.eba": "Evidence based acquisitions (EBA)",
+  "acquisition_method.exchange": "Exchange",
+  "acquisition_method.free": "Free",
+  "acquisition_method.gift": "Gift",
+  "acquisition_method.internalTransfer": "Internal transfer",
+  "acquisition_method.membership": "Membership",
+  "acquisition_method.other": "Other",
+  "acquisition_method.purchase": "Purchase",
+  "acquisition_method.purchaseAtVendorSystem": "Purchase at vendor system",
+  "acquisition_method.technical": "Technical"
 }
