@@ -2,6 +2,9 @@
 
 ## (IN PROGRESS)
 
+## [3.0.2](https://github.com/folio-org/stripes-acq-components/tree/v3.0.2) (2021-12-09)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.0.1...v3.0.2)
+
 * POL Title selection overwriting Order template location. Refs UISACQCOMP-65.
 
 ## [3.0.1](https://github.com/folio-org/stripes-acq-components/tree/v3.0.1) (2021-11-02)
