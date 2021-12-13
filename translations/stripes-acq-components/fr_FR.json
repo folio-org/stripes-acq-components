@@ -124,10 +124,10 @@
     "shortcut.cut": "Couper",
     "shortcut.paste": "Coller",
     "shortcut.find": "Trouver",
-    "shortcut.openShortcutModal": "View keyboard shortcuts list",
+    "shortcut.openShortcutModal": "Consulter la liste de raccourcis clavier",
     "holding.createFromLocation": "Create new holdings for location",
     "holding.label": "Select holdings",
     "location.label": "Nom (code)",
-    "validation.shouldBePositiveAmount": "Amount must be a positive number",
+    "validation.shouldBePositiveAmount": "Le montant doit être un nombre positif",
     "invalidReference": "Référence invalide"
 }
