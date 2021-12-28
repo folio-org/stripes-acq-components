@@ -5,6 +5,7 @@
 * Use final-form "Field" component in "FieldHoldingLocation". Refs UISACQCOMP-64.
 * Add resources to interact with Acquisition methods API. Refs UISACQCOMP-62.
 * Rename collection field name for Acquisition method. Refs UISACQCOMP-66.
+* Remove duplicates from keyboard shortcuts modal list. Refs UISACQCOMP-69.
 
 ## [3.0.2](https://github.com/folio-org/stripes-acq-components/tree/v3.0.2) (2021-12-09)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.0.1...v3.0.2)
