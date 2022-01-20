@@ -8,6 +8,7 @@
 * Remove duplicates from keyboard shortcuts modal list. Refs UISACQCOMP-69.
 * Leverage useIntegrationConfigs hook from ui-organizations. Refs UISACQCOMP-71.
 * Leverage useOrganization hook from ui-organizations. Refs UISACQCOMP-72.
+* FindRecords implementation. Refs UISACQCOMP-70.
 
 ## [3.0.2](https://github.com/folio-org/stripes-acq-components/tree/v3.0.2) (2021-12-09)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.0.1...v3.0.2)
