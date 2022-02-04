@@ -23,6 +23,7 @@
   "filter.true": "Yes",
   "filter.tags": "Tags",
   "filter.acqUnit": "Acquisition unit",
+  "filter.acqUnit.noAcqUnit": "No acquisition unit",
 
   "label.emptyValue": " ",
   "label.sourceFilter": "Source",
