@@ -92,6 +92,8 @@
   "search": "Search",
   "resetAllFilters": "Reset all",
 
+  "filter.placeholder": "Filter",
+
   "organization": "Organization",
   "filter.organization.lookup": "Organization look-up",
   "filter.organization.lookupNoSupport": "Organization look-up is not supported",
