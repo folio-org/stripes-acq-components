@@ -89,7 +89,7 @@
     "no-ui-plugin-find-user": "[no user-selection plugin]",
     "modal.selectAll": "すべて選択",
     "fundDistribution.expenseClass": "経費クラス",
-    "validation.invalidURL": "URL is not valid",
+    "validation.invalidURL": "URL is not valid, must include URL scheme. Eg. ftp://",
     "modal.selectItem": "{value} checkbox",
     "modal.selectItemDefault": "record {value} checkbox",
     "noPermissionsMessage": "You do not have permissions for this page.",
@@ -137,5 +137,7 @@
     "acquisition_method.other": "Other",
     "acquisition_method.purchase": "Purchase",
     "acquisition_method.purchaseAtVendorSystem": "Purchase at vendor system",
-    "acquisition_method.technical": "Technical"
+    "acquisition_method.technical": "Technical",
+    "filter.acqUnit.noAcqUnit": "No acquisition unit",
+    "filter.placeholder": "Filter"
 }

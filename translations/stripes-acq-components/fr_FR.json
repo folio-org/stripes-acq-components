@@ -130,12 +130,14 @@
     "acquisition_method.depository": "Depository",
     "acquisition_method.eba": "Evidence based acquisitions (EBA)",
     "acquisition_method.exchange": "Exchange",
-    "acquisition_method.free": "Free",
-    "acquisition_method.gift": "Gift",
+    "acquisition_method.free": "Gratuit",
+    "acquisition_method.gift": "Cadeau",
     "acquisition_method.internalTransfer": "Internal transfer",
     "acquisition_method.membership": "Membership",
     "acquisition_method.other": "Autre",
     "acquisition_method.purchase": "Purchase",
     "acquisition_method.purchaseAtVendorSystem": "Purchase at vendor system",
-    "acquisition_method.technical": "Technical"
+    "acquisition_method.technical": "Technical",
+    "filter.acqUnit.noAcqUnit": "No acquisition unit",
+    "filter.placeholder": "Filter"
 }

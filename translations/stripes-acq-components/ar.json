@@ -137,5 +137,7 @@
     "acquisition_method.other": "أخرى",
     "acquisition_method.purchase": "شراء",
     "acquisition_method.purchaseAtVendorSystem": "الشراء في نظام المورد",
-    "acquisition_method.technical": "فني"
+    "acquisition_method.technical": "فني",
+    "filter.acqUnit.noAcqUnit": "No acquisition unit",
+    "filter.placeholder": "Filter"
 }
