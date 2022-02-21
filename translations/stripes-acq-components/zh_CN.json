@@ -137,5 +137,7 @@
     "acquisition_method.other": "其他",
     "acquisition_method.purchase": "购买",
     "acquisition_method.purchaseAtVendorSystem": "在供应商系统采购",
-    "acquisition_method.technical": "技术"
+    "acquisition_method.technical": "技术",
+    "filter.acqUnit.noAcqUnit": "No acquisition unit",
+    "filter.placeholder": "Filter"
 }

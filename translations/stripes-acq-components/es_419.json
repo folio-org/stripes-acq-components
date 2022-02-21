@@ -137,5 +137,7 @@
     "acquisition_method.other": "Otro",
     "acquisition_method.purchase": "Compra",
     "acquisition_method.purchaseAtVendorSystem": "Compra en el sistema del vendedor",
-    "acquisition_method.technical": "Técnico"
+    "acquisition_method.technical": "Técnico",
+    "filter.acqUnit.noAcqUnit": "No acquisition unit",
+    "filter.placeholder": "Filter"
 }
