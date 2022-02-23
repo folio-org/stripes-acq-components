@@ -16,6 +16,7 @@
 * timezone support in FolioFormattedDate. Refs UISACQCOMP-78.
 * useFocusPane hook. Refs UISACQCOMP-79.
 * Add common components to use input filter and action menu filters. Refs UISACQCOMP-80.
+* Accessibility issue for some filter accordions (Ensures landmarks are unique). Refs UISACQCOMP-82.
 
 ## [3.0.2](https://github.com/folio-org/stripes-acq-components/tree/v3.0.2) (2021-12-09)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.0.1...v3.0.2)
