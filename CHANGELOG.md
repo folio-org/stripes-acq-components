@@ -2,6 +2,9 @@
 
 ## (IN PROGRESS)
 
+## [3.1.0](https://github.com/folio-org/stripes-acq-components/tree/v3.1.0) (2022-02-28)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.0.2...v3.1.0)
+
 * Use final-form "Field" component in "FieldHoldingLocation". Refs UISACQCOMP-64.
 * Add resources to interact with Acquisition methods API. Refs UISACQCOMP-62.
 * Rename collection field name for Acquisition method. Refs UISACQCOMP-66.
