@@ -89,7 +89,7 @@
     "no-ui-plugin-find-user": "[لا يوجد برنامج مساعد لتحديد المستخدم]",
     "modal.selectAll": "تحديد الكل",
     "fundDistribution.expenseClass": "فئة المصروفات",
-    "validation.invalidURL": "عنوان URL غير صالح",
+    "validation.invalidURL": "عنوان URL غير صالح، يجب أن يشتمل على مخطط URL. على سبيل المثال: ftp://",
     "modal.selectItem": "مربع تحديد {value}",
     "modal.selectItemDefault": "مربع تحديد {value} التسجيلة",
     "noPermissionsMessage": "ليس لديك صلاحيات لهذه الصفحة.",

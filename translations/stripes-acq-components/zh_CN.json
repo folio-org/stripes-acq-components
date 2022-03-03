@@ -89,7 +89,7 @@
     "no-ui-plugin-find-user": "[没有用户选择插件]",
     "modal.selectAll": "全选",
     "fundDistribution.expenseClass": "支出类别",
-    "validation.invalidURL": "URL 无效",
+    "validation.invalidURL": "URL无效，必须包含URL方案。例如ftp://",
     "modal.selectItem": "{value}复选框",
     "modal.selectItemDefault": "记录{value}复选框",
     "noPermissionsMessage": "没有此页面的权限。",
@@ -138,6 +138,6 @@
     "acquisition_method.purchase": "购买",
     "acquisition_method.purchaseAtVendorSystem": "在供应商系统采购",
     "acquisition_method.technical": "技术",
-    "filter.acqUnit.noAcqUnit": "No acquisition unit",
-    "filter.placeholder": "Filter"
+    "filter.acqUnit.noAcqUnit": "无采购单位",
+    "filter.placeholder": "筛选"
 }
