@@ -101,6 +101,8 @@
   "filter.organization.lookupNoSupport": "Organization look-up is not supported",
   "filter.user.lookup": "User look-up",
   "filter.user.lookupNoSupport": "user look-up is not supported",
+  "filter.expenseClass": "Expense class",
+  "filter.fundCode": "Fund code",
 
   "order.status.closed": "Closed",
   "order.status.open": "Open",
