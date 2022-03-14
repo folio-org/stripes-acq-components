@@ -3,6 +3,7 @@
 ## (IN PROGRESS)
 
 * Display only active funds in Fund Distribution drop-down. Refs UISACQCOMP-83.
+* Applying a date range filter clears other filters. Refs UISACQCOMP-85.
 
 ## [3.1.0](https://github.com/folio-org/stripes-acq-components/tree/v3.1.0) (2022-02-28)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.0.2...v3.1.0)
