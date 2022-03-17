@@ -8,6 +8,7 @@
 
   "no-ui-plugin-find-user": "[no user-selection plugin]",
 
+  "button.apply": "Apply",
   "button.close": "Close",
   "button.save": "Save",
 
@@ -24,6 +25,8 @@
   "filter.tags": "Tags",
   "filter.acqUnit": "Acquisition unit",
   "filter.acqUnit.noAcqUnit": "No acquisition unit",
+  "filter.numberRange.max": "To",
+  "filter.numberRange.min": "From",
 
   "label.emptyValue": " ",
   "label.sourceFilter": "Source",
@@ -155,6 +158,8 @@
   "validation.shouldBePositiveAmount": "Amount must be a positive number",
   "validation.shouldBePositive": "Should be positive",
   "validation.cantBeNegativeOrEmpty": "Can not be negative or empty",
+  "validation.cantBeNegative": "Can not be negative",
+  "validation.maxCantBeLessMin": "\"To\" can not be less than \"From\"",
 
   "acquisition_method.approvalPlan": "Approval plan",
   "acquisition_method.dda": "Demand driven acquisitions (DDA)",
