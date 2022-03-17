@@ -92,6 +92,7 @@
 
   "searchAndFilter": "Search & filter",
   "search": "Search",
+  "search.resultsCount": "{resultsCount, plural, =0 {no results found} one {# record found} other {# records found}}",
   "resetAllFilters": "Reset all",
 
   "filter.placeholder": "Filter",
