@@ -90,7 +90,7 @@
   "sources.marc": "MARC",
   "sources.user": "User",
 
-  "resultsCount": "{count, number} {count, plural, one {record found} other {records found}}",
+  "resultsCount": "{resultsCount, number} {resultsCount, plural, one {record found} other {records found}}",
   "searchAndFilter": "Search & filter",
   "search": "Search",
   "resetAllFilters": "Reset all",
