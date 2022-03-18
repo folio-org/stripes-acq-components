@@ -139,5 +139,10 @@
     "acquisition_method.purchaseAtVendorSystem": "在供应商系统采购",
     "acquisition_method.technical": "技术",
     "filter.acqUnit.noAcqUnit": "无采购单位",
-    "filter.placeholder": "筛选"
+    "filter.placeholder": "筛选",
+    "fundDistribution.fundStatus.Inactive": "Inactive",
+    "fundDistribution.fundStatus.Frozen": "Frozen",
+    "resultsCount": "{resultsCount, number} {resultsCount, plural, one {record found} other {records found}}",
+    "filter.expenseClass": "Expense class",
+    "filter.fundCode": "Fund code"
 }

@@ -139,5 +139,10 @@
     "acquisition_method.purchaseAtVendorSystem": "الشراء في نظام المورد",
     "acquisition_method.technical": "فني",
     "filter.acqUnit.noAcqUnit": "بدون وحدة تزويد",
-    "filter.placeholder": "تنقيح"
+    "filter.placeholder": "تنقيح",
+    "fundDistribution.fundStatus.Inactive": "Inactive",
+    "fundDistribution.fundStatus.Frozen": "Frozen",
+    "resultsCount": "{resultsCount, number} {resultsCount, plural, one {record found} other {records found}}",
+    "filter.expenseClass": "Expense class",
+    "filter.fundCode": "Fund code"
 }

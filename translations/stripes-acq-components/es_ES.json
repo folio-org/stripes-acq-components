@@ -139,5 +139,10 @@
     "acquisition_method.purchaseAtVendorSystem": "Purchase at vendor system",
     "acquisition_method.technical": "Technical",
     "filter.acqUnit.noAcqUnit": "Sin unidad de adquisición",
-    "filter.placeholder": "Filtro"
+    "filter.placeholder": "Filtro",
+    "fundDistribution.fundStatus.Inactive": "Inactive",
+    "fundDistribution.fundStatus.Frozen": "Frozen",
+    "resultsCount": "{resultsCount, number} {resultsCount, plural, one {record found} other {records found}}",
+    "filter.expenseClass": "Expense class",
+    "filter.fundCode": "Fund code"
 }
