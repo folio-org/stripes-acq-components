@@ -2,6 +2,8 @@
 
 ## (IN PROGRESS)
 
+* Unable to type in filter select list input. Refs UISACQCOMP-90.
+
 ## [3.1.0](https://github.com/folio-org/stripes-acq-components/tree/v3.1.0) (2022-02-28)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.0.2...v3.1.0)
 
