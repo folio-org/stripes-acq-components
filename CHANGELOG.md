@@ -5,6 +5,10 @@
 * Display only active funds in Fund Distribution drop-down. Refs UISACQCOMP-83.
 * Move Fund and Expense class filters to stripes-acq-components for common usage. Refs UISACQCOMP-84.
 * Results List pane should announce results count change. Refs UISACQCOMP-89.
+
+## [3.1.1](https://github.com/folio-org/stripes-acq-components/tree/v3.1.1) (2022-03-24)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.1.0...v3.1.1)
+
 * Unable to type in filter select list input. Refs UISACQCOMP-90.
 
 ## [3.1.0](https://github.com/folio-org/stripes-acq-components/tree/v3.1.0) (2022-02-28)
