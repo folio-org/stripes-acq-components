@@ -16,6 +16,7 @@
     "test:unit": "jest --ci --coverage && yarn run test:unit:report",
     "test:unit:watch": "jest --ci --coverage --watch",
     "test": "yarn run test:unit",
+    "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json ",
     "lint": "eslint ."
   },
   "devDependencies": {
