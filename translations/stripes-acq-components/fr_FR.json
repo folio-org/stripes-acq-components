@@ -140,9 +140,9 @@
     "acquisition_method.technical": "Technical",
     "filter.acqUnit.noAcqUnit": "Pas d'unité d'acquisition",
     "filter.placeholder": "Filtre",
-    "fundDistribution.fundStatus.Inactive": "Inactive",
-    "fundDistribution.fundStatus.Frozen": "Frozen",
+    "fundDistribution.fundStatus.Inactive": "Inactif",
+    "fundDistribution.fundStatus.Frozen": "Verrouillé",
     "resultsCount": "{resultsCount, number} {resultsCount, plural, one {record found} other {records found}}",
-    "filter.expenseClass": "Expense class",
-    "filter.fundCode": "Fund code"
+    "filter.expenseClass": "Classe de dépenses",
+    "filter.fundCode": "Code budgétaire"
 }

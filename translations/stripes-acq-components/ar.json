@@ -140,9 +140,9 @@
     "acquisition_method.technical": "فني",
     "filter.acqUnit.noAcqUnit": "بدون وحدة تزويد",
     "filter.placeholder": "تنقيح",
-    "fundDistribution.fundStatus.Inactive": "Inactive",
-    "fundDistribution.fundStatus.Frozen": "Frozen",
-    "resultsCount": "{resultsCount, number} {resultsCount, plural, one {record found} other {records found}}",
-    "filter.expenseClass": "Expense class",
-    "filter.fundCode": "Fund code"
+    "fundDistribution.fundStatus.Inactive": "غير نشط",
+    "fundDistribution.fundStatus.Frozen": "مجمّد",
+    "resultsCount": "تم العثور على {resultsCount, number} {resultsCount, plural, one { تسجيلة } other { تسجيلة }}",
+    "filter.expenseClass": "فئة المصروفات",
+    "filter.fundCode": "رمز التمويل"
 }
