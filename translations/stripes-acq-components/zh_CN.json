@@ -140,9 +140,9 @@
     "acquisition_method.technical": "技术",
     "filter.acqUnit.noAcqUnit": "无采购单位",
     "filter.placeholder": "筛选",
-    "fundDistribution.fundStatus.Inactive": "Inactive",
-    "fundDistribution.fundStatus.Frozen": "Frozen",
-    "resultsCount": "{resultsCount, number} {resultsCount, plural, one {record found} other {records found}}",
-    "filter.expenseClass": "Expense class",
-    "filter.fundCode": "Fund code"
+    "fundDistribution.fundStatus.Inactive": "未激活",
+    "fundDistribution.fundStatus.Frozen": "冻结",
+    "resultsCount": "{resultsCount, number} {resultsCount, plural, one {找到记录} other {找到记录}}",
+    "filter.expenseClass": "支出类别",
+    "filter.fundCode": "经费代码"
 }
