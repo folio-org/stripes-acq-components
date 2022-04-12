@@ -8,6 +8,7 @@
 * Create Number range filter. Refs UISACQCOMP-88.
 * Remove react-hot-loader. Refs UISACQCOMP-92.
 * Move common functions and constants for CSVExport to stripes-acq-component. Refs UISACQCOMP-93.
+* Date filter search results do not match "Date created" period specified. Refs UISACQCOMP-94.
 
 ## [3.1.1](https://github.com/folio-org/stripes-acq-components/tree/v3.1.1) (2022-03-24)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.1.0...v3.1.1)
