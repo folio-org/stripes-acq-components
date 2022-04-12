@@ -139,10 +139,10 @@
     "acquisition_method.purchaseAtVendorSystem": "Acquisto con il sistema del fornitore",
     "acquisition_method.technical": "Tecnico",
     "filter.acqUnit.noAcqUnit": "No acquisition unit",
-    "filter.placeholder": "Filter",
-    "fundDistribution.fundStatus.Inactive": "Inactive",
-    "fundDistribution.fundStatus.Frozen": "Frozen",
-    "resultsCount": "{resultsCount, number} {resultsCount, plural, one {record found} other {records found}}",
-    "filter.expenseClass": "Expense class",
-    "filter.fundCode": "Fund code"
+    "filter.placeholder": "Filtro",
+    "fundDistribution.fundStatus.Inactive": "Inattivo",
+    "fundDistribution.fundStatus.Frozen": "Congelato",
+    "resultsCount": "{resultsCount, number} {resultsCount, plural, one {record trovato} other {record trovati}}",
+    "filter.expenseClass": "Classe di spesa",
+    "filter.fundCode": "Codice fondo"
 }
