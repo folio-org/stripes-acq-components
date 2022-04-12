@@ -43,6 +43,7 @@ jest.mock('@folio/stripes/core', () => {
 
   return {
     ...jest.requireActual('@folio/stripes/core'),
+    // eslint-disable-next-line react/prop-types
     stripesConnect: Component => ({ mutator, resources, stripes, ...rest }) => {
       const fakeMutator = mutator || Object.keys(Component.manifest).reduce((acc, mutatorName) => {
         const returnValue = Component.manifest[mutatorName].records ? [] : {};
@@ -76,7 +77,7 @@ jest.mock('@folio/stripes/core', () => {
     useNamespace: jest.fn().mockReturnValue(['module-namespace']),
 
     useStripes: () => STRIPES,
-
+    // eslint-disable-next-line react/prop-types
     withStripes: Component => ({ stripes, ...rest }) => {
       const fakeStripes = stripes || STRIPES;
 
