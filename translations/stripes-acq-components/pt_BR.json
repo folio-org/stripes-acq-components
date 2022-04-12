@@ -140,9 +140,9 @@
     "acquisition_method.technical": "Técnico",
     "filter.acqUnit.noAcqUnit": "Nenhuma unidade de aquisição",
     "filter.placeholder": "Filtro",
-    "fundDistribution.fundStatus.Inactive": "Inactive",
-    "fundDistribution.fundStatus.Frozen": "Frozen",
-    "resultsCount": "{resultsCount, number} {resultsCount, plural, one {record found} other {records found}}",
-    "filter.expenseClass": "Expense class",
-    "filter.fundCode": "Fund code"
+    "fundDistribution.fundStatus.Inactive": "Inativo",
+    "fundDistribution.fundStatus.Frozen": "Congelado",
+    "resultsCount": "{resultsCount, number} {resultsCount, plural, one { registro encontrado } other { registros encontrados }}",
+    "filter.expenseClass": "Classe de despesas",
+    "filter.fundCode": "Código do fundo"
 }
