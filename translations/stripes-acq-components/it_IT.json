@@ -138,7 +138,7 @@
     "acquisition_method.purchase": "Acquisto",
     "acquisition_method.purchaseAtVendorSystem": "Acquisto con il sistema del fornitore",
     "acquisition_method.technical": "Tecnico",
-    "filter.acqUnit.noAcqUnit": "No acquisition unit",
+    "filter.acqUnit.noAcqUnit": "Nessuna unità di acquisizione",
     "filter.placeholder": "Filtro",
     "fundDistribution.fundStatus.Inactive": "Inattivo",
     "fundDistribution.fundStatus.Frozen": "Congelato",
