@@ -97,7 +97,7 @@
     "currency": "Currency",
     "currentExchangeRate": "Current exchange rate",
     "useSetExchangeRate": "Use set exchange rate",
-    "useSetExchangeRate.tooltip": "Choose another currency to interact with this field",
+    "useSetExchangeRate.tooltip": "Pro interakci s tímto polem vyberte jinou měnu",
     "setExchangeRate": "Set exchange rate",
     "setExchangeRate.tooltip": "Check use set exchange rate to interact with this field",
     "validation.shouldBePositive": "Mělo by být pozitivní",
