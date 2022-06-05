@@ -111,6 +111,7 @@
   "filter.user.lookupNoSupport": "user look-up is not supported",
   "filter.expenseClass": "Expense class",
   "filter.fundCode": "Fund code",
+  "filter.dynamic.emptyMessage": "Start typing to load options",
 
   "order.status.closed": "Closed",
   "order.status.open": "Open",
