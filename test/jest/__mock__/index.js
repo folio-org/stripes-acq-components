@@ -1,3 +1,4 @@
+import './beautifulDND.mock';
 import './currencyData.mock';
 import './documentCreateRange.mock';
 import './localStorage.mock';
