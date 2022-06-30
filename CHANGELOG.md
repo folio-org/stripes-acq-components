@@ -15,6 +15,7 @@
 * Hyperlink current encumbrance amount in Fund distribution. Refs UISACQCOMP-101.
 * Add new component for dynamic data loading and filtering. Refs UISACQCOMP-103.
 * Create common component `OptimisticLockingBanner`. Refs UISACQCOMP-104.
+* Remove encumbrance when fund is changed. Refs UISACQCOMP-106.
 
 ## [3.1.1](https://github.com/folio-org/stripes-acq-components/tree/v3.1.1) (2022-03-24)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.1.0...v3.1.1)
