@@ -3,6 +3,7 @@
 ## (IN PROGRESS)
 
 * Add a common Drag-n-Drop MCL component. Refs UISACQCOMP-105.
+* Move reusable utils and constants from `ui-invoice` to `stripes-acq-components` lib. Refs UISACQCOMP-110.
 
 ## [3.2.0](https://github.com/folio-org/stripes-acq-components/tree/v3.2.0) (2022-07-07)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.1.1...v3.2.0)
