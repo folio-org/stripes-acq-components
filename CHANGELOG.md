@@ -16,6 +16,7 @@
 * Add new component for dynamic data loading and filtering. Refs UISACQCOMP-103.
 * Create common component `OptimisticLockingBanner`. Refs UISACQCOMP-104.
 * Add a common Drag-n-Drop MCL component. Refs UISACQCOMP-105.
+* Move reusable utils and constants from `ui-invoice` to `stripes-acq-components` lib. Refs UISACQCOMP-110.
 
 ## [3.1.1](https://github.com/folio-org/stripes-acq-components/tree/v3.1.1) (2022-03-24)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.1.0...v3.1.1)
