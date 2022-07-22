@@ -159,6 +159,7 @@
   "validation.fundDistribution.uniqueFunds": "You can not have multiple distributions for the same fund with the same expense class.",
   "validation.invalidURL": "URL is not valid, must include URL scheme. Eg. ftp://",
   "validation.shouldBeEqualToTotalAmount": "The percentage or amount(s) should be equal 100% of the total",
+  "validation.cannotMixTypesForZeroPrice": "Fund distribution types cannot be mixed for a price of 0",
   "validation.required": "Required!",
   "validation.shouldBePositiveAmount": "Amount must be a positive number",
   "validation.shouldBePositive": "Should be positive",

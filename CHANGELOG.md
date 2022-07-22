@@ -2,6 +2,11 @@
 
 ## (IN PROGRESS)
 
+## [3.2.1](https://github.com/folio-org/stripes-acq-components/tree/v3.2.1) (2022-07-27)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.2.0...v3.2.1)
+
+* Add support for fund distribution total backend validation. Refs UISACQCOMP-111.
+
 ## [3.2.0](https://github.com/folio-org/stripes-acq-components/tree/v3.2.0) (2022-07-07)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.1.1...v3.2.0)
 
