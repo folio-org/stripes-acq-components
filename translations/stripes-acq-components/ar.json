@@ -145,13 +145,14 @@
     "resultsCount": "تم العثور على {resultsCount, number} {resultsCount, plural, one { تسجيلة } other { تسجيلة }}",
     "filter.expenseClass": "فئة المصروفات",
     "filter.fundCode": "رمز التمويل",
-    "button.apply": "Apply",
-    "filter.numberRange.max": "To",
-    "filter.numberRange.min": "From",
-    "holdings.deleteModal.heading": "Delete Holdings",
+    "button.apply": "تطبيق",
+    "filter.numberRange.max": "إلى",
+    "filter.numberRange.min": "من",
+    "holdings.deleteModal.heading": "حذف المقتنيات",
     "holdings.deleteModal.message": "This piece is connected to records in inventory. After this edit there will be no other pieces OR items connected to the related Holdings record(s). After making this change would you like FOLIO to delete the Holdings record(s)?",
-    "holdings.deleteModal.keepHoldings": "Keep Holdings",
-    "filter.dynamic.emptyMessage": "Start typing to load options",
-    "validation.cantBeNegative": "Can not be negative",
-    "validation.maxCantBeLessMin": "\"To\" can not be less than \"From\""
+    "holdings.deleteModal.keepHoldings": "احتفظ بالمقتنيات",
+    "filter.dynamic.emptyMessage": "ابدأ الكتابة لتحميل الخيارات",
+    "validation.cantBeNegative": "لا يمكن أن يكون سالبًا",
+    "validation.maxCantBeLessMin": "\"To\" can not be less than \"From\"",
+    "validation.cannotMixTypesForZeroPrice": "Fund distribution types cannot be mixed for a price of 0"
 }

@@ -153,5 +153,6 @@
     "holdings.deleteModal.keepHoldings": "Keep Holdings",
     "filter.dynamic.emptyMessage": "Start typing to load options",
     "validation.cantBeNegative": "Can not be negative",
-    "validation.maxCantBeLessMin": "\"To\" can not be less than \"From\""
+    "validation.maxCantBeLessMin": "\"To\" can not be less than \"From\"",
+    "validation.cannotMixTypesForZeroPrice": "Fund distribution types cannot be mixed for a price of 0"
 }
