@@ -2,6 +2,8 @@
 
 ## (IN PROGRESS)
 
+* PO/L does not save/open when deviating from the default electronic inventory interactions. Refs UIOR-999.
+
 ## [3.2.1](https://github.com/folio-org/stripes-acq-components/tree/v3.2.1) (2022-07-27)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.2.0...v3.2.1)
 
