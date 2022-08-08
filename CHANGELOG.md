@@ -4,7 +4,11 @@
 
 * Add a common Drag-n-Drop MCL component. Refs UISACQCOMP-105.
 * Move reusable utils and constants from `ui-invoice` to `stripes-acq-components` lib. Refs UISACQCOMP-110.
-* PO/L does not save/open when deviating from the default electronic inventory interactions. Refs UIOR-999.
+
+## [3.2.2](https://github.com/folio-org/stripes-acq-components/tree/v3.2.2) (2022-08-08)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.2.1...v3.2.2)
+
+* PO/L does not save/open when deviating from the default electronic inventory interactions. Refs UISACQCOMP-113.
 * Filtering for tags not working if tag contains forward slash. Refs UISACQCOMP-114.
 
 ## [3.2.1](https://github.com/folio-org/stripes-acq-components/tree/v3.2.1) (2022-07-27)
