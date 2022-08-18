@@ -153,6 +153,6 @@
     "holdings.deleteModal.keepHoldings": "احتفظ بالمقتنيات",
     "filter.dynamic.emptyMessage": "ابدأ الكتابة لتحميل الخيارات",
     "validation.cantBeNegative": "لا يمكن أن يكون سالبًا",
-    "validation.maxCantBeLessMin": "\"To\" can not be less than \"From\"",
+    "validation.maxCantBeLessMin": "لا يمكن أن يكون \"إلى\" أقل من \"من\"",
     "validation.cannotMixTypesForZeroPrice": "Fund distribution types cannot be mixed for a price of 0"
 }
