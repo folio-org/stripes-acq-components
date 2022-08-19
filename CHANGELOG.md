@@ -2,6 +2,11 @@
 
 ## (IN PROGRESS)
 
+## [3.2.3](https://github.com/folio-org/stripes-acq-components/tree/v3.2.3) (2022-08-19)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.2.2...v3.2.3)
+
+* Fund distribution validation issue on form saving. Refs UINV-432.
+
 ## [3.2.2](https://github.com/folio-org/stripes-acq-components/tree/v3.2.2) (2022-08-08)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.2.1...v3.2.2)
 
