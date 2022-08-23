@@ -2,6 +2,11 @@
 
 ## (IN PROGRESS)
 
+## [3.2.4](https://github.com/folio-org/stripes-acq-components/tree/v3.2.4) (2022-08-25)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.2.3...v3.2.4)
+
+* Selecting a new search index automatically kicks off a new search. Refs UISACQCOMP-118.
+
 ## [3.2.3](https://github.com/folio-org/stripes-acq-components/tree/v3.2.3) (2022-08-19)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.2.2...v3.2.3)
 
