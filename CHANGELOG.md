@@ -5,6 +5,10 @@
 * Add a common Drag-n-Drop MCL component. Refs UISACQCOMP-105.
 * Move reusable utils and constants from `ui-invoice` to `stripes-acq-components` lib. Refs UISACQCOMP-110.
 * Support MCL Next/Previous pagination by plugins. Refs UISACQCOMP-116.
+
+## [3.2.4](https://github.com/folio-org/stripes-acq-components/tree/v3.2.4) (2022-08-25)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.2.3...v3.2.4)
+
 * Selecting a new search index automatically kicks off a new search. Refs UISACQCOMP-118.
 
 ## [3.2.3](https://github.com/folio-org/stripes-acq-components/tree/v3.2.3) (2022-08-19)
