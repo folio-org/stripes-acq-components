@@ -44,7 +44,7 @@
     "showTags": "Mostra tag",
     "addTagFor": "Aggiungi tag per: {filterValue}",
     "filter.tags": "Tag",
-    "fundDistribution.name": "Fondi",
+    "fundDistribution.name": "Fondo",
     "fundDistribution.adjustmentDescription": "Aggiustamento",
     "validation.fundDistribution.uniqueFunds": "Non è possibile avere più distribuzioni per lo stesso fondo con la stessa classe di spesa.",
     "validation.cantBeNegativeOrEmpty": "Non può essere negativo o vuoto",
