@@ -2,6 +2,9 @@
 
 ## (IN PROGRESS)
 
+## [3.3.0](https://github.com/folio-org/stripes-acq-components/tree/v3.3.0) (2022-10-18)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.2.4...v3.3.0)
+
 * Add a common Drag-n-Drop MCL component. Refs UISACQCOMP-105.
 * Move reusable utils and constants from `ui-invoice` to `stripes-acq-components` lib. Refs UISACQCOMP-110.
 * Support MCL Next/Previous pagination by plugins. Refs UISACQCOMP-116.
