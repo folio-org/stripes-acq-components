@@ -16,11 +16,11 @@
     "modal.resultsHeader": "Risultati ricerca",
     "modal.noSourceYet": "Ancora nessuna fonte",
     "modal.totalSelected": "Totale selezionato: {count}",
-    "fundDistribution.addBtn": "Aggiungi distribuzione dei fondi",
+    "fundDistribution.addBtn": "Aggiungi distribuzione della spesa",
     "fundDistribution.amount": "Importo",
     "fundDistribution.code": "Codice",
     "fundDistribution.encumbrance": "Impegno di spesa",
-    "fundDistribution.id": "ID fondi",
+    "fundDistribution.id": "ID voce di spesa",
     "label.tags": "Tag",
     "searchAndFilter": "Cerca e filtra",
     "search": "Cerca",
@@ -46,7 +46,7 @@
     "filter.tags": "Tag",
     "fundDistribution.name": "Voce di spesa",
     "fundDistribution.adjustmentDescription": "Aggiustamento",
-    "validation.fundDistribution.uniqueFunds": "Non è possibile avere più distribuzioni per la stessa voce con la stessa classe di spesa.",
+    "validation.fundDistribution.uniqueFunds": "Non è possibile avere più distribuzioni  di spesa per la stessa voce con la stessa classe di spesa.",
     "validation.cantBeNegativeOrEmpty": "Non può essere negativo o vuoto",
     "label.contributor": "Contributore",
     "label.contributorType": "Tipologia contributore",
@@ -66,7 +66,7 @@
     "order.format.physicalResource": "Risorsa fisica",
     "order.format.PEMix": "Mix fisico/elettronico",
     "order.format.other": "Altro",
-    "fundDistribution.initialEncumbrance": "Impegno di spesa iniziale",
+    "fundDistribution.initialEncumbrance": "Impegno iniziale",
     "fundDistribution.currentEncumbrance": "Impegno di spesa corrente",
     "organization": "Organizzazione",
     "tagWasAdded": "Il tag è stato aggiunto",
@@ -154,5 +154,5 @@
     "filter.dynamic.emptyMessage": "Start typing to load options",
     "validation.cantBeNegative": "Can not be negative",
     "validation.maxCantBeLessMin": "\"To\" can not be less than \"From\"",
-    "validation.cannotMixTypesForZeroPrice": "Fund distribution types cannot be mixed for a price of 0"
+    "validation.cannotMixTypesForZeroPrice": "I tipi di distribuzione della spesa non possono essere mescolati se il prezzo è pari a 0"
 }
