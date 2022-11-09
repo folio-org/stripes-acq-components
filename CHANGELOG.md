@@ -1,6 +1,9 @@
 # Change history for stripes-acq-components
 
-## (IN PROGRESS)
+## [3.3.1](https://github.com/folio-org/stripes-acq-components/tree/v3.3.1) (2022-11-17)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.3.0...v3.3.1)
+
+* Add handlers for search field and reset all button in `PluginFindRecordModal` component. Refs UISACQCOMP-124.
 
 ## [3.3.0](https://github.com/folio-org/stripes-acq-components/tree/v3.3.0) (2022-10-18)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.2.4...v3.3.0)
