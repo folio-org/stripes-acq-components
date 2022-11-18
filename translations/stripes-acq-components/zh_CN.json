@@ -29,7 +29,7 @@
     "paymentMethod.card": "信用卡",
     "paymentMethod.eft": "EFT",
     "paymentMethod.depAccount": "存款账户",
-    "paymentMethod.physicalCheck": "实体检查",
+    "paymentMethod.physicalCheck": "实物支票",
     "paymentMethod.bankDraft": "银行汇票",
     "paymentMethod.internalTransfer": "内部转移",
     "paymentMethod.other": "其他",
