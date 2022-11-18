@@ -1,13 +1,14 @@
 # Change history for stripes-acq-components
 
+## (IN PROGRESS)
+
+* Add common util which will provide translations for `ControlledVocab`. Refs UISACQCOMP-123.
+* Selection dropdown search textbox doesn't allow use of parentheses characters. Refs UISACQCOMP-125.
+
 ## [3.3.1](https://github.com/folio-org/stripes-acq-components/tree/v3.3.1) (2022-11-18)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.3.0...v3.3.1)
 
 * Add handlers for search field and reset all button in `PluginFindRecordModal` component. Refs UISACQCOMP-124.
-
-* Add common util which will provide translations for `ControlledVocab`. Refs UISACQCOMP-123.
-* Add handlers for search field and reset all button in `PluginFindRecordModal` component. Refs UISACQCOMP-124.
-* Selection dropdown search textbox doesn't allow use of parentheses characters. Refs UISACQCOMP-125.
 
 ## [3.3.0](https://github.com/folio-org/stripes-acq-components/tree/v3.3.0) (2022-10-18)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.2.4...v3.3.0)
