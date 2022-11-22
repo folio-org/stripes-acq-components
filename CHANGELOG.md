@@ -1,5 +1,10 @@
 # Change history for stripes-acq-components
 
+## (IN PROGRESS)
+
+* Selection dropdown search textbox doesn't allow use of parentheses characters. Refs UISACQCOMP-125.
+* Add common `useFiltersReset` hook to support filter reset based on location state. Refs UISACQCOMP-127.
+
 ## [3.3.1](https://github.com/folio-org/stripes-acq-components/tree/v3.3.1) (2022-11-18)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.3.0...v3.3.1)
 
