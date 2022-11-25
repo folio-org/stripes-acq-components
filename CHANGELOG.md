@@ -3,6 +3,10 @@
 ## (IN PROGRESS)
 
 * Add common util which will provide translations for `ControlledVocab`. Refs UISACQCOMP-123.
+
+## [3.3.2](https://github.com/folio-org/stripes-acq-components/tree/v3.3.2) (2022-11-25)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.3.1...v3.3.2)
+
 * Selection dropdown search textbox doesn't allow use of parentheses characters. Refs UISACQCOMP-125.
 * Add common `useFiltersReset` hook to support filter reset based on location state. Refs UISACQCOMP-127.
 
