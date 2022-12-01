@@ -64,7 +64,7 @@
     "order.type.ongoing": "进行中",
     "order.format.electronicResource": "电子资源",
     "order.format.physicalResource": "实体资源",
-    "order.format.PEMix": "P/E Mix",
+    "order.format.PEMix": "实体/电子组合",
     "order.format.other": "其他",
     "fundDistribution.initialEncumbrance": "初始预支",
     "fundDistribution.currentEncumbrance": "当前预支",
