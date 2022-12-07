@@ -167,6 +167,9 @@
   "validation.cantBeNegative": "Can not be negative",
   "validation.maxCantBeLessMin": "\"To\" can not be less than \"From\"",
 
+  "versionHistory.pane.header": "Version history",
+  "versionHistory.pane.sub": "{count, plural, one {# version} other {# versions}}",
+
   "acquisition_method.approvalPlan": "Approval plan",
   "acquisition_method.dda": "Demand driven acquisitions (DDA)",
   "acquisition_method.depository": "Depository",
