@@ -4,6 +4,7 @@ export const orderLineAuditEvent = {
   orderId: 'c4abf6c3-4bd5-4464-999b-c66cfb6f1cf9',
   orderLineId: 'c4abf6c3-4bd5-4464-999b-c66cfb6f1cf9',
   userId: 'a7d92b0c-1bb6-4a0e-adcd-3c6dbf2d32b8',
+  username: 'testuser',
   eventDate: '2022-11-10T10:16:53.804Z',
   actionDate: '2022-11-10T10:17:53.807Z',
   orderLineSnapshot: {

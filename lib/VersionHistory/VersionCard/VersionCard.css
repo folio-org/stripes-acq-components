@@ -1,0 +1,19 @@
+@import '@folio/stripes-components/lib/variables';
+
+.versionCardBody {
+  padding: var(--gutter-static-two-thirds);
+  display: flex;
+  flex-direction: column;
+
+  & > span {
+    line-height: var(--line-height);
+  }
+}
+
+.changedRecordsList {
+  margin-bottom: 0;
+
+  & .changedRecord {
+    margin-bottom: 0;
+  }
+}

@@ -167,6 +167,11 @@
   "validation.cantBeNegative": "Can not be negative",
   "validation.maxCantBeLessMin": "\"To\" can not be less than \"From\"",
 
+  "versionHistory.card.changed": "Changed",
+  "versionHistory.card.select.tooltip": "View this version",
+  "versionHistory.card.version.current": "Current version",
+  "versionHistory.card.version.original": "Original version",
+  "versionHistory.dataLost": "Data lost",
   "versionHistory.pane.header": "Version history",
   "versionHistory.pane.sub": "{count, plural, one {# version} other {# versions}}",
 
