@@ -154,5 +154,12 @@
     "filter.dynamic.emptyMessage": "Pro načtení možností začněte psát",
     "validation.cantBeNegative": "Nemůže být negativní",
     "validation.maxCantBeLessMin": "\"Do\" nemůže být menší než \"Od\"",
-    "validation.cannotMixTypesForZeroPrice": "Typy distribuce fondů nelze míchat za cenu 0"
+    "validation.cannotMixTypesForZeroPrice": "Typy distribuce fondů nelze míchat za cenu 0",
+    "versionHistory.pane.header": "Historie verzí",
+    "versionHistory.pane.sub": "{count, plural, one {verze} few {verzí} many {verzí} other {verze}}",
+    "versionHistory.card.changed": "Změněno",
+    "versionHistory.card.select.tooltip": "Zobrazit tuto verzi",
+    "versionHistory.card.version.current": "Aktuální verze",
+    "versionHistory.card.version.original": "Původní verze",
+    "versionHistory.dataLost": "Data ztracena"
 }
