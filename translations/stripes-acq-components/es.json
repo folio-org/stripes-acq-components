@@ -154,5 +154,12 @@
     "filter.dynamic.emptyMessage": "Start typing to load options",
     "validation.cantBeNegative": "Can not be negative",
     "validation.maxCantBeLessMin": "\"To\" can not be less than \"From\"",
-    "validation.cannotMixTypesForZeroPrice": "Fund distribution types cannot be mixed for a price of 0"
+    "validation.cannotMixTypesForZeroPrice": "Fund distribution types cannot be mixed for a price of 0",
+    "versionHistory.pane.header": "Historial de versiones",
+    "versionHistory.pane.sub": "{count, plural, one {Uno} other {Otro}}",
+    "versionHistory.card.changed": "Cambiado",
+    "versionHistory.card.select.tooltip": "Ver esta versión",
+    "versionHistory.card.version.current": "Versión actual",
+    "versionHistory.card.version.original": "Original",
+    "versionHistory.dataLost": "Datos perdidos"
 }

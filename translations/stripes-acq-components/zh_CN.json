@@ -154,5 +154,12 @@
     "filter.dynamic.emptyMessage": "开始输入以加载选项",
     "validation.cantBeNegative": "不能为负数",
     "validation.maxCantBeLessMin": "\"到 \"不能少于 \"从\"",
-    "validation.cannotMixTypesForZeroPrice": "经费分配类型不能以0价格混合"
+    "validation.cannotMixTypesForZeroPrice": "经费分配类型不能以0价格混合",
+    "versionHistory.pane.header": "Version history",
+    "versionHistory.pane.sub": "{count, plural, one {# version} other {# versions}}",
+    "versionHistory.card.changed": "Changed",
+    "versionHistory.card.select.tooltip": "View this version",
+    "versionHistory.card.version.current": "Current version",
+    "versionHistory.card.version.original": "Original version",
+    "versionHistory.dataLost": "Data lost"
 }

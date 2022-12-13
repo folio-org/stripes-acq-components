@@ -154,5 +154,12 @@
     "filter.dynamic.emptyMessage": "Comece a digitar para carregar as opções",
     "validation.cantBeNegative": "Não pode ser negativo",
     "validation.maxCantBeLessMin": "\"Para\" não pode ser inferior a \"De\".",
-    "validation.cannotMixTypesForZeroPrice": "Os tipos de distribuição de fundos não podem ser misturados por um preço de 0"
+    "validation.cannotMixTypesForZeroPrice": "Os tipos de distribuição de fundos não podem ser misturados por um preço de 0",
+    "versionHistory.pane.header": "Histórico da versão",
+    "versionHistory.pane.sub": "{count, plural, one {versão} other {versões}}",
+    "versionHistory.card.changed": "Alterado",
+    "versionHistory.card.select.tooltip": "Ver esta versão",
+    "versionHistory.card.version.current": "Versão atual",
+    "versionHistory.card.version.original": "Versão original",
+    "versionHistory.dataLost": "Dados perdidos"
 }

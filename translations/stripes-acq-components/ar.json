@@ -154,5 +154,12 @@
     "filter.dynamic.emptyMessage": "ابدأ الكتابة لتحميل الخيارات",
     "validation.cantBeNegative": "لا يمكن أن يكون سالبًا",
     "validation.maxCantBeLessMin": "لا يمكن أن يكون \"إلى\" أقل من \"من\"",
-    "validation.cannotMixTypesForZeroPrice": "Fund distribution types cannot be mixed for a price of 0"
+    "validation.cannotMixTypesForZeroPrice": "Fund distribution types cannot be mixed for a price of 0",
+    "versionHistory.pane.header": "Version history",
+    "versionHistory.pane.sub": "{count, plural, one {# version} other {# versions}}",
+    "versionHistory.card.changed": "Changed",
+    "versionHistory.card.select.tooltip": "View this version",
+    "versionHistory.card.version.current": "Current version",
+    "versionHistory.card.version.original": "Original version",
+    "versionHistory.dataLost": "Data lost"
 }
