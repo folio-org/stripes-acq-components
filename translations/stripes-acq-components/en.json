@@ -171,7 +171,7 @@
   "versionHistory.card.select.tooltip": "View this version",
   "versionHistory.card.version.current": "Current version",
   "versionHistory.card.version.original": "Original version",
-  "versionHistory.notFound": "Data not found",
+  "versionHistory.deletedRecord": "Record deleted",
   "versionHistory.pane.header": "Version history",
   "versionHistory.pane.sub": "{count, plural, one {# version} other {# versions}}",
 
