@@ -22,8 +22,8 @@
     "fundDistribution.encumbrance": "Bindung",
     "fundDistribution.id": "Fonds-ID",
     "label.tags": "Tags",
-    "searchAndFilter": "Suche & Filter",
-    "search": "Suche",
+    "searchAndFilter": "Suchen & filtern",
+    "search": "Suchen",
     "resetAllFilters": "Alles zurücksetzen",
     "paymentMethod.cash": "Bargeld",
     "paymentMethod.card": "Kreditkarte",
@@ -138,7 +138,7 @@
     "acquisition_method.purchase": "Kauf",
     "acquisition_method.purchaseAtVendorSystem": "Purchase at vendor system",
     "acquisition_method.technical": "Technical",
-    "filter.acqUnit.noAcqUnit": "No acquisition unit",
+    "filter.acqUnit.noAcqUnit": "Kein Erwerbungsteam",
     "filter.placeholder": "Filter",
     "fundDistribution.fundStatus.Inactive": "Inactive",
     "fundDistribution.fundStatus.Frozen": "Frozen",
@@ -161,5 +161,5 @@
     "versionHistory.card.select.tooltip": "View this version",
     "versionHistory.card.version.current": "Current version",
     "versionHistory.card.version.original": "Original version",
-    "versionHistory.dataLost": "Data lost"
+    "versionHistory.deletedRecord": "Record deleted"
 }

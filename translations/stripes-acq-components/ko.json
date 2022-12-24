@@ -155,11 +155,11 @@
     "validation.cantBeNegative": "음수일 수 없음",
     "validation.maxCantBeLessMin": "\"To\"는 \"From\"보다 작을 수 없습니다.",
     "validation.cannotMixTypesForZeroPrice": "금액이 0인 경우 기금 분배 유형을 혼합할 수 없습니다.",
-    "versionHistory.pane.header": "Version history",
+    "versionHistory.pane.header": "버전 이력",
     "versionHistory.pane.sub": "{count, plural, one {# version} other {# versions}}",
-    "versionHistory.card.changed": "Changed",
-    "versionHistory.card.select.tooltip": "View this version",
-    "versionHistory.card.version.current": "Current version",
-    "versionHistory.card.version.original": "Original version",
-    "versionHistory.dataLost": "Data lost"
+    "versionHistory.card.changed": "변경됨",
+    "versionHistory.card.select.tooltip": "이 버전 보기",
+    "versionHistory.card.version.current": "현재 버전",
+    "versionHistory.card.version.original": "원본 버전",
+    "versionHistory.deletedRecord": "Record deleted"
 }
