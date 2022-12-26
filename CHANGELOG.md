@@ -5,6 +5,7 @@
 * Add common util which will provide translations for `ControlledVocab`. Refs UISACQCOMP-123.
 * Change log: add common components to display version history on the fourth pane. Refs UISACQCOMP-129.
 * Change log: display all versions in fourth pane. Refs UISACQCOMP-131.
+* Show in version history record view, which fields have been edited. Refs UISACQCOMP-132.
 
 ## [3.3.2](https://github.com/folio-org/stripes-acq-components/tree/v3.3.2) (2022-11-25)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.3.1...v3.3.2)
