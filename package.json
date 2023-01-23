@@ -1,6 +1,6 @@
 {
   "name": "@folio/stripes-acq-components",
-  "version": "3.4.0",
+  "version": "4.0.0",
   "description": "Component library for Stripes Acquisitions modules",
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
@@ -30,7 +30,7 @@
     "@babel/preset-typescript": "^7.13.0",
     "@bigtest/interactor": "^0.9.3",
     "@folio/eslint-config-stripes": "^6.1.0",
-    "@folio/stripes": "^7.0.0",
+    "@folio/stripes": "^8.0.0",
     "@folio/stripes-cli": "^2.4.0",
     "@formatjs/cli": "^4.2.6",
     "@testing-library/jest-dom": "^5.11.1",
@@ -52,7 +52,7 @@
     "react-dom": "^17.0.2",
     "react-intl": "^5.7.1",
     "react-query": "^3.6.0",
-    "react-redux": "^7.2.2",
+    "react-redux": "^8.0.5",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5"
@@ -79,10 +79,10 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-intl": "^5.7.1",
-    "react-redux": "*",
+    "react-redux": "^8.0.5",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "redux": "*"
+    "redux": "^4.0.0"
   },
   "resolutions": {
     "@rehooks/local-storage": "2.4.0"
