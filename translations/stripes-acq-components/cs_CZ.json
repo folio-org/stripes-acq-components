@@ -42,7 +42,7 @@
     "validation.fundDistributionType": "Všechny distribuce by měly být stejného typu",
     "validation.shouldBeEqualToTotalAmount": "Procentní podíl nebo částka by se měly rovnat 100 % celkové částky.",
     "showTags": "Zobrazit tagy",
-    "addTagFor": "Přidat značku pro: {filterValue}",
+    "addTagFor": "Přidat tag pro: {filterValue}",
     "filter.tags": "Tagy",
     "fundDistribution.name": "Fond",
     "fundDistribution.adjustmentDescription": "Úprava",
@@ -161,5 +161,5 @@
     "versionHistory.card.select.tooltip": "Zobrazit tuto verzi",
     "versionHistory.card.version.current": "Aktuální verze",
     "versionHistory.card.version.original": "Původní verze",
-    "versionHistory.dataLost": "Data ztracena"
+    "versionHistory.deletedRecord": "Záznam smazán"
 }

@@ -157,9 +157,9 @@
     "validation.cannotMixTypesForZeroPrice": "Fund distribution types cannot be mixed for a price of 0",
     "versionHistory.pane.header": "Version history",
     "versionHistory.pane.sub": "{count, plural, one {# version} other {# versions}}",
-    "versionHistory.card.changed": "Changed",
-    "versionHistory.card.select.tooltip": "View this version",
-    "versionHistory.card.version.current": "Current version",
-    "versionHistory.card.version.original": "Original version",
-    "versionHistory.dataLost": "Data lost"
+    "versionHistory.card.changed": "Modifié",
+    "versionHistory.card.select.tooltip": "Voir cette version",
+    "versionHistory.card.version.current": "Version actuelle",
+    "versionHistory.card.version.original": "Version d'origine",
+    "versionHistory.deletedRecord": "Record deleted"
 }

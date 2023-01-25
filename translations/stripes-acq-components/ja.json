@@ -140,7 +140,7 @@
     "acquisition_method.technical": "テクニカル",
     "filter.acqUnit.noAcqUnit": "No acquisition unit",
     "filter.placeholder": "Filter",
-    "fundDistribution.fundStatus.Inactive": "Inactive",
+    "fundDistribution.fundStatus.Inactive": "非アクティブ",
     "fundDistribution.fundStatus.Frozen": "Frozen",
     "resultsCount": "{resultsCount, number} {resultsCount, plural, one {record found} other {records found}}",
     "filter.expenseClass": "Expense class",
@@ -161,5 +161,5 @@
     "versionHistory.card.select.tooltip": "View this version",
     "versionHistory.card.version.current": "Current version",
     "versionHistory.card.version.original": "Original version",
-    "versionHistory.dataLost": "Data lost"
+    "versionHistory.deletedRecord": "Record deleted"
 }
