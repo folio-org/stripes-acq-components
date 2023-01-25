@@ -155,11 +155,11 @@
     "validation.cantBeNegative": "不能为负数",
     "validation.maxCantBeLessMin": "\"到 \"不能少于 \"从\"",
     "validation.cannotMixTypesForZeroPrice": "经费分配类型不能以0价格混合",
-    "versionHistory.pane.header": "Version history",
+    "versionHistory.pane.header": "版本历史",
     "versionHistory.pane.sub": "{count, plural, one {# version} other {# versions}}",
-    "versionHistory.card.changed": "Changed",
-    "versionHistory.card.select.tooltip": "View this version",
-    "versionHistory.card.version.current": "Current version",
-    "versionHistory.card.version.original": "Original version",
-    "versionHistory.dataLost": "Data lost"
+    "versionHistory.card.changed": "已更改",
+    "versionHistory.card.select.tooltip": "查看此版本",
+    "versionHistory.card.version.current": "当前版本",
+    "versionHistory.card.version.original": "原始版本",
+    "versionHistory.deletedRecord": "记录已删除"
 }
