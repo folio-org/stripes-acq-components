@@ -7,7 +7,9 @@
 * Change log: display all versions in fourth pane. Refs UISACQCOMP-131.
 * Show in version history record view, which fields have been edited. Refs UISACQCOMP-132.
 * Add ability to provide `notLoadedMessage` prop for `<NoResultsMessage>` component. Refs UISACQCOMP-136.
-* Upgrade `react-redux` to `v8`. Refs UISACQCOMP-137.
+* *BREAKING*: Upgrade `react-redux` to `v8`. Refs UISACQCOMP-137.
+* Do not display version history cards without changes. Refs UISACQCOMP-139.
+* *BREAKING*: Update `@folio/stripes` to `8.0.0`. Refs UISACQCOMP-140.
 
 ## [3.3.2](https://github.com/folio-org/stripes-acq-components/tree/v3.3.2) (2022-11-25)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.3.1...v3.3.2)
