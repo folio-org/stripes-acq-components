@@ -1,6 +1,9 @@
 # Change history for stripes-acq-components
 
-## (4.0.0 IN PROGRESS)
+## (4.1.0 IN PROGRESS)
+
+## [4.0.0](https://github.com/folio-org/stripes-acq-components/tree/v4.0.0) (2023-02-15)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.3.2...v4.0.0)
 
 * Add common util which will provide translations for `ControlledVocab`. Refs UISACQCOMP-123.
 * Change log: add common components to display version history on the fourth pane. Refs UISACQCOMP-129.
