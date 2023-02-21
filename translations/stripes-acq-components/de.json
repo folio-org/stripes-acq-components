@@ -149,7 +149,7 @@
     "filter.numberRange.max": "To",
     "filter.numberRange.min": "From",
     "holdings.deleteModal.heading": "Bestand löschen",
-    "holdings.deleteModal.message": "Dieses Stück ist mit Datensätzen im Katalog verbunden. Es gibt keine weiteren Exemplare, die mit diesen Bestandsdatensätzen verbunden sind. Möchten Sie nach dem Löschen des Stückes, dass FOLIO die Bestandsdatensätze löscht?",
+    "holdings.deleteModal.message": "Dieses Teil ist mit Datensätzen im Katalog verbunden. Es gibt keine weiteren Exemplare, die mit diesen Bestandsdatensätzen verbunden sind. Möchten Sie nach dem Löschen des Stückes, dass FOLIO die Bestandsdatensätze löscht?",
     "holdings.deleteModal.keepHoldings": "Bestand behalten",
     "filter.dynamic.emptyMessage": "Start typing to load options",
     "validation.cantBeNegative": "Can not be negative",
