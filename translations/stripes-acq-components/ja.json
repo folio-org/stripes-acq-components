@@ -6,7 +6,7 @@
     "sources.user": "ユーザー",
     "filter.false": "いいえ",
     "filter.true": "はい",
-    "label.emptyValue": " ",
+    "label.emptyValue": ".",
     "validation.required": "必須です！",
     "label.acqUnits": "収集ユニット",
     "fileUploader.dropFile": "ドラッグ&ドロップでドキュメントをアップロード",
