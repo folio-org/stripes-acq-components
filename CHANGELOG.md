@@ -2,6 +2,9 @@
 
 ## (4.1.0 IN PROGRESS)
 
+## [4.0.1](https://github.com/folio-org/stripes-acq-components/tree/v4.0.1) (2023-03-09)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v4.0.0...v4.0.1)
+
 * Acq list results pane doesn't support icons. Refs UISACQCOMP-144.
 * Unpin `@rehooks/local-storage` now that it's no longer broken. Refs UISACQCOMP-138.
 
