@@ -3,6 +3,7 @@
 ## (4.1.0 IN PROGRESS)
 
 * Escape quotes `"` and backslash `\` characters in search queries. Refs UISACQCOMP-145.
+* Select the current version by clicking on the version card title. Refs UISACQCOMP-146.
 
 ## [4.0.1](https://github.com/folio-org/stripes-acq-components/tree/v4.0.1) (2023-03-09)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v4.0.0...v4.0.1)
