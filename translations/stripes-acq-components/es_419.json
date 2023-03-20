@@ -156,7 +156,7 @@
     "validation.maxCantBeLessMin": "\"To\" can not be less than \"From\"",
     "validation.cannotMixTypesForZeroPrice": "Fund distribution types cannot be mixed for a price of 0",
     "versionHistory.pane.header": "Historial de versiones",
-    "versionHistory.pane.sub": "{count, plural, one {Uno} other {}}",
+    "versionHistory.pane.sub": "{count, plural, one {Uno} other {Uno}}",
     "versionHistory.card.changed": "Cambiado",
     "versionHistory.card.select.tooltip": "Ver esta versión",
     "versionHistory.card.version.current": "Versión actual",
