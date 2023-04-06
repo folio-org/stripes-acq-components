@@ -2,6 +2,8 @@
 
 ## (4.1.0 IN PROGRESS)
 
+* Link to vendor organization record from organization value. Refs UISACQCOMP-147.
+
 ## [4.0.2](https://github.com/folio-org/stripes-acq-components/tree/v4.0.2) (2023-03-17)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v4.0.1...v4.0.2)
 
