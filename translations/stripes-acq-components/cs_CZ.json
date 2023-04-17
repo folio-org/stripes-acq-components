@@ -75,7 +75,7 @@
     "receiving.itemStatus.In process": "Probíhá",
     "receiving.itemStatus.On order": "Objednáno",
     "receiving.itemStatus.Available": "Dostupné",
-    "receiving.itemStatus.In transit": "Na cestě",
+    "receiving.itemStatus.In transit": "V přepravě",
     "receiving.itemStatus.Order closed": "Objednávka uzavřena",
     "receiving.itemStatus.Undefined": "Nedefinována",
     "filter.user.lookup": "Vyhledávání uživatelů",
