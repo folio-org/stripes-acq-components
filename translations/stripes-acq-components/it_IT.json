@@ -59,7 +59,7 @@
     "filter.organization.lookupNoSupport": "Ricerca dell'organizzazione non supportata",
     "order.status.closed": "Chiuso",
     "order.status.open": "Aperto",
-    "order.status.pending": "In attesa",
+    "order.status.pending": "In sospeso",
     "order.type.oneTime": "Una tantum",
     "order.type.ongoing": "Continuativo",
     "order.format.electronicResource": "Risorsa elettronica",
