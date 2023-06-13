@@ -6,6 +6,7 @@
 * Add dependencies argument in the custom hook useLocationSorting. Refs UISACQCOMP-149.
 * "Reset all" button remains enabled after clicking it to clear filtering results. Refs UISACQCOMP-148.
 * "No value" in the "Current encumbrance" column of a fund distribution field is a hyperlink. Refs UISACQCOMP-150.
+* Allow user to select Fund and Expense class from Fiscal year specified in invoice. Refs UISACQCOMP-151.
 
 ## [4.0.2](https://github.com/folio-org/stripes-acq-components/tree/v4.0.2) (2023-03-17)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v4.0.1...v4.0.2)
