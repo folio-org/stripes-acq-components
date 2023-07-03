@@ -9,6 +9,7 @@
 * Allow user to select Fund and Expense class from Fiscal year specified in invoice. Refs UISACQCOMP-151.
 * Hide End Of List label when there is pagination. Refs UISACQCOMP-152.
 * Add local pagination hook. Refs UISACQCOMP-153.
+* Add the ability to convey searchable indexes to the Select component via children prop, and not just through the dataOptions prop. Refs UISACQCOMP-155.
 
 ## [4.0.2](https://github.com/folio-org/stripes-acq-components/tree/v4.0.2) (2023-03-17)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v4.0.1...v4.0.2)
