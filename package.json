@@ -1,6 +1,6 @@
 {
   "name": "@folio/stripes-acq-components",
-  "version": "4.0.2",
+  "version": "5.0.0",
   "description": "Component library for Stripes Acquisitions modules",
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
@@ -28,9 +28,9 @@
     "@babel/preset-react": "^7.9.0",
     "@babel/preset-typescript": "^7.13.0",
     "@bigtest/interactor": "^0.9.3",
-    "@folio/eslint-config-stripes": "^6.1.0",
-    "@folio/stripes": "^8.0.0",
-    "@folio/stripes-cli": "^2.4.0",
+    "@folio/eslint-config-stripes": "^7.0.0",
+    "@folio/stripes": "^9.0.0",
+    "@folio/stripes-cli": "^3.0.0",
     "@formatjs/cli": "^4.2.6",
     "@testing-library/jest-dom": "^5.11.1",
     "@testing-library/react": "^11.0.2",
@@ -47,8 +47,8 @@
     "jest-junit": "^11.1.0",
     "miragejs": "^0.1.32",
     "moment": "^2.24.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-intl": "^5.7.1",
     "react-query": "^3.6.0",
     "react-redux": "^8.0.5",
@@ -73,10 +73,10 @@
     "redux-form": "^8.3.0"
   },
   "peerDependencies": {
-    "@folio/stripes": "^8.0.0",
+    "@folio/stripes": "^9.0.0",
     "moment": "^2.24.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-intl": "^5.7.1",
     "react-redux": "^8.0.5",
     "react-router": "^5.2.0",

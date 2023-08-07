@@ -1,6 +1,6 @@
 # Change history for stripes-acq-components
 
-## (4.1.0 IN PROGRESS)
+## (5.0.0 IN PROGRESS)
 
 * Link to vendor organization record from organization value. Refs UISACQCOMP-147.
 * Add dependencies argument in the custom hook useLocationSorting. Refs UISACQCOMP-149.
@@ -11,6 +11,7 @@
 * Add local pagination hook. Refs UISACQCOMP-153.
 * Add the ability to convey searchable indexes to the Select component via children prop, and not just through the dataOptions prop. Refs UISACQCOMP-155.
 * Fund distribution can be saved with a "blank" expense class. Refs UISACQCOMP-156.
+* *BREAKING* Update `react` to `v18`. Refs UISACQCOMP-157.
 
 ## [4.0.2](https://github.com/folio-org/stripes-acq-components/tree/v4.0.2) (2023-03-17)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v4.0.1...v4.0.2)
