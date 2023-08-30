@@ -6,9 +6,6 @@
     "registry": "https://repository.folio.org/repository/npm-folio/"
   },
   "license": "Apache-2.0",
-  "engines": {
-    "node": ">=10"
-  },
   "repository": "folio-org/stripes-acq-components",
   "scripts": {
     "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/stripes-acq-components ./translations/stripes-acq-components/compiled",
