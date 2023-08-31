@@ -1,6 +1,8 @@
 # Change history for stripes-acq-components
 
-## (4.1.0 IN PROGRESS)
+## 4.0.3 IN PROGRESS
+
+* Lock `react-virtual-auto-sizer` to `1.0.7` to preserve `<Pane>` CSS behavior. Refs UISACQCOMP-160.
 
 ## [4.0.2](https://github.com/folio-org/stripes-acq-components/tree/v4.0.2) (2023-03-17)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v4.0.1...v4.0.2)
