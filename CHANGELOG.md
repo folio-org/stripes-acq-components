@@ -14,7 +14,8 @@
 * *BREAKING* Update `react` to `v18`. Refs UISACQCOMP-157.
 * Update `Node.js` to `v18` in GitHub Actions. Refs UISACQCOMP-158.
 * A user can not save edited PO line when budget without expense class was selected. Refs UISACQCOMP-159.
-
+* *BREAKING* bump `react-intl` to `v6.4.4`. Refs UISACQCOM-161.
+ 
 ## [4.0.2](https://github.com/folio-org/stripes-acq-components/tree/v4.0.2) (2023-03-17)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v4.0.1...v4.0.2)
 
