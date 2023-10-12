@@ -1,6 +1,9 @@
 # Change history for stripes-acq-components
 
-## (5.0.0 IN PROGRESS)
+## (5.1.0 IN PROGRESS)
+
+## [5.0.0](https://github.com/folio-org/stripes-acq-components/tree/v5.0.0) (2023-10-12)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v4.0.2...v5.0.0)
 
 * Link to vendor organization record from organization value. Refs UISACQCOMP-147.
 * Add dependencies argument in the custom hook useLocationSorting. Refs UISACQCOMP-149.
