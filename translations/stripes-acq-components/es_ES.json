@@ -140,7 +140,7 @@
     "acquisition_method.technical": "Technical",
     "filter.acqUnit.noAcqUnit": "Sin unidad de adquisición",
     "filter.placeholder": "Filtro",
-    "fundDistribution.fundStatus.Inactive": "Inactive",
+    "fundDistribution.fundStatus.Inactive": "Inactivo",
     "fundDistribution.fundStatus.Frozen": "Frozen",
     "resultsCount": "{resultsCount, number} {resultsCount, plural, one {record found} other {records found}}",
     "filter.expenseClass": "Expense class",
