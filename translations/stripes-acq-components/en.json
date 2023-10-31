@@ -187,5 +187,8 @@
   "acquisition_method.other": "Other",
   "acquisition_method.purchase": "Purchase",
   "acquisition_method.purchaseAtVendorSystem": "Purchase at vendor system",
-  "acquisition_method.technical": "Technical"
+  "acquisition_method.technical": "Technical",
+  "donors.button.addDonor": "Add donor",
+  "donors.column.code": "Code",
+  "donors.column.name": "Name"
 }
