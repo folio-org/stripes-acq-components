@@ -190,5 +190,8 @@
   "acquisition_method.technical": "Technical",
   "donors.button.addDonor": "Add donor",
   "donors.column.code": "Code",
-  "donors.column.name": "Name"
+  "donors.column.name": "Name",
+  "donors.modal.title": "Add donors",
+  "donors.modal.resultsTitle": "Donors",
+  "donors.noFindOrganizationPlugin": "no find-organization plugin"
 }
