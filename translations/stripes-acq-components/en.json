@@ -193,5 +193,6 @@
   "donors.column.name": "Name",
   "donors.modal.title": "Add donors",
   "donors.modal.resultsTitle": "Donors",
-  "donors.noFindOrganizationPlugin": "no find-organization plugin"
+  "donors.noFindOrganizationPlugin": "no find-organization plugin",
+  "donors.button.unassign": "Unassign"
 }
