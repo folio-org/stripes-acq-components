@@ -161,5 +161,12 @@
     "versionHistory.card.select.tooltip": "Ver esta versão",
     "versionHistory.card.version.current": "Versão atual",
     "versionHistory.card.version.original": "Versão original",
-    "versionHistory.deletedRecord": "Registro excluído"
+    "versionHistory.deletedRecord": "Registro excluído",
+    "donors.button.addDonor": "Adicionar doador",
+    "donors.column.code": "Código",
+    "donors.column.name": "Nome",
+    "donors.modal.title": "Adicionar doadores",
+    "donors.modal.resultsTitle": "Doadores",
+    "donors.noFindOrganizationPlugin": "nenhum plugin de localização de organização",
+    "donors.button.unassign": "Cancelar atribuição"
 }

@@ -161,5 +161,12 @@
     "versionHistory.card.select.tooltip": "查看此版本",
     "versionHistory.card.version.current": "当前版本",
     "versionHistory.card.version.original": "原始版本",
-    "versionHistory.deletedRecord": "记录已删除"
+    "versionHistory.deletedRecord": "记录已删除",
+    "donors.button.addDonor": "Add donor",
+    "donors.column.code": "Code",
+    "donors.column.name": "Name",
+    "donors.modal.title": "Add donors",
+    "donors.modal.resultsTitle": "Donors",
+    "donors.noFindOrganizationPlugin": "no find-organization plugin",
+    "donors.button.unassign": "Unassign"
 }
