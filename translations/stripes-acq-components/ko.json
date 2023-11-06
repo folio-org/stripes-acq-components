@@ -161,5 +161,12 @@
     "versionHistory.card.select.tooltip": "이 버전 보기",
     "versionHistory.card.version.current": "현재 버전",
     "versionHistory.card.version.original": "원본 버전",
-    "versionHistory.deletedRecord": "Record deleted"
+    "versionHistory.deletedRecord": "Record deleted",
+    "donors.button.addDonor": "Add donor",
+    "donors.column.code": "Code",
+    "donors.column.name": "Name",
+    "donors.modal.title": "Add donors",
+    "donors.modal.resultsTitle": "Donors",
+    "donors.noFindOrganizationPlugin": "no find-organization plugin",
+    "donors.button.unassign": "Unassign"
 }
