@@ -5,6 +5,7 @@
 * Sort the list of countries based on the current locale. Refs UISACQCOMP-164.
 * Add `inputType` prop to `<SingleSearchForm>`. Refs UISACQCOMP-165.
 * View the list of donors. Refs UISACQCOMP-166.
+* Added `indexRef` and `inputRef` props to `<SingleSearchForm>`. Refs UISACQCOMP-167.
 
 ## [5.0.0](https://github.com/folio-org/stripes-acq-components/tree/v5.0.0) (2023-10-12)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v4.0.2...v5.0.0)
