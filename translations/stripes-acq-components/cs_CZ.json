@@ -168,5 +168,7 @@
     "donors.modal.title": "Přidat dárce",
     "donors.modal.resultsTitle": "Dárci",
     "donors.noFindOrganizationPlugin": "žádný plugin pro vyhledávání a organizaci",
-    "donors.button.unassign": "Zrušení přiřazení"
+    "donors.button.unassign": "Zrušení přiřazení",
+    "filter.donor.lookup": "Donor look-up",
+    "filter.donor.lookupNoSupport": "Donor look-up is not supported"
 }

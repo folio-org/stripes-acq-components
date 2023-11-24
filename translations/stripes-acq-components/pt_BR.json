@@ -168,5 +168,7 @@
     "donors.modal.title": "Adicionar doadores",
     "donors.modal.resultsTitle": "Doadores",
     "donors.noFindOrganizationPlugin": "nenhum plugin de localização de organização",
-    "donors.button.unassign": "Cancelar atribuição"
+    "donors.button.unassign": "Cancelar atribuição",
+    "filter.donor.lookup": "Consulta de doadores",
+    "filter.donor.lookupNoSupport": "A consulta de doadores não é suportada"
 }

@@ -168,5 +168,7 @@
     "donors.modal.title": "Add donors",
     "donors.modal.resultsTitle": "Donors",
     "donors.noFindOrganizationPlugin": "no find-organization plugin",
-    "donors.button.unassign": "Unassign"
+    "donors.button.unassign": "Unassign",
+    "filter.donor.lookup": "Donor look-up",
+    "filter.donor.lookupNoSupport": "Donor look-up is not supported"
 }
