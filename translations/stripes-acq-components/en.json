@@ -107,6 +107,8 @@
   "organization": "Organization",
   "filter.organization.lookup": "Organization look-up",
   "filter.organization.lookupNoSupport": "Organization look-up is not supported",
+  "filter.donor.lookup": "Donor look-up",
+  "filter.donor.lookupNoSupport": "Donor look-up is not supported",
   "filter.user.lookup": "User look-up",
   "filter.user.lookupNoSupport": "user look-up is not supported",
   "filter.expenseClass": "Expense class",
