@@ -9,6 +9,7 @@
 * Extend Donors component functionality. Refs UISACQCOMP-168.
 * Add Donors Filter component. Refs UISACQCOMP-169.
 * Optimize acquisition memberships query to improve performance. Refs UISACQCOMP-170.
+* Create Privileged donor contacts modal and list. Refs UISACQCOMP-172.
 
 ## [5.0.0](https://github.com/folio-org/stripes-acq-components/tree/v5.0.0) (2023-10-12)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v4.0.2...v5.0.0)
