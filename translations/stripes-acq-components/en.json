@@ -196,5 +196,18 @@
   "donors.modal.title": "Add donors",
   "donors.modal.resultsTitle": "Donors",
   "donors.noFindOrganizationPlugin": "no find-organization plugin",
-  "donors.button.unassign": "Unassign"
+  "donors.button.unassign": "Unassign",
+
+  "privilegedContacts.categories": "Categories",
+  "privilegedContacts.name": "Name",
+  "privilegedContacts.email": "Email",
+  "privilegedContacts.status": "Status",
+  "privilegedContacts.status.active": "Active",
+  "privilegedContacts.status.inactive": "Inactive",
+  "privilegedContacts.note": "Notes",
+  "privilegedContacts.phone": "Phone",
+  "privilegedContacts.newContact": "New",
+  "privilegedContacts.noFindContactPlugin": "no find-contact plugin",
+  "privilegedContacts.button.addDonor": "Add donor",
+  "privilegedContacts.button.unassign": "Unassign"
 }
