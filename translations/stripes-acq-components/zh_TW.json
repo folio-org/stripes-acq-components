@@ -170,5 +170,17 @@
     "donors.noFindOrganizationPlugin": "no find-organization plugin",
     "donors.button.unassign": "Unassign",
     "filter.donor.lookup": "Donor look-up",
-    "filter.donor.lookupNoSupport": "Donor look-up is not supported"
+    "filter.donor.lookupNoSupport": "Donor look-up is not supported",
+    "privilegedContacts.categories": "Categories",
+    "privilegedContacts.name": "Name",
+    "privilegedContacts.email": "Email",
+    "privilegedContacts.status": "Status",
+    "privilegedContacts.status.active": "Active",
+    "privilegedContacts.status.inactive": "Inactive",
+    "privilegedContacts.note": "Notes",
+    "privilegedContacts.phone": "Phone",
+    "privilegedContacts.newContact": "New",
+    "privilegedContacts.noFindContactPlugin": "no find-contact plugin",
+    "privilegedContacts.button.addDonor": "Add donor",
+    "privilegedContacts.button.unassign": "Unassign"
 }
