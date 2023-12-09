@@ -170,5 +170,17 @@
     "donors.noFindOrganizationPlugin": "nenhum plugin de localização de organização",
     "donors.button.unassign": "Cancelar atribuição",
     "filter.donor.lookup": "Consulta de doadores",
-    "filter.donor.lookupNoSupport": "A consulta de doadores não é suportada"
+    "filter.donor.lookupNoSupport": "A consulta de doadores não é suportada",
+    "privilegedContacts.categories": "Categorias",
+    "privilegedContacts.name": "Nome",
+    "privilegedContacts.email": "E-mail",
+    "privilegedContacts.status": "Status",
+    "privilegedContacts.status.active": "Ativo",
+    "privilegedContacts.status.inactive": "Inativo",
+    "privilegedContacts.note": "Notas",
+    "privilegedContacts.phone": "Telefone",
+    "privilegedContacts.newContact": "Novo",
+    "privilegedContacts.noFindContactPlugin": "nenhum plugin localizador de contatos",
+    "privilegedContacts.button.addDonor": "Adicionar doador",
+    "privilegedContacts.button.unassign": "Cancelar atribuição"
 }
