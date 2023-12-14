@@ -1,7 +1,7 @@
 export const institution = {
   id: '28a372df-a8c9-439e-91fd-6d606b52e1f4',
   name: 'Test institution',
-  code: 'TS'
+  code: 'TS',
 };
 
 export const campus = {
@@ -30,7 +30,7 @@ export const location = {
   libraryId: [library.id],
   details: {
     a: 'b',
-    foo: 'bar'
+    foo: 'bar',
   },
   primaryServicePoint: '79faacf1-4ba4-42c7-8b2a-566b259e4641',
   servicePointIds: [
