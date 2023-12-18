@@ -182,5 +182,21 @@
     "privilegedContacts.newContact": "New",
     "privilegedContacts.noFindContactPlugin": "no find-contact plugin",
     "privilegedContacts.button.addDonor": "Add donor",
-    "privilegedContacts.button.unassign": "Unassign"
+    "privilegedContacts.button.unassign": "Unassign",
+    "filter.campus": "Campus",
+    "filter.institution": "Institution",
+    "filter.library": "Library",
+    "filter.assignment.assigned": "Assigned",
+    "filter.assignment.unassigned": "Unassigned",
+    "find-location.modal.label": "Select locations",
+    "find-location.results.column.assignment": "Location assignment status",
+    "find-location.results.column.campus": "Campus",
+    "find-location.results.column.code": "Code",
+    "find-location.results.column.institution": "Institution",
+    "find-location.results.column.library": "Library",
+    "find-location.results.column.name": "Name",
+    "find-location.results.column.status": "Location status",
+    "find-location.results.column.status.active": "Active",
+    "find-location.results.column.status.inactive": "Inactive",
+    "find-location.results.heading": "Locations"
 }
