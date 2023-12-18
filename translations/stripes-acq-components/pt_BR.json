@@ -182,5 +182,21 @@
     "privilegedContacts.newContact": "Novo",
     "privilegedContacts.noFindContactPlugin": "nenhum plugin localizador de contatos",
     "privilegedContacts.button.addDonor": "Adicionar doador",
-    "privilegedContacts.button.unassign": "Cancelar atribuição"
+    "privilegedContacts.button.unassign": "Cancelar atribuição",
+    "filter.campus": "Campus",
+    "filter.institution": "Instituição",
+    "filter.library": "Biblioteca",
+    "filter.assignment.assigned": "Atribuído",
+    "filter.assignment.unassigned": "Não atribuído",
+    "find-location.modal.label": "Selecionar localizações",
+    "find-location.results.column.assignment": "Status de atribuição de localização",
+    "find-location.results.column.campus": "Campus",
+    "find-location.results.column.code": "Código",
+    "find-location.results.column.institution": "Instituição",
+    "find-location.results.column.library": "Biblioteca",
+    "find-location.results.column.name": "Nome",
+    "find-location.results.column.status": "Status da localização",
+    "find-location.results.column.status.active": "Ativo",
+    "find-location.results.column.status.inactive": "Inativo",
+    "find-location.results.heading": "Localizações"
 }

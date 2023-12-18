@@ -182,5 +182,21 @@
     "privilegedContacts.newContact": "Nový",
     "privilegedContacts.noFindContactPlugin": "žádný plugin pro hledání kontaktů",
     "privilegedContacts.button.addDonor": "Přidat dárce",
-    "privilegedContacts.button.unassign": "Zrušení přiřazení"
+    "privilegedContacts.button.unassign": "Zrušení přiřazení",
+    "filter.campus": "Kampus",
+    "filter.institution": "Instituce",
+    "filter.library": "Knihovna",
+    "filter.assignment.assigned": "Přiřazeno",
+    "filter.assignment.unassigned": "Nepřiřazeno",
+    "find-location.modal.label": "Select locations",
+    "find-location.results.column.assignment": "Location assignment status",
+    "find-location.results.column.campus": "Kampus",
+    "find-location.results.column.code": "Kód",
+    "find-location.results.column.institution": "Instituce",
+    "find-location.results.column.library": "Knihovna",
+    "find-location.results.column.name": "Jméno",
+    "find-location.results.column.status": "Location status",
+    "find-location.results.column.status.active": "Aktivní",
+    "find-location.results.column.status.inactive": "Neaktivní",
+    "find-location.results.heading": "Lokace"
 }
