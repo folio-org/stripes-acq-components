@@ -198,5 +198,9 @@
     "find-location.results.column.status": "Location status",
     "find-location.results.column.status.active": "Aktivní",
     "find-location.results.column.status.inactive": "Neaktivní",
-    "find-location.results.heading": "Lokace"
+    "find-location.results.heading": "Lokace",
+    "piece.pieceStatus.late": "Late",
+    "piece.pieceStatus.claimDelayed": "Claim delayed",
+    "piece.pieceStatus.claimSent": "Claim sent",
+    "piece.pieceStatus.unreceivable": "Unreceivable"
 }
