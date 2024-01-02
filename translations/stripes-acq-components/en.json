@@ -96,6 +96,10 @@
   "piece.pieceFormat.other": "Other",
   "piece.pieceStatus.expected": "Expected",
   "piece.pieceStatus.received": "Received",
+  "piece.pieceStatus.late": "Late",
+  "piece.pieceStatus.claimDelayed": "Claim delayed",
+  "piece.pieceStatus.claimSent": "Claim sent",
+  "piece.pieceStatus.unreceivable": "Unreceivable",
 
   "sources.api": "API",
   "sources.edi": "EDI",
