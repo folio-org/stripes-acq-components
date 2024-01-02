@@ -196,7 +196,11 @@
     "find-location.results.column.library": "Library",
     "find-location.results.column.name": "Name",
     "find-location.results.column.status": "Location status",
-    "find-location.results.column.status.active": "Active",
-    "find-location.results.column.status.inactive": "Inactive",
-    "find-location.results.heading": "Locations"
+    "find-location.results.column.status.active": "Ativo",
+    "find-location.results.column.status.inactive": "Inativo",
+    "find-location.results.heading": "Localizações",
+    "piece.pieceStatus.late": "Late",
+    "piece.pieceStatus.claimDelayed": "Claim delayed",
+    "piece.pieceStatus.claimSent": "Claim sent",
+    "piece.pieceStatus.unreceivable": "Unreceivable"
 }

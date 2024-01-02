@@ -198,5 +198,9 @@
     "find-location.results.column.status": "Status da localização",
     "find-location.results.column.status.active": "Ativo",
     "find-location.results.column.status.inactive": "Inativo",
-    "find-location.results.heading": "Localizações"
+    "find-location.results.heading": "Localizações",
+    "piece.pieceStatus.late": "Atrasado",
+    "piece.pieceStatus.claimDelayed": "Reclamação atrasada",
+    "piece.pieceStatus.claimSent": "Reclamação enviada",
+    "piece.pieceStatus.unreceivable": "Não recebível"
 }
