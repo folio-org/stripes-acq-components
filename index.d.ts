@@ -1,1 +1,1 @@
-export * from "@folio/stripes-types/acq-components";
+export * from '@folio/stripes-types/acq-components';
