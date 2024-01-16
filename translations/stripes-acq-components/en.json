@@ -177,6 +177,8 @@
   "validation.cantBeNegativeOrEmpty": "Can not be negative or empty",
   "validation.cantBeNegative": "Can not be negative",
   "validation.maxCantBeLessMin": "\"To\" can not be less than \"From\"",
+  "validation.shouldBeLessThan": "Value must be less than or equal to {maxNumber}",
+  "validation.shouldBeGreaterThan": "Value must be greater than or equal to {minNumber}",
 
   "versionHistory.card.changed": "Changed",
   "versionHistory.card.select.tooltip": "View this version",
