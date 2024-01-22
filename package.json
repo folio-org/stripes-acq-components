@@ -54,6 +54,7 @@
     "redux": "^4.0.5"
   },
   "dependencies": {
+    "@folio/stripes-types": "^2.1.0",
     "@rehooks/local-storage": "^2.4.4",
     "classnames": "^2.2.5",
     "dom-helpers": "^3.4.0",
