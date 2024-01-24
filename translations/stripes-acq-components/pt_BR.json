@@ -202,5 +202,7 @@
     "piece.pieceStatus.late": "Atrasado",
     "piece.pieceStatus.claimDelayed": "Reclamação atrasada",
     "piece.pieceStatus.claimSent": "Reclamação enviada",
-    "piece.pieceStatus.unreceivable": "Não recebível"
+    "piece.pieceStatus.unreceivable": "Não recebível",
+    "validation.shouldBeLessThan": "O valor deve ser menor ou igual a {maxNumber}",
+    "validation.shouldBeGreaterThan": "O valor deve ser maior ou igual a {minNumber}"
 }
