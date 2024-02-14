@@ -16,6 +16,7 @@
 * Add TypeScript support via `stripes-types`. Refs UISACQCOMP-175.
 * Add min and max number validation. Refs UISACQCOMP-176.
 * Support location-restricted funds in POLs. Refs UISACQCOMP-177.
+* Allow order template to hide Currency and exchange rate fields. Refs UISACQCOMP-178.
 
 ## [5.0.0](https://github.com/folio-org/stripes-acq-components/tree/v5.0.0) (2023-10-12)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v4.0.2...v5.0.0)
