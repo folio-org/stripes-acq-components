@@ -1,0 +1,22 @@
+.visibilityControlBox {
+  display: flex;
+}
+
+.visibilityControlLabel {
+  width: 16px;
+  height: 16px;
+  margin-left: -16px;
+  z-index: 99;
+  cursor: pointer;
+}
+
+.visibilityControlCheckbox {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1;
+  width: 1;
+  margin: -1;
+  padding: 0;
+  overflow: hidden;
+  position: absolute;
+}
