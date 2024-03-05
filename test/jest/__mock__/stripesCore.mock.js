@@ -90,5 +90,7 @@ jest.mock('@folio/stripes/core', () => {
 
     // eslint-disable-next-line react/prop-types
     IfPermission: props => <>{props.children}</>,
+
+    TitleManager: () => <div>TitleManager</div>,
   };
 }, { virtual: true });
