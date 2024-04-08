@@ -3,6 +3,7 @@
 ## (5.2.0 IN PROGRESS)
 
 * Added new returned `clearLocationFilters` function from `useLocationFilters`. Refs UISACQCOMP-181.
+* Implement common tools to retrieve "Central ordering" settings. Refs UISACQCOMP-182.
 
 ## [5.1.0](https://github.com/folio-org/stripes-acq-components/tree/v5.1.0) (2024-03-18)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v5.0.0...v5.1.0)
