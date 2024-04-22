@@ -19,6 +19,7 @@ module.exports = {
   moduleNameMapper: {
     '^.+\\.(css)$': 'identity-obj-proxy',
     '^.+\\.(svg)$': 'identity-obj-proxy',
+    '^.+\\.(png)$': 'identity-obj-proxy',
   },
   testMatch: ['**/(lib|src)/**/?(*.)test.{js,jsx}'],
   testPathIgnorePatterns: ['/node_modules/', '/test/ui-testing/', '/test/bigtest/'],
