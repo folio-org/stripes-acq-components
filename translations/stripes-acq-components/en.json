@@ -152,6 +152,12 @@
   "referenceNumbers.refNumberType.refNumber": "Vendor order reference number",
   "referenceNumbers.refNumberType.titleNumber": "Vendor title number",
 
+  "routing.list.label": "Routing lists",
+  "routing.list.column.name": "Name",
+  "routing.list.column.notes": "Notes",
+  "routing.list.column.userIds": "Users",
+  "routing.list.noRoutingLists": "No routing lists",
+
   "shortcut.new": "Create a new record",
   "shortcut.edit": "Edit a record",
   "shortcut.save": "Save a record",
