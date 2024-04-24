@@ -5,6 +5,7 @@
 * Implement common tools to retrieve "Central ordering" settings. Refs UISACQCOMP-182.
 * Add `<CustomFieldsFilters>` and `<CustomFieldsFilter>` components. Refs UISACQCOMP-183.
 * Create `<RoutingList>` component for Routing list table. Refs UISACQCOMP-184.
+* ECS - Support for location search in the context of multiple consortium affiliations. UISACQCOMP-185.
 
 ## [5.1.1](https://github.com/folio-org/stripes-acq-components/tree/v5.1.1) (2024-04-22)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v5.1.0...v5.1.1)
