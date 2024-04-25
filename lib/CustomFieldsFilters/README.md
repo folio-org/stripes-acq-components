@@ -38,3 +38,20 @@ Name | Type | Description | Required
 `customFields` | array | An array of custom field objects. | false
 `disabled` | bool | Determines whether the filter components are disabled. | false
 `onChange` | func | A callback function that is invoked when a filter value is changed. | true
+
+# useCustomFieldsSearchableIndexes
+
+A hook that returns an array with searchable indexes for the provided custom fields. Searchable custom fields are of
+type `TEXTBOX_LONG`, `TEXTBOX_SHORT` or `DATE_PICKER`. The result can be used as part of the `searchableIndexes` prop of
+the [`<SingleSearchForm>`](../AcqList/SingleSearchForm/SingleSearchForm.js) component.
+
+# utils/getCustomFieldsKeywordIndexes
+
+Returns an array with searchable custom fields for the provided custom fields. Searchable custom fields are of type
+`TEXTBOX_LONG`, `TEXTBOX_SHORT` or `DATE_PICKER`. The result can be used to construct search queries.
+
+# utils/getCustomFieldsFilterMap
+
+Returns an object that maps custom fields to a specific query function. This is done for custom fields of type
+`MULTI_SELECT_DROPDOWN` and `DATE_PICKER`. The result can be used to construct search queries.
+
