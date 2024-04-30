@@ -76,7 +76,7 @@ jest.mock('@folio/stripes/core', () => {
 
     useNamespace: jest.fn().mockReturnValue(['module-namespace']),
 
-    useStripes: () => STRIPES,
+    useStripes: jest.fn(() => STRIPES),
 
     // eslint-disable-next-line react/prop-types
     withStripes: Component => ({ stripes, ...rest }) => {
