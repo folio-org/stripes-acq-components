@@ -16,6 +16,7 @@ Name | Type | Description | Required | Default
 `renderTrigger`* | `(props: RenderTriggerProps) => Element`** | Used for rendering the lookup trigger. | `false` | -
 `searchButtonStyle`* | `string` | Style of the lookup trigger button. | `false` | -
 `searchLabel`* | `string` | Label for the lookup trigger button. | `false` | -
+`tenantId` | `string` | The initial tenant ID where the location search should take place. | `false` | -
 `triggerless` | `boolean` | A flag determining whether the lookup should open by clicking on the trigger or when the lookup component itself is rendered. | `false` | `false`
 
 `*` - Applicable with `triggerless` === `false`.
