@@ -238,5 +238,8 @@
   "find-location.results.column.status": "Location status",
   "find-location.results.column.status.active": "Active",
   "find-location.results.column.status.inactive": "Inactive",
-  "find-location.results.heading": "Locations"
+  "find-location.results.heading": "Locations",
+
+  "consortia.affiliations.primary.label": "(Primary)",
+  "consortia.affiliations.select.label": "Affiliation"
 }

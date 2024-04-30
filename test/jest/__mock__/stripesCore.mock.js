@@ -92,5 +92,7 @@ jest.mock('@folio/stripes/core', () => {
     IfPermission: props => <>{props.children}</>,
 
     TitleManager: () => <div>TitleManager</div>,
+
+    checkIfUserInCentralTenant: jest.fn(() => false),
   };
 }, { virtual: true });

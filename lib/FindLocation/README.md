@@ -9,19 +9,17 @@ Name | Type | Description | Required | Default
 `crossTenant` | `boolean` | Requirement to search for locations among all tenants affiliated with the current user (in central tenant only). Activates the "Affiliations" select for the central tenant of the consortium. | `false` | `false`
 `disabled` | `boolean` | If the prop is `true` disable lookup trigger. | `false` | `false`
 `id` | `string` | Identifier of the lookup trigger | `true` | -
-`initialSelected` | `InitialLocation[]`** | An array of objects with information about the initially selected locations. | `false` | `[]`
+`initialSelected` | `InitialLocation[]`* | An array of objects with information about the initially selected locations. | `false` | `[]`
 `marginBottom0` | `boolean` | Remove bottom margin for the lookup trigger | `false` | `false`
 `onClose` | `() => void` | If this callback is passed as a prop, it will be invoked when the lookup modal window is closed. | `false` | -
 `onRecordsSelect` | `(records: LocationRecord[]) => void` | A callback triggered as a result of selecting location(s) in the lookup. | `true` | -
-`renderTrigger`* | `(props: RenderTriggerProps) => Element`** | Used for rendering the lookup trigger. | `false` | -
-`searchButtonStyle`* | `string` | Style of the lookup trigger button. | `false` | -
-`searchLabel`* | `string` | Label for the lookup trigger button. | `false` | -
+`renderTrigger`** | `(props: RenderTriggerProps) => Element`** | Used for rendering the lookup trigger. | `false` | -
+`searchButtonStyle`*** | `string` | Style of the lookup trigger button. | `false` | -
+`searchLabel`*** | `string` | Label for the lookup trigger button. | `false` | -
 `tenantId` | `string` | The initial tenant ID where the location search should take place. | `false` | -
 `triggerless` | `boolean` | A flag determining whether the lookup should open by clicking on the trigger or when the lookup component itself is rendered. | `false` | `false`
 
-`*` - Applicable with `triggerless` === `false`.
-
-`**`:
+`*`:
 ```
 interface RenderTriggerProps {
   buttonRef: React.MutableRefObject,
@@ -33,6 +31,9 @@ interface InitialLocation {
   tenantId?: string,
 }
 ```
+`**` - Applicable with `triggerless` === `false`.
+
+`***` - Applicable with `triggerless` === `false` and `renderTrigger` is not provided.
 ___
 
 ## Usage
