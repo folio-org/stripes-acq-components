@@ -76,7 +76,7 @@ jest.mock('@folio/stripes/core', () => {
 
     useNamespace: jest.fn().mockReturnValue(['module-namespace']),
 
-    useStripes: () => STRIPES,
+    useStripes: jest.fn(() => STRIPES),
 
     // eslint-disable-next-line react/prop-types
     withStripes: Component => ({ stripes, ...rest }) => {
@@ -92,5 +92,7 @@ jest.mock('@folio/stripes/core', () => {
     IfPermission: props => <>{props.children}</>,
 
     TitleManager: () => <div>TitleManager</div>,
+
+    checkIfUserInCentralTenant: jest.fn(() => false),
   };
 }, { virtual: true });
