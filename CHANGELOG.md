@@ -7,6 +7,7 @@
 * Create `<RoutingList>` component for Routing list table. Refs UISACQCOMP-184.
 * Add functions related to custom fields filter and search functionality. Refs UISACQCOMP-186.
 * *BREAKING* ECS - Support for location search in the context of multiple consortium affiliations. UISACQCOMP-185.
+* *BREAKING* ECS - Adjust the locations filter to support cross-tenant search mode. UISACQCOMP-187.
 
 ## [5.1.1](https://github.com/folio-org/stripes-acq-components/tree/v5.1.1) (2024-04-22)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v5.1.0...v5.1.1)
