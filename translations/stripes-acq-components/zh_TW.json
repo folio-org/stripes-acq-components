@@ -204,5 +204,12 @@
     "piece.pieceStatus.claimSent": "催缺發送",
     "piece.pieceStatus.unreceivable": "應收款項",
     "validation.shouldBeLessThan": "值必須小於或等於{maxNumber}",
-    "validation.shouldBeGreaterThan": "值必須大於或等於{minNumber}"
+    "validation.shouldBeGreaterThan": "值必須大於或等於{minNumber}",
+    "routing.list.label": "Routing lists",
+    "routing.list.column.name": "Name",
+    "routing.list.column.notes": "Notes",
+    "routing.list.column.userIds": "Users",
+    "routing.list.noRoutingLists": "No routing lists",
+    "consortia.affiliations.primary.label": "(Primary)",
+    "consortia.affiliations.select.label": "Affiliation"
 }

@@ -204,5 +204,12 @@
     "piece.pieceStatus.claimSent": "Claim sent",
     "piece.pieceStatus.unreceivable": "Unreceivable",
     "validation.shouldBeLessThan": "Value must be less than or equal to {maxNumber}",
-    "validation.shouldBeGreaterThan": "Value must be greater than or equal to {minNumber}"
+    "validation.shouldBeGreaterThan": "Value must be greater than or equal to {minNumber}",
+    "routing.list.label": "Listas de enrutamiento",
+    "routing.list.column.name": "Nombre:",
+    "routing.list.column.notes": "Notas",
+    "routing.list.column.userIds": "Usuarios",
+    "routing.list.noRoutingLists": "Sin listas de enrutamiento",
+    "consortia.affiliations.primary.label": "(Primary)",
+    "consortia.affiliations.select.label": "Affiliation"
 }

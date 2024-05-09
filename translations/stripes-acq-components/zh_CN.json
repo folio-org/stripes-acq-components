@@ -204,5 +204,12 @@
     "piece.pieceStatus.claimSent": "催缺发送",
     "piece.pieceStatus.unreceivable": "不可接收",
     "validation.shouldBeLessThan": "值必须小于或等于{maxNumber}",
-    "validation.shouldBeGreaterThan": "值必须大于或等于{minNumber}"
+    "validation.shouldBeGreaterThan": "值必须大于或等于{minNumber}",
+    "routing.list.label": "Routing lists",
+    "routing.list.column.name": "Name",
+    "routing.list.column.notes": "Notes",
+    "routing.list.column.userIds": "Users",
+    "routing.list.noRoutingLists": "No routing lists",
+    "consortia.affiliations.primary.label": "(Primary)",
+    "consortia.affiliations.select.label": "Affiliation"
 }
