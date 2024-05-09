@@ -204,5 +204,12 @@
     "piece.pieceStatus.claimSent": "Nárokování odesláno",
     "piece.pieceStatus.unreceivable": "Nepřijatelné",
     "validation.shouldBeLessThan": "Hodnota musí být menší nebo rovna {maxNumber}",
-    "validation.shouldBeGreaterThan": "Hodnota musí být větší nebo rovna {minNumber}"
+    "validation.shouldBeGreaterThan": "Hodnota musí být větší nebo rovna {minNumber}",
+    "routing.list.label": "Seznamy směrování",
+    "routing.list.column.name": "Jméno",
+    "routing.list.column.notes": "Poznámky",
+    "routing.list.column.userIds": "Uživatelé",
+    "routing.list.noRoutingLists": "Žádné seznamy směrování",
+    "consortia.affiliations.primary.label": "(Hlavní)",
+    "consortia.affiliations.select.label": "Pobočka"
 }
