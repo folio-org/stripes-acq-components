@@ -1,0 +1,8 @@
+.actions {
+  margin-top: 8px;
+}
+
+.unassignAll {
+  margin-top: 8px;
+  margin-left: var(--gutter);
+}
