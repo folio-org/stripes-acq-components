@@ -9,6 +9,7 @@
 * *BREAKING* ECS - Support for location search in the context of multiple consortium affiliations. Refs UISACQCOMP-185.
 * *BREAKING* ECS - Adjust the locations filter to support cross-tenant search mode. Refs UISACQCOMP-187.
 * Correctly manage state setting in the `toggle` function of the `useToggle` hook. Refs UISACQCOMP-189.
+* ECS - Support affiliations select for the inventory field (`<ConsortiumFieldInventory>`). Refs UISACQCOMP-190.
 * Add Print routing list functionality. Refs UISACQCOMP-191.
 
 ## [5.1.1](https://github.com/folio-org/stripes-acq-components/tree/v5.1.1) (2024-04-22)
