@@ -11,6 +11,7 @@
 * Correctly manage state setting in the `toggle` function of the `useToggle` hook. Refs UISACQCOMP-189.
 * ECS - Support affiliations select for the inventory field (`<ConsortiumFieldInventory>`). Refs UISACQCOMP-190.
 * Add Print routing list functionality. Refs UISACQCOMP-191.
+* ECS - Support central ordering in the acq modules. Refs UISACQCOMP-194.
 
 ## [5.1.1](https://github.com/folio-org/stripes-acq-components/tree/v5.1.1) (2024-04-22)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v5.1.0...v5.1.1)
