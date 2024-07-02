@@ -1,0 +1,5 @@
+.vertical {
+  flex: auto;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
