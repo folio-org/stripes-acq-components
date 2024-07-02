@@ -208,7 +208,7 @@
     "routing.list.label": "Routing lists",
     "routing.list.column.name": "Name",
     "routing.list.column.notes": "Notes",
-    "routing.list.column.userIds": "Users",
+    "routing.list.column.userIds": "Utilisateurs",
     "routing.list.noRoutingLists": "No routing lists",
     "consortia.affiliations.primary.label": "(Primary)",
     "consortia.affiliations.select.label": "Affiliation",
@@ -216,9 +216,9 @@
     "routing.list.actions.edit": "Edit",
     "routing.list.actions.printRoutingList": "Print all routing lists",
     "routing.list.actions.printRoutingList.error": "Something went wrong. Make sure the routing list configuration is set up correctly.",
-    "routing.list.addUsers.plugin.notAvailable": "Add users is not available",
-    "routing.list.addUsers": "Add users",
-    "routing.list.column.user": "User",
+    "routing.list.addUsers.plugin.notAvailable": "\"Ajouter des utilisateurs\" n'est pas disponible",
+    "routing.list.addUsers": "Ajouter des utilisateurs",
+    "routing.list.column.user": "Utilisateur",
     "routing.list.create.error.nameMustBeUnique": "Name must be unique",
     "routing.list.create.error": "Something went wrong. The Routing list was not created.",
     "routing.list.create.label": "Create routing list",
@@ -239,6 +239,6 @@
     "routing.list.removeUsers": "Unassign all users",
     "routing.list.update.error": "Something went wrong. The Routing list was not updated.",
     "routing.list.update.success": "The Routing list was successfully updated.",
-    "routing.list.users.empty": "No users found",
-    "routing.list.users": "Users"
+    "routing.list.users.empty": "Aucun utilisateur n'a été trouvé",
+    "routing.list.users": "Utilisateurs"
 }
