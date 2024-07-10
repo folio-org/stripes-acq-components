@@ -201,7 +201,7 @@
     "find-location.results.heading": "Lokace",
     "piece.pieceStatus.late": "Zpožděný",
     "piece.pieceStatus.claimDelayed": "Nárokování zpožděno",
-    "piece.pieceStatus.claimSent": "Nárokování odesláno",
+    "piece.pieceStatus.claimSent": "Údajně odesláno",
     "piece.pieceStatus.unreceivable": "Nepřijatelné",
     "validation.shouldBeLessThan": "Hodnota musí být menší nebo rovna {maxNumber}",
     "validation.shouldBeGreaterThan": "Hodnota musí být větší nebo rovna {minNumber}",
