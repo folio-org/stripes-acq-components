@@ -14,6 +14,7 @@
 * ECS - Support central ordering in the acq modules. Refs UISACQCOMP-194.
 * ECS - Replace calls to the publish coordinator with new endpoints to retrieve locations and their references. Refs UISACQCOMP-199.
 * Introduce a new flag `skipTrimOnChange` to control the usage of the `trim` function during search change in `useFilters`. Refs UISACQCOMP-198.
+* Add `locationLabelId` and `holdingLabelId` to `FieldInventory` Component. Refs UISACQCOMP-204.
 
 ## [5.1.1](https://github.com/folio-org/stripes-acq-components/tree/v5.1.1) (2024-04-22)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v5.1.0...v5.1.1)
