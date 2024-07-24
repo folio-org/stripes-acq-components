@@ -16,6 +16,7 @@
 * Introduce a new flag `skipTrimOnChange` to control the usage of the `trim` function during search change in `useFilters`. Refs UISACQCOMP-198.
 * Add `locationLabelId` and `holdingLabelId` to `FieldInventory` Component. Refs UISACQCOMP-204.
 * Add translation for `Unavailable` item status message. Refs UISACQCOMP-205.
+* Keep returnUrl in routing list navigation. Refs UISACQCOMP-206.
 
 ## [5.1.1](https://github.com/folio-org/stripes-acq-components/tree/v5.1.1) (2024-04-22)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v5.1.0...v5.1.1)
@@ -58,7 +59,7 @@
 * Update `Node.js` to `v18` in GitHub Actions. Refs UISACQCOMP-158.
 * A user can not save edited PO line when budget without expense class was selected. Refs UISACQCOMP-159.
 * *BREAKING* bump `react-intl` to `v6.4.4`. Refs UISACQCOM-161.
- 
+
 ## [4.0.2](https://github.com/folio-org/stripes-acq-components/tree/v4.0.2) (2023-03-17)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v4.0.1...v4.0.2)
 
