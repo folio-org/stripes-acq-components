@@ -139,6 +139,7 @@
   "receiving.itemStatus.In process": "In process",
   "receiving.itemStatus.On order": "On order",
   "receiving.itemStatus.Available": "Available",
+  "receiving.itemStatus.Unavailable": "Unavailable",
   "receiving.itemStatus.In transit": "In transit",
   "receiving.itemStatus.Order closed": "Order closed",
   "receiving.itemStatus.Undefined": "Undefined",

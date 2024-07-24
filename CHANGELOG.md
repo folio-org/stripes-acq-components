@@ -15,6 +15,7 @@
 * ECS - Replace calls to the publish coordinator with new endpoints to retrieve locations and their references. Refs UISACQCOMP-199.
 * Introduce a new flag `skipTrimOnChange` to control the usage of the `trim` function during search change in `useFilters`. Refs UISACQCOMP-198.
 * Add `locationLabelId` and `holdingLabelId` to `FieldInventory` Component. Refs UISACQCOMP-204.
+* Add translation for `Unavailable` item status message. Refs UISACQCOMP-205.
 * Keep returnUrl in routing list navigation. Refs UISACQCOMP-206.
 
 ## [5.1.1](https://github.com/folio-org/stripes-acq-components/tree/v5.1.1) (2024-04-22)
