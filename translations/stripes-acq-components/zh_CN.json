@@ -240,5 +240,6 @@
     "routing.list.update.error": "出现错误。路由列表未更新。",
     "routing.list.update.success": "路由列表已成功更新。",
     "routing.list.users.empty": "未找到用户",
-    "routing.list.users": "用户"
+    "routing.list.users": "用户",
+    "receiving.itemStatus.Unavailable": "Unavailable"
 }
