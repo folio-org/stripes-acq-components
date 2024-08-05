@@ -19,6 +19,7 @@
 * Keep returnUrl in routing list navigation. Refs UISACQCOMP-206.
 * ECS - clear Location/Holding field when affiliation selected. Refs UISACQCOMP-201.
 * ECS - clear Select location filters on change another Affiliation. Refs UISACQCOMP-208.
+* ECS - Display all consortium tenants in the affiliation selection of the location lookup. Refs UISACQCOMP-202.
 
 ## [5.1.1](https://github.com/folio-org/stripes-acq-components/tree/v5.1.1) (2024-04-22)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v5.1.0...v5.1.1)
