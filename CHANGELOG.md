@@ -2,6 +2,8 @@
 
 ## (5.2.0 IN PROGRESS)
 
+## (5.1.2 IN PROGRESS)
+* Add isMultiSelect prop to DonorsLookup component. Refs UISACQCOMP-212.
 
 ## [5.1.1](https://github.com/folio-org/stripes-acq-components/tree/v5.1.1) (2024-04-22)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v5.1.0...v5.1.1)
