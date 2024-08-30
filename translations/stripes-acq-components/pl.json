@@ -101,9 +101,9 @@
     "setExchangeRate": "Ustaw kurs wymiany",
     "setExchangeRate.tooltip": "Sprawdź użycie ustawionego kursu wymiany do interakcji z tym polem",
     "validation.shouldBePositive": "Kwota musi być liczbą dodatnią",
-    "referenceNumbers.addReferenceNumbers": "Dodaj numer referencyjny sprzedawcy",
-    "referenceNumbers.refNumber": "Numer referencyjny sprzedawcy",
-    "referenceNumbers.refNumberType": "Typ referencyjny sprzedawcy",
+    "referenceNumbers.addReferenceNumbers": "Dodaj numer referencyjny dostawcy",
+    "referenceNumbers.refNumber": "Numer referencyjny dostawcy",
+    "referenceNumbers.refNumberType": "Typ referencyjny dostawcy",
     "referenceNumbers.refNumberType.subscriptionRefNumber": "Numer referencyjny subskrypcji sprzedawcy",
     "referenceNumbers.refNumberType.internalNumber": "Wewnętrzny numer sprzedawcy",
     "referenceNumbers.refNumberType.continuationRefNumber": "Numer referencyjny kontynuacji sprzedawcy",
@@ -240,5 +240,6 @@
     "routing.list.update.error": "Something went wrong. The Routing list was not updated.",
     "routing.list.update.success": "The Routing list was successfully updated.",
     "routing.list.users.empty": "No users found",
-    "routing.list.users": "Users"
+    "routing.list.users": "Users",
+    "receiving.itemStatus.Unavailable": "Unavailable"
 }
