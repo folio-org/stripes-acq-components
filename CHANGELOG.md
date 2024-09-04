@@ -22,6 +22,7 @@
 * Support using custom list of tenants when open the locations modal. Refs UISACQCOMP-210.
 * ECS - Display all consortium tenants in the affiliation selection of the location lookup. Refs UISACQCOMP-202.
 * Add isMultiSelect prop to DonorsLookup component. Refs UISACQCOMP-212.
+* ECS - Add `isLoading` prop for `ConsortiumFieldInventory` component. Refs UISACQCOMP-215.
 
 ## [5.1.1](https://github.com/folio-org/stripes-acq-components/tree/v5.1.1) (2024-04-22)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v5.1.0...v5.1.1)
