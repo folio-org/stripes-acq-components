@@ -61,7 +61,7 @@
     "order.status.open": "Otevřeno",
     "order.status.pending": "Čekající",
     "order.type.oneTime": "Jednorázová",
-    "order.type.ongoing": "Pokračující",
+    "order.type.ongoing": "Probíhající",
     "order.format.electronicResource": "Elektronický zdroj",
     "order.format.physicalResource": "Fyzický zdroj",
     "order.format.PEMix": "P/E Mix",
@@ -149,7 +149,7 @@
     "filter.numberRange.max": "Na",
     "filter.numberRange.min": "Z",
     "holdings.deleteModal.heading": "Smazat holdingy",
-    "holdings.deleteModal.message": "Tento kus je spojen se záznamy v katalogu. Po této úpravě nebudou žádné další kusy NEBO jednotky spojené se souvisejícím záznamem o holdingu. Chcete po provedení této změny, aby FOLIO smazal záznam(y) holdingů?",
+    "holdings.deleteModal.message": "Tento kus je spojen se záznamy v katalogu. Po této úpravě nebudou žádné další kusy NEBO jednotky spojené se souvisejícím záznamem holdingu. Chcete po provedení této změny, aby FOLIO smazal záznam(y) holdingů?",
     "holdings.deleteModal.keepHoldings": "Ponechat holdingy",
     "filter.dynamic.emptyMessage": "Pro načtení možností začněte psát",
     "validation.cantBeNegative": "Nemůže být negativní",
@@ -240,5 +240,6 @@
     "routing.list.update.error": "Něco se pokazilo. Seznam směrování nebyl aktualizován.",
     "routing.list.update.success": "Seznam směrování byl úspěšně aktualizován.",
     "routing.list.users.empty": "Nebyli nalezeni žádní uživatelé",
-    "routing.list.users": "Uživatelé"
+    "routing.list.users": "Uživatelé",
+    "receiving.itemStatus.Unavailable": "Nedostupný"
 }
