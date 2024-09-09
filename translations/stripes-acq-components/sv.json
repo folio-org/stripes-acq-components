@@ -240,5 +240,6 @@
     "routing.list.update.error": "Something went wrong. The Routing list was not updated.",
     "routing.list.update.success": "The Routing list was successfully updated.",
     "routing.list.users.empty": "No users found",
-    "routing.list.users": "Användare"
+    "routing.list.users": "Användare",
+    "receiving.itemStatus.Unavailable": "Unavailable"
 }
