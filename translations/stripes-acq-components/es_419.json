@@ -240,5 +240,6 @@
     "routing.list.update.error": "Algo ha ido mal. La lista de rutas no se ha actualizado.",
     "routing.list.update.success": "La lista de enrutamiento se actualizó correctamente.",
     "routing.list.users.empty": "No se encontraron usuarios",
-    "routing.list.users": "Usuarios"
+    "routing.list.users": "Usuarios",
+    "receiving.itemStatus.Unavailable": "Unavailable"
 }
