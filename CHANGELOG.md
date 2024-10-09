@@ -24,6 +24,7 @@
 * ECS - Add `isLoading` prop for `ConsortiumFieldInventory` component. Refs UISACQCOMP-215.
 * Add "Amount must be a positive number" validation for "Set exchange rate" field. Refs UISACQCOMP-218.
 * Create common utilities for managing response errors. Refs UISACQCOMP-219.
+* ECS - expand `ConsortiumFieldInventory` component with `additionalAffiliationIds` prop to display affiliation name for User without affiliation in specific tenant. Refs UISACQCOMP-220.
 
 ## [5.1.2](https://github.com/folio-org/stripes-acq-components/tree/v5.1.2) (2024-09-13)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v5.1.1...v5.1.2)
