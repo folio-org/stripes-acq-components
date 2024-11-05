@@ -2,6 +2,10 @@
 
 ## (6.1.0 IN PROGRESS)
 
+## (6.0.1 IN PROGRESS)
+
+* Added new `subscribeOnReset` prop to `<AcqDateRangeFilter>`. Refs UISACQCOMP-227.
+
 ## [6.0.0](https://github.com/folio-org/stripes-acq-components/tree/v6.0.0) (2024-10-29)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v5.1.2...v6.0.0)
 
