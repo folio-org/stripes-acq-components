@@ -1,6 +1,6 @@
 {
   "name": "@folio/stripes-acq-components",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "Component library for Stripes Acquisitions modules",
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
