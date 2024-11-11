@@ -2,6 +2,8 @@
 
 ## (6.1.0 IN PROGRESS)
 
+* Add more reusable hooks and utilities. Refs UISACQCOMP-228.
+
 ## (6.0.1 IN PROGRESS)
 
 * Added new `subscribeOnReset` prop to `<AcqDateRangeFilter>`. Refs UISACQCOMP-227.
