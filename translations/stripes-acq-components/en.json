@@ -221,6 +221,7 @@
   "versionHistory.card.version.current": "Current version",
   "versionHistory.card.version.original": "Original version",
   "versionHistory.deletedRecord": "Record deleted",
+  "versionHistory.noVersion": "No version history to display.",
   "versionHistory.pane.header": "Version history",
   "versionHistory.pane.sub": "{count, plural, one {# version} other {# versions}}",
 
