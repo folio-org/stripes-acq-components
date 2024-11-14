@@ -3,6 +3,7 @@
 ## (6.1.0 IN PROGRESS)
 
 * Add more reusable hooks and utilities. Refs UISACQCOMP-228.
+* Move reusable version history components to the ACQ lib. Refs UISACQCOMP-230.
 
 ## (6.0.1 IN PROGRESS)
 
