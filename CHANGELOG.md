@@ -5,6 +5,7 @@
 * Add more reusable hooks and utilities. Refs UISACQCOMP-228.
 * Move reusable version history components to the ACQ lib. Refs UISACQCOMP-230.
 * Move reusable helper function to support version history functionality. Refs UISACQCOMP-232.
+* Add `useDebouncedQuery` hook to fix endless request for `DynamicSelection` component. Refs UISACQCOMP-233.
 
 ## [6.0.1](https://github.com/folio-org/stripes-acq-components/tree/v6.0.1) (2024-11-14)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v6.0.0...v6.0.1)
