@@ -241,5 +241,6 @@
     "routing.list.update.success": "La lista de enrutamiento se actualizó correctamente.",
     "routing.list.users.empty": "No se encontraron usuarios",
     "routing.list.users": "Usuarios",
-    "receiving.itemStatus.Unavailable": "Unavailable"
+    "receiving.itemStatus.Unavailable": "Unavailable",
+    "versionHistory.noVersion": "No version history to display."
 }

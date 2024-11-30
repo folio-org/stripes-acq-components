@@ -241,5 +241,6 @@
     "routing.list.update.success": "The Routing list was successfully updated.",
     "routing.list.users.empty": "No users found",
     "routing.list.users": "ユーザー",
-    "receiving.itemStatus.Unavailable": "利用不可"
+    "receiving.itemStatus.Unavailable": "利用不可",
+    "versionHistory.noVersion": "No version history to display."
 }

@@ -241,5 +241,6 @@
     "routing.list.update.success": "De roulatielijst is met succes bijgewerkt.",
     "routing.list.users.empty": "Geen gebruikers gevonden",
     "routing.list.users": "Gebruikers",
-    "receiving.itemStatus.Unavailable": "Niet beschikbaar"
+    "receiving.itemStatus.Unavailable": "Niet beschikbaar",
+    "versionHistory.noVersion": "No version history to display."
 }

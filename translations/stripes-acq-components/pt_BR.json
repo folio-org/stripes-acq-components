@@ -13,7 +13,7 @@
     "fileUploader.selectFile": "ou escolha o arquivo",
     "button.close": "Fechar",
     "button.save": "Salvar",
-    "modal.resultsHeader": "Resultados da pesquisa",
+    "modal.resultsHeader": "Resultados da busca",
     "modal.noSourceYet": "Nenhuma fonte ainda",
     "modal.totalSelected": "Total selecionado: {count}",
     "fundDistribution.addBtn": "Adicionar distribuição de fundos",
@@ -22,8 +22,8 @@
     "fundDistribution.encumbrance": "Encargo",
     "fundDistribution.id": "ID do fundo",
     "label.tags": "Tags",
-    "searchAndFilter": "Pesquisar & filtrar",
-    "search": "Pesquisa",
+    "searchAndFilter": "Buscar & filtrar",
+    "search": "Buscar",
     "resetAllFilters": "Retirar filtros",
     "paymentMethod.cash": "Dinheiro",
     "paymentMethod.card": "Cartão de crédito",
@@ -56,7 +56,7 @@
     "FormFooter.cancel": "Cancelar",
     "FormFooter.save": "Salvar e fechar",
     "filter.organization.lookup": "Pesquisa da organização",
-    "filter.organization.lookupNoSupport": "A pesquisa da organização não é suportada",
+    "filter.organization.lookupNoSupport": "A busca da organização não é suportada",
     "order.status.closed": "Fechado",
     "order.status.open": "Aberto",
     "order.status.pending": "Pendente",
@@ -241,5 +241,6 @@
     "routing.list.update.success": "A lista de roteamento foi atualizada com sucesso.",
     "routing.list.users.empty": "Nenhum usuário encontrado",
     "routing.list.users": "Usuários",
-    "receiving.itemStatus.Unavailable": "Indisponível"
+    "receiving.itemStatus.Unavailable": "Indisponível",
+    "versionHistory.noVersion": "Não há histórico de versões a ser exibido."
 }

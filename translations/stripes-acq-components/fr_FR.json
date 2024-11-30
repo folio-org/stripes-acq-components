@@ -60,7 +60,7 @@
     "order.status.closed": "Clôturée",
     "order.status.open": "Ouvert",
     "order.status.pending": "En attente",
-    "order.type.oneTime": "Une fois",
+    "order.type.oneTime": "Unique",
     "order.type.ongoing": "Continu",
     "order.format.electronicResource": "Ressource électronique",
     "order.format.physicalResource": "Ressource physique",
@@ -81,7 +81,7 @@
     "filter.user.lookup": "Recherche d'utilisateur",
     "filter.user.lookupNoSupport": "la recherche d'utilisateur n'est pas prise en charge",
     "piece.pieceFormat.electronic": "Électronique",
-    "piece.pieceFormat.physical": "Physique",
+    "piece.pieceFormat.physical": "Objet",
     "piece.pieceFormat.other": "Autre",
     "piece.pieceStatus.expected": "En attente",
     "piece.pieceStatus.received": "Reçu(e)",
@@ -241,5 +241,6 @@
     "routing.list.update.success": "The Routing list was successfully updated.",
     "routing.list.users.empty": "Aucun utilisateur n'a été trouvé",
     "routing.list.users": "Utilisateurs",
-    "receiving.itemStatus.Unavailable": "Indisponible"
+    "receiving.itemStatus.Unavailable": "Indisponible",
+    "versionHistory.noVersion": "No version history to display."
 }

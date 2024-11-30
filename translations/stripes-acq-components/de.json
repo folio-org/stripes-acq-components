@@ -241,5 +241,6 @@
     "routing.list.update.success": "Umlaufliste wurde erfolgreich aktualisiert.",
     "routing.list.users.empty": "Keine Personen gefunden",
     "routing.list.users": "Personen",
-    "receiving.itemStatus.Unavailable": "Unavailable"
+    "receiving.itemStatus.Unavailable": "Unavailable",
+    "versionHistory.noVersion": "No version history to display."
 }
