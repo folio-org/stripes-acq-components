@@ -3,6 +3,7 @@
 ## (6.1.0 IN PROGRESS)
 
 * Add `useDebouncedQuery` hook to fix endless request for `DynamicSelection` component. Refs UISACQCOMP-233.
+* Display system change label for version cards. Refs UISACQCOMP-231.
 
 ## [6.0.1](https://github.com/folio-org/stripes-acq-components/tree/v6.0.1) (2024-11-14)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v6.0.0...v6.0.1)
