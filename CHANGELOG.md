@@ -2,6 +2,7 @@
 
 ## (6.1.0 IN PROGRESS)
 
+* Move reusable version history hook useVersionHistoryValueResolvers to the ACQ lib. Refs UISACQCOMP-235.
 * Add more reusable hooks and utilities. Refs UISACQCOMP-228.
 * Move reusable version history components to the ACQ lib. Refs UISACQCOMP-230.
 * Move reusable helper function to support version history functionality. Refs UISACQCOMP-232.
