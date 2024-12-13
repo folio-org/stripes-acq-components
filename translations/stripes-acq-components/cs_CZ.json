@@ -241,5 +241,7 @@
     "routing.list.update.success": "Seznam směrování byl úspěšně aktualizován.",
     "routing.list.users.empty": "Nebyli nalezeni žádní uživatelé",
     "routing.list.users": "Uživatelé",
-    "receiving.itemStatus.Unavailable": "Nedostupný"
+    "receiving.itemStatus.Unavailable": "Nedostupný",
+    "versionHistory.noVersion": "Žádná historie verzí k zobrazení.",
+    "versionHistory.card.systemChange": "System maintenance update"
 }
