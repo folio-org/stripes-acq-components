@@ -144,6 +144,10 @@
   "receiving.itemStatus.Order closed": "Order closed",
   "receiving.itemStatus.Undefined": "Undefined",
 
+  "claiming.action.sendClaim": "Send claim",
+  "claiming.action.delayClaim": "Delay claim",
+  "claiming.action.unreceivable": "Unreceivable",
+
   "referenceNumbers.addReferenceNumbers": "Add vendor reference number",
   "referenceNumbers.refNumber": "Vendor reference number",
   "referenceNumbers.refNumberType": "Vendor reference type",
