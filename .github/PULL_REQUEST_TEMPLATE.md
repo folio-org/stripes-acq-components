@@ -35,6 +35,19 @@
  [ ] Use GitHub checklists. When solved, check the box and explain the answer.
 -->
 
+## Screenshots
+<!-- OPTIONAL
+ One picture is literally worth a thousand words. When the feature is
+ an interaction, an animated GIF or video is best. Most of the time it helps to
+ include "before" and "after" screenshots to quickly demonstrate the
+ value of the feature.
+
+ Here are some great tools to help you record gifs:
+
+ Windows: https://getsharex.com/
+ Mac: https://gifox.io/
+-->
+
 <!-- OPTIONAL
 ## Learning
   Help out not only your reviewer, but also your fellow developer!
