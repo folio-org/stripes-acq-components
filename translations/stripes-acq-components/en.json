@@ -144,6 +144,16 @@
   "receiving.itemStatus.Order closed": "Order closed",
   "receiving.itemStatus.Undefined": "Undefined",
 
+  "claiming.action.sendClaim": "Send claim",
+  "claiming.action.delayClaim": "Delay claim",
+  "claiming.action.unreceivable": "Unreceivable",
+  "claiming.modal.delayClaim.heading": "{count, select, undefined {Delay claim} other {Delay {count, plural, one {claim} other {claims}}}}",
+  "claiming.modal.delayClaim.field.delayTo": "Delay to",
+  "claiming.modal.sendClaim.heading": "{count, select, undefined {Send claim} other {Send {count, plural, one {claim} other {claims}}}}",
+  "claiming.modal.sendClaim.field.claimExpiryDate": "Claim expiry date",
+  "claiming.modal.sendClaim.field.internalNote": "Internal note",
+  "claiming.modal.sendClaim.field.externalNote": "External note",
+
   "referenceNumbers.addReferenceNumbers": "Add vendor reference number",
   "referenceNumbers.refNumber": "Vendor reference number",
   "referenceNumbers.refNumberType": "Vendor reference type",
@@ -202,6 +212,7 @@
   "location.label": "Name (code)",
 
   "validation.cantContainSpaces": "Spaces aren't allowed",
+  "validation.dateAfter": "Selected date must be later than the current date",
   "validation.fundDistributionType": "All distributions should be the same type",
   "validation.fundDistribution.uniqueFunds": "You can not have multiple distributions for the same fund with the same expense class.",
   "validation.invalidURL": "URL is not valid, must include URL scheme. Eg. ftp://",
