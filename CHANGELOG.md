@@ -2,6 +2,8 @@
 
 ## (6.1.0 IN PROGRESS)
 
+* Claim locations from all members for locations filter when `crossTenant` equals `true`. Refs UISACQCOMP-239.
+
 ## [6.0.2](https://github.com/folio-org/stripes-acq-components/tree/v6.0.2) (2024-12-04)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v6.0.1...v6.0.2)
 
