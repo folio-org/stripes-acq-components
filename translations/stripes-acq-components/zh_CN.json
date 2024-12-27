@@ -243,5 +243,15 @@
     "routing.list.users": "用户",
     "receiving.itemStatus.Unavailable": "不可用",
     "versionHistory.noVersion": "没有可显示的版本历史。",
-    "versionHistory.card.systemChange": "系统维护更新"
+    "versionHistory.card.systemChange": "系统维护更新",
+    "claiming.action.sendClaim": "Send claim",
+    "claiming.action.delayClaim": "Delay claim",
+    "claiming.action.unreceivable": "Unreceivable",
+    "claiming.modal.delayClaim.heading": "{count, select, undefined {Delay claim} other {Delay {count, plural, one {claim} other {claims}}}}",
+    "claiming.modal.delayClaim.field.delayTo": "Delay to",
+    "claiming.modal.sendClaim.heading": "{count, select, undefined {Send claim} other {Send {count, plural, one {claim} other {claims}}}}",
+    "claiming.modal.sendClaim.field.claimExpiryDate": "Claim expiry date",
+    "claiming.modal.sendClaim.field.internalNote": "Internal note",
+    "claiming.modal.sendClaim.field.externalNote": "External note",
+    "validation.dateAfter": "Selected date must be later than the current date"
 }
