@@ -243,5 +243,15 @@
     "routing.list.users": "Usuários",
     "receiving.itemStatus.Unavailable": "Indisponível",
     "versionHistory.noVersion": "Não há histórico de versões a ser exibido.",
-    "versionHistory.card.systemChange": "Atualização de manutenção do sistema"
+    "versionHistory.card.systemChange": "Atualização de manutenção do sistema",
+    "claiming.action.sendClaim": "Enviar reclamação",
+    "claiming.action.delayClaim": "Reclamação de atraso",
+    "claiming.action.unreceivable": "Não recebível",
+    "claiming.modal.delayClaim.heading": "{count, select, undefined {Reclamação de atraso} other {Atraso {count, plural, one {reclamação} other {reclamações}}}}",
+    "claiming.modal.delayClaim.field.delayTo": "Atrasar para",
+    "claiming.modal.sendClaim.heading": "{count, select, undefined {Enviar reclamação} other {Enviar {count, plural, one {reclamação} other {reclamações}}}}",
+    "claiming.modal.sendClaim.field.claimExpiryDate": "Data de expiração da reclamação",
+    "claiming.modal.sendClaim.field.internalNote": "Nota interna",
+    "claiming.modal.sendClaim.field.externalNote": "Nota externa",
+    "validation.dateAfter": "A data selecionada deve ser posterior à data atual"
 }

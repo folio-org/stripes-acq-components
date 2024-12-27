@@ -243,5 +243,15 @@
     "routing.list.users": "ユーザー",
     "receiving.itemStatus.Unavailable": "利用不可",
     "versionHistory.noVersion": "No version history to display.",
-    "versionHistory.card.systemChange": "System maintenance update"
+    "versionHistory.card.systemChange": "System maintenance update",
+    "claiming.action.sendClaim": "Send claim",
+    "claiming.action.delayClaim": "Delay claim",
+    "claiming.action.unreceivable": "Unreceivable",
+    "claiming.modal.delayClaim.heading": "{count, select, undefined {Delay claim} other {Delay {count, plural, one {claim} other {claims}}}}",
+    "claiming.modal.delayClaim.field.delayTo": "Delay to",
+    "claiming.modal.sendClaim.heading": "{count, select, undefined {Send claim} other {Send {count, plural, one {claim} other {claims}}}}",
+    "claiming.modal.sendClaim.field.claimExpiryDate": "Claim expiry date",
+    "claiming.modal.sendClaim.field.internalNote": "Internal note",
+    "claiming.modal.sendClaim.field.externalNote": "External note",
+    "validation.dateAfter": "Selected date must be later than the current date"
 }
