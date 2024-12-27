@@ -9,6 +9,7 @@
 * Move reusable claiming code from `ui-receiving` to the shared library. Refs UISACQCOMP-236.
 * Support `CLAIMS` export type in the `useIntegrationConfigs` hook. Refs UISACQCOMP-238.
 * Claim locations from all members for locations filter when `crossTenant` equals `true`. Refs UISACQCOMP-239.
+* Exclude unsupported currencies on `getInvoiceExportData`. Refs UISACQCOMP-237.
 
 ## [6.0.2](https://github.com/folio-org/stripes-acq-components/tree/v6.0.2) (2024-12-04)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v6.0.1...v6.0.2)
