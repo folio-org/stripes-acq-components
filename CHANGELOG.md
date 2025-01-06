@@ -9,6 +9,7 @@
 * Move reusable claiming code from `ui-receiving` to the shared library. Refs UISACQCOMP-236.
 * Support `CLAIMS` export type in the `useIntegrationConfigs` hook. Refs UISACQCOMP-238.
 * Exclude unsupported currencies on `getInvoiceExportData`. Refs UISACQCOMP-237.
+* Add `GroupByOrgActionMenuItem` action button. Refs UICLAIM-2.
 
 ## [6.0.3](https://github.com/folio-org/stripes-acq-components/tree/v6.0.3) (2024-12-27)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v6.0.2...v6.0.3)
