@@ -8,6 +8,10 @@
 * Move reusable version history hook useVersionHistoryValueResolvers to the ACQ lib. Refs UISACQCOMP-235.
 * Move reusable claiming code from `ui-receiving` to the shared library. Refs UISACQCOMP-236.
 * Support `CLAIMS` export type in the `useIntegrationConfigs` hook. Refs UISACQCOMP-238.
+
+## [6.0.4](https://github.com/folio-org/stripes-acq-components/tree/v6.0.4) (2025-01-21)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v6.0.3...v6.0.4)
+
 * Exclude unsupported currencies on `getInvoiceExportData`. Refs UISACQCOMP-237.
 
 ## [6.0.3](https://github.com/folio-org/stripes-acq-components/tree/v6.0.3) (2024-12-27)
