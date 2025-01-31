@@ -250,8 +250,8 @@
     "claiming.modal.delayClaim.heading": "{count, select, undefined {Delay claim} other {Delay {count, plural, one {claim} other {claims}}}}",
     "claiming.modal.delayClaim.field.delayTo": "Delay to",
     "claiming.modal.sendClaim.heading": "{count, select, undefined {Send claim} other {Send {count, plural, one {claim} other {claims}}}}",
-    "claiming.modal.sendClaim.field.claimExpiryDate": "Claim expiry date",
-    "claiming.modal.sendClaim.field.internalNote": "Internal note",
-    "claiming.modal.sendClaim.field.externalNote": "External note",
-    "validation.dateAfter": "Selected date must be later than the current date"
+    "claiming.modal.sendClaim.field.claimExpiryDate": "Datum vypršení platnosti nároku",
+    "claiming.modal.sendClaim.field.internalNote": "Vnitřní poznámka",
+    "claiming.modal.sendClaim.field.externalNote": "Externí poznámka",
+    "validation.dateAfter": "Vybrané datum musí být pozdější než aktuální datum"
 }
