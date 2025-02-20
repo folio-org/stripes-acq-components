@@ -11,6 +11,7 @@
 * Add `labelless`, `fullWidth`, `marginBottom0` props to `FieldTags` component. Refs UISACQCOMP-243.
 * Migrate to shared GA workflows. Refs UISACQCOMP-244.
 * Keep previously selected tags after adding a new one in `<FieldTags>`. Fixes UISACQCOMP-247.
+* Move reusable `useFiscalYears` hook and `FiscalYearFilter` component. Fixes UISACQCOMP-249.
 
 ## [6.0.4](https://github.com/folio-org/stripes-acq-components/tree/v6.0.4) (2025-01-21)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v6.0.3...v6.0.4)
