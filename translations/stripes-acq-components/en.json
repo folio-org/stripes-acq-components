@@ -284,5 +284,14 @@
   "find-location.results.heading": "Locations",
 
   "consortia.affiliations.primary.label": "(Primary)",
-  "consortia.affiliations.select.label": "Affiliation"
+  "consortia.affiliations.select.label": "Affiliation",
+
+  "audit-log.anonymousUser": "Anonymous user",
+  "audit-log.action.added": "Added",
+  "audit-log.action.edited": "Edited",
+  "audit-log.action.removed": "Removed",
+  "audit-log.modal.action": "Action",
+  "audit-log.modal.field": "Field",
+  "audit-log.modal.changedFrom": "Changed from",
+  "audit-log.modal.changedTo": "Changed to"
 }

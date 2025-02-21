@@ -9,6 +9,8 @@
 * Move reusable claiming code from `ui-receiving` to the shared library. Refs UISACQCOMP-236.
 * Support `CLAIMS` export type in the `useIntegrationConfigs` hook. Refs UISACQCOMP-238.
 * Add `labelless`, `fullWidth`, `marginBottom0` props to `FieldTags` component. Refs UISACQCOMP-243.
+* Implement AuditLogPane component to render View history pane. Refs UISACQCOMP-248.
+* Implement AuditLogModal to display version history details. Refs UISACQCOMP-250.
 
 ## [6.0.4](https://github.com/folio-org/stripes-acq-components/tree/v6.0.4) (2025-01-21)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v6.0.3...v6.0.4)
