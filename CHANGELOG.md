@@ -9,6 +9,9 @@
 * Move reusable claiming code from `ui-receiving` to the shared library. Refs UISACQCOMP-236.
 * Support `CLAIMS` export type in the `useIntegrationConfigs` hook. Refs UISACQCOMP-238.
 * Add `labelless`, `fullWidth`, `marginBottom0` props to `FieldTags` component. Refs UISACQCOMP-243.
+* Migrate to shared GA workflows. Refs UISACQCOMP-244.
+* Keep previously selected tags after adding a new one in `<FieldTags>`. Fixes UISACQCOMP-247.
+* Move reusable `useFiscalYears` hook and `FiscalYearFilter` component. Fixes UISACQCOMP-249.
 * Implement AuditLogPane component to render View history pane. Refs UISACQCOMP-248.
 * Implement AuditLogModal to display version history details. Refs UISACQCOMP-250.
 
