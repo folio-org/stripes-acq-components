@@ -1,6 +1,6 @@
 # Change history for stripes-acq-components
 
-## (6.1.0 IN PROGRESS)
+## (7.0.0 IN PROGRESS)
 
 * Add more reusable hooks and utilities. Refs UISACQCOMP-228.
 * Move reusable version history components to the ACQ lib. Refs UISACQCOMP-230.
@@ -12,6 +12,8 @@
 * Migrate to shared GA workflows. Refs UISACQCOMP-244.
 * Keep previously selected tags after adding a new one in `<FieldTags>`. Fixes UISACQCOMP-247.
 * Move reusable `useFiscalYears` hook and `FiscalYearFilter` component. Fixes UISACQCOMP-249.
+* *BREAKING* Migrate stripes dependencies to their Sunflower versions. Refs UISACQCOMP-245.
+* *BREAKING* Migrate `react-intl` to v7. Refs UISACQCOMP-246.
 
 ## [6.0.4](https://github.com/folio-org/stripes-acq-components/tree/v6.0.4) (2025-01-21)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v6.0.3...v6.0.4)

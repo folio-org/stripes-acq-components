@@ -1,6 +1,6 @@
 {
   "name": "@folio/stripes-acq-components",
-  "version": "6.0.4",
+  "version": "7.0.0",
   "description": "Component library for Stripes Acquisitions modules",
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
@@ -8,7 +8,7 @@
   "license": "Apache-2.0",
   "repository": "folio-org/stripes-acq-components",
   "scripts": {
-    "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/stripes-acq-components ./translations/stripes-acq-components/compiled",
+    "formatjs-compile": "stripes translate compile",
     "test:unit:report": "cp -r ./artifacts/coverage-jest ./artifacts/coverage",
     "test:unit": "jest --ci --coverage && yarn run test:unit:report",
     "test:unit:watch": "jest --ci --coverage --watch",
@@ -25,10 +25,9 @@
     "@babel/preset-react": "^7.9.0",
     "@babel/preset-typescript": "^7.13.0",
     "@bigtest/interactor": "^0.9.3",
-    "@folio/eslint-config-stripes": "^7.0.0",
-    "@folio/stripes": "^9.0.0",
-    "@folio/stripes-cli": "^3.0.0",
-    "@formatjs/cli": "^4.2.6",
+    "@folio/eslint-config-stripes": "^8.0.0",
+    "@folio/stripes": "^10.0.0",
+    "@folio/stripes-cli": "^4.0.0",
     "@testing-library/jest-dom": "^5.11.1",
     "@testing-library/react": "^11.0.2",
     "@testing-library/react-hooks": "^5.0.3",
@@ -46,7 +45,7 @@
     "moment": "^2.24.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-intl": "^6.4.4",
+    "react-intl": "^7.1.5",
     "react-query": "^3.6.0",
     "react-redux": "^8.0.5",
     "react-router": "^5.2.0",
@@ -54,7 +53,7 @@
     "redux": "^4.0.5"
   },
   "dependencies": {
-    "@folio/stripes-types": "^2.1.0",
+    "@folio/stripes-types": "^3.0.0",
     "@rehooks/local-storage": "^2.4.4",
     "classnames": "^2.2.5",
     "dom-helpers": "^3.4.0",
@@ -72,11 +71,11 @@
     "redux-form": "^8.3.0"
   },
   "peerDependencies": {
-    "@folio/stripes": "^9.0.0",
+    "@folio/stripes": "^10.0.0",
     "moment": "^2.24.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-intl": "^6.4.4",
+    "react-intl": "^7.1.5",
     "react-redux": "^8.0.5",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
