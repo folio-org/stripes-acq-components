@@ -14,6 +14,7 @@
 * Move reusable `useFiscalYears` hook and `FiscalYearFilter` component. Fixes UISACQCOMP-249.
 * *BREAKING* Migrate stripes dependencies to their Sunflower versions. Refs UISACQCOMP-245.
 * *BREAKING* Migrate `react-intl` to v7. Refs UISACQCOMP-246.
+* Include refetch for useOrganization hook. Fixes UISACQCOMP-252.
 
 ## [6.0.4](https://github.com/folio-org/stripes-acq-components/tree/v6.0.4) (2025-01-21)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v6.0.3...v6.0.4)
