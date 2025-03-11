@@ -1,6 +1,9 @@
 # Change history for stripes-acq-components
 
-## (7.0.0 IN PROGRESS)
+## (7.1.0 IN PROGRESS)
+
+## [7.0.0](https://github.com/folio-org/stripes-acq-components/tree/v7.0.0) (2025-03-11)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v6.0.4...v7.0.0)
 
 * Add more reusable hooks and utilities. Refs UISACQCOMP-228.
 * Move reusable version history components to the ACQ lib. Refs UISACQCOMP-230.
@@ -15,7 +18,7 @@
 * *BREAKING* Migrate stripes dependencies to their Sunflower versions. Refs UISACQCOMP-245.
 * *BREAKING* Migrate `react-intl` to v7. Refs UISACQCOMP-246.
 * Include refetch for useOrganization hook. Fixes UISACQCOMP-252.
-* Display Holdings copy number when selecting holding. Refs STACQCOMP-253.
+* Display Holdings copy number when selecting holding. Refs UISACQCOMP-253.
 
 ## [6.0.4](https://github.com/folio-org/stripes-acq-components/tree/v6.0.4) (2025-01-21)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v6.0.3...v6.0.4)
