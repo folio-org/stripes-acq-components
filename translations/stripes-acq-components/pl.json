@@ -93,7 +93,7 @@
     "modal.selectItem": "Zaznacz {value}",
     "modal.selectItemDefault": "Zaznacz {value} recordów",
     "noPermissionsMessage": "Nie masz uprawnień do tej strony.",
-    "fundDistribution.unavailableFund": "<b>Unavailable fund name</b>",
+    "fundDistribution.unavailableFund": "<b>Niedostępna nazwa funduszu</b>",
     "currency": "Waluta",
     "currentExchangeRate": "Bieżący kurs wymiany",
     "useSetExchangeRate": "Użyj ustawionego kursu wymiany",
