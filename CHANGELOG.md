@@ -2,6 +2,11 @@
 
 ## (7.1.0 IN PROGRESS)
 
+## [7.0.1](https://github.com/folio-org/stripes-acq-components/tree/v7.0.1) (2025-03-24)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.0...v7.0.1)
+
+* Support tenantId in `useClaimsSend` and `usePiecesStatusBatchUpdate` hooks. Refs UISACQCOMP-256.
+
 ## [7.0.0](https://github.com/folio-org/stripes-acq-components/tree/v7.0.0) (2025-03-11)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v6.0.4...v7.0.0)
 
