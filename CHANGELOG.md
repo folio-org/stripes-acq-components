@@ -1,6 +1,7 @@
 # Change history for stripes-acq-components
 
-## (6.0.5 IN PROGRESS)
+## [6.0.5](https://github.com/folio-org/stripes-acq-components/tree/v6.0.5) (2025-03-27)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v6.0.4...v6.0.5)
 
 * Autosuggest `renderValue` should return string. Refs UISACQCOMP-258.
 
