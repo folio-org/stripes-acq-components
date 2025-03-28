@@ -11,6 +11,8 @@
   "button.apply": "Apply",
   "button.close": "Close",
   "button.save": "Save",
+  "button.credentials.show": "Show credentials",
+  "button.credentials.hide": "Hide credentials",
 
   "exchangeRate": "Exchange rate",
   "currency": "Currency",
