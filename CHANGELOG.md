@@ -11,6 +11,8 @@
 * Support tenantId in `useClaimsSend` and `usePiecesStatusBatchUpdate` hooks. Refs UISACQCOMP-256.
 
 * Autosuggest `renderValue` should return string. Refs UISACQCOMP-258.
+* Support for restriction on assigned affiliations. Refs UISACQCOMP-257.
+* Implement filter based on stripes "Select" component. Refs UISACQCOMP-260.
 
 ## [7.0.1](https://github.com/folio-org/stripes-acq-components/tree/v7.0.1) (2025-03-24)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.0...v7.0.1)
