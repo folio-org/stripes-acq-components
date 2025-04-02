@@ -91,7 +91,13 @@ jest.mock('@folio/stripes/core', () => {
     // eslint-disable-next-line react/prop-types
     IfPermission: props => <>{props.children}</>,
 
-    TitleManager: () => <div>TitleManager</div>,
+    // eslint-disable-next-line react/prop-types
+    TitleManager: ({ children }) => (
+      <>
+        <div>TitleManager</div>
+        {children}
+      </>
+    ),
 
     checkIfUserInCentralTenant: jest.fn(() => false),
   };
