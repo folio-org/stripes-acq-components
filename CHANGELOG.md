@@ -1,10 +1,22 @@
 # Change history for stripes-acq-components
 
-## (7.1.0 IN PROGRESS)
-
-* Autosuggest `renderValue` should return string. Refs UISACQCOMP-258.
 * Support for restriction on assigned affiliations. Refs UISACQCOMP-257.
 * Create components to support exchange rate source feature. Refs UISACQCOMP-259.
+
+## [7.0.3](https://github.com/folio-org/stripes-acq-components/tree/v7.0.3) (2025-03-31)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.2...v7.0.3)
+
+* Implement filter based on stripes "Select" component. Refs UISACQCOMP-260.
+
+## [7.0.2](https://github.com/folio-org/stripes-acq-components/tree/v7.0.2) (2025-03-27)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.1...v7.0.2)
+
+* AutoSuggest `renderValue` should return string. Refs UISACQCOMP-258.
+
+## [7.0.1](https://github.com/folio-org/stripes-acq-components/tree/v7.0.1) (2025-03-24)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.0...v7.0.1)
+
+* Support tenantId in `useClaimsSend` and `usePiecesStatusBatchUpdate` hooks. Refs UISACQCOMP-256.
 
 ## [7.0.1](https://github.com/folio-org/stripes-acq-components/tree/v7.0.1) (2025-03-24)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.0...v7.0.1)
