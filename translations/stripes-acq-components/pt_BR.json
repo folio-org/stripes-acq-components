@@ -253,5 +253,7 @@
     "claiming.modal.sendClaim.field.claimExpiryDate": "Data de expiração da reclamação",
     "claiming.modal.sendClaim.field.internalNote": "Nota interna",
     "claiming.modal.sendClaim.field.externalNote": "Nota externa",
-    "validation.dateAfter": "A data selecionada deve ser posterior à data atual"
+    "validation.dateAfter": "A data selecionada deve ser posterior à data atual",
+    "button.credentials.show": "Mostrar credenciais",
+    "button.credentials.hide": "Ocultar credenciais"
 }

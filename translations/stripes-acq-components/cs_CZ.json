@@ -253,5 +253,7 @@
     "claiming.modal.sendClaim.field.claimExpiryDate": "Datum vypršení platnosti nároku",
     "claiming.modal.sendClaim.field.internalNote": "Vnitřní poznámka",
     "claiming.modal.sendClaim.field.externalNote": "Externí poznámka",
-    "validation.dateAfter": "Vybrané datum musí být pozdější než aktuální datum"
+    "validation.dateAfter": "Vybrané datum musí být pozdější než aktuální datum",
+    "button.credentials.show": "Zobrazit přihlašovací údaje",
+    "button.credentials.hide": "Skrýt přihlašovací údaje"
 }
