@@ -14,7 +14,6 @@ export const orderLineAuditEvent = {
     agreementId: '09c6ed1b-3984-4d9a-8f9b-e1200b68b61c',
     acquisitionMethod: 'df26d81b-9d63-4ff8-bf41-49bf75cfa70e',
     automaticExport: false,
-    alerts: [],
     cancellationRestriction: false,
     cancellationRestrictionNote: '',
     claims: [
@@ -81,7 +80,6 @@ export const orderLineAuditEvent = {
     publisher: 'American Bar Association',
     purchaseOrderId: 'c27e60f9-6361-44c1-976e-0c4821a33a7d',
     receiptStatus: 'Pending',
-    reportingCodes: [],
     requester: '',
     rush: false,
     selector: '',
