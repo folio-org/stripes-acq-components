@@ -253,5 +253,7 @@
     "claiming.modal.sendClaim.field.claimExpiryDate": "Claim expiry date",
     "claiming.modal.sendClaim.field.internalNote": "Internal note",
     "claiming.modal.sendClaim.field.externalNote": "External note",
-    "validation.dateAfter": "Selected date must be later than the current date"
+    "validation.dateAfter": "Selected date must be later than the current date",
+    "button.credentials.show": "Show credentials",
+    "button.credentials.hide": "Hide credentials"
 }
