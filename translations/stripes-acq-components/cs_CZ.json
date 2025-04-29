@@ -49,7 +49,7 @@
     "validation.fundDistribution.uniqueFunds": "Nemůžete mít více distribucí pro stejné prostředky se stejnou třídou výdajů.",
     "validation.cantBeNegativeOrEmpty": "Nesmí být záporné nebo prázdné",
     "label.contributor": "Autor",
-    "label.contributorType": "Typ autora",
+    "label.contributorType": "Autorská role",
     "label.productId": "ID produktu",
     "label.qualifier": "Kvalifikátor",
     "label.productIdType": "Typ ID produktu",
