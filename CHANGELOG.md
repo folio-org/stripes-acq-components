@@ -4,6 +4,7 @@
 * Create components to support exchange rate source feature. Refs UISACQCOMP-259.
 * Enhance `CentralOrderingContextProvider` component. Refs UISACQCOMP-262.
 * Enhance shared components to support expense class change handling. Refs UISACQCOMP-264.
+* Add IfVisible ability to Donors component. Refs UISACQCOMP-266.
 
 ## [7.0.3](https://github.com/folio-org/stripes-acq-components/tree/v7.0.3) (2025-03-31)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.2...v7.0.3)
