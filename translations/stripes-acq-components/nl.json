@@ -254,6 +254,6 @@
     "claiming.modal.sendClaim.field.internalNote": "Interne Opmerking",
     "claiming.modal.sendClaim.field.externalNote": "Externe Opmerking",
     "validation.dateAfter": "Geselecteerde datum moet later zijn dan de Huidige datum",
-    "button.credentials.show": "Show credentials",
-    "button.credentials.hide": "Hide credentials"
+    "button.credentials.show": "Referenties tonen",
+    "button.credentials.hide": "Verberg referenties"
 }
