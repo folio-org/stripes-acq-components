@@ -1,6 +1,7 @@
 # Change history for stripes-acq-components
 
 * Enhance `CentralOrderingContextProvider` component. Refs UISACQCOMP-262.
+* Fix selected locations reinitialization after affiliation change in the locations lookup. Fixes UISACQCOMP-265.
 
 ## [7.0.3](https://github.com/folio-org/stripes-acq-components/tree/v7.0.3) (2025-03-31)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.2...v7.0.3)
