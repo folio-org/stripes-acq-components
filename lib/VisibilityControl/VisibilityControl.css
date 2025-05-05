@@ -8,6 +8,10 @@
   margin-left: -16px;
   z-index: 99;
   cursor: pointer;
+
+  &.detached {
+    margin-left: unset;
+  }
 }
 
 .visibilityControlCheckbox {
