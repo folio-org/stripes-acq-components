@@ -1,5 +1,8 @@
 # Change history for stripes-acq-components
 
+## [7.0.5](https://github.com/folio-org/stripes-acq-components/tree/v7.0.5) (2025-05-06)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.4...v7.0.5)
+
 * Support for restriction on assigned affiliations. Refs UISACQCOMP-257.
 
 ## [7.0.4](https://github.com/folio-org/stripes-acq-components/tree/v7.0.4) (2025-05-05)
