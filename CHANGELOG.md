@@ -1,10 +1,14 @@
 # Change history for stripes-acq-components
 
-* Support for restriction on assigned affiliations. Refs UISACQCOMP-257.
 * Create components to support exchange rate source feature. Refs UISACQCOMP-259.
 * Enhance shared components to support expense class change handling. Refs UISACQCOMP-264.
 * Accept `detached` prop in the `VisibilityControl` component. Refs UISACQCOMP-267.
 * Optimize `IfFieldVisible` component to reduce number of renders. Refs UISACQCOMP-268.
+
+## [7.0.5](https://github.com/folio-org/stripes-acq-components/tree/v7.0.5) (2025-05-06)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.4...v7.0.5)
+
+* Support for restriction on assigned affiliations. Refs UISACQCOMP-257.
 
 ## [7.0.4](https://github.com/folio-org/stripes-acq-components/tree/v7.0.4) (2025-05-05)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.3...v7.0.4)
