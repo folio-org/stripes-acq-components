@@ -3,6 +3,7 @@ import './currencyData.mock';
 import './documentCreateRange.mock';
 import './localStorage.mock';
 import './matchMedia.mock';
+import './range.mock';
 import './reactIntl.mock';
 import './reactVirtualizedAutoSize.mock';
 import './resizeObserver.mock';
