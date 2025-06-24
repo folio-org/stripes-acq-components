@@ -176,7 +176,7 @@
     "privilegedContacts.email": "E-mail",
     "privilegedContacts.status": "Status",
     "privilegedContacts.status.active": "Aktywny",
-    "privilegedContacts.status.inactive": "Inactive",
+    "privilegedContacts.status.inactive": "Nieaktywny",
     "privilegedContacts.note": "Uwagi",
     "privilegedContacts.phone": "Telefon",
     "privilegedContacts.newContact": "Nowy",
