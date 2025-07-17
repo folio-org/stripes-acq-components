@@ -1,5 +1,7 @@
 # Change history for stripes-acq-components
 
+## [7.1.0](IN PROGRESS)
+
 * Create components to support exchange rate source feature. Refs UISACQCOMP-259.
 * Enhance shared components to support expense class change handling. Refs UISACQCOMP-264.
 * Accept `detached` prop in the `VisibilityControl` component. Refs UISACQCOMP-267.
