@@ -149,7 +149,7 @@
     "filter.numberRange.max": "Para",
     "filter.numberRange.min": "De",
     "holdings.deleteModal.heading": "Excluir coleção",
-    "holdings.deleteModal.message": "Esta peça está conectada aos registros na app Inventário. Após esta edição não haverá outras partes OU itens ligados ao(s) registro(s) de coleção relacionado(s). Após esta mudança, você gostaria que o FOLIO apagasse o(s) registro(s) de coleção?",
+    "holdings.deleteModal.message": "Esta parte está conectada aos registros na app Inventário. Após esta edição não haverá outras partes OU itens ligados ao(s) registro(s) de coleção relacionado(s). Após esta mudança, você gostaria que o FOLIO apagasse o(s) registro(s) de coleção?",
     "holdings.deleteModal.keepHoldings": "Manter coleções",
     "filter.dynamic.emptyMessage": "Comece a digitar para carregar as opções",
     "validation.cantBeNegative": "Não pode ser negativo",
