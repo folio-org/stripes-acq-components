@@ -241,7 +241,7 @@
     "routing.list.update.success": "Lista routingu została pomyślnie zaktualizowana.",
     "routing.list.users.empty": "No users found",
     "routing.list.users": "Użytkownicy",
-    "receiving.itemStatus.Unavailable": "Unavailable",
+    "receiving.itemStatus.Unavailable": "Niedostępny",
     "versionHistory.noVersion": "Brak historii wersji do wyświetlenia.",
     "versionHistory.card.systemChange": "System maintenance update",
     "claiming.action.sendClaim": "Wyślij monit",
