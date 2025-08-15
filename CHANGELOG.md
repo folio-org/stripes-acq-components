@@ -10,6 +10,7 @@
 * Use `jest-config-stripes` as dependency to setup Jest tests. Refs UISACQCOMP-270.
 * Move reusable hook to the shared library. UISACQCOMP-271.
 * Add the ability to handle change of the currency field outside the component. Refs UISACQCOMP-273.
+* Increase the limit for the funds query. Refs UISACQCOMP-275.
 
 ## [7.0.5](https://github.com/folio-org/stripes-acq-components/tree/v7.0.5) (2025-05-06)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.4...v7.0.5)
