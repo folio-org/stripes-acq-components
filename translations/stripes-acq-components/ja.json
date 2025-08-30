@@ -36,7 +36,7 @@
     "fundDistribution.value": "値",
     "fundDistribution.type": "タイプ",
     "fundDistribution.type.sign.percent": "%",
-    "fundDistribution.type.percent": "Percent",
+    "fundDistribution.type.percent": "パーセント",
     "fundDistribution.type.amount": "金額",
     "fundDistribution.remainingAmount": "分配残額： {remainingAmount}",
     "validation.fundDistributionType": "すべての配分は同じタイプである必要があります",
