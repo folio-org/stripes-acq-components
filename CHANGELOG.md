@@ -15,6 +15,7 @@
 * Refactor `FieldTags` component to use `react-query`. Refs UISACQCOMP-277.
 * `useLocationFilters` - allow applying filters without writing values to the url. Refs UISACQCOMP-278.
 * Move `useExchangeCalculation` hook to the acq lib. Refs UISACQCOMP-279.
+* Add `applyLocationFiltersAsync` to `useLocationFilters` hook. Refs UISACQCOMP-281.
 
 ## [7.0.5](https://github.com/folio-org/stripes-acq-components/tree/v7.0.5) (2025-05-06)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.4...v7.0.5)
