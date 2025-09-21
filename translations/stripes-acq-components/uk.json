@@ -61,7 +61,7 @@
     "order.status.open": "Відкрито",
     "order.status.pending": "В очікуванні",
     "order.type.oneTime": "Одноразове",
-    "order.type.ongoing": "Безстрокове",
+    "order.type.ongoing": "Безстрокове (постійне)",
     "order.format.electronicResource": "Електронний ресурс",
     "order.format.physicalResource": "Фізичний ресурс",
     "order.format.PEMix": "Мікс Друковане/Електронне",
