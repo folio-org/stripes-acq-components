@@ -120,7 +120,7 @@
     "shortcut.collapseAllSections": "Zwiń wszystko",
     "shortcut.search": "Przejdź do okienka Wyszukaj i filtruj",
     "shortcut.openShortcutModal": "Zobacz listę skrótów klawiaturowych",
-    "holding.createFromLocation": "Create new holdings for location",
+    "holding.createFromLocation": "Utwórz nowy zasób dla lokalizacji",
     "holding.label": "Wybierz zasoby",
     "location.label": "Nazwa (kod)",
     "validation.shouldBePositiveAmount": "Suma musi być liczbą dodatnią",
