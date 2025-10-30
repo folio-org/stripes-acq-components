@@ -232,7 +232,7 @@
     "routing.list.delete.confirm": "You are about to delete this routing list. Continue?",
     "routing.list.delete.error": "Coś poszło nie tak. Lista routingu nie została usunięta.",
     "routing.list.delete.success": "Lista routingu została pomyślnie usunięta.",
-    "routing.list.generalInformation": "General information",
+    "routing.list.generalInformation": "Informacje ogólne",
     "routing.list.name": "Nazwa",
     "routing.list.notes": "Uwagi",
     "routing.list.orderNumber": "#",
@@ -254,6 +254,6 @@
     "claiming.modal.sendClaim.field.internalNote": "Uwaga wewnętrzna",
     "claiming.modal.sendClaim.field.externalNote": "Uwaga zewnętrzna",
     "validation.dateAfter": "Wybrana data musi być późniejsza niż bieżąca data",
-    "button.credentials.show": "Pokaż dane uwierzytelniające",
+    "button.credentials.show": "Pokaż dane logowania",
     "button.credentials.hide": "Ukryj dane uwierzytelniające"
 }
