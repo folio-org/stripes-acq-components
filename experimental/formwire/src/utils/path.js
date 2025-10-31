@@ -2,6 +2,8 @@
  * Path manipulation utilities
  */
 
+import { isNullish, isArray } from './checks';
+
 /**
  * Parse path into keys array
  * @param {string} path - Dot notation path
@@ -28,7 +30,7 @@ const navigateToPath = (obj, keys, createMissing = false) => {
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
 
-    if (current == null) {
+    if (isNullish(current)) {
       if (createMissing) {
         current = {};
       } else {
@@ -72,16 +74,16 @@ export const setByPath = (obj, path, value) => {
   if (!path) return obj;
 
   const keys = parsePath(path);
-  const result = { ...obj };
+  const result = isArray(obj) ? [...obj] : { ...obj };
   let current = result;
 
   for (let i = 0; i < keys.length - 1; i++) {
     const key = keys[i];
 
-    if (current[key] == null) {
+    if (isNullish(current[key])) {
       current[key] = {};
     } else {
-      current[key] = { ...current[key] };
+      current[key] = isArray(current[key]) ? [...current[key]] : { ...current[key] };
     }
 
     current = current[key];
@@ -117,17 +119,17 @@ export const deleteByPath = (obj, path) => {
   if (!path) return obj;
 
   const keys = parsePath(path);
-  const result = { ...obj };
+  const result = isArray(obj) ? [...obj] : { ...obj };
   let current = result;
 
   for (let i = 0; i < keys.length - 1; i++) {
     const key = keys[i];
 
-    if (current[key] == null) {
+    if (isNullish(current[key])) {
       return result; // Path doesn't exist
     }
 
-    current[key] = { ...current[key] };
+    current[key] = isArray(current[key]) ? [...current[key]] : { ...current[key] };
     current = current[key];
   }
 

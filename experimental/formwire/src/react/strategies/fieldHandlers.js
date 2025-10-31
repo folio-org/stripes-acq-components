@@ -1,4 +1,5 @@
 import { VALIDATION_MODES } from '../../constants';
+import { isDefined } from '../../utils/checks';
 
 export const buildOnChangeCommands = ({ engine, name, validate, validateOn, debouncedValidate, newValue }) => ([
   () => engine.set(name, newValue),
@@ -10,11 +11,13 @@ export const buildOnBlurCommands = ({ engine, name, validate, validateOn }) => (
   () => engine.touch(name),
   () => engine.blur(),
   () => {
+    const errors = engine.getErrors();
+
     return (
       validate
         && validateOn === VALIDATION_MODES.SUBMIT
         && name
-        && engine.getErrors()[name]
+        && isDefined(errors[name])
     ) && engine.clearError(name);
   },
   () => {

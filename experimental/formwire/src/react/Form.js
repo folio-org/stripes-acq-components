@@ -6,6 +6,7 @@ import React, { useMemo, useCallback, useEffect } from 'react';
 import FormEngine from '../core/FormEngine';
 import { FormProvider } from './FormContext';
 import { EVENTS, VALIDATION_MODES } from '../constants';
+import { isFunction } from '../utils/checks';
 
 export default function Form({
   children,
@@ -15,6 +16,7 @@ export default function Form({
   validate, // form-level validator: (allValues) => string | null | Promise<string|null>
   formValidateOn = 'submit', // 'change' | 'blur' | 'submit' (form-level)
   debounceDelay = 0,
+  dirtyCheckStrategy,
   engine: providedEngine,
   ...rest
 }) {
@@ -26,10 +28,13 @@ export default function Form({
 
     const newEngine = new FormEngine();
 
-    newEngine.init(initialValues, { validateOnBlur: defaultValidateOn === 'blur' });
+    newEngine.init(initialValues, {
+      validateOnBlur: defaultValidateOn === 'blur',
+      dirtyCheckStrategy,
+    });
 
     return newEngine;
-  }, [providedEngine, initialValues, defaultValidateOn]);
+  }, [providedEngine, initialValues, defaultValidateOn, dirtyCheckStrategy]);
 
   // Register and run form-level validation declaratively
   useEffect(() => {
@@ -69,7 +74,9 @@ export default function Form({
 
   // Handle form submission
   const handleSubmit = useCallback(async (e) => {
-    e?.preventDefault?.();
+    if (isFunction(e?.preventDefault)) {
+      e.preventDefault();
+    }
 
     if (onSubmit) {
       const result = await engine.submit((values) => onSubmit(values, engine.getFormApi()));

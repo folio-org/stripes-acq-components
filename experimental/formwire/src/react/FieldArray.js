@@ -5,6 +5,7 @@
 import React, { useMemo, memo } from 'react';
 import { useFormEngine } from './FormContext';
 import { useWatch } from './hooks';
+import { isFunction } from '../utils/checks';
 
 const FieldArray = memo(({ name, children }) => {
   const engine = useFormEngine();
@@ -81,7 +82,7 @@ const FieldArray = memo(({ name, children }) => {
   }), [engine, name, array.length]);
 
   // Render with children function
-  if (typeof children === 'function') {
+  if (isFunction(children)) {
     return children({ fields, ...arrayMethods });
   }
 

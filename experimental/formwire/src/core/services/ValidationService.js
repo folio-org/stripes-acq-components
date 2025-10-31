@@ -4,6 +4,7 @@
  */
 
 import { getByPath } from '../../utils/path';
+import { isFunction, isDefined } from '../../utils/checks';
 import { createValidationModeStrategies } from './strategies/validationModes';
 
 export class ValidationService {
@@ -50,17 +51,9 @@ export class ValidationService {
     const { validator } = validatorData;
 
     try {
-      let fieldState;
-      let api;
+      const context = this._getFieldContext(path, value, allValues);
 
-      if (typeof this.options.getFieldContext === 'function') {
-        const ctx = this.options.getFieldContext(path, value, allValues);
-
-        fieldState = ctx && ctx.fieldState;
-        api = ctx && ctx.api;
-      }
-
-      const result = await validator(value, allValues, fieldState, api);
+      const result = await validator(value, allValues, context.fieldState, context.api);
 
       return result || null;
     } catch (error) {
@@ -111,17 +104,9 @@ export class ValidationService {
 
       timeoutId = setTimeout(async () => {
         try {
-          let fieldState;
-          let api;
+          const context = path ? this._getFieldContext(path, value, allValues) : { fieldState: undefined, api: undefined };
 
-          if (typeof this.options.getFieldContext === 'function' && path) {
-            const ctx = this.options.getFieldContext(path, value, allValues);
-
-            fieldState = ctx && ctx.fieldState;
-            api = ctx && ctx.api;
-          }
-
-          const result = await validator(value, allValues, fieldState, api);
+          const result = await validator(value, allValues, context.fieldState, context.api);
 
           onResult(result || null);
         } catch (error) {
@@ -165,6 +150,27 @@ export class ValidationService {
   }
 
   /**
+   * Get field context from options if available
+   * @param {string} path - Field path
+   * @param {*} value - Field value
+   * @param {*} allValues - All form values
+   * @returns {{fieldState: *, api: *}} Field context
+   * @private
+   */
+  _getFieldContext(path, value, allValues) {
+    if (!isFunction(this.options.getFieldContext)) {
+      return { fieldState: undefined, api: undefined };
+    }
+
+    const ctx = this.options.getFieldContext(path, value, allValues);
+
+    return {
+      fieldState: isDefined(ctx) ? ctx.fieldState : undefined,
+      api: isDefined(ctx) ? ctx.api : undefined,
+    };
+  }
+
+  /**
    * Internal: run validator immediately with context
    * @private
    */
@@ -174,19 +180,10 @@ export class ValidationService {
     if (!validatorData) return null;
 
     const { validator } = validatorData;
-
-    let fieldState;
-    let api;
-
-    if (typeof this.options.getFieldContext === 'function') {
-      const ctx = this.options.getFieldContext(path, value, allValues);
-
-      fieldState = ctx && ctx.fieldState;
-      api = ctx && ctx.api;
-    }
+    const context = this._getFieldContext(path, value, allValues);
 
     try {
-      const result = await validator(value, allValues, fieldState, api);
+      const result = await validator(value, allValues, context.fieldState, context.api);
 
       return result || null;
     } catch (error) {

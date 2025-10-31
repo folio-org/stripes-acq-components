@@ -161,6 +161,49 @@ engine.init({ email: '', name: '' }, { validateOnBlur: true });
 - **EventService** - Event system with automatic cleanup
 - **BatchService** - Batches operations for optimal performance
 
+## Configuration
+
+### Dirty Check Strategy
+
+FormWire provides two strategies for determining if a form is dirty:
+
+```jsx
+import { DIRTY_CHECK_STRATEGY } from 'formwire';
+
+// VALUES strategy (default) - compares current values with initial values
+engine.init({ email: '' }, {
+  dirtyCheckStrategy: DIRTY_CHECK_STRATEGY.VALUES, // default
+});
+
+// TOUCHED strategy (legacy) - based on touched fields
+engine.init({ email: '' }, {
+  dirtyCheckStrategy: DIRTY_CHECK_STRATEGY.TOUCHED,
+});
+```
+
+**VALUES Strategy (Recommended)**
+- `dirty: true` when any value differs from initial value
+- `dirty: false` when all values equal initial values
+- Correctly handles "undo" scenarios (value changed back to initial)
+
+**TOUCHED Strategy (Legacy)**
+- `dirty: true` when any field was touched
+- `dirty: false` when no fields were touched
+- Does NOT detect "undo" scenarios
+
+### Custom Equality Function
+
+For complex value comparisons (objects, arrays), provide a custom equality function:
+
+```jsx
+import { isEqual } from 'lodash';
+
+engine.init({ items: [] }, {
+  dirtyCheckStrategy: DIRTY_CHECK_STRATEGY.VALUES,
+  isEqual: (a, b) => isEqual(a, b), // deep equality
+});
+```
+
 ## API Reference
 
 ### Form Component
@@ -170,6 +213,11 @@ engine.init({ email: '', name: '' }, { validateOnBlur: true });
   onSubmit={(values) => void}
   initialValues={object}
   defaultValidateOn="blur" | "change"
+  config={{
+    dirtyCheckStrategy: DIRTY_CHECK_STRATEGY.VALUES,
+    isEqual: (a, b) => a === b,
+    // ... other FormEngine options
+  }}
   engine={FormEngine}
 >
   {children}

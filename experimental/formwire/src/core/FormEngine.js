@@ -15,8 +15,11 @@ import {
   EVENTS,
   DEBOUNCE_DELAYS,
   FORM_ENGINE_OPTIONS,
+  DIRTY_CHECK_STRATEGY,
+  FIELD_EVENT_PREFIXES,
 } from '../constants';
 import { getByPath, setByPath } from '../utils/path';
+import { isFunction, isDefined, shallowEqual } from '../utils/checks';
 import { ValidationService } from './services/ValidationService';
 import { CacheService } from './services/CacheService';
 import { EventService } from './services/EventService';
@@ -49,6 +52,11 @@ export default class FormEngine {
     // Performance tracking
     this.operations = 0;
     this.renderCount = 0;
+
+    // Previous state tracking for emitting events only when state changes
+    this._previousFormDirty = null;
+    this._previousFieldDirty = new Map(); // Map<path, boolean>
+    this._previousFormValid = null;
   }
 
   /**
@@ -68,12 +76,17 @@ export default class FormEngine {
       [FORM_ENGINE_OPTIONS.ENABLE_VALIDATION]: true,
       [FORM_ENGINE_OPTIONS.VALIDATE_ON_CHANGE]: false,
       [FORM_ENGINE_OPTIONS.VALIDATE_ON_BLUR]: true,
+      [FORM_ENGINE_OPTIONS.DIRTY_CHECK_STRATEGY]: DIRTY_CHECK_STRATEGY.VALUES,
       ...config,
     };
 
     this._configureServices();
 
     this.isInitialized = true;
+
+    // Initialize previous state tracking
+    this._previousFormDirty = this._isFormDirty();
+    this._previousFormValid = Object.keys(this.errors).length === 0;
 
     this.eventService.emit(EVENTS.INIT, { values: this.values, config: this.options });
 
@@ -84,7 +97,9 @@ export default class FormEngine {
    * Reset form to initial state
    */
   reset() {
-    this.batchService && this.batchService.dispose && this.batchService.dispose();
+    if (isDefined(this.batchService) && isFunction(this.batchService.dispose)) {
+      this.batchService.dispose();
+    }
     this._resetState();
     this.isInitialized = false;
     this.eventService.emit(EVENTS.RESET, {});
@@ -143,6 +158,8 @@ export default class FormEngine {
    * @param {string} path - Dot notation path
    * @param {*} value - Value to set
    * @param {Object} options - Options for setting value
+   * @param {boolean} options.immediate - Emit events immediately (skip batching)
+   * @param {boolean} options.silent - Don't emit CHANGE events (for programmatic updates that shouldn't trigger listeners)
    */
   set(path, value, options = {}) {
     this._ensureInitialized();
@@ -153,8 +170,13 @@ export default class FormEngine {
     this.cacheService.clearForPath(path);
 
     // Run validation if enabled
-    if (this.options.enableValidation && this.options.validateOnChange) {
+    if (this.options[FORM_ENGINE_OPTIONS.ENABLE_VALIDATION] && this.options[FORM_ENGINE_OPTIONS.VALIDATE_ON_CHANGE]) {
       this._validateField(path, value);
+    }
+
+    // Skip emitting events if silent option is set
+    if (options.silent) {
+      return;
     }
 
     // Emit events
@@ -174,8 +196,10 @@ export default class FormEngine {
   /**
    * Set multiple values in batch
    * @param {Array} updates - Array of {path, value} objects
+   * @param {Object} options - Options for setting values
+   * @param {boolean} options.silent - Don't emit CHANGE events
    */
-  setMany(updates) {
+  setMany(updates, options = {}) {
     if (this.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING]) {
       this.batch(() => {
         updates.forEach(({ path, value }) => {
@@ -183,10 +207,12 @@ export default class FormEngine {
           this.cacheService.clearForPath(path);
         });
       });
-      this._emitBatch(updates);
+      if (!options.silent) {
+        this._emitBatch(updates);
+      }
     } else {
       updates.forEach(({ path, value }) => {
-        this.set(path, value, { immediate: true });
+        this.set(path, value, { immediate: true, silent: options.silent });
       });
     }
   }
@@ -209,11 +235,18 @@ export default class FormEngine {
 
     // Emit aggregated change event
     this.eventService.emit(EVENTS.CHANGE, { batch: true, updates: operations });
+    // Emit values event
+    this.eventService.emit(EVENTS.VALUES, { values: this.getValues() });
 
     // Emit per-field events
     operations.forEach(({ path, value }) => {
       this.eventService.emit(`${EVENTS.CHANGE}:${path}`, value);
+      // Check and emit dirty/pristine events for this field
+      this._checkAndEmitFieldDirtyState(path);
     });
+
+    // Check and emit form-level dirty/pristine events
+    this._checkAndEmitFormDirtyState();
   }
 
   /**
@@ -234,14 +267,27 @@ export default class FormEngine {
   }
 
   /**
+   * Get initial values
+   */
+  getInitialValues() {
+    return { ...this.initialValues };
+  }
+
+  /**
    * Set field error
    * @param {string} path - Field path
    * @param {string} error - Error message
    */
   setError(path, error) {
-    this.errors[path] = error;
-    this.eventService.emit(EVENTS.ERROR, { path, error });
-    this.eventService.emit(`${EVENTS.ERROR}:${path}`, error);
+    const previousError = this.errors[path];
+
+    // Only emit if error actually changed
+    if (previousError !== error) {
+      this.errors[path] = error;
+      this.eventService.emit(EVENTS.ERROR, { path, error });
+      this.eventService.emit(`${EVENTS.ERROR}:${path}`, error);
+      this._checkAndEmitFormValidState();
+    }
   }
 
   /**
@@ -249,9 +295,13 @@ export default class FormEngine {
    * @param {string} path - Field path
    */
   clearError(path) {
-    delete this.errors[path];
-    this.eventService.emit(EVENTS.ERROR, { path, error: null });
-    this.eventService.emit(`${EVENTS.ERROR}:${path}`, null);
+    // Only emit if error actually existed
+    if (path in this.errors) {
+      delete this.errors[path];
+      this.eventService.emit(EVENTS.ERROR, { path, error: null });
+      this.eventService.emit(`${EVENTS.ERROR}:${path}`, null);
+      this._checkAndEmitFormValidState();
+    }
   }
 
   /**
@@ -294,10 +344,30 @@ export default class FormEngine {
    */
   async validateAll() {
     const errors = await this.validationService.validateAll(this.values);
+    const previousErrors = this.errors;
 
-    // Update errors
-    this.errors = errors;
-    this.eventService.emit(EVENTS.VALIDATION, { errors });
+    // Check if errors object actually changed
+    const errorsChanged = !shallowEqual(previousErrors, errors);
+
+    if (errorsChanged) {
+      this.errors = errors;
+      this.eventService.emit(EVENTS.VALIDATION, { errors });
+      this._checkAndEmitFormValidState();
+      // Emit ERROR event for changed fields
+      const previousErrorKeys = Object.keys(previousErrors);
+      const currentErrorKeys = Object.keys(errors);
+      const allErrorKeys = new Set([...previousErrorKeys, ...currentErrorKeys]);
+
+      allErrorKeys.forEach(path => {
+        const prevError = previousErrors[path];
+        const currError = errors[path];
+
+        if (prevError !== currError) {
+          this.eventService.emit(EVENTS.ERROR, { path, error: currError || null });
+          this.eventService.emit(`${EVENTS.ERROR}:${path}`, currError || null);
+        }
+      });
+    }
 
     return Object.keys(errors).length === 0;
   }
@@ -322,9 +392,12 @@ export default class FormEngine {
    * @param {string} path - Field path
    */
   touch(path) {
-    this.touched.add(path);
-    this.eventService.emit(EVENTS.TOUCH, { path });
-    this.eventService.emit(`${EVENTS.TOUCH}:${path}`, true);
+    // Only emit if field wasn't already touched
+    if (!this.touched.has(path)) {
+      this.touched.add(path);
+      this.eventService.emit(EVENTS.TOUCH, { path });
+      this.eventService.emit(`${EVENTS.TOUCH}:${path}`, true);
+    }
   }
 
   /**
@@ -332,17 +405,61 @@ export default class FormEngine {
    * @param {string} path - Field path
    */
   focus(path) {
-    this.active = path;
-    this.eventService.emit(EVENTS.FOCUS, { path });
-    this.eventService.emit(`${EVENTS.FOCUS}:${path}`, true);
+    const previousActive = this.active;
+
+    // Only emit if active field changed
+    if (previousActive !== path) {
+      this.active = path;
+      this.eventService.emit(EVENTS.FOCUS, { path });
+      this.eventService.emit(`${EVENTS.FOCUS}:${path}`, true);
+      // Emit active state update
+      this.eventService.emit(EVENTS.ACTIVE, { active: path });
+    }
   }
 
   /**
    * Blur field
    */
   blur() {
-    this.active = null;
-    this.eventService.emit(EVENTS.BLUR, {});
+    // Only emit if there was an active field
+    if (this.active !== null) {
+      this.active = null;
+      this.eventService.emit(EVENTS.BLUR, {});
+      // Emit active state update
+      this.eventService.emit(EVENTS.ACTIVE, { active: null });
+    }
+  }
+
+  /**
+   * Check if form is dirty based on configured strategy
+   * @returns {boolean}
+   */
+  _isFormDirty() {
+    const strategy = this.options[FORM_ENGINE_OPTIONS.DIRTY_CHECK_STRATEGY];
+
+    if (strategy === DIRTY_CHECK_STRATEGY.TOUCHED) {
+      return this.touched.size > 0;
+    }
+
+    // Default: VALUES strategy - compare all values with initial
+    const isEqual = this._getIsEqualFunction();
+
+    const currentValues = this.getValues();
+    const allKeys = new Set([
+      ...Object.keys(currentValues),
+      ...Object.keys(this.initialValues),
+    ]);
+
+    for (const key of allKeys) {
+      const current = currentValues[key];
+      const initial = this.initialValues[key];
+
+      if (!isEqual(current, initial)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   /**
@@ -351,15 +468,17 @@ export default class FormEngine {
   getFormState() {
     this._ensureInitialized();
 
+    const isDirty = this._isFormDirty();
     const formState = {
       values: this.getValues(),
+      initialValues: this.getInitialValues(),
       errors: this.getErrors(),
       touched: Array.from(this.touched),
       active: this.active,
       submitting: this.submitting,
       valid: Object.keys(this.errors).length === 0,
-      dirty: this.touched.size > 0,
-      pristine: this.touched.size === 0,
+      dirty: isDirty,
+      pristine: !isDirty,
     };
 
     return this.cacheService.getFormState(formState, () => formState);
@@ -372,18 +491,19 @@ export default class FormEngine {
   getFieldState(path) {
     const currentValue = this.get(path);
     const initialValue = getByPath(this.initialValues, path);
-    const isEqual = (this.options && typeof this.options.isEqual === 'function')
-      ? this.options.isEqual
-      : (a, b) => a === b;
+    const isEqual = this._getIsEqualFunction();
+
+    const isDirty = !isEqual(currentValue, initialValue);
 
     return {
       name: path,
       value: currentValue,
       initialValue,
-      dirty: !isEqual(currentValue, initialValue),
+      dirty: isDirty,
       error: this.getErrors()[path],
       touched: this.isTouched(path),
       active: this.active === path,
+      pristine: !isDirty,
     };
   }
 
@@ -396,7 +516,8 @@ export default class FormEngine {
         get: (p) => this.get(p),
         set: (p, v, options) => this.set(p, v, options),
         getValues: () => this.getValues(),
-        setMany: (updates) => this.setMany(updates),
+        getInitialValues: () => this.getInitialValues(),
+        setMany: (updates, options) => this.setMany(updates, options),
         getErrors: () => this.getErrors(),
         touch: (p) => this.touch(p),
         focus: (p) => this.focus(p),
@@ -485,6 +606,9 @@ export default class FormEngine {
     this.isBatching = false;
     this.operations = 0;
     this.renderCount = 0;
+    this._previousFormDirty = null;
+    this._previousFieldDirty.clear();
+    this._previousFormValid = null;
   }
 
   /**
@@ -492,11 +616,11 @@ export default class FormEngine {
    * @private
    */
   _configureServices() {
-    if (this.validationService && this.validationService.updateConfig) {
+    if (isDefined(this.validationService) && isFunction(this.validationService.updateConfig)) {
       this.validationService.updateConfig({
-        debounceDelay: this.options.batchDelay,
-        validateOnChange: this.options.validateOnChange,
-        validateOnBlur: this.options.validateOnBlur,
+        debounceDelay: this.options[FORM_ENGINE_OPTIONS.BATCH_DELAY],
+        validateOnChange: this.options[FORM_ENGINE_OPTIONS.VALIDATE_ON_CHANGE],
+        validateOnBlur: this.options[FORM_ENGINE_OPTIONS.VALIDATE_ON_BLUR],
         getFieldContext: (path, _value, _allValues) => ({
           fieldState: this.getFieldState(path),
           api: this.getFormApi(),
@@ -504,12 +628,90 @@ export default class FormEngine {
       });
     }
 
-    if (this.batchService && this.batchService.updateConfig) {
+    if (isDefined(this.batchService) && isFunction(this.batchService.updateConfig)) {
       this.batchService.updateConfig({
         enableBatching: this.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING],
         batchDelay: this.options[FORM_ENGINE_OPTIONS.BATCH_DELAY],
       });
     }
+  }
+
+  /**
+   * Get isEqual function from options or return default (shallowEqual)
+   * @returns {Function} Comparison function
+   * @private
+   */
+  _getIsEqualFunction() {
+    return isFunction(this.options.isEqual)
+      ? this.options.isEqual
+      : shallowEqual;
+  }
+
+  /**
+   * Check and emit form-level dirty/pristine state changes
+   * @private
+   */
+  _checkAndEmitFormDirtyState() {
+    const currentDirty = this._isFormDirty();
+
+    // Only emit if state actually changed
+    if (this._previousFormDirty !== null && this._previousFormDirty !== currentDirty) {
+      if (currentDirty) {
+        this.eventService.emit(EVENTS.DIRTY, { dirty: true, pristine: false });
+      } else {
+        this.eventService.emit(EVENTS.PRISTINE, { dirty: false, pristine: true });
+      }
+    }
+
+    this._previousFormDirty = currentDirty;
+  }
+
+  /**
+   * Check and emit form valid state event only when state changes
+   * @private
+   */
+  _checkAndEmitFormValidState() {
+    const isValid = Object.keys(this.errors).length === 0;
+
+    if (this._previousFormValid !== isValid) {
+      this._previousFormValid = isValid;
+      this.eventService.emit(EVENTS.VALID, { valid: isValid });
+    }
+  }
+
+  /**
+   * Check and emit field-level dirty/pristine state changes
+   * @param {string} path - Field path
+   * @private
+   */
+  _checkAndEmitFieldDirtyState(path) {
+    if (!path) return;
+
+    const currentValue = this.get(path);
+    const initialValue = getByPath(this.initialValues, path);
+    const isEqual = this._getIsEqualFunction();
+    const currentDirty = !isEqual(currentValue, initialValue);
+
+    const previousDirty = this._previousFieldDirty.get(path);
+
+    // Only emit if state actually changed
+    if (previousDirty !== undefined && previousDirty !== currentDirty) {
+      if (currentDirty) {
+        this.eventService.emit(`${FIELD_EVENT_PREFIXES.DIRTY}${path}`, {
+          path,
+          dirty: true,
+          pristine: false,
+        });
+      } else {
+        this.eventService.emit(`${FIELD_EVENT_PREFIXES.PRISTINE}${path}`, {
+          path,
+          dirty: false,
+          pristine: true,
+        });
+      }
+    }
+
+    this._previousFieldDirty.set(path, currentDirty);
   }
 
   /**
@@ -528,8 +730,15 @@ export default class FormEngine {
    */
   async submit(onSubmit) {
     this._ensureInitialized();
-    this.submitting = true;
-    this.eventService.emit(EVENTS.SUBMIT, { submitting: true });
+
+    // Only emit submitting events if state actually changed
+    const previousSubmitting = this.submitting;
+
+    if (!previousSubmitting) {
+      this.submitting = true;
+      this.eventService.emit(EVENTS.SUBMIT, { submitting: true });
+      this.eventService.emit(EVENTS.SUBMITTING, { submitting: true });
+    }
 
     try {
       const values = this.getValues();
@@ -544,8 +753,12 @@ export default class FormEngine {
           this.touched.add(fieldName);
         });
 
-        this.submitting = false;
-        this.eventService.emit(EVENTS.SUBMIT, { submitting: false, success: false, errors });
+        // Only emit if state changed
+        if (this.submitting !== false) {
+          this.submitting = false;
+          this.eventService.emit(EVENTS.SUBMIT, { submitting: false, success: false, errors });
+          this.eventService.emit(EVENTS.SUBMITTING, { submitting: false });
+        }
 
         return { success: false, errors, values };
       }
@@ -554,13 +767,21 @@ export default class FormEngine {
         await onSubmit(values);
       }
 
-      this.submitting = false;
-      this.eventService.emit(EVENTS.SUBMIT, { submitting: false, success: true, values });
+      // Only emit if state changed
+      if (this.submitting !== false) {
+        this.submitting = false;
+        this.eventService.emit(EVENTS.SUBMIT, { submitting: false, success: true, values });
+        this.eventService.emit(EVENTS.SUBMITTING, { submitting: false });
+      }
 
       return { success: true, values };
     } catch (error) {
-      this.submitting = false;
-      this.eventService.emit(EVENTS.SUBMIT, { submitting: false, success: false, error: error.message });
+      // Only emit if state changed
+      if (this.submitting !== false) {
+        this.submitting = false;
+        this.eventService.emit(EVENTS.SUBMIT, { submitting: false, success: false, error: error.message });
+        this.eventService.emit(EVENTS.SUBMITTING, { submitting: false });
+      }
 
       return { success: false, error: error.message };
     }

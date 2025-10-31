@@ -3,6 +3,8 @@
  * Replaces slow JSON.stringify for better performance
  */
 
+import { isNullish, isObject, isArray } from './checks';
+
 /**
  * Create a fast hash of an object
  * Much faster than JSON.stringify for large objects
@@ -10,15 +12,15 @@
  * @returns {string} Hash string
  */
 export const hashObject = (obj) => {
-  if (obj === null || obj === undefined) {
+  if (isNullish(obj)) {
     return 'null';
   }
 
-  if (typeof obj !== 'object') {
+  if (!isObject(obj)) {
     return String(obj);
   }
 
-  if (Array.isArray(obj)) {
+  if (isArray(obj)) {
     return `[${obj.map(hashObject).join(',')}]`;
   }
 
@@ -36,11 +38,11 @@ export const hashObject = (obj) => {
  * @returns {string} Shallow hash string
  */
 export const hashObjectShallow = (obj) => {
-  if (obj === null || obj === undefined) {
+  if (isNullish(obj)) {
     return 'null';
   }
 
-  if (typeof obj !== 'object') {
+  if (!isObject(obj)) {
     return String(obj);
   }
 
@@ -57,13 +59,17 @@ export const hashObjectShallow = (obj) => {
  * @returns {string} Hash string
  */
 export const hashFormState = (formState) => {
-  const { values, errors, touched, active, submitting } = formState;
+  const { values, initialValues, errors, touched, active, submitting, dirty, pristine, valid } = formState;
 
   return [
     hashObjectShallow(values),
+    hashObjectShallow(initialValues || {}),
     hashObjectShallow(errors),
-    Array.isArray(touched) ? touched.join(',') : '[]',
+    isArray(touched) ? touched.join(',') : '[]',
     active || 'null',
     submitting ? 'true' : 'false',
+    dirty ? 'true' : 'false',
+    pristine ? 'true' : 'false',
+    valid ? 'true' : 'false',
   ].join('|');
 };

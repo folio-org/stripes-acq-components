@@ -7,6 +7,7 @@ import { useFormEngine } from '../FormContext';
 import { FIELD_ACTIONS, VALIDATION_MODES, DEFAULT_SUBSCRIPTION, DEBOUNCE_DELAYS } from '../../constants';
 import { buildFieldSubscriptions } from '../strategies/fieldSubscriptions';
 import { buildOnBlurCommands, buildOnChangeCommands } from '../strategies/fieldHandlers';
+import { isFunction } from '../../utils/checks';
 
 // Field state reducer
 const fieldStateReducer = (state, action) => {
@@ -78,7 +79,7 @@ export function useField(name, options = {}) {
   const handlers = useMemo(() => ({
     onChange: (event) => {
       const rawValue = event.target ? event.target.value : event;
-      const newValue = typeof parse === 'function' ? parse(rawValue, name) : rawValue;
+      const newValue = isFunction(parse) ? parse(rawValue, name) : rawValue;
       const commands = buildOnChangeCommands({ engine, name, validate, validateOn, debouncedValidate, newValue });
 
       commands.forEach(run => run());

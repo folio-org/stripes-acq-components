@@ -4,6 +4,7 @@
 
 import React, { memo, useMemo } from 'react';
 import { useField } from './hooks';
+import { isFunction } from '../utils/checks';
 
 const Field = memo(({
   name,
@@ -26,14 +27,18 @@ const Field = memo(({
     parse: rest.parse,
   });
 
-  console.log('fieldState', fieldState);
+  // console.log('fieldState', fieldState);
 
   // Memoize component props to prevent unnecessary re-renders
+  const formatValue = useMemo(() => {
+    return isFunction(format) && (!fieldState.active || !formatOnBlur)
+      ? format(fieldState.value, name)
+      : (fieldState.value || '');
+  }, [format, fieldState.value, fieldState.active, formatOnBlur, name]);
+
   const componentProps = useMemo(() => ({
     name,
-    value: (typeof format === 'function' && (!fieldState.active || !formatOnBlur))
-      ? format(fieldState.value, name)
-      : (fieldState.value || ''),
+    value: formatValue,
     onChange: fieldState.onChange,
     onBlur: fieldState.onBlur,
     onFocus: fieldState.onFocus,
@@ -45,7 +50,7 @@ const Field = memo(({
       dirty: fieldState.touched && fieldState.value !== '',
     },
     ...rest,
-  }), [name, fieldState, rest, format, formatOnBlur]);
+  }), [name, fieldState, rest, formatValue]);
 
   // Render with component
   if (Component) {
@@ -53,13 +58,11 @@ const Field = memo(({
   }
 
   // Render with children function
-  if (typeof children === 'function') {
+  if (isFunction(children)) {
     return children({
       input: {
         name,
-        value: (typeof format === 'function' && (!fieldState.active || !formatOnBlur))
-          ? format(fieldState.value, name)
-          : (fieldState.value || ''),
+        value: formatValue,
         onChange: fieldState.onChange,
         onBlur: fieldState.onBlur,
         onFocus: fieldState.onFocus,

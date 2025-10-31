@@ -1,10 +1,11 @@
-/**
- * useWatch - Hook for watching specific field values
- */
+import {
+  useState,
+  useEffect,
+  useRef,
+} from 'react';
 
-import { useState, useEffect, useRef } from 'react';
-import { useFormEngine } from '../FormContext';
 import { FIELD_EVENT_PREFIXES } from '../../constants';
+import { useFormEngine } from '../FormContext';
 
 export function useWatch(name, selector = null) {
   const engine = useFormEngine();
@@ -14,9 +15,9 @@ export function useWatch(name, selector = null) {
     return selector ? selector(fieldValue) : fieldValue;
   });
 
+  const contextRef = useRef();
+
   useEffect(() => {
-    const contextRef = { current: null };
-    // Stable context object for this hook instance
     if (!contextRef.current) contextRef.current = {};
 
     const unsubscribe = engine.on(
@@ -29,7 +30,7 @@ export function useWatch(name, selector = null) {
 
     return () => {
       unsubscribe();
-      // Best-effort cleanup for any missed subscriptions under this context
+
       if (engine.eventService && engine.eventService.cleanupContext) {
         engine.eventService.cleanupContext(contextRef.current);
       }

@@ -1,4 +1,5 @@
 import { EVENTS, FIELD_EVENT_PREFIXES, FIELD_ACTIONS } from '../../constants';
+import { isDefined } from '../../utils/checks';
 
 export const buildFieldSubscriptions = (name, subscription, validate, dispatch) => ([
   {
@@ -29,11 +30,11 @@ export const buildFieldSubscriptions = (name, subscription, validate, dispatch) 
   {
     enabled: !!validate,
     event: EVENTS.VALIDATION,
-    cb: ({ errors }) => errors[name] && dispatch({ type: FIELD_ACTIONS.SET_ERROR, payload: errors[name] }),
+    cb: ({ errors }) => isDefined(errors) && isDefined(errors[name]) && dispatch({ type: FIELD_ACTIONS.SET_ERROR, payload: errors[name] }),
   },
   {
     enabled: !!validate,
     event: EVENTS.SUBMIT,
-    cb: ({ errors }) => errors?.[name] && dispatch({ type: FIELD_ACTIONS.SET_ERROR, payload: errors[name] }),
+    cb: ({ errors }) => isDefined(errors) && isDefined(errors[name]) && dispatch({ type: FIELD_ACTIONS.SET_ERROR, payload: errors[name] }),
   },
 ]);

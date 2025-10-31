@@ -47,6 +47,12 @@ export const EVENTS = {
   SUBMIT: 'submit',
   VALIDATION: 'validation',
   RESET: 'reset',
+  DIRTY: 'dirty',
+  PRISTINE: 'pristine',
+  VALID: 'valid',
+  VALUES: 'values',
+  ACTIVE: 'active',
+  SUBMITTING: 'submitting',
 };
 
 // Field event prefixes
@@ -54,6 +60,8 @@ export const FIELD_EVENT_PREFIXES = {
   CHANGE: 'change:',
   ERROR: 'error:',
   TOUCH: 'touch:',
+  DIRTY: 'dirty:',
+  PRISTINE: 'pristine:',
 };
 
 // Debounce delays
@@ -63,6 +71,12 @@ export const DEBOUNCE_DELAYS = {
   NUMBER: 200,
 };
 
+// Dirty check strategies
+export const DIRTY_CHECK_STRATEGY = {
+  TOUCHED: 'touched', // dirty = has touched fields
+  VALUES: 'values',   // dirty = values differ from initial
+};
+
 // Form engine options
 export const FORM_ENGINE_OPTIONS = {
   ENABLE_BATCHING: 'enableBatching',
@@ -70,4 +84,5 @@ export const FORM_ENGINE_OPTIONS = {
   ENABLE_VALIDATION: 'enableValidation',
   VALIDATE_ON_CHANGE: 'validateOnChange',
   VALIDATE_ON_BLUR: 'validateOnBlur',
+  DIRTY_CHECK_STRATEGY: 'dirtyCheckStrategy',
 };
