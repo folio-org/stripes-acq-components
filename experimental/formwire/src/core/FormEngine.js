@@ -85,8 +85,13 @@ export default class FormEngine {
     this.isInitialized = true;
 
     // Initialize previous state tracking
-    this._previousFormDirty = this._isFormDirty();
+    // For dirty state, initialize from tracked fields (will be computed on first check)
+    // For valid state, compute from errors
     this._previousFormValid = Object.keys(this.errors).length === 0;
+
+    // Compute initial dirty state to set _previousFormDirty correctly
+    // This will also populate _previousFieldDirty for all initial fields
+    this._previousFormDirty = this._isFormDirty();
 
     this.eventService.emit(EVENTS.INIT, { values: this.values, config: this.options });
 
@@ -432,33 +437,28 @@ export default class FormEngine {
 
   /**
    * Check if form is dirty based on configured strategy
+   * Form is dirty if at least one field is dirty
    * @returns {boolean}
    */
   _isFormDirty() {
     const strategy = this.options[FORM_ENGINE_OPTIONS.DIRTY_CHECK_STRATEGY];
 
     if (strategy === DIRTY_CHECK_STRATEGY.TOUCHED) {
+      // Form is dirty if at least one field is touched
       return this.touched.size > 0;
     }
 
-    // Default: VALUES strategy - compare all values with initial
-    const isEqual = this._getIsEqualFunction();
-
-    const currentValues = this.getValues();
-    const allKeys = new Set([
-      ...Object.keys(currentValues),
-      ...Object.keys(this.initialValues),
-    ]);
-
-    for (const key of allKeys) {
-      const current = currentValues[key];
-      const initial = this.initialValues[key];
-
-      if (!isEqual(current, initial)) {
+    // Default: VALUES strategy - form is dirty if at least one field has different value
+    // Use field-level tracking - check all tracked fields
+    // If any field is dirty, form is dirty
+    for (const [, isDirty] of this._previousFieldDirty) {
+      if (isDirty) {
         return true;
       }
     }
 
+    // All tracked fields are pristine (or no fields tracked yet)
+    // Form is pristine
     return false;
   }
 
@@ -653,9 +653,11 @@ export default class FormEngine {
    */
   _checkAndEmitFormDirtyState() {
     const currentDirty = this._isFormDirty();
+    const previousDirty = this._previousFormDirty;
 
     // Only emit if state actually changed
-    if (this._previousFormDirty !== null && this._previousFormDirty !== currentDirty) {
+    // Note: on first check (previousDirty === null), we don't emit, but we initialize the state
+    if (previousDirty !== null && previousDirty !== currentDirty) {
       if (currentDirty) {
         this.eventService.emit(EVENTS.DIRTY, { dirty: true, pristine: false });
       } else {
@@ -663,6 +665,7 @@ export default class FormEngine {
       }
     }
 
+    // Always update previous state, even on first check
     this._previousFormDirty = currentDirty;
   }
 
@@ -681,6 +684,7 @@ export default class FormEngine {
 
   /**
    * Check and emit field-level dirty/pristine state changes
+   * Also triggers form-level dirty/pristine check if field state changed
    * @param {string} path - Field path
    * @private
    */
@@ -693,6 +697,9 @@ export default class FormEngine {
     const currentDirty = !isEqual(currentValue, initialValue);
 
     const previousDirty = this._previousFieldDirty.get(path);
+
+    // Always update the tracked state
+    this._previousFieldDirty.set(path, currentDirty);
 
     // Only emit if state actually changed
     if (previousDirty !== undefined && previousDirty !== currentDirty) {
@@ -709,9 +716,15 @@ export default class FormEngine {
           pristine: true,
         });
       }
-    }
 
-    this._previousFieldDirty.set(path, currentDirty);
+      // Field state changed, check form-level dirty state
+      this._checkAndEmitFormDirtyState();
+    } else if (previousDirty === undefined) {
+      // First time tracking this field - check form state if field is dirty
+      if (currentDirty) {
+        this._checkAndEmitFormDirtyState();
+      }
+    }
   }
 
   /**
@@ -731,13 +744,12 @@ export default class FormEngine {
   async submit(onSubmit) {
     this._ensureInitialized();
 
-    // Only emit submitting events if state actually changed
+    // Only emit submit events if state actually changed
     const previousSubmitting = this.submitting;
 
     if (!previousSubmitting) {
       this.submitting = true;
       this.eventService.emit(EVENTS.SUBMIT, { submitting: true });
-      this.eventService.emit(EVENTS.SUBMITTING, { submitting: true });
     }
 
     try {
@@ -757,7 +769,6 @@ export default class FormEngine {
         if (this.submitting !== false) {
           this.submitting = false;
           this.eventService.emit(EVENTS.SUBMIT, { submitting: false, success: false, errors });
-          this.eventService.emit(EVENTS.SUBMITTING, { submitting: false });
         }
 
         return { success: false, errors, values };
@@ -771,7 +782,6 @@ export default class FormEngine {
       if (this.submitting !== false) {
         this.submitting = false;
         this.eventService.emit(EVENTS.SUBMIT, { submitting: false, success: true, values });
-        this.eventService.emit(EVENTS.SUBMITTING, { submitting: false });
       }
 
       return { success: true, values };
@@ -780,7 +790,6 @@ export default class FormEngine {
       if (this.submitting !== false) {
         this.submitting = false;
         this.eventService.emit(EVENTS.SUBMIT, { submitting: false, success: false, error: error.message });
-        this.eventService.emit(EVENTS.SUBMITTING, { submitting: false });
       }
 
       return { success: false, error: error.message };

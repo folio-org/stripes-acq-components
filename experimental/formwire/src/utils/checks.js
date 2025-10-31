@@ -99,18 +99,19 @@ export const shallowEqual = (a, b) => {
   // One is nullish, other is not
   if (isNullish(a) || isNullish(b)) return false;
 
-  // Both arrays - compare length and elements
+  // Both arrays - compare length and elements recursively
   if (isArray(a) && isArray(b)) {
     if (a.length !== b.length) return false;
 
     for (let i = 0; i < a.length; i++) {
-      if (a[i] !== b[i]) return false;
+      // Use recursive shallow comparison for nested objects/arrays
+      if (!shallowEqual(a[i], b[i])) return false;
     }
 
     return true;
   }
 
-  // Both objects (but not arrays) - compare keys and values
+  // Both objects (but not arrays) - compare keys and values recursively
   if (isObject(a) && isObject(b)) {
     const keysA = Object.keys(a);
     const keysB = Object.keys(b);
@@ -118,7 +119,9 @@ export const shallowEqual = (a, b) => {
     if (keysA.length !== keysB.length) return false;
 
     for (const key of keysA) {
-      if (!(key in b) || a[key] !== b[key]) return false;
+      if (!(key in b)) return false;
+      // Use recursive shallow comparison for nested objects/arrays
+      if (!shallowEqual(a[key], b[key])) return false;
     }
 
     return true;

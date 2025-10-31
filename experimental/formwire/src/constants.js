@@ -52,7 +52,6 @@ export const EVENTS = {
   VALID: 'valid',
   VALUES: 'values',
   ACTIVE: 'active',
-  SUBMITTING: 'submitting',
 };
 
 // Field event prefixes

@@ -2,7 +2,7 @@
  * Form component - Main form wrapper
  */
 
-import React, { useMemo, useCallback, useEffect } from 'react';
+import React, { useMemo, useCallback, useEffect, useRef } from 'react';
 import FormEngine from '../core/FormEngine';
 import { FormProvider } from './FormContext';
 import { EVENTS, VALIDATION_MODES } from '../constants';
@@ -36,32 +36,55 @@ export default function Form({
     return newEngine;
   }, [providedEngine, initialValues, defaultValidateOn, dirtyCheckStrategy]);
 
+  // Stabilize validate function using ref
+  const validateRef = useRef(validate);
+
+  validateRef.current = validate;
+
   // Register and run form-level validation declaratively
+  // Use requestIdleCallback for low-priority validation tasks to avoid blocking
   useEffect(() => {
-    if (!validate) return undefined;
+    const currentValidate = validateRef.current;
+
+    if (!currentValidate) return undefined;
 
     if (!engine.hasValidator('$form')) {
-      engine.registerValidator('$form', (_ignored, allValues) => validate(allValues), formValidateOn);
+      engine.registerValidator('$form', (_ignored, allValues) => currentValidate(allValues), formValidateOn);
     }
 
-    const strategies = {
-      [VALIDATION_MODES.CHANGE]: () => {
-        // reuse validation service strategy, including debounce if passed
-        return engine.on(EVENTS.CHANGE, () => {
-          engine.validationService
-            .validateByMode('$form', null, engine.getValues(), VALIDATION_MODES.CHANGE, { debounceDelay })
-            .then((error) => {
-              if (error) engine.setError('$form', error); else engine.clearError('$form');
-            });
-        });
-      },
-      [VALIDATION_MODES.BLUR]: () => engine.on(EVENTS.BLUR, () => {
+    const runValidation = (mode, delay = 0) => {
+      const doValidate = () => {
         engine.validationService
-          .validateByMode('$form', null, engine.getValues(), VALIDATION_MODES.BLUR)
+          .validateByMode('$form', null, engine.getValues(), mode, { debounceDelay: delay })
           .then((error) => {
-            if (error) engine.setError('$form', error); else engine.clearError('$form');
+            if (error) {
+              engine.setError('$form', error);
+            } else {
+              engine.clearError('$form');
+            }
           });
-      }),
+      };
+
+      // For low-priority validations (CHANGE mode), use requestAnimationFrame for smoother UX
+      // This ensures validation runs without blocking the UI thread
+      if (mode === VALIDATION_MODES.CHANGE) {
+        if (typeof requestAnimationFrame !== 'undefined') {
+          requestAnimationFrame(doValidate);
+        } else {
+          setTimeout(doValidate, 0);
+        }
+      } else {
+        // For BLUR and SUBMIT, validate immediately
+        doValidate();
+      }
+    };
+
+    const strategies = {
+      [VALIDATION_MODES.CHANGE]: () => engine.on(
+        EVENTS.CHANGE,
+        () => runValidation(VALIDATION_MODES.CHANGE, debounceDelay),
+      ),
+      [VALIDATION_MODES.BLUR]: () => engine.on(EVENTS.BLUR, () => runValidation(VALIDATION_MODES.BLUR)),
       [VALIDATION_MODES.SUBMIT]: () => null,
     };
 
@@ -70,7 +93,7 @@ export default function Form({
     return () => {
       if (unsubscribe) unsubscribe();
     };
-  }, [engine, validate, formValidateOn, debounceDelay]);
+  }, [engine, formValidateOn, debounceDelay]); // validate handled via ref
 
   // Handle form submission
   const handleSubmit = useCallback(async (e) => {

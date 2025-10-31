@@ -16,14 +16,23 @@ export function useWatch(name, selector = null) {
   });
 
   const contextRef = useRef();
+  // Stabilize selector using ref to avoid recreating subscription
+  const selectorRef = useRef(selector);
+
+  selectorRef.current = selector;
 
   useEffect(() => {
-    if (!contextRef.current) contextRef.current = {};
+    if (!contextRef.current) {
+      contextRef.current = {};
+    }
 
     const unsubscribe = engine.on(
       `${FIELD_EVENT_PREFIXES.CHANGE}${name}`,
       (newValue) => {
-        setValue(selector ? selector(newValue) : newValue);
+        // Use current selector from ref
+        const currentSelector = selectorRef.current;
+
+        setValue(currentSelector ? currentSelector(newValue) : newValue);
       },
       contextRef.current,
     );
@@ -35,7 +44,7 @@ export function useWatch(name, selector = null) {
         engine.eventService.cleanupContext(contextRef.current);
       }
     };
-  }, [engine, name, selector]);
+  }, [engine, name]); // Only engine and name - selector handled via ref
 
   return value;
 }

@@ -6,7 +6,7 @@ import {
   useRef,
   useEffect,
   useReducer,
-  useMemo,
+  startTransition,
 } from 'react';
 
 import {
@@ -87,7 +87,13 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
   const initialState = engine.getFormState();
   const [formState, dispatch] = useReducer(formStateReducer, initialState);
 
-  const stableSubscription = useMemo(() => ({
+  // Stabilize subscription using ref to avoid recreating on every render
+  const subscriptionRef = useRef(subscription);
+
+  subscriptionRef.current = subscription;
+
+  // Use ref for stable subscription to avoid useEffect dependency on subscription object
+  const stableSubscriptionRef = useRef({
     values: subscription.values,
     errors: subscription.errors,
     touched: subscription.touched,
@@ -96,16 +102,32 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
     dirty: subscription.dirty,
     pristine: subscription.pristine,
     valid: subscription.valid,
-  }), [
-    subscription.values,
-    subscription.errors,
-    subscription.touched,
-    subscription.active,
-    subscription.submitting,
-    subscription.dirty,
-    subscription.pristine,
-    subscription.valid,
-  ]);
+  });
+
+  // Update ref synchronously but only when values change (no useEffect needed - ref updates are cheap)
+  const currentSubscription = subscriptionRef.current;
+
+  if (
+    currentSubscription.values !== stableSubscriptionRef.current.values ||
+    currentSubscription.errors !== stableSubscriptionRef.current.errors ||
+    currentSubscription.touched !== stableSubscriptionRef.current.touched ||
+    currentSubscription.active !== stableSubscriptionRef.current.active ||
+    currentSubscription.submitting !== stableSubscriptionRef.current.submitting ||
+    currentSubscription.dirty !== stableSubscriptionRef.current.dirty ||
+    currentSubscription.pristine !== stableSubscriptionRef.current.pristine ||
+    currentSubscription.valid !== stableSubscriptionRef.current.valid
+  ) {
+    stableSubscriptionRef.current = {
+      values: currentSubscription.values,
+      errors: currentSubscription.errors,
+      touched: currentSubscription.touched,
+      active: currentSubscription.active,
+      submitting: currentSubscription.submitting,
+      dirty: currentSubscription.dirty,
+      pristine: currentSubscription.pristine,
+      valid: currentSubscription.valid,
+    };
+  }
 
   const prevStateRef = useRef(initialState);
   const contextRef = useRef();
@@ -117,7 +139,9 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
 
     const unsubscribers = [];
 
-    const handler = () => {
+    // Separate handlers for critical vs low-priority updates
+    // Critical handler - synchronous for immediate UI feedback (values, errors)
+    const criticalHandler = () => {
       const nextState = engine.getFormState();
       const prevState = prevStateRef.current;
 
@@ -126,57 +150,108 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
         return;
       }
 
+      // Use current subscription from ref
+      const activeSubscription = stableSubscriptionRef.current;
+
       // Only update if subscribed fields actually changed
-      if (hasSubscribedChanges(prevState, nextState, stableSubscription)) {
+      if (hasSubscribedChanges(prevState, nextState, activeSubscription)) {
         prevStateRef.current = nextState;
-        dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
+        // Use startTransition for non-urgent updates to keep UI responsive
+        startTransition(() => {
+          dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
+        });
       } else {
         // Update ref even if no changes to avoid false positives in future comparisons
         prevStateRef.current = nextState;
       }
     };
 
-    // Subscribe to events based on subscription - each field has its own event
-    if (stableSubscription.values) {
+    // Low-priority handler for non-critical updates (dirty, pristine, valid)
+    // Uses requestAnimationFrame + startTransition for smooth async updates
+    const lowPriorityHandler = () => {
+      const nextState = engine.getFormState();
+      const prevState = prevStateRef.current;
+
+      // Skip if states are the same reference
+      if (prevState === nextState) {
+        return;
+      }
+
+      // Use current subscription from ref
+      const activeSubscription = stableSubscriptionRef.current;
+
+      const processUpdate = () => {
+        // Only update if subscribed fields actually changed
+        if (hasSubscribedChanges(prevState, nextState, activeSubscription)) {
+          prevStateRef.current = nextState;
+          // Use startTransition for low-priority updates
+          startTransition(() => {
+            dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
+          });
+        } else {
+          // Update ref even if no changes to avoid false positives in future comparisons
+          prevStateRef.current = nextState;
+        }
+      };
+
+      // Use requestAnimationFrame for smooth UI updates without blocking
+      if (typeof requestAnimationFrame !== 'undefined') {
+        requestAnimationFrame(processUpdate);
+      } else {
+        // Fallback: use setTimeout for async but fast update
+        setTimeout(processUpdate, 0);
+      }
+    };
+
+    // Get current subscription from ref for subscriptions setup
+    const activeSubscription = stableSubscriptionRef.current;
+
+    // Subscribe to events based on subscription - use different handlers for critical vs low-priority
+    // Critical updates (values, errors) - synchronous for immediate UI feedback
+    if (activeSubscription.values) {
       unsubscribers.push(
-        engine.on(EVENTS.VALUES, handler, contextRef.current),
+        engine.on(EVENTS.VALUES, criticalHandler, contextRef.current),
       );
     }
 
-    if (stableSubscription.errors) {
+    if (activeSubscription.errors) {
       unsubscribers.push(
-        engine.on(EVENTS.ERROR, handler, contextRef.current),
+        engine.on(EVENTS.ERROR, criticalHandler, contextRef.current),
       );
     }
 
-    if (stableSubscription.touched) {
+    // Medium priority (touched, active, submitting) - synchronous but less critical
+    if (activeSubscription.touched) {
       unsubscribers.push(
-        engine.on(EVENTS.TOUCH, handler, contextRef.current),
+        engine.on(EVENTS.TOUCH, criticalHandler, contextRef.current),
       );
     }
 
-    if (stableSubscription.active) {
+    if (activeSubscription.active) {
       unsubscribers.push(
-        engine.on(EVENTS.ACTIVE, handler, contextRef.current),
+        engine.on(EVENTS.ACTIVE, criticalHandler, contextRef.current),
       );
     }
 
-    if (stableSubscription.submitting) {
+    // Subscribe to SUBMIT event if submitting state is needed
+    // SUBMIT event already contains submitting state in payload
+    if (activeSubscription.submitting) {
       unsubscribers.push(
-        engine.on(EVENTS.SUBMITTING, handler, contextRef.current),
+        engine.on(EVENTS.SUBMIT, criticalHandler, contextRef.current),
       );
     }
 
-    if (stableSubscription.dirty || stableSubscription.pristine) {
+    // Low priority (dirty, pristine, valid) - async to avoid blocking
+    if (activeSubscription.dirty || activeSubscription.pristine) {
       unsubscribers.push(
-        engine.on(EVENTS.DIRTY, handler, contextRef.current),
-        engine.on(EVENTS.PRISTINE, handler, contextRef.current),
+        engine.on(EVENTS.DIRTY, lowPriorityHandler, contextRef.current),
+        engine.on(EVENTS.PRISTINE, lowPriorityHandler, contextRef.current),
       );
     }
 
-    if (stableSubscription.valid) {
+    if (activeSubscription.valid) {
       unsubscribers.push(
-        engine.on(EVENTS.VALID, handler, contextRef.current),
+        engine.on(EVENTS.VALID, lowPriorityHandler, contextRef.current),
       );
     }
 
@@ -186,7 +261,7 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
         engine.eventService.cleanupContext(contextRef.current);
       }
     };
-  }, [engine, stableSubscription]);
+  }, [engine]); // Only engine as dependency - subscription handled via ref
 
   return formState;
 }

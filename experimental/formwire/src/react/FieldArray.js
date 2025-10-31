@@ -2,7 +2,7 @@
  * FieldArray component - For managing arrays of fields with optimizations
  */
 
-import React, { useMemo, memo } from 'react';
+import React, { useMemo, memo, useRef } from 'react';
 import { useFormEngine } from './FormContext';
 import { useWatch } from './hooks';
 import { isFunction } from '../utils/checks';
@@ -10,8 +10,11 @@ import { isFunction } from '../utils/checks';
 const FieldArray = memo(({ name, children }) => {
   const engine = useFormEngine();
 
+  // Stabilize selector function using useRef
+  const arraySelectorRef = useRef((value) => value || []);
+
   // Watch array changes
-  const array = useWatch(name, (value) => value || []);
+  const array = useWatch(name, arraySelectorRef.current);
 
   // Generate field descriptors with stable IDs
   const fields = useMemo(() => {
