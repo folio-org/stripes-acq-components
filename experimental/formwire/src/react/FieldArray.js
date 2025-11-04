@@ -25,55 +25,43 @@ const FieldArray = memo(({ name, children }) => {
     }));
   }, [name, array]);
 
-  // Memoized array manipulation methods
   const arrayMethods = useMemo(() => ({
     push: (item) => {
-      const currentArray = engine.get(name) || [];
-
-      engine.set(name, [...currentArray, item]);
+      engine.set(name, [...array, item]);
     },
 
     remove: (index) => {
-      const currentArray = engine.get(name) || [];
-      const newArray = currentArray.filter((_, i) => i !== index);
+      const newArray = array.filter((_, i) => i !== index);
 
       engine.set(name, newArray);
     },
 
     insert: (index, item) => {
-      const currentArray = engine.get(name) || [];
-      const newArray = [...currentArray];
+      const newArray = [...array];
 
       newArray.splice(index, 0, item);
-
       engine.set(name, newArray);
     },
 
     move: (fromIndex, toIndex) => {
-      const currentArray = engine.get(name) || [];
-      const newArray = [...currentArray];
+      const newArray = [...array];
       const [movedItem] = newArray.splice(fromIndex, 1);
 
       newArray.splice(toIndex, 0, movedItem);
-
       engine.set(name, newArray);
     },
 
     swap: (indexA, indexB) => {
-      const currentArray = engine.get(name) || [];
-      const newArray = [...currentArray];
+      const newArray = [...array];
 
       [newArray[indexA], newArray[indexB]] = [newArray[indexB], newArray[indexA]];
-
       engine.set(name, newArray);
     },
 
     update: (index, item) => {
-      const currentArray = engine.get(name) || [];
-      const newArray = [...currentArray];
+      const newArray = [...array];
 
       newArray[index] = item;
-
       engine.set(name, newArray);
     },
 
@@ -82,14 +70,12 @@ const FieldArray = memo(({ name, children }) => {
     },
 
     length: array.length,
-  }), [engine, name, array.length]);
+  }), [engine, name, array]);
 
-  // Render with children function
   if (isFunction(children)) {
     return children({ fields, ...arrayMethods });
   }
 
-  // Default render
   return (
     <div>
       {fields.map((field) => (

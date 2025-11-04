@@ -32,18 +32,14 @@ const Field = memo(forwardRef(({
 
   formatRef.current = format;
 
-  // Memoize component props to prevent unnecessary re-renders
-  // Use ref for format to avoid recreating on every render
   const formatValue = useMemo(() => {
     const currentFormat = formatRef.current;
 
     return isFunction(currentFormat) && (!fieldState.active || !formatOnBlur)
       ? currentFormat(fieldState.value, name)
       : (fieldState.value || '');
-  }, [fieldState.value, fieldState.active, formatOnBlur, name]); // format handled via ref
+  }, [fieldState.value, fieldState.active, formatOnBlur, name]);
 
-  // Component props - handlers from useField are stable (from ref), so we can safely include them
-  // rest is intentionally excluded to avoid unnecessary re-renders when parent re-renders
   const componentProps = useMemo(() => ({
     name,
     value: formatValue,
@@ -69,17 +65,13 @@ const Field = memo(forwardRef(({
     fieldState.onBlur,
     fieldState.onFocus,
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    rest, // rest intentionally excluded - usually contains stable props
+    rest,
   ]);
 
-  // Render with component
   if (Component) {
-    // If Component accepts ref (class component or forwardRef), pass it
-    // For functional components that need ref, they should use forwardRef
     return <Component {...componentProps} ref={ref} />;
   }
 
-  // Render with children function
   if (isFunction(children)) {
     return children({
       input: {
@@ -88,7 +80,7 @@ const Field = memo(forwardRef(({
         onChange: fieldState.onChange,
         onBlur: fieldState.onBlur,
         onFocus: fieldState.onFocus,
-        ref, // Pass ref in input object for children function
+        ref,
       },
       meta: {
         error: fieldState.error,
@@ -101,7 +93,6 @@ const Field = memo(forwardRef(({
     });
   }
 
-  // Default input - pass ref directly
   return (
     <input
       {...componentProps}

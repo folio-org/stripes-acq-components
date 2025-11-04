@@ -17,11 +17,14 @@ export function useWatch(name, selector = null) {
 
   const contextRef = useRef();
   // Stabilize selector using ref to avoid recreating subscription
+  // If selector is in dependency array, subscription would recreate on every selector change
+  // Using ref allows selector to change without recreating subscription
   const selectorRef = useRef(selector);
 
   selectorRef.current = selector;
 
   useEffect(() => {
+    // Create context object once for cleanup tracking
     if (!contextRef.current) {
       contextRef.current = {};
     }
@@ -29,7 +32,8 @@ export function useWatch(name, selector = null) {
     const unsubscribe = engine.on(
       `${FIELD_EVENT_PREFIXES.CHANGE}${name}`,
       (newValue) => {
-        // Use current selector from ref
+        // Read current selector from ref - this ensures we always use latest selector
+        // even if it changed after subscription was created
         const currentSelector = selectorRef.current;
 
         setValue(currentSelector ? currentSelector(newValue) : newValue);

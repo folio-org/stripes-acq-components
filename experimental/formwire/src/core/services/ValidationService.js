@@ -140,12 +140,16 @@ export class ValidationService {
 
     const { validateOn } = validatorData;
 
+    // Only validate if validator's validateOn mode matches requested mode
+    // This ensures validators only run when they should (e.g., blur validator only on blur)
     if (validateOn !== mode) return null;
 
     const strategy = this.modeStrategies[mode];
 
     if (!strategy) return null;
 
+    // Execute validation using the appropriate strategy for the mode
+    // Strategies handle debouncing, timing, etc. differently per mode
     return strategy(path, value, allValues, options);
   }
 

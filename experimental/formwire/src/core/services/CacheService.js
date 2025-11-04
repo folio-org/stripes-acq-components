@@ -3,7 +3,8 @@
  * Can be injected into FormEngine for custom caching behavior
  */
 
-import { hashFormState } from '../../utils/hash';
+import { hashFormState, hashObject } from '../../utils/hash';
+import { getByPath } from '../../utils/path';
 
 export class CacheService {
   constructor(options = {}) {
@@ -48,9 +49,7 @@ export class CacheService {
     this.stats.misses++;
     const value = computeFn();
 
-    // Check cache size limit
     if (this.valueCache.size >= this.options.maxCacheSize) {
-      // Remove oldest entries (Map maintains insertion order)
       const keysToDelete = Array.from(this.valueCache.keys()).slice(0, Math.floor(this.options.maxCacheSize / 2));
 
       keysToDelete.forEach(cacheKeyToDelete => this.valueCache.delete(cacheKeyToDelete));
@@ -86,9 +85,7 @@ export class CacheService {
     this.stats.misses++;
     const computedState = computeFn();
 
-    // Check cache size limit
     if (this.formStateCache.size >= this.options.maxCacheSize) {
-      // Remove oldest entries (Map maintains insertion order)
       const keysToDelete = Array.from(this.formStateCache.keys()).slice(0, Math.floor(this.options.maxCacheSize / 2));
 
       keysToDelete.forEach(cacheKeyToDelete => this.formStateCache.delete(cacheKeyToDelete));
@@ -106,13 +103,20 @@ export class CacheService {
    */
   clearForPath(_path) {
     if (this.valueCache) {
-      // In a real implementation, track affected keys by path
       this.valueCache.clear();
       this.stats.size = this.valueCache.size;
     }
 
     if (this.formStateCache) {
-      // Changing any path may affect computed form state
+      this.formStateCache.clear();
+    }
+  }
+
+  /**
+   * Clear form state cache
+   */
+  clearFormStateCache() {
+    if (this.formStateCache) {
       this.formStateCache.clear();
     }
   }
@@ -134,10 +138,24 @@ export class CacheService {
    * Create cache key for value
    * @param {string} path - Field path
    * @param {Object} values - Form values
-   * @returns {Object} Cache key
+   * @returns {string} Cache key
    */
   createValueKey(path, values) {
-    return { path, values };
+    const valueAtPath = getByPath(values, path);
+
+    // Create deterministic cache key from path and value
+    // Use hash for objects/arrays to handle reference changes, simple string for primitives
+    if (valueAtPath === null || valueAtPath === undefined) {
+      return `${path}::nullish`;
+    }
+
+    if (typeof valueAtPath === 'object') {
+      // Hash ensures same object content produces same key even if reference differs
+      return `${path}::${hashObject(valueAtPath)}`;
+    }
+
+    // Primitives can be directly converted to string
+    return `${path}::${String(valueAtPath)}`;
   }
 
   /**

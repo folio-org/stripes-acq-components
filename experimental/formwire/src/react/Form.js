@@ -36,13 +36,10 @@ export default function Form({
     return newEngine;
   }, [providedEngine, initialValues, defaultValidateOn, dirtyCheckStrategy]);
 
-  // Stabilize validate function using ref
   const validateRef = useRef(validate);
 
   validateRef.current = validate;
 
-  // Register and run form-level validation declaratively
-  // Use requestIdleCallback for low-priority validation tasks to avoid blocking
   useEffect(() => {
     const currentValidate = validateRef.current;
 
@@ -65,16 +62,26 @@ export default function Form({
           });
       };
 
-      // For low-priority validations (CHANGE mode), use requestAnimationFrame for smoother UX
-      // This ensures validation runs without blocking the UI thread
+      // Different scheduling strategies per mode for optimal UX
       if (mode === VALIDATION_MODES.CHANGE) {
+        // CHANGE: Use requestAnimationFrame to align with browser repaint
+        // This ensures validation doesn't block UI during rapid typing
         if (typeof requestAnimationFrame !== 'undefined') {
           requestAnimationFrame(doValidate);
         } else {
           setTimeout(doValidate, 0);
         }
+      } else if (mode === VALIDATION_MODES.BLUR) {
+        // BLUR: Use queueMicrotask for immediate but non-blocking execution
+        // User already left the field, so validation can run quickly without blocking
+        if (typeof queueMicrotask !== 'undefined') {
+          queueMicrotask(doValidate);
+        } else {
+          Promise.resolve().then(doValidate);
+        }
       } else {
-        // For BLUR and SUBMIT, validate immediately
+        // SUBMIT: Validate immediately (blocking is acceptable for submit)
+        // User expects immediate feedback on submit
         doValidate();
       }
     };
@@ -93,21 +100,15 @@ export default function Form({
     return () => {
       if (unsubscribe) unsubscribe();
     };
-  }, [engine, formValidateOn, debounceDelay]); // validate handled via ref
+  }, [engine, formValidateOn, debounceDelay]);
 
-  // Handle form submission
   const handleSubmit = useCallback(async (e) => {
     if (isFunction(e?.preventDefault)) {
       e.preventDefault();
     }
 
     if (onSubmit) {
-      const result = await engine.submit((values) => onSubmit(values, engine.getFormApi()));
-
-      if (!result.success) {
-        // Form submission failed - errors are handled by FormEngine
-        // Could emit custom event or call error callback here
-      }
+      await engine.submit((values) => onSubmit(values, engine.getFormApi()));
     }
   }, [engine, onSubmit]);
 

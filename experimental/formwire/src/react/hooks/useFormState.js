@@ -32,14 +32,14 @@ const formStateReducer = (state, action) => {
  * Checks if any subscribed fields changed between two states
  */
 function hasSubscribedChanges(prevState, nextState, subscription) {
-  // Quick reference equality check first
+  // Quick reference equality check - if same object, no changes
   if (prevState === nextState) {
     return false;
   }
 
+  // Only check keys that are subscribed to (performance optimization)
   for (const key in subscription) {
     if (!subscription[key]) {
-      // Skip unsubscribed keys
       // eslint-disable-next-line no-continue
       continue;
     }
@@ -47,12 +47,12 @@ function hasSubscribedChanges(prevState, nextState, subscription) {
     const hasPrev = key in prevState;
     const hasNext = key in nextState;
 
-    // If one exists and other doesn't, it's a change
+    // Key appeared or disappeared - this is a change
     if (hasPrev !== hasNext) {
       return true;
     }
 
-    // If neither exists, no change
+    // Key doesn't exist in either state - no change
     if (!hasPrev && !hasNext) {
       // eslint-disable-next-line no-continue
       continue;
@@ -61,13 +61,13 @@ function hasSubscribedChanges(prevState, nextState, subscription) {
     const prev = prevState[key];
     const next = nextState[key];
 
-    // Quick reference equality check
+    // Reference equality - same object reference means no change
     if (prev === next) {
       // eslint-disable-next-line no-continue
       continue;
     }
 
-    // For objects and arrays, do shallow comparison
+    // Shallow comparison for objects/arrays - deep comparison would be too expensive
     if (!shallowEqual(prev, next)) {
       return true;
     }
@@ -104,30 +104,46 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
     valid: subscription.valid,
   });
 
-  // Update ref synchronously but only when values change (no useEffect needed - ref updates are cheap)
-  const currentSubscription = subscriptionRef.current;
+  // Update ref in useEffect to avoid blocking render
+  // Update stable subscription ref when subscription changes
+  // This ref is used in event handlers to avoid recreating subscriptions on every render
+  // Moving ref update to useEffect ensures it doesn't block render phase
+  useEffect(() => {
+    const currentSubscription = subscriptionRef.current;
 
-  if (
-    currentSubscription.values !== stableSubscriptionRef.current.values ||
-    currentSubscription.errors !== stableSubscriptionRef.current.errors ||
-    currentSubscription.touched !== stableSubscriptionRef.current.touched ||
-    currentSubscription.active !== stableSubscriptionRef.current.active ||
-    currentSubscription.submitting !== stableSubscriptionRef.current.submitting ||
-    currentSubscription.dirty !== stableSubscriptionRef.current.dirty ||
-    currentSubscription.pristine !== stableSubscriptionRef.current.pristine ||
-    currentSubscription.valid !== stableSubscriptionRef.current.valid
-  ) {
-    stableSubscriptionRef.current = {
-      values: currentSubscription.values,
-      errors: currentSubscription.errors,
-      touched: currentSubscription.touched,
-      active: currentSubscription.active,
-      submitting: currentSubscription.submitting,
-      dirty: currentSubscription.dirty,
-      pristine: currentSubscription.pristine,
-      valid: currentSubscription.valid,
-    };
-  }
+    // Only update if subscription actually changed (reference equality check)
+    // This prevents unnecessary ref updates and potential subscription recreation
+    if (
+      currentSubscription.values !== stableSubscriptionRef.current.values ||
+      currentSubscription.errors !== stableSubscriptionRef.current.errors ||
+      currentSubscription.touched !== stableSubscriptionRef.current.touched ||
+      currentSubscription.active !== stableSubscriptionRef.current.active ||
+      currentSubscription.submitting !== stableSubscriptionRef.current.submitting ||
+      currentSubscription.dirty !== stableSubscriptionRef.current.dirty ||
+      currentSubscription.pristine !== stableSubscriptionRef.current.pristine ||
+      currentSubscription.valid !== stableSubscriptionRef.current.valid
+    ) {
+      stableSubscriptionRef.current = {
+        values: currentSubscription.values,
+        errors: currentSubscription.errors,
+        touched: currentSubscription.touched,
+        active: currentSubscription.active,
+        submitting: currentSubscription.submitting,
+        dirty: currentSubscription.dirty,
+        pristine: currentSubscription.pristine,
+        valid: currentSubscription.valid,
+      };
+    }
+  }, [
+    subscription.values,
+    subscription.errors,
+    subscription.touched,
+    subscription.active,
+    subscription.submitting,
+    subscription.dirty,
+    subscription.pristine,
+    subscription.valid,
+  ]);
 
   const prevStateRef = useRef(initialState);
   const contextRef = useRef();
@@ -140,34 +156,39 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
     const unsubscribers = [];
 
     // Separate handlers for critical vs low-priority updates
-    // Critical handler - synchronous for immediate UI feedback (values, errors)
+    // Critical updates (values, errors) need immediate UI feedback
+    // Low-priority updates (dirty, pristine, valid) can be deferred
     const criticalHandler = () => {
       const nextState = engine.getFormState();
       const prevState = prevStateRef.current;
 
-      // Skip if states are the same reference
+      // Skip if states are the same reference (cached form state)
       if (prevState === nextState) {
         return;
       }
 
-      // Use current subscription from ref
+      // Use current subscription from ref (subscription may change without recreating effect)
       const activeSubscription = stableSubscriptionRef.current;
 
       // Only update if subscribed fields actually changed
+      // This prevents unnecessary re-renders when unsubscribed fields change
       if (hasSubscribedChanges(prevState, nextState, activeSubscription)) {
         prevStateRef.current = nextState;
-        // Use startTransition for non-urgent updates to keep UI responsive
+        // Use startTransition to mark this as non-urgent update
+        // This allows React to keep UI responsive during rapid changes
         startTransition(() => {
           dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
         });
       } else {
-        // Update ref even if no changes to avoid false positives in future comparisons
+        // Update ref even if no subscribed changes detected
+        // This ensures future comparisons use correct baseline
         prevStateRef.current = nextState;
       }
     };
 
     // Low-priority handler for non-critical updates (dirty, pristine, valid)
-    // Uses requestAnimationFrame + startTransition for smooth async updates
+    // These updates are deferred using requestAnimationFrame to avoid blocking UI
+    // Combined with startTransition for smooth async updates
     const lowPriorityHandler = () => {
       const nextState = engine.getFormState();
       const prevState = prevStateRef.current;

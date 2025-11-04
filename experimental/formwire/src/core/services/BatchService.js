@@ -16,6 +16,7 @@ export class BatchService {
     this.isBatching = false;
     this.batchScheduled = false;
     this.batchTimeout = null;
+    this.onFlushCallback = null; // Callback for flush operations
 
     // Statistics
     this.stats = {
@@ -56,6 +57,14 @@ export class BatchService {
   }
 
   /**
+   * Set flush callback for queued operations
+   * @param {Function} onFlush - Callback when batch is flushed
+   */
+  setOnFlush(onFlush) {
+    this.onFlushCallback = onFlush;
+  }
+
+  /**
    * Queue operation for batching
    * @param {Object} operation - Operation to queue
    */
@@ -89,20 +98,38 @@ export class BatchService {
   }
 
   /**
-   * Schedule batch with microtask
+   * Schedule batch with requestAnimationFrame for better batching of rapid input
    * @private
    */
   _scheduleMicrotaskBatch() {
+    if (this.batchScheduled) return;
+
     this.batchScheduled = true;
-    queueMicrotask(() => {
-      this.batchScheduled = false;
-      this._flushBatch();
-    });
+
+    // Use requestAnimationFrame when batchDelay is 0 (immediate batching)
+    // This allows multiple rapid input events in the same frame to be batched together
+    // Better than queueMicrotask for UI events as it aligns with browser repaint cycle
+    if (typeof requestAnimationFrame !== 'undefined') {
+      requestAnimationFrame(() => {
+        this.batchScheduled = false;
+        this._flushBatch();
+      });
+    } else if (typeof queueMicrotask !== 'undefined') {
+      queueMicrotask(() => {
+        this.batchScheduled = false;
+        this._flushBatch();
+      });
+    } else {
+      setTimeout(() => {
+        this.batchScheduled = false;
+        this._flushBatch();
+      }, 0);
+    }
   }
 
   /**
    * Flush pending batch operations
-   * @param {Function} onFlush - Callback when batch is flushed
+   * @param {Function} onFlush - Callback when batch is flushed (optional, uses setOnFlush if not provided)
    * @private
    */
   _flushBatch(onFlush) {
@@ -115,8 +142,11 @@ export class BatchService {
     this.stats.totalBatches++;
     this.stats.averageBatchSize = this.stats.totalOperations / this.stats.totalBatches;
 
-    if (onFlush) {
-      onFlush(operations);
+    // Use provided callback or default callback from setOnFlush
+    const callback = onFlush || this.onFlushCallback;
+
+    if (callback) {
+      callback(operations);
     }
   }
 

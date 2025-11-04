@@ -3,7 +3,7 @@
  * Replaces slow JSON.stringify for better performance
  */
 
-import { isNullish, isObject, isArray } from './checks';
+import { isNullish, isObject } from './checks';
 
 /**
  * Create a fast hash of an object
@@ -20,7 +20,7 @@ export const hashObject = (obj) => {
     return String(obj);
   }
 
-  if (isArray(obj)) {
+  if (Array.isArray(obj)) {
     return `[${obj.map(hashObject).join(',')}]`;
   }
 
@@ -65,7 +65,7 @@ export const hashFormState = (formState) => {
     hashObjectShallow(values),
     hashObjectShallow(initialValues || {}),
     hashObjectShallow(errors),
-    isArray(touched) ? touched.join(',') : '[]',
+    Array.isArray(touched) ? touched.join(',') : '[]',
     active || 'null',
     submitting ? 'true' : 'false',
     dirty ? 'true' : 'false',

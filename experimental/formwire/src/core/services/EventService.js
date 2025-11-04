@@ -70,15 +70,15 @@ export class EventService {
       if (this.options.enableContextTracking && context) {
         const contextMap = this.contexts.get(context);
 
-        if (contextMap) {
-          const setForEvent = contextMap.get(event);
+        if (!contextMap) return;
 
-          if (setForEvent) {
-            setForEvent.delete(callback);
-            if (setForEvent.size === 0) {
-              contextMap.delete(event);
-            }
-          }
+        const setForEvent = contextMap.get(event);
+
+        if (!setForEvent) return;
+
+        setForEvent.delete(callback);
+        if (setForEvent.size === 0) {
+          contextMap.delete(event);
         }
       }
     };
@@ -163,6 +163,41 @@ export class EventService {
     this.stats.contextsCount = 0;
 
     return totalRemoved;
+  }
+
+  /**
+   * Check if there are any listeners registered
+   * @returns {boolean} True if there are any listeners
+   */
+  hasListeners() {
+    return this.listeners.size > 0;
+  }
+
+  /**
+   * Get all event names that start with the given prefix
+   * Used for cascading events when parent path changes
+   * @param {string} prefix - Event name prefix
+   * @returns {Array<string>} Array of event names matching the prefix
+   */
+  getEventsWithPrefix(prefix) {
+    const matches = [];
+
+    // Fast iteration through Map keys
+    for (const event of this.listeners.keys()) {
+      // Match events that start with prefix and continue with path separator
+      // Examples: prefix='change:array' matches 'change:array[0].field' (nextChar='[')
+      //           prefix='change:array[0]' matches 'change:array[0].field' (nextChar='.')
+      // This ensures we only match actual nested paths, not unrelated events
+      if (event.startsWith(prefix) && event.length > prefix.length) {
+        const nextChar = event[prefix.length];
+
+        if (nextChar === '.' || nextChar === '[') {
+          matches.push(event);
+        }
+      }
+    }
+
+    return matches;
   }
 
   /**
