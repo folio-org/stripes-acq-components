@@ -20,6 +20,12 @@ const fieldStateReducer = (state, action) => {
       return { ...state, touched: action.payload };
     case FIELD_ACTIONS.SET_ACTIVE:
       return { ...state, active: action.payload };
+    case FIELD_ACTIONS.SET_DIRTY:
+      return {
+        ...state,
+        dirty: action.payload,
+        pristine: !action.payload,
+      };
     case FIELD_ACTIONS.UPDATE_MULTIPLE:
       return { ...state, ...action.payload };
     default:
@@ -38,11 +44,29 @@ export function useField(name, options = {}) {
   } = options;
 
   // Get initial state with useReducer
-  const [fieldState, dispatch] = useReducer(fieldStateReducer, {
-    value: engine.get(name),
-    error: name ? engine.getErrors()[name] : undefined,
-    touched: engine.isTouched(name),
-    active: engine.active === name,
+  // Use getFieldState for consistent state initialization from single source of truth
+  const [fieldState, dispatch] = useReducer(fieldStateReducer, () => {
+    if (!name) {
+      return {
+        value: undefined,
+        error: undefined,
+        touched: false,
+        active: false,
+        dirty: false,
+        pristine: true,
+      };
+    }
+
+    const engineState = engine.getFieldState(name);
+
+    return {
+      value: engineState.value,
+      error: engineState.error,
+      touched: engineState.touched,
+      active: engineState.active,
+      dirty: engineState.dirty,
+      pristine: engineState.pristine,
+    };
   });
 
   // Debounced validation function
@@ -67,13 +91,24 @@ export function useField(name, options = {}) {
 
   // Set up subscriptions declaratively
   useEffect(() => {
-    const configs = buildFieldSubscriptions(name, subscription, validate, dispatch);
+    const configs = buildFieldSubscriptions(name, subscription, validate, dispatch, engine);
     const unsubscribers = configs.filter(c => c.enabled).map(c => engine.on(c.event, c.cb));
+
+    // Initialize dirty tracking for this field if subscription is enabled
+    // This ensures DirtyFeature tracks the field from the start and can detect changes
+    // Call queueCheck with immediate=true SYNCHRONOUSLY after subscriptions are set up
+    // This establishes baseline tracking immediately, ensuring previousDirty is set
+    // before any user interactions can occur
+    if (name && (subscription.dirty ?? true)) {
+      // Synchronous call ensures baseline is established before any changes
+      // The event emitted here will synchronize component state with engine state
+      engine.dirtyFeature.queueCheck(name, true);
+    }
 
     return () => {
       unsubscribers.forEach(unsub => unsub());
     };
-  }, [engine, name, subscription.value, subscription.error, subscription.touched, subscription.active, validate]);
+  }, [engine, name, subscription.value, subscription.error, subscription.touched, subscription.active, subscription.dirty, validate]);
 
   // Field handlers
   const handlers = useMemo(() => ({
@@ -104,20 +139,21 @@ export function useField(name, options = {}) {
   }), [name, fieldState.value, handlers]);
 
   // Meta props
-  const meta = useMemo(() => ({
-    error: fieldState.error,
-    touched: fieldState.touched,
-    active: fieldState.active,
-  }), [fieldState.error, fieldState.touched, fieldState.active]);
+  const meta = useMemo(() => {
+    const dirty = fieldState.dirty || false;
+
+    return {
+      error: fieldState.error,
+      touched: fieldState.touched,
+      active: fieldState.active,
+      dirty,
+      pristine: !dirty,
+    };
+  }, [fieldState.error, fieldState.touched, fieldState.active, fieldState.dirty]);
 
   return {
-    value: input.value,
-    onChange: input.onChange,
-    onBlur: input.onBlur,
-    onFocus: input.onFocus,
-    error: meta.error,
-    touched: meta.touched,
-    active: meta.active,
+    ...input,
+    ...meta,
     input,
     meta,
   };

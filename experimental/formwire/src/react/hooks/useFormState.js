@@ -174,6 +174,8 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
       // This prevents unnecessary re-renders when unsubscribed fields change
       if (hasSubscribedChanges(prevState, nextState, activeSubscription)) {
         prevStateRef.current = nextState;
+        // Track React re-render before dispatch
+        engine.trackRender();
         // Use startTransition to mark this as non-urgent update
         // This allows React to keep UI responsive during rapid changes
         startTransition(() => {
@@ -205,6 +207,8 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
         // Only update if subscribed fields actually changed
         if (hasSubscribedChanges(prevState, nextState, activeSubscription)) {
           prevStateRef.current = nextState;
+          // Track React re-render before dispatch
+          engine.trackRender();
           // Use startTransition for low-priority updates
           startTransition(() => {
             dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });

@@ -71,6 +71,14 @@ export default class FormEngine {
   init(initialValues = Object.create(null), config = {}) {
     this._resetState();
 
+    // Filter out undefined values from config to avoid overwriting defaults
+    const cleanConfig = Object.keys(config).reduce((acc, key) => {
+      if (isDefined(config[key])) {
+        acc[key] = config[key];
+      }
+      return acc;
+    }, {});
+
     this.options = {
       [FORM_ENGINE_OPTIONS.ENABLE_BATCHING]: true,
       [FORM_ENGINE_OPTIONS.BATCH_DELAY]: DEBOUNCE_DELAYS.DEFAULT,
@@ -78,7 +86,7 @@ export default class FormEngine {
       [FORM_ENGINE_OPTIONS.VALIDATE_ON_CHANGE]: false,
       [FORM_ENGINE_OPTIONS.VALIDATE_ON_BLUR]: true,
       [FORM_ENGINE_OPTIONS.DIRTY_CHECK_STRATEGY]: DIRTY_CHECK_STRATEGY.VALUES,
-      ...config,
+      ...cleanConfig,
     };
 
     // Initialize features
@@ -449,6 +457,16 @@ export default class FormEngine {
   }
 
   /**
+   * Track React component re-render
+   * Should be called from React hooks before dispatch to state update
+   */
+  trackRender() {
+    if (this.isInitialized) {
+      this.renderCount++;
+    }
+  }
+
+  /**
    * Get current field state snapshot
    * @param {string} path
    */
@@ -474,41 +492,9 @@ export default class FormEngine {
    * @returns {Object} Object with field paths as keys and dirty status as values
    */
   getDirtyFields() {
-    const dirtyFields = {};
-    const values = this.valuesFeature.getAll();
-    const initialValues = this.valuesFeature.getAllInitial();
-
-    // Helper function to check if value is an object/array
-    const isObjectValue = (value) => value !== null && typeof value === 'object';
-
-    // Helper function to recursively check all fields
-    const checkFields = (obj, initialObj, prefix = '') => {
-      for (const key in obj) {
-        if (!Object.prototype.hasOwnProperty.call(obj, key)) {
-          continue; // eslint-disable-line no-continue
-        }
-
-        const path = prefix ? `${prefix}.${key}` : key;
-
-        if (this.dirtyFeature.isFieldDirty(path)) {
-          dirtyFields[path] = true;
-        }
-
-        const currentValue = obj[key];
-        const initialValue = initialObj?.[key];
-        const isCurrentObject = isObjectValue(currentValue);
-        const isInitialObject = isObjectValue(initialValue);
-
-        if (isCurrentObject && isInitialObject) {
-          // Recursively check nested objects/arrays
-          checkFields(currentValue, initialValue, path);
-        }
-      }
-    };
-
-    checkFields(values, initialValues);
-
-    return dirtyFields;
+    // Simply return dirty fields from DirtyFeature's internal Map
+    // This is much more efficient than recursively traversing all form fields
+    return this.dirtyFeature.getAllDirtyFields();
   }
 
   /**

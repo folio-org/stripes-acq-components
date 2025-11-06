@@ -21,16 +21,21 @@ export class DirtyFeature {
   init() {
     // Initialize to null - will be set on first check
     // Don't check _isFormDirty() here because no fields are tracked yet
-    this._previousFormDirty = null;
-    this._previousFieldDirty.clear();
-    this._dirtyCheckScheduled = false;
-    this._pendingFieldDirtyChecks.clear();
+    this._clearState();
   }
 
   /**
    * Reset dirty state
    */
   reset() {
+    this._clearState();
+  }
+
+  /**
+   * Clear all dirty state (DRY - shared by init and reset)
+   * @private
+   */
+  _clearState() {
     this._previousFormDirty = null;
     this._previousFieldDirty.clear();
     this._dirtyCheckScheduled = false;
@@ -54,25 +59,62 @@ export class DirtyFeature {
   }
 
   /**
+   * Get current and initial values for a field (DRY)
+   * @param {string} path - Field path
+   * @returns {{currentValue: *, initialValue: *}}
+   * @private
+   */
+  _getFieldValues(path) {
+    return {
+      currentValue: this.engine.valuesFeature.get(path),
+      initialValue: getByPath(this.engine.valuesFeature.initialValues, path),
+    };
+  }
+
+  /**
    * Check if field is dirty
    * @param {string} path - Field path
    * @returns {boolean} True if field is dirty
    */
   isFieldDirty(path) {
-    const currentValue = this.engine.valuesFeature.get(path);
-    const initialValue = getByPath(this.engine.valuesFeature.initialValues, path);
+    const { currentValue, initialValue } = this._getFieldValues(path);
     const isEqual = this._getIsEqualFunction();
 
     return !isEqual(currentValue, initialValue);
   }
 
   /**
+   * Get all dirty fields as an object { path: boolean }
+   * Returns only tracked fields (fields that have been checked at least once)
+   * @returns {Object} Object with dirty field paths as keys and true as values
+   */
+  getAllDirtyFields() {
+    const dirtyFields = {};
+    
+    // Iterate over tracked fields and collect dirty ones
+    // Filter out invalid/empty paths
+    for (const [path, isDirty] of this._previousFieldDirty) {
+      if (isDirty && path) {
+        dirtyFields[path] = true;
+      }
+    }
+    
+    return dirtyFields;
+  }
+
+  /**
    * Queue dirty check for a field
    * @param {string} path - Field path
+   * @param {boolean} immediate - If true, check immediately instead of queuing
    */
-  queueCheck(path) {
+  queueCheck(path, immediate = false) {
     this._pendingFieldDirtyChecks.add(path);
-    this._scheduleDirtyChecks();
+    if (immediate) {
+      this._checkAndEmitFieldDirtyState(path);
+      this._pendingFieldDirtyChecks.delete(path);
+    } else {
+      this._scheduleDirtyChecks();
+    }
   }
 
   /**
@@ -155,8 +197,7 @@ export class DirtyFeature {
   _checkAndEmitFieldDirtyState(path) {
     if (!path) return;
 
-    const currentValue = this.engine.valuesFeature.get(path);
-    const initialValue = getByPath(this.engine.valuesFeature.initialValues, path);
+    const { currentValue, initialValue } = this._getFieldValues(path);
     const isEqual = this._getIsEqualFunction();
     const currentDirty = !isEqual(currentValue, initialValue);
 
@@ -164,29 +205,31 @@ export class DirtyFeature {
 
     // Only emit if state actually changed
     if (previousDirty !== undefined && previousDirty !== currentDirty) {
-      // Update tracked state before emitting
-      this._previousFieldDirty.set(path, currentDirty);
+              // Update tracked state before emitting
+        this._previousFieldDirty.set(path, currentDirty);
 
-      if (currentDirty) {
-        // Field became dirty - emit dirty event
-        this.engine.eventService.emit(`${FIELD_EVENT_PREFIXES.DIRTY}${path}`, {
-          path,
-          dirty: true,
-          pristine: false,
-        });
-      } else {
-        // Field became pristine - emit both events for completeness
-        this.engine.eventService.emit(`${FIELD_EVENT_PREFIXES.PRISTINE}${path}`, {
-          path,
-          dirty: false,
-          pristine: true,
-        });
-        this.engine.eventService.emit(`${FIELD_EVENT_PREFIXES.DIRTY}${path}`, {
-          path,
-          dirty: false,
-          pristine: true,
-        });
-      }
+        const eventName = `${FIELD_EVENT_PREFIXES.DIRTY}${path}`;
+
+        if (currentDirty) {
+          // Field became dirty - emit dirty event
+          this.engine.eventService.emit(eventName, {
+            path,
+            dirty: true,
+            pristine: false,
+          });
+        } else {
+          // Field became pristine - emit both events for completeness
+          this.engine.eventService.emit(`${FIELD_EVENT_PREFIXES.PRISTINE}${path}`, {
+            path,
+            dirty: false,
+            pristine: true,
+          });
+          this.engine.eventService.emit(eventName, {
+            path,
+            dirty: false,
+            pristine: true,
+          });
+        }
 
       // Check form state after field state changed
       this._checkAndEmitFormDirtyState();
@@ -194,16 +237,16 @@ export class DirtyFeature {
       // First time tracking this field - update tracked state
       this._previousFieldDirty.set(path, currentDirty);
 
-      // Emit initial state only if field is dirty
-      // Don't emit pristine events on first track - not needed
-      if (currentDirty) {
-        // Field is dirty from the start - emit dirty event
-        this.engine.eventService.emit(`${FIELD_EVENT_PREFIXES.DIRTY}${path}`, {
-          path,
-          dirty: true,
-          pristine: false,
-        });
-      }
+      const eventName = `${FIELD_EVENT_PREFIXES.DIRTY}${path}`;
+
+      // Always emit initial state to synchronize subscribers
+      // This ensures components get the correct dirty state even if field is pristine
+      // Subscribers may have been initialized with stale state, so we need to sync
+      this.engine.eventService.emit(eventName, {
+        path,
+        dirty: currentDirty,
+        pristine: !currentDirty,
+      });
 
       // Check form state after tracking field
       // This will emit form-level dirty state if needed

@@ -4,6 +4,7 @@ export const FIELD_ACTIONS = {
   SET_ERROR: 'SET_ERROR',
   SET_TOUCHED: 'SET_TOUCHED',
   SET_ACTIVE: 'SET_ACTIVE',
+  SET_DIRTY: 'SET_DIRTY',
   UPDATE_MULTIPLE: 'UPDATE_MULTIPLE',
 };
 
@@ -25,6 +26,7 @@ export const DEFAULT_SUBSCRIPTION = {
   error: true,
   touched: true,
   active: false,
+  dirty: true,
 };
 
 // Default form state subscription

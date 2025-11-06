@@ -4,6 +4,7 @@
 
 import React, { memo, useMemo, useRef, forwardRef } from 'react';
 import { useField } from './hooks';
+import { DEFAULT_SUBSCRIPTION } from '../constants';
 import { isFunction } from '../utils/checks';
 
 const Field = memo(forwardRef(({
@@ -13,7 +14,7 @@ const Field = memo(forwardRef(({
   validate,
   validateOn = 'blur',
   debounceDelay = 0,
-  subscription = { value: true, error: true, touched: true, active: false },
+  subscription = DEFAULT_SUBSCRIPTION,
   format,
   formatOnBlur = false,
   ...rest
@@ -40,6 +41,9 @@ const Field = memo(forwardRef(({
       : (fieldState.value || '');
   }, [fieldState.value, fieldState.active, formatOnBlur, name]);
 
+  // Reuse meta from fieldState to avoid duplication
+  const meta = fieldState.meta;
+
   const componentProps = useMemo(() => ({
     name,
     value: formatValue,
@@ -47,23 +51,16 @@ const Field = memo(forwardRef(({
     onBlur: fieldState.onBlur,
     onFocus: fieldState.onFocus,
     error: fieldState.error,
-    meta: {
-      error: fieldState.error,
-      touched: fieldState.touched,
-      active: fieldState.active,
-      dirty: fieldState.touched && fieldState.value !== '',
-    },
+    meta,
     ...rest,
   }), [
     name,
     fieldState.error,
-    fieldState.touched,
-    fieldState.active,
-    fieldState.value,
-    formatValue,
     fieldState.onChange,
     fieldState.onBlur,
     fieldState.onFocus,
+    formatValue,
+    fieldState.meta,
     // eslint-disable-next-line react-hooks/exhaustive-deps
     rest,
   ]);
@@ -82,12 +79,7 @@ const Field = memo(forwardRef(({
         onFocus: fieldState.onFocus,
         ref,
       },
-      meta: {
-        error: fieldState.error,
-        touched: fieldState.touched,
-        active: fieldState.active,
-        dirty: fieldState.touched && fieldState.value !== '',
-      },
+      meta,
       value: fieldState.value,
       error: fieldState.error,
     });

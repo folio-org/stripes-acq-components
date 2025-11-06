@@ -5,6 +5,17 @@
 import { isNullish } from './checks';
 
 /**
+ * Convert string key to number if it represents a valid array index
+ * @param {string} key - String key to convert
+ * @returns {number|null} Numeric key or null if not a valid numeric string
+ * @private
+ */
+const parseNumericKey = (key) => {
+  if (typeof key !== 'string') return null;
+  return /^\d+$/.test(key) ? parseInt(key, 10) : null;
+};
+
+/**
  * Parse path into keys array
  * Supports both dot notation and array indices: 'field[0].subField[1]'
  * @param {string} path - Dot notation path with optional array indices
@@ -132,7 +143,7 @@ const navigateToPath = (obj, keys, createMissing = false) => {
   let current = obj;
 
   for (let i = 0; i < keys.length; i++) {
-    const key = keys[i];
+    let key = keys[i];
 
     // Handle nullish current
     if (isNullish(current)) {
@@ -143,6 +154,23 @@ const navigateToPath = (obj, keys, createMissing = false) => {
       }
 
       current = newCurrent;
+    }
+
+    // Special handling: if current is array and key is string that represents a number
+    // Try to use it as array index first
+    if (Array.isArray(current) && typeof key === 'string') {
+      const numericKey = parseNumericKey(key);
+      
+      if (numericKey !== null) {
+        // Key is a numeric string, try as array index first
+        const arrayResult = handleArrayIndex(current, numericKey, keys, i, createMissing);
+        
+        if (arrayResult !== null) {
+          current = arrayResult;
+          continue;
+        }
+        // If array access failed, fall through to try as object key (unlikely but possible)
+      }
     }
 
     // Handle array index
@@ -206,13 +234,38 @@ export const setByPath = (obj, path, value) => {
 
   // Navigate to parent of final key, creating missing structures
   for (let i = 0; i < keys.length - 1; i++) {
-    const key = keys[i];
+    let key = keys[i];
     const nextKey = keys[i + 1];
+
+    // Special handling: if current is array and key is string that represents a number
+    // Convert it to number for array access
+    // For setByPath, we always create missing structures, so allow array extension
+    if (Array.isArray(current) && typeof key === 'string') {
+      const numericKey = parseNumericKey(key);
+      if (numericKey !== null && numericKey >= 0) {
+        // Convert to numeric key
+        key = numericKey;
+        // Extend array if needed (current is already cloned, safe to mutate)
+        if (current.length <= numericKey) {
+          while (current.length <= numericKey) {
+            current.push(undefined);
+          }
+        }
+      }
+    }
 
     // Create missing structure based on next key type
     // If next key is number, we need array; otherwise object
+    // Also check if next key is a numeric string and current would be array
+    let shouldBeArray = typeof nextKey === 'number';
+    if (!shouldBeArray && parseNumericKey(nextKey) !== null) {
+      // Next key is numeric string - check if current[key] should be array
+      // This is a heuristic: if we're navigating to an array index, parent should be array
+      shouldBeArray = true;
+    }
+
     if (isNullish(current[key])) {
-      current[key] = typeof nextKey === 'number' ? [] : {};
+      current[key] = shouldBeArray ? [] : {};
     } else if (Array.isArray(current[key])) {
       // Clone existing array to maintain immutability
       current[key] = [...current[key]];
@@ -225,7 +278,16 @@ export const setByPath = (obj, path, value) => {
   }
 
   // Set the final value
-  const lastKey = keys[keys.length - 1];
+  let lastKey = keys[keys.length - 1];
+
+  // Special handling: if current is array and lastKey is string that represents a number
+  // Convert it to number for array access
+  if (Array.isArray(current) && typeof lastKey === 'string') {
+    const numericKey = parseNumericKey(lastKey);
+    if (numericKey !== null) {
+      lastKey = numericKey;
+    }
+  }
 
   // Handle array index
   if (typeof lastKey === 'number') {
