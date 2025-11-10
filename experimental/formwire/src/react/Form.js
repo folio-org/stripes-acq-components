@@ -3,10 +3,15 @@
  */
 
 import React, { useMemo, useCallback, useEffect, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
+
+import { LastVisitedContext } from '@folio/stripes-core';
+
 import FormEngine from '../core/FormEngine';
 import { FormProvider } from './FormContext';
 import { EVENTS, VALIDATION_MODES } from '../constants';
 import { isFunction } from '../utils/checks';
+import { FormNavigationGuard } from './FormNavigationGuard';
 
 export default function Form({
   children,
@@ -18,9 +23,17 @@ export default function Form({
   debounceDelay = 0,
   dirtyCheckStrategy,
   engine: providedEngine,
+  navigationCheck = false,
+  navigationGuardProps = {},
   ...rest
 }) {
+  const history = useHistory();
+  
   // Create form engine instance or use provided one
+  // Note: Engine is recreated when initialValues object reference changes.
+  // This is intentional - if initialValues change, we need to reinitialize the form.
+  // To prevent unnecessary recreation, ensure initialValues object reference is stable
+  // (e.g., use useMemo or useState in parent component).
   const engine = useMemo(() => {
     if (providedEngine) {
       return providedEngine;
@@ -37,8 +50,32 @@ export default function Form({
   }, [providedEngine, initialValues, defaultValidateOn, dirtyCheckStrategy]);
 
   const validateRef = useRef(validate);
+  const formValidatorRegisteredRef = useRef(false);
 
   validateRef.current = validate;
+
+  useEffect(() => {
+    if (!engine) return undefined;
+
+    if (!validate) {
+      if (formValidatorRegisteredRef.current) {
+        engine.unregisterValidator('$form');
+        formValidatorRegisteredRef.current = false;
+      }
+
+      return undefined;
+    }
+
+    const validator = (_ignored, allValues) => validate(allValues);
+
+    engine.registerValidator('$form', validator, formValidateOn);
+    formValidatorRegisteredRef.current = true;
+
+    return () => {
+      engine.unregisterValidator('$form');
+      formValidatorRegisteredRef.current = false;
+    };
+  }, [engine, validate, formValidateOn]);
 
   useEffect(() => {
     const currentValidate = validateRef.current;
@@ -100,7 +137,7 @@ export default function Form({
     return () => {
       if (unsubscribe) unsubscribe();
     };
-  }, [engine, formValidateOn, debounceDelay]);
+  }, [engine, formValidateOn, debounceDelay, validate]);
 
   const handleSubmit = useCallback(async (e) => {
     if (isFunction(e?.preventDefault)) {
@@ -112,6 +149,7 @@ export default function Form({
     }
   }, [engine, onSubmit]);
 
+  // Render
   return (
     <FormProvider
       engine={engine}
@@ -122,6 +160,18 @@ export default function Form({
         onSubmit={handleSubmit}
       >
         {children}
+        {navigationCheck && (
+          <LastVisitedContext.Consumer>
+            {(ctx) => (
+              <FormNavigationGuard
+              enabled
+              history={history}
+                {...navigationGuardProps}
+                cachePreviousUrl={navigationGuardProps.cachePreviousUrl || ctx?.cachePreviousUrl}
+              />
+            )}
+          </LastVisitedContext.Consumer>
+        )}
       </form>
     </FormProvider>
   );

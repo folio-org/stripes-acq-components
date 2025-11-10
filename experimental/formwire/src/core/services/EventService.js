@@ -3,11 +3,15 @@
  * Can be injected into FormEngine for custom event behavior
  */
 
+import { isFunction } from '../../utils/checks';
+
 export class EventService {
   constructor(options = {}) {
     this.options = {
       enableContextTracking: true,
       enableErrorHandling: true,
+      logErrors: true,
+      onListenerError: null,
       ...options,
     };
 
@@ -99,11 +103,15 @@ export class EventService {
         try {
           callback(data);
         } catch (error) {
-          if (this.options.enableErrorHandling) {
+          if (!this.options.enableErrorHandling) {
+            throw error;
+          }
+
+          if (isFunction(this.options.onListenerError)) {
+            this.options.onListenerError(error, { event, data });
+          } else if (this.options.logErrors) {
             // eslint-disable-next-line no-console
             console.error(`Error in event listener for ${event}:`, error);
-          } else {
-            throw error;
           }
         }
       });

@@ -26,6 +26,8 @@ export * from './constants';
 export { default as Form } from './react/Form';
 export { default as Field } from './react/Field';
 export { default as FieldArray } from './react/FieldArray';
+export { FormNavigationGuard } from './react/FormNavigationGuard';
+export { FormNavigationModal } from './react/FormNavigationModal';
 
 // React hooks
 export {

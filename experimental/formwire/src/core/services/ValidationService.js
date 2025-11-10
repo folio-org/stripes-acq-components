@@ -37,6 +37,35 @@ export class ValidationService {
   }
 
   /**
+   * Check if validator exists for field
+   * @param {string} path
+   * @returns {boolean}
+   */
+  hasValidator(path) {
+    return this.validators.has(path);
+  }
+
+  /**
+   * Unregister validator for field
+   * @param {string} path
+   */
+  unregisterValidator(path) {
+    const removed = this.validators.delete(path);
+
+    if (this.debouncers.has(path)) {
+      const debouncedValidator = this.debouncers.get(path);
+
+      if (debouncedValidator && typeof debouncedValidator.cleanup === 'function') {
+        debouncedValidator.cleanup();
+      }
+
+      this.debouncers.delete(path);
+    }
+
+    return removed;
+  }
+
+  /**
    * Validate field
    * @param {string} path - Field path
    * @param {*} value - Field value

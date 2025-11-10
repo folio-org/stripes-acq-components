@@ -187,6 +187,12 @@ export default class FormEngine {
     this._ensureInitialized();
     this.operations++;
 
+    // Reset submitSucceeded if form was successfully submitted but user makes changes
+    // This ensures navigation guard blocks navigation again after successful submit
+    if (this.submittingFeature.hasSubmitSucceeded()) {
+      this.submittingFeature.setSubmitSucceeded(false);
+    }
+
     this.valuesFeature.set(path, value);
 
     this.cacheService.clearForPath(path);
@@ -223,6 +229,12 @@ export default class FormEngine {
    * @param {boolean} options.silent - Don't emit CHANGE events
    */
   setMany(updates, options = {}) {
+    // Reset submitSucceeded if form was successfully submitted but user makes changes
+    // This ensures navigation guard blocks navigation again after successful submit
+    if (this.submittingFeature.hasSubmitSucceeded() && updates.length > 0) {
+      this.submittingFeature.setSubmitSucceeded(false);
+    }
+
     if (this.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING]) {
       this.batch(() => {
         updates.forEach(({ path, value }) => {
@@ -341,12 +353,26 @@ export default class FormEngine {
   }
 
   /**
+   * Unregister validator for field
+   * @param {string} path
+   */
+  unregisterValidator(path) {
+    if (this.validationService.unregisterValidator) {
+      this.validationService.unregisterValidator(path);
+    }
+  }
+
+  /**
    * Check if validator is registered for field
    * @param {string} path - Field path
    * @returns {boolean}
    */
   hasValidator(path) {
-    return this.validationService.validators.has(path);
+    if (this.validationService.hasValidator) {
+      return this.validationService.hasValidator(path);
+    }
+
+    return false;
   }
 
   /**
@@ -448,6 +474,7 @@ export default class FormEngine {
       touched: this.touchedFeature.getTouchedArray(),
       active: this.activeFeature.getActive(),
       submitting: this.submittingFeature.isSubmitting(),
+      submitSucceeded: this.submittingFeature.hasSubmitSucceeded(),
       valid: this.errorsFeature.isValid(),
       dirty: this.dirtyFeature.isDirty(),
       pristine: this.dirtyFeature.isPristine(),
@@ -457,8 +484,13 @@ export default class FormEngine {
   }
 
   /**
-   * Track React component re-render
+   * Track React component state update attempt
    * Should be called from React hooks before dispatch to state update
+   * 
+   * Note: This counts dispatch attempts, not actual React re-renders.
+   * React may batch multiple updates into a single re-render, so renderCount
+   * represents the number of state update attempts, which is a useful metric
+   * for understanding form activity and potential performance implications.
    */
   trackRender() {
     if (this.isInitialized) {
@@ -520,6 +552,8 @@ export default class FormEngine {
       dirtyFieldsCount: dirtyFieldsList.length,
       dirtyFieldsList,
       dirtyFields,
+      submitting: this.submittingFeature.isSubmitting(),
+      submitSucceeded: this.submittingFeature.hasSubmitSucceeded(),
       touchedCount: this.touchedFeature.touched.size,
       touchedFields: this.touchedFeature.getTouchedArray(),
     };
@@ -687,6 +721,7 @@ export default class FormEngine {
         });
 
         this.submittingFeature.stop();
+        this.submittingFeature.setSubmitSucceeded(false);
         this.cacheService.clearFormStateCache();
         this.eventService.emit(EVENTS.SUBMIT, { submitting: false, success: false, errors });
 
@@ -698,12 +733,14 @@ export default class FormEngine {
       }
 
       this.submittingFeature.stop();
+      this.submittingFeature.setSubmitSucceeded(true);
       this.cacheService.clearFormStateCache();
       this.eventService.emit(EVENTS.SUBMIT, { submitting: false, success: true, values });
 
       return { success: true, values };
     } catch (error) {
       this.submittingFeature.stop();
+      this.submittingFeature.setSubmitSucceeded(false);
       this.cacheService.clearFormStateCache();
       this.eventService.emit(EVENTS.SUBMIT, { submitting: false, success: false, error: error.message });
 

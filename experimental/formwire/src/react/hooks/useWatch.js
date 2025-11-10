@@ -2,53 +2,100 @@ import {
   useState,
   useEffect,
   useRef,
+  useCallback,
 } from 'react';
 
-import { FIELD_EVENT_PREFIXES } from '../../constants';
+import { FIELD_EVENT_PREFIXES, EVENTS } from '../../constants';
 import { useFormEngine } from '../FormContext';
 
 export function useWatch(name, selector = null) {
   const engine = useFormEngine();
-  const [value, setValue] = useState(() => {
-    const fieldValue = engine.get(name);
 
-    return selector ? selector(fieldValue) : fieldValue;
-  });
-
-  const contextRef = useRef();
-  // Stabilize selector using ref to avoid recreating subscription
-  // If selector is in dependency array, subscription would recreate on every selector change
-  // Using ref allows selector to change without recreating subscription
   const selectorRef = useRef(selector);
-
   selectorRef.current = selector;
 
+  const getCurrentValue = useCallback(() => {
+    const engineNotReady = !engine || (typeof engine.isReady === 'function' && !engine.isReady());
+
+    if (engineNotReady) {
+      const initialValue = undefined;
+      const currentSelector = selectorRef.current;
+
+      return currentSelector ? currentSelector(initialValue) : initialValue;
+    }
+
+    const fieldValue = engine.get(name);
+    const currentSelector = selectorRef.current;
+
+    return currentSelector ? currentSelector(fieldValue) : fieldValue;
+  }, [engine, name]);
+
+  const [value, setValue] = useState(() => getCurrentValue());
+
+  // Recalculate value when selector changes
   useEffect(() => {
-    // Create context object once for cleanup tracking
+    setValue(getCurrentValue());
+  }, [getCurrentValue]);
+
+  const contextRef = useRef();
+
+  useEffect(() => {
     if (!contextRef.current) {
       contextRef.current = {};
     }
 
-    const unsubscribe = engine.on(
-      `${FIELD_EVENT_PREFIXES.CHANGE}${name}`,
-      (newValue) => {
-        // Read current selector from ref - this ensures we always use latest selector
-        // even if it changed after subscription was created
-        const currentSelector = selectorRef.current;
+    if (!engine || !engine.on) {
+      return undefined;
+    }
 
-        setValue(currentSelector ? currentSelector(newValue) : newValue);
-      },
-      contextRef.current,
-    );
+    let unsubscribeChange = null;
+
+    const subscribeToChanges = () => {
+      if (unsubscribeChange) return;
+
+      unsubscribeChange = engine.on(
+        `${FIELD_EVENT_PREFIXES.CHANGE}${name}`,
+        (newValue) => {
+          const currentSelector = selectorRef.current;
+
+          setValue(currentSelector ? currentSelector(newValue) : newValue);
+        },
+        contextRef.current,
+      );
+    };
+
+    const engineNotReady = typeof engine.isReady === 'function' && !engine.isReady();
+
+    if (!engineNotReady) {
+      subscribeToChanges();
+    } else {
+      const initUnsubscribe = engine.on(
+        EVENTS.INIT,
+        () => {
+          setValue(getCurrentValue());
+          subscribeToChanges();
+        },
+        contextRef.current,
+      );
+
+      return () => {
+        if (initUnsubscribe) initUnsubscribe();
+        if (unsubscribeChange) unsubscribeChange();
+
+        if (engine.eventService && engine.eventService.cleanupContext) {
+          engine.eventService.cleanupContext(contextRef.current);
+        }
+      };
+    }
 
     return () => {
-      unsubscribe();
+      if (unsubscribeChange) unsubscribeChange();
 
       if (engine.eventService && engine.eventService.cleanupContext) {
         engine.eventService.cleanupContext(contextRef.current);
       }
     };
-  }, [engine, name]); // Only engine and name - selector handled via ref
+  }, [engine, name, getCurrentValue]);
 
   return value;
 }

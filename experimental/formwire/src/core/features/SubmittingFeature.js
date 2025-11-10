@@ -8,6 +8,7 @@ export class SubmittingFeature {
   constructor(engine) {
     this.engine = engine;
     this.submitting = false;
+    this.submitSucceeded = false;
   }
 
   /**
@@ -15,6 +16,7 @@ export class SubmittingFeature {
    */
   init() {
     this.submitting = false;
+    this.submitSucceeded = false;
   }
 
   /**
@@ -22,6 +24,7 @@ export class SubmittingFeature {
    */
   reset() {
     this.submitting = false;
+    this.submitSucceeded = false;
   }
 
   /**
@@ -57,6 +60,26 @@ export class SubmittingFeature {
    */
   stop() {
     this.setSubmitting(false);
+  }
+
+  /**
+   * Set submit succeeded state
+   * @param {boolean} succeeded - Whether submit succeeded
+   */
+  setSubmitSucceeded(succeeded) {
+    if (this.submitSucceeded !== succeeded) {
+      this.submitSucceeded = succeeded;
+      // Clear cache when submit succeeded state changes
+      this.engine.cacheService.clearFormStateCache();
+    }
+  }
+
+  /**
+   * Check if form submit succeeded
+   * @returns {boolean} True if form submit succeeded
+   */
+  hasSubmitSucceeded() {
+    return this.submitSucceeded;
   }
 }
 

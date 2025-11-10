@@ -99,6 +99,7 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
     touched: subscription.touched,
     active: subscription.active,
     submitting: subscription.submitting,
+    submitSucceeded: subscription.submitSucceeded,
     dirty: subscription.dirty,
     pristine: subscription.pristine,
     valid: subscription.valid,
@@ -119,6 +120,7 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
       currentSubscription.touched !== stableSubscriptionRef.current.touched ||
       currentSubscription.active !== stableSubscriptionRef.current.active ||
       currentSubscription.submitting !== stableSubscriptionRef.current.submitting ||
+      currentSubscription.submitSucceeded !== stableSubscriptionRef.current.submitSucceeded ||
       currentSubscription.dirty !== stableSubscriptionRef.current.dirty ||
       currentSubscription.pristine !== stableSubscriptionRef.current.pristine ||
       currentSubscription.valid !== stableSubscriptionRef.current.valid
@@ -129,6 +131,7 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
         touched: currentSubscription.touched,
         active: currentSubscription.active,
         submitting: currentSubscription.submitting,
+        submitSucceeded: currentSubscription.submitSucceeded,
         dirty: currentSubscription.dirty,
         pristine: currentSubscription.pristine,
         valid: currentSubscription.valid,
@@ -140,6 +143,7 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
     subscription.touched,
     subscription.active,
     subscription.submitting,
+    subscription.submitSucceeded,
     subscription.dirty,
     subscription.pristine,
     subscription.valid,
@@ -258,9 +262,9 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
       );
     }
 
-    // Subscribe to SUBMIT event if submitting state is needed
-    // SUBMIT event already contains submitting state in payload
-    if (activeSubscription.submitting) {
+    // Subscribe to SUBMIT event if submitting or submitSucceeded state is needed
+    // SUBMIT event contains submitting and success state in payload
+    if (activeSubscription.submitting || activeSubscription.submitSucceeded) {
       unsubscribers.push(
         engine.on(EVENTS.SUBMIT, criticalHandler, contextRef.current),
       );
