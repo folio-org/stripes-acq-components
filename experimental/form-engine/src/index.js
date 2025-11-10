@@ -1,5 +1,5 @@
-/**
- * FormWire - Ultra-lightweight form state management
+ /**
+  * Form engine - lightweight form state management
  *
  * Exports:
  * - FormEngine: Core form engine with batching and validation

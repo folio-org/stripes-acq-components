@@ -1,5 +1,5 @@
 /**
- * Utility functions for FormWire
+ * Utility functions for the form engine
  */
 
 export * from './validation';

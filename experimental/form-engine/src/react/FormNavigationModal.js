@@ -18,7 +18,7 @@ export function FormNavigationModal({
 }) {
   return (
     <ConfirmationModal
-      id="formwire-navigation-guard-confirmation"
+      id="form-engine-navigation-guard-confirmation"
       open={open}
       message={message}
       heading={heading}

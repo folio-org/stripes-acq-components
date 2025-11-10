@@ -6,7 +6,7 @@
  * 
  * @example
  * ```jsx
- * import { Form, FormNavigationGuard } from '@formwire/react';
+ * import { Form, FormNavigationGuard } from '@folio/stripes-acq-components/experimental';
  * import { useHistory } from 'react-router-dom';
  * import { ConfirmationModal } from '@folio/stripes-components';
  * 
@@ -27,7 +27,6 @@
 
 import PropTypes from 'prop-types';
 import React, { useState, useEffect, useRef } from 'react';
-import { FormattedMessage } from 'react-intl';
 
 import { useFormState } from './hooks/useFormState';
 import { FormNavigationModal } from './FormNavigationModal';

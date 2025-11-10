@@ -1,5 +1,5 @@
 /**
- * Validation utilities for FormWire
+ * Validation utilities for the form engine
  * Centralizes validation logic to eliminate code duplication
  */
 

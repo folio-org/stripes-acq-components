@@ -1,4 +1,4 @@
-# FormWire
+# Form engine
 
 Ultra-lightweight form state management library for React with service injection architecture.
 
@@ -24,7 +24,7 @@ Ultra-lightweight form state management library for React with service injection
 - Complex React integration
 - Limited support for modern patterns
 
-### FormWire Solutions
+### Approach
 
 **🏗️ Service Injection Architecture**
 - Each service is independent and testable
@@ -64,7 +64,7 @@ Ultra-lightweight form state management library for React with service injection
 
 ### Result
 
-FormWire solves all major problems of existing solutions:
+This form engine focuses on:
 
 - **Performance** - 3-5x faster than competitors
 - **Memory** - automatic cleanup, no leaks
@@ -77,7 +77,6 @@ FormWire solves all major problems of existing solutions:
 - **Service Injection Architecture** - Modular, testable, and extensible
 - **Zero Dependencies** - No external dependencies
 - **High Performance** - Optimized with WeakMap caching and microtask batching
-- **TypeScript Ready** - Full type support
 - **React Hooks** - Modern React patterns
 - **Debounced Validation** - Built-in validation with debouncing
 - **Memory Efficient** - Automatic cleanup with WeakMap
@@ -116,7 +115,7 @@ function MyForm() {
 
 ### Service Injection
 
-FormWire uses a service injection pattern for maximum flexibility:
+This form engine uses a service injection pattern for maximum flexibility:
 
 ```jsx
 import { FormEngine, ValidationService, CacheService, EventService, BatchService } from './src';
@@ -165,10 +164,10 @@ engine.init({ email: '', name: '' }, { validateOnBlur: true });
 
 ### Dirty Check Strategy
 
-FormWire provides two strategies for determining if a form is dirty:
+The engine provides two strategies for determining if a form is dirty:
 
 ```jsx
-import { DIRTY_CHECK_STRATEGY } from 'formwire';
+import { DIRTY_CHECK_STRATEGY } from './src';
 
 // VALUES strategy (default) - compares current values with initial values
 engine.init({ email: '' }, {
@@ -277,7 +276,3 @@ engine.getServiceStats();
 
 - **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Detailed architecture and internal structure description
 - **[USER_GUIDE.md](./USER_GUIDE.md)** - Complete API usage guide with examples
-
-## License
-
-MIT
