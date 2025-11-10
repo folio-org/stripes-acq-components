@@ -230,6 +230,8 @@
   "validation.shouldBeGreaterThan": "Value must be greater than or equal to {minNumber}",
 
   "versionHistory.card.changed": "Changed",
+  "versionHistory.card.showAll": "Show all",
+  "versionHistory.card.showLess": "Show less",
   "versionHistory.card.systemChange": "System maintenance update",
   "versionHistory.card.select.tooltip": "View this version",
   "versionHistory.card.version.current": "Current version",

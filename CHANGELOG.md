@@ -20,6 +20,7 @@
 * Move reusable components for fetch consortium holdings and locations. Refs UISACQCOMP-284.
 * `useLocationFilters` hook - clear unused filters when submitting a new search. Refs UISACQCOMP-285.
 * Update `useSorting` hook to return `undefined` for sorting field and direction by default. Refs UISACQCOMP-287.
+* Add a toggle to expand the list of changed fields in the version card. Refs UISACQCOMP-280.
 
 ## [7.0.5](https://github.com/folio-org/stripes-acq-components/tree/v7.0.5) (2025-05-06)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.4...v7.0.5)
