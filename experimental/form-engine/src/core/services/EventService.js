@@ -166,7 +166,6 @@ export class EventService {
     }
 
     this.listeners.clear();
-    this.contexts.clear();
     this.stats.totalListeners = 0;
     this.stats.contextsCount = 0;
 

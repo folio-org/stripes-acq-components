@@ -71,6 +71,10 @@ export class SubmittingFeature {
       this.submitSucceeded = succeeded;
       // Clear cache when submit succeeded state changes
       this.engine.cacheService.clearFormStateCache();
+      // Emit submit event so subscribers (useFormState) get updated submitSucceeded state
+      if (this.engine && this.engine.eventService) {
+        this.engine.eventService.emit(EVENTS.SUBMIT, { submitting: this.submitting, success: succeeded });
+      }
     }
   }
 
@@ -82,4 +86,3 @@ export class SubmittingFeature {
     return this.submitSucceeded;
   }
 }
-

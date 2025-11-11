@@ -10,12 +10,13 @@ import {
 } from 'react';
 
 import {
-  FORM_ACTIONS,
   DEFAULT_FORM_SUBSCRIPTION,
   EVENTS,
+  FORM_ACTIONS,
+  FORM_ENGINE_OPTIONS,
 } from '../../constants';
-import { useFormEngine } from '../FormContext';
 import { shallowEqual } from '../../utils/checks';
+import { useFormEngine } from '../FormContext';
 
 // Form state reducer
 const formStateReducer = (state, action) => {
@@ -180,11 +181,16 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
         prevStateRef.current = nextState;
         // Track React re-render before dispatch
         engine.trackRender();
-        // Use startTransition to mark this as non-urgent update
-        // This allows React to keep UI responsive during rapid changes
-        startTransition(() => {
+        // When batching is disabled, use synchronous dispatch for deterministic behavior.
+        // Otherwise, use startTransition to defer non-urgent updates.
+        if (!engine.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING] || typeof startTransition !== 'function') {
           dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
-        });
+        } else {
+          // Use startTransition to mark this as non-urgent update
+          startTransition(() => {
+            dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
+          });
+        }
       } else {
         // Update ref even if no subscribed changes detected
         // This ensures future comparisons use correct baseline
@@ -213,18 +219,26 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
           prevStateRef.current = nextState;
           // Track React re-render before dispatch
           engine.trackRender();
-          // Use startTransition for low-priority updates
-          startTransition(() => {
+          // When batching is disabled, use synchronous dispatch for deterministic behavior.
+          // Otherwise, defer to requestAnimationFrame for smooth updates.
+          if (!engine.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING]) {
             dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
-          });
+          } else {
+            startTransition(() => {
+              dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
+            });
+          }
         } else {
           // Update ref even if no changes to avoid false positives in future comparisons
           prevStateRef.current = nextState;
         }
       };
 
-      // Use requestAnimationFrame for smooth UI updates without blocking
-      if (typeof requestAnimationFrame !== 'undefined') {
+      // When batching is disabled, process updates immediately for determinism.
+      // Otherwise, defer to requestAnimationFrame for smooth UI without blocking.
+      if (!engine.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING]) {
+        processUpdate();
+      } else if (typeof requestAnimationFrame !== 'undefined') {
         requestAnimationFrame(processUpdate);
       } else {
         // Fallback: use setTimeout for async but fast update

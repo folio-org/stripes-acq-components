@@ -94,6 +94,16 @@ export function useField(name, options = {}) {
     const configs = buildFieldSubscriptions(name, subscription, validate, dispatch, engine);
     const unsubscribers = configs.filter(c => c.enabled).map(c => engine.on(c.event, c.cb));
 
+    // Sync initial value from engine if subscription is enabled
+    // This ensures Field displays the correct initial value even if subscription hasn't fired yet
+    if (name && subscription.value) {
+      const currentValue = engine.get(name);
+
+      if (currentValue !== undefined) {
+        dispatch({ type: FIELD_ACTIONS.SET_VALUE, payload: currentValue });
+      }
+    }
+
     // Initialize dirty tracking for this field if subscription is enabled
     // This ensures DirtyFeature tracks the field from the start and can detect changes
     // Call queueCheck with immediate=true SYNCHRONOUSLY after subscriptions are set up
@@ -108,7 +118,16 @@ export function useField(name, options = {}) {
     return () => {
       unsubscribers.forEach(unsub => unsub());
     };
-  }, [engine, name, subscription.value, subscription.error, subscription.touched, subscription.active, subscription.dirty, validate]);
+  }, [
+    engine,
+    name,
+    subscription.value,
+    subscription.error,
+    subscription.touched,
+    subscription.active,
+    subscription.dirty,
+    validate,
+  ]);
 
   // Field handlers
   const handlers = useMemo(() => ({
@@ -144,7 +163,7 @@ export function useField(name, options = {}) {
 
     return {
       error: fieldState.error,
-      touched: fieldState.touched,
+      touched: fieldState.touched || false,
       active: fieldState.active,
       dirty,
       pristine: !dirty,

@@ -76,6 +76,7 @@ export default class FormEngine {
       if (isDefined(config[key])) {
         acc[key] = config[key];
       }
+
       return acc;
     }, {});
 
@@ -268,8 +269,17 @@ export default class FormEngine {
   _emitBatch(operations) {
     if (!operations || operations.length === 0) return;
 
+    // Deduplicate operations by path - keep only the last value for each path
+    // This ensures we emit the final state, not intermediate states
+    const operationsByPath = {};
+
+    operations.forEach(({ path, value }) => {
+      operationsByPath[path] = { path, value };
+    });
+    const deduplicatedOperations = Object.values(operationsByPath);
+
     // Emit aggregated change event
-    this.eventService.emit(EVENTS.CHANGE, { batch: true, updates: operations });
+    this.eventService.emit(EVENTS.CHANGE, { batch: true, updates: deduplicatedOperations });
     // Emit values event
     this.eventService.emit(EVENTS.VALUES, { values: this.getValues() });
 
@@ -277,7 +287,7 @@ export default class FormEngine {
     const nestedPathsEmitted = new Set();
 
     // Emit per-field events and queue dirty checks (non-blocking)
-    operations.forEach(({ path, value }) => {
+    deduplicatedOperations.forEach(({ path, value }) => {
       const changeEvent = `${EVENTS.CHANGE}:${path}`;
 
       // Emit direct event for the changed path
@@ -286,7 +296,7 @@ export default class FormEngine {
       // Emit events for nested paths when parent path changes
       // Example: when 'calculatedFinanceData' array changes, emit for 'calculatedFinanceData[0].budgetAfterAllocation'
       // This ensures Field components subscribed to nested paths receive updates
-      // Only check if there are listeners to avoid unnecessary work
+      // Only check if there are listeners to avoid necessary work
       if (this.eventService.hasListeners()) {
         const nestedEvents = this.eventService.getEventsWithPrefix(changeEvent);
 
@@ -486,7 +496,7 @@ export default class FormEngine {
   /**
    * Track React component state update attempt
    * Should be called from React hooks before dispatch to state update
-   * 
+   *
    * Note: This counts dispatch attempts, not actual React re-renders.
    * React may batch multiple updates into a single re-render, so renderCount
    * represents the number of state update attempts, which is a useful metric
@@ -517,6 +527,14 @@ export default class FormEngine {
       active: this.activeFeature.isActive(path),
       pristine: !isDirty,
     };
+  }
+
+  /**
+   * Check if form is dirty
+   * @returns {boolean} True if form is dirty
+   */
+  isDirty() {
+    return this.dirtyFeature.isDirty();
   }
 
   /**

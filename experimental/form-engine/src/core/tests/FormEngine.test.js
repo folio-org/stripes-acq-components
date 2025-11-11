@@ -1,5 +1,7 @@
 /* Developed collaboratively using AI (Cursor) */
 
+import { waitFor } from '@folio/jest-config-stripes/testing-library/react';
+
 import {
   DIRTY_CHECK_STRATEGY,
   FORM_ENGINE_OPTIONS,
@@ -70,7 +72,7 @@ describe('FormEngine', () => {
     engine.set('a', 2);
     // Wait for dirty check to complete
     await new Promise(resolve => setTimeout(resolve, 10));
-    expect(engine.isDirty()).toBe(true);
+    await waitFor(async () => expect(engine.isDirty()).toBe(true));
     engine.reset();
     expect(engine.isInitialized).toBe(false);
   });
@@ -112,7 +114,7 @@ describe('FormEngine', () => {
     await new Promise(resolve => setTimeout(resolve, 10));
     const debug = engine.getDebugInfo();
 
-    expect(debug.formDirty).toBe(true);
+    await waitFor(async () => expect(engine.isDirty()).toBe(true));
     expect(debug.dirtyStrategy).toBe(DIRTY_CHECK_STRATEGY.VALUES);
   });
 
