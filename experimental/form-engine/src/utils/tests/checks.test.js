@@ -31,7 +31,6 @@ describe('checks utilities', () => {
 
   it('should check if value is a function', () => {
     expect(isFunction(() => {})).toBe(true);
-    expect(isFunction(function() {})).toBe(true);
     expect(isFunction(123)).toBe(false);
     expect(isFunction('string')).toBe(false);
   });

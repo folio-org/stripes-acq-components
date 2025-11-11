@@ -10,6 +10,7 @@ describe('validationModes', () => {
       _runValidator: jest.fn(() => Promise.resolve(null)),
     };
     const strategies = createValidationModeStrategies(service);
+
     expect(strategies.change).toBeDefined();
     expect(strategies.blur).toBeDefined();
     expect(strategies.submit).toBeDefined();
@@ -22,6 +23,7 @@ describe('validationModes', () => {
       _runValidator: jest.fn(() => Promise.resolve(null)),
     };
     const strategies = createValidationModeStrategies(service);
+
     await strategies.blur('email', 'test', { email: 'test' });
     expect(service._runValidator).toHaveBeenCalledWith('email', 'test', { email: 'test' });
   });
@@ -33,6 +35,7 @@ describe('validationModes', () => {
       _runValidator: jest.fn(() => Promise.resolve(null)),
     };
     const strategies = createValidationModeStrategies(service);
+
     await strategies.submit('email', 'test', { email: 'test' });
     expect(service._runValidator).toHaveBeenCalledWith('email', 'test', { email: 'test' });
   });
@@ -50,6 +53,7 @@ describe('validationModes', () => {
     };
     const strategies = createValidationModeStrategies(service);
     const promise = strategies.change('email', 'test', { email: 'test' }, { debounceDelay: 100 });
+
     expect(service.createDebouncedValidator).toHaveBeenCalled();
     await promise;
   });
@@ -61,8 +65,8 @@ describe('validationModes', () => {
       _runValidator: jest.fn(() => Promise.resolve(null)),
     };
     const strategies = createValidationModeStrategies(service);
+
     await strategies.change('email', 'test', { email: 'test' }, { debounceDelay: 0 });
     expect(service._runValidator).toHaveBeenCalledWith('email', 'test', { email: 'test' });
   });
 });
-

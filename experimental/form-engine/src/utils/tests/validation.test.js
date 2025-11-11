@@ -9,6 +9,7 @@ describe('validation utilities', () => {
       clearError: jest.fn(),
     };
     const validator = jest.fn(() => 'Error message');
+
     await validateField(validator, 'test', {}, engine, 'email');
     expect(engine.setError).toHaveBeenCalledWith('email', 'Error message');
   });
@@ -19,6 +20,7 @@ describe('validation utilities', () => {
       clearError: jest.fn(),
     };
     const validator = jest.fn(() => null);
+
     await validateField(validator, 'test', {}, engine, 'email');
     expect(engine.clearError).toHaveBeenCalledWith('email');
   });
@@ -29,6 +31,7 @@ describe('validation utilities', () => {
       clearError: jest.fn(),
     };
     const validator = jest.fn(() => { throw new Error('Validation error'); });
+
     await validateField(validator, 'test', {}, engine, 'email');
     expect(engine.setError).toHaveBeenCalledWith('email', 'Validation error');
   });
@@ -38,9 +41,9 @@ describe('validation utilities', () => {
       setError: jest.fn(),
       clearError: jest.fn(),
     };
+
     await validateField(null, 'test', {}, engine, 'email');
     expect(engine.setError).not.toHaveBeenCalled();
     expect(engine.clearError).not.toHaveBeenCalled();
   });
 });
-

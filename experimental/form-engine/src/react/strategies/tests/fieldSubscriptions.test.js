@@ -17,8 +17,9 @@ describe('fieldSubscriptions', () => {
       { value: true, error: true, touched: true, active: true, dirty: true },
       jest.fn(),
       dispatch,
-      engine
+      engine,
     );
+
     expect(subscriptions.length).toBeGreaterThan(0);
     expect(subscriptions.some(s => s.event === `${FIELD_EVENT_PREFIXES.CHANGE}email`)).toBe(true);
   });
@@ -33,9 +34,10 @@ describe('fieldSubscriptions', () => {
       { value: true },
       null,
       dispatch,
-      engine
+      engine,
     );
     const sub = subscriptions.find(s => s.event === `${FIELD_EVENT_PREFIXES.CHANGE}email`);
+
     sub.cb('test');
     expect(engine.trackRender).toHaveBeenCalled();
     expect(dispatch).toHaveBeenCalledWith({ type: FIELD_ACTIONS.SET_VALUE, payload: 'test' });
@@ -51,9 +53,10 @@ describe('fieldSubscriptions', () => {
       { error: true },
       jest.fn(),
       dispatch,
-      engine
+      engine,
     );
     const sub = subscriptions.find(s => s.event === `${FIELD_EVENT_PREFIXES.ERROR}email`);
+
     sub.cb('Error message');
     expect(dispatch).toHaveBeenCalledWith({ type: FIELD_ACTIONS.SET_ERROR, payload: 'Error message' });
   });
@@ -68,11 +71,11 @@ describe('fieldSubscriptions', () => {
       { dirty: true },
       null,
       dispatch,
-      engine
+      engine,
     );
     const sub = subscriptions.find(s => s.event === `${FIELD_EVENT_PREFIXES.DIRTY}email`);
+
     sub.cb({ dirty: true });
     expect(dispatch).toHaveBeenCalledWith({ type: FIELD_ACTIONS.SET_DIRTY, payload: true });
   });
 });
-

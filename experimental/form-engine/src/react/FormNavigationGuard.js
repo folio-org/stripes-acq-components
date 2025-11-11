@@ -1,18 +1,18 @@
 /**
  * FormNavigationGuard - Component for blocking navigation when form has unsaved changes
- * 
+ *
  * Based on stripes-final-form's StripesFinalFormWrapper navigation check logic.
  * Blocks navigation when form is dirty and hasn't been successfully submitted.
- * 
+ *
  * @example
  * ```jsx
  * import { Form, FormNavigationGuard } from '@folio/stripes-acq-components/experimental';
  * import { useHistory } from 'react-router-dom';
  * import { ConfirmationModal } from '@folio/stripes-components';
- * 
+ *
  * function MyForm() {
  *   const history = useHistory();
- *   
+ *
  *   return (
  *     <Form onSubmit={handleSubmit}>
  *       <FormNavigationGuard
@@ -74,7 +74,6 @@ export function FormNavigationGuard({
       return undefined;
     }
 
-
     unblockRef.current = history.block((location) => {
       // Ignore navigation to specified paths (e.g., /logout)
       if (ignorePaths.some(path => location.pathname.startsWith(path))) {
@@ -105,7 +104,6 @@ export function FormNavigationGuard({
       }
     };
   }, [enabled, history, dirty, submitSucceeded, submitting, ignorePaths, onBeforeBlock]);
-
 
   const handleConfirm = () => {
     setOpenModal(false);

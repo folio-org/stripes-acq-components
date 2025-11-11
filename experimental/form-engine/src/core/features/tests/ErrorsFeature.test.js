@@ -12,6 +12,7 @@ describe('ErrorsFeature', () => {
       },
     };
     const ef = new ErrorsFeature(engine);
+
     ef.init();
     expect(ef.isValid()).toBe(true);
     expect(ef.getAll()).toEqual({});
@@ -25,6 +26,7 @@ describe('ErrorsFeature', () => {
       },
     };
     const ef = new ErrorsFeature(engine);
+
     ef.init();
     ef.set('email', 'Invalid email');
     expect(ef.get('email')).toBe('Invalid email');
@@ -40,6 +42,7 @@ describe('ErrorsFeature', () => {
       },
     };
     const ef = new ErrorsFeature(engine);
+
     ef.init();
     ef.set('email', 'Invalid email');
     ef.clear('email');
@@ -55,6 +58,7 @@ describe('ErrorsFeature', () => {
       },
     };
     const ef = new ErrorsFeature(engine);
+
     ef.init();
     ef.setAll({ email: 'Invalid email', password: 'Too short' });
     expect(ef.get('email')).toBe('Invalid email');
@@ -69,6 +73,7 @@ describe('ErrorsFeature', () => {
       },
     };
     const ef = new ErrorsFeature(engine);
+
     ef.init();
     expect(ef.hasError('email')).toBe(false);
     ef.set('email', 'Invalid');
@@ -83,11 +88,13 @@ describe('ErrorsFeature', () => {
       },
     };
     const ef = new ErrorsFeature(engine);
+
     ef.init();
     ef.set('email', 'Invalid');
     expect(ef.isValid()).toBe(false);
     ef.clear('email');
     const validEvent = events.find(e => e.name === EVENTS.VALID && e.payload.valid === true);
+
     expect(validEvent).toBeTruthy();
   });
 
@@ -98,6 +105,7 @@ describe('ErrorsFeature', () => {
       },
     };
     const ef = new ErrorsFeature(engine);
+
     ef.init();
     ef.set('email', 'Invalid');
     ef.reset();
@@ -105,4 +113,3 @@ describe('ErrorsFeature', () => {
     expect(ef._previousFormValid).toBe(null);
   });
 });
-

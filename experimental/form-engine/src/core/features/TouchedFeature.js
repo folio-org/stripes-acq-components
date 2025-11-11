@@ -76,4 +76,3 @@ export class TouchedFeature {
     this._touchedArraySize = 0;
   }
 }
-

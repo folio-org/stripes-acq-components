@@ -22,6 +22,7 @@ describe('fieldHandlers', () => {
       debouncedValidate: jest.fn(),
       newValue: 'test@test.com',
     });
+
     expect(commands.length).toBe(3);
     commands.forEach(cmd => cmd());
     expect(engine.set).toHaveBeenCalledWith('email', 'test@test.com');
@@ -45,6 +46,7 @@ describe('fieldHandlers', () => {
       validate: jest.fn(),
       validateOn: VALIDATION_MODES.BLUR,
     });
+
     expect(commands.length).toBe(4);
     commands.forEach(cmd => cmd());
     expect(engine.touch).toHaveBeenCalledWith('email');
@@ -69,8 +71,8 @@ describe('fieldHandlers', () => {
       validate: jest.fn(),
       validateOn: VALIDATION_MODES.SUBMIT,
     });
+
     commands.forEach(cmd => cmd());
     expect(engine.clearError).toHaveBeenCalledWith('email');
   });
 });
-

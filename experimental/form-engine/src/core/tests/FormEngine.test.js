@@ -10,28 +10,35 @@ describe('FormEngine', () => {
   it('should initialize and return form state with correct values', () => {
     const engine = new FormEngine().init({ a: 1 });
     const fs = engine.getFormState();
+
     expect(fs.values.a).toBe(1);
     expect(fs.pristine).toBe(true);
     expect(fs.submitSucceeded).toBe(false);
   });
 
-  it('should use custom isEqual strategy via options', () => {
+  it('should use custom isEqual strategy via options', async () => {
     const engine = new FormEngine().init(
       { a: { x: 1 } },
       {
         dirtyCheckStrategy: DIRTY_CHECK_STRATEGY.VALUES,
         isEqual: (a, b) => JSON.stringify(a) === JSON.stringify(b),
-      }
+      },
     );
+
     expect(engine.isDirty()).toBe(false);
     engine.set('a', { x: 1 });
+    // Wait for dirty check to complete
+    await new Promise(resolve => setTimeout(resolve, 10));
     expect(engine.isDirty()).toBe(false); // equal by custom comparator
     engine.set('a', { x: 2 });
+    // Wait for dirty check to complete
+    await new Promise(resolve => setTimeout(resolve, 10));
     expect(engine.isDirty()).toBe(true);
   });
 
   it('should handle get and set operations', () => {
     const engine = new FormEngine().init({ name: 'test', age: 25 });
+
     expect(engine.get('name')).toBe('test');
     engine.set('name', 'updated');
     expect(engine.get('name')).toBe('updated');
@@ -39,6 +46,7 @@ describe('FormEngine', () => {
 
   it('should handle setMany operations', () => {
     const engine = new FormEngine().init({ a: 1, b: 2 });
+
     engine.setMany([
       { path: 'a', value: 10 },
       { path: 'b', value: 20 },
@@ -50,14 +58,18 @@ describe('FormEngine', () => {
   it('should track operations count', () => {
     const engine = new FormEngine().init({});
     const initialOps = engine.operations;
+
     engine.get('test');
     engine.set('test', 'value');
     expect(engine.operations).toBeGreaterThan(initialOps);
   });
 
-  it('should handle reset', () => {
+  it('should handle reset', async () => {
     const engine = new FormEngine().init({ a: 1 });
+
     engine.set('a', 2);
+    // Wait for dirty check to complete
+    await new Promise(resolve => setTimeout(resolve, 10));
     expect(engine.isDirty()).toBe(true);
     engine.reset();
     expect(engine.isInitialized).toBe(false);
@@ -65,8 +77,10 @@ describe('FormEngine', () => {
 
   it('should handle submit with validation', async () => {
     const engine = new FormEngine().init({ email: '' });
+
     engine.registerValidator('email', (v) => (!v ? 'Required' : null), 'submit');
     const result = await engine.submit();
+
     expect(result.success).toBe(false);
     expect(result.errors.email).toBe('Required');
   });
@@ -75,12 +89,14 @@ describe('FormEngine', () => {
     const engine = new FormEngine().init({ email: 'test@test.com' });
     const onSubmit = jest.fn();
     const result = await engine.submit(onSubmit);
+
     expect(result.success).toBe(true);
     expect(onSubmit).toHaveBeenCalled();
   });
 
   it('should reset submitSucceeded when form changes after successful submit', () => {
     const engine = new FormEngine().init({ email: 'test@test.com' });
+
     engine.submit().then(() => {
       expect(engine.submittingFeature.hasSubmitSucceeded()).toBe(true);
       engine.set('email', 'new@test.com');
@@ -88,10 +104,14 @@ describe('FormEngine', () => {
     });
   });
 
-  it('should get debug info', () => {
+  it('should get debug info', async () => {
     const engine = new FormEngine().init({ a: 1 });
+
     engine.set('a', 2);
+    // Wait for dirty check to complete (it's async via queueMicrotask)
+    await new Promise(resolve => setTimeout(resolve, 10));
     const debug = engine.getDebugInfo();
+
     expect(debug.formDirty).toBe(true);
     expect(debug.dirtyStrategy).toBe(DIRTY_CHECK_STRATEGY.VALUES);
   });
@@ -99,6 +119,7 @@ describe('FormEngine', () => {
   it('should get service stats', () => {
     const engine = new FormEngine().init({});
     const stats = engine.getServiceStats();
+
     expect(stats.engine).toBeDefined();
     expect(stats.cache).toBeDefined();
     expect(stats.validation).toBeDefined();
@@ -108,6 +129,7 @@ describe('FormEngine', () => {
 
   it('should handle updateConfig', () => {
     const engine = new FormEngine().init({});
+
     engine.updateConfig({ [FORM_ENGINE_OPTIONS.BATCH_DELAY]: 100 });
     expect(engine.getConfig()[FORM_ENGINE_OPTIONS.BATCH_DELAY]).toBe(100);
   });
@@ -115,6 +137,7 @@ describe('FormEngine', () => {
   it('should handle getFormApi', () => {
     const engine = new FormEngine().init({ a: 1 });
     const api = engine.getFormApi();
+
     expect(api.get('a')).toBe(1);
     api.set('a', 2);
     expect(api.get('a')).toBe(2);
@@ -122,6 +145,7 @@ describe('FormEngine', () => {
 
   it('should handle batch operations', () => {
     const engine = new FormEngine().init({});
+
     engine.batch(() => {
       engine.set('a', 1);
       engine.set('b', 2);
@@ -132,6 +156,7 @@ describe('FormEngine', () => {
 
   it('should throw error if used before init', () => {
     const engine = new FormEngine();
+
     expect(() => engine.get('test')).toThrow('FormEngine must be initialized');
   });
 });

@@ -12,6 +12,7 @@ describe('ActiveFeature', () => {
       },
     };
     const af = new ActiveFeature(engine);
+
     af.init();
     expect(af.getActive()).toBe(null);
     expect(af.isActive('email')).toBe(false);
@@ -25,6 +26,7 @@ describe('ActiveFeature', () => {
       },
     };
     const af = new ActiveFeature(engine);
+
     af.init();
     af.focus('email');
     expect(af.getActive()).toBe('email');
@@ -41,9 +43,11 @@ describe('ActiveFeature', () => {
       },
     };
     const af = new ActiveFeature(engine);
+
     af.init();
     af.focus('email');
     const eventCount = events.length;
+
     af.focus('email');
     expect(events.length).toBe(eventCount);
   });
@@ -56,6 +60,7 @@ describe('ActiveFeature', () => {
       },
     };
     const af = new ActiveFeature(engine);
+
     af.init();
     af.focus('email');
     af.blur();
@@ -73,6 +78,7 @@ describe('ActiveFeature', () => {
       },
     };
     const af = new ActiveFeature(engine);
+
     af.init();
     af.blur();
     expect(events.length).toBe(0);
@@ -85,6 +91,7 @@ describe('ActiveFeature', () => {
       },
     };
     const af = new ActiveFeature(engine);
+
     af.init();
     af.focus('email');
     expect(af.getActive()).toBe('email');
@@ -100,10 +107,10 @@ describe('ActiveFeature', () => {
       },
     };
     const af = new ActiveFeature(engine);
+
     af.init();
     af.focus('email');
     af.reset();
     expect(af.getActive()).toBe(null);
   });
 });
-

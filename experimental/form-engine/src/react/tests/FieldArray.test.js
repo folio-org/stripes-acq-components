@@ -3,6 +3,7 @@
 import {
   render,
   screen,
+  waitFor,
 } from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
@@ -27,7 +28,7 @@ describe('FieldArray', () => {
             </div>
           )}
         </FieldArray>
-      </Form>
+      </Form>,
     );
     expect(screen.getByTestId('item-0')).toBeInTheDocument();
     expect(screen.getByTestId('item-1')).toBeInTheDocument();
@@ -35,6 +36,7 @@ describe('FieldArray', () => {
 
   it('should push items to array', async () => {
     const user = userEvent.setup();
+
     render(
       <Form onSubmit={() => {}} initialValues={{ items: [] }}>
         <FieldArray name="items">
@@ -51,14 +53,18 @@ describe('FieldArray', () => {
             </div>
           )}
         </FieldArray>
-      </Form>
+      </Form>,
     );
     await user.click(screen.getByTestId('push'));
-    expect(screen.getByTestId('item-0')).toBeInTheDocument();
+    // Wait for batched state update and field array re-render
+    await waitFor(() => {
+      expect(screen.getByTestId('item-0')).toBeInTheDocument();
+    });
   });
 
   it('should remove items from array', async () => {
     const user = userEvent.setup();
+
     render(
       <Form onSubmit={() => {}} initialValues={{ items: [{ name: 'item1' }, { name: 'item2' }] }}>
         <FieldArray name="items">
@@ -77,11 +83,13 @@ describe('FieldArray', () => {
             </div>
           )}
         </FieldArray>
-      </Form>
+      </Form>,
     );
     await user.click(screen.getByTestId('remove-0'));
-    expect(screen.queryByTestId('item-0')).not.toBeInTheDocument();
+    // After removal the array should have one item (the original item-1 shifted to index 0)
+    await waitFor(() => {
+      expect(screen.getAllByTestId(/item-/)).toHaveLength(1);
+    });
     expect(screen.getByTestId('item-0')).toBeInTheDocument(); // item-1 becomes item-0
   });
 });
-

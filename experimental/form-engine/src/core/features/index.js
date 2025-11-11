@@ -9,4 +9,3 @@ export { DirtyFeature } from './DirtyFeature';
 export { TouchedFeature } from './TouchedFeature';
 export { ActiveFeature } from './ActiveFeature';
 export { SubmittingFeature } from './SubmittingFeature';
-

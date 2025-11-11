@@ -1,6 +1,7 @@
 /* Developed collaboratively using AI (Cursor) */
 
 import {
+  act,
   render,
   screen,
 } from '@folio/jest-config-stripes/testing-library/react';
@@ -14,25 +15,37 @@ import {
 describe('Field', () => {
   it('should render input with value', async () => {
     const user = userEvent.setup();
+
     render(
       <Form onSubmit={() => {}} initialValues={{ name: 'test' }}>
         <Field name="name" />
-      </Form>
+      </Form>,
     );
-    const input = screen.getByDisplayValue('test');
+
+    // Input should have initial value after render
+    const input = await screen.findByDisplayValue('test');
+
     expect(input).toBeInTheDocument();
-    await user.type(input, 'x');
-    expect(input.value).toBe('testx');
+
+    // Clear and type new value
+    await act(async () => {
+      await user.clear(input);
+      await user.type(input, 'testx');
+      // Give batching time to complete
+      await new Promise(resolve => setTimeout(resolve, 100));
+    });
+    expect(input).toHaveValue('testx');
   });
 
   it('should render with component prop', () => {
     const CustomInput = ({ value, onChange, ...props }) => (
       <input data-testid="custom" value={value} onChange={onChange} {...props} />
     );
+
     render(
       <Form onSubmit={() => {}} initialValues={{ name: 'test' }}>
         <Field name="name" component={CustomInput} />
-      </Form>
+      </Form>,
     );
     expect(screen.getByTestId('custom')).toBeInTheDocument();
   });
@@ -48,22 +61,23 @@ describe('Field', () => {
             </div>
           )}
         </Field>
-      </Form>
+      </Form>,
     );
     expect(screen.getByTestId('name')).toBeInTheDocument();
   });
 
-  it('should format value', () => {
+  it('should format value', async () => {
     render(
       <Form onSubmit={() => {}} initialValues={{ phone: '1234567890' }}>
         <Field
           name="phone"
           format={(value) => value?.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')}
         />
-      </Form>
+      </Form>,
     );
-    const input = screen.getByDisplayValue('(123) 456-7890');
+    // Format should be applied to initial value
+    const input = await screen.findByDisplayValue('(123) 456-7890');
+
     expect(input).toBeInTheDocument();
   });
 });
-

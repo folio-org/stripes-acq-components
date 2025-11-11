@@ -2,15 +2,23 @@
  * Form component - Main form wrapper
  */
 
-import React, { useMemo, useCallback, useEffect, useRef } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { LastVisitedContext } from '@folio/stripes-core';
+import { LastVisitedContext } from '@folio/stripes/core';
 
+import {
+  EVENTS,
+  VALIDATION_MODES,
+} from '../constants';
 import FormEngine from '../core/FormEngine';
-import { FormProvider } from './FormContext';
-import { EVENTS, VALIDATION_MODES } from '../constants';
 import { isFunction } from '../utils/checks';
+import { FormProvider } from './FormContext';
 import { FormNavigationGuard } from './FormNavigationGuard';
 
 export default function Form({
@@ -23,12 +31,13 @@ export default function Form({
   debounceDelay = 0,
   dirtyCheckStrategy,
   engine: providedEngine,
+  enableBatching = true,
   navigationCheck = false,
   navigationGuardProps = {},
   ...rest
 }) {
   const history = useHistory();
-  
+
   // Create form engine instance or use provided one
   // Note: Engine is recreated when initialValues object reference changes.
   // This is intentional - if initialValues change, we need to reinitialize the form.
@@ -41,13 +50,17 @@ export default function Form({
 
     const newEngine = new FormEngine();
 
-    newEngine.init(initialValues, {
-      validateOnBlur: defaultValidateOn === 'blur',
+    // Merge engine options passed from props (explicit) with defaults used by Form
+    const initOptions = {
       dirtyCheckStrategy,
-    });
+      enableBatching,
+      validateOnBlur: defaultValidateOn === 'blur',
+    };
+
+    newEngine.init(initialValues, initOptions);
 
     return newEngine;
-  }, [providedEngine, initialValues, defaultValidateOn, dirtyCheckStrategy]);
+  }, [providedEngine, initialValues, defaultValidateOn, dirtyCheckStrategy, enableBatching]);
 
   const validateRef = useRef(validate);
   const formValidatorRegisteredRef = useRef(false);
@@ -164,8 +177,8 @@ export default function Form({
           <LastVisitedContext.Consumer>
             {(ctx) => (
               <FormNavigationGuard
-              enabled
-              history={history}
+                enabled
+                history={history}
                 {...navigationGuardProps}
                 cachePreviousUrl={navigationGuardProps.cachePreviousUrl || ctx?.cachePreviousUrl}
               />

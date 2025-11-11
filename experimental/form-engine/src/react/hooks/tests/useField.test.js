@@ -1,6 +1,10 @@
 /* Developed collaboratively using AI (Cursor) */
 
-import { render, screen } from '@folio/jest-config-stripes/testing-library/react';
+import {
+  render,
+  screen,
+  waitFor,
+} from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
 import {
@@ -11,6 +15,7 @@ import {
 describe('useField', () => {
   it('should update value, dirty, and touched states on user interaction', async () => {
     const user = userEvent.setup();
+
     render(
       <Form onSubmit={() => {}} initialValues={{ name: '' }}>
         <Field name="name">
@@ -22,17 +27,24 @@ describe('useField', () => {
             </div>
           )}
         </Field>
-      </Form>
+      </Form>,
     );
 
     const input = screen.getByTestId('name');
+
     expect(screen.getByTestId('dirty').textContent).toBe('false');
     expect(screen.getByTestId('touched').textContent).toBe('false');
 
     await user.type(input, 'x');
-    expect(screen.getByTestId('dirty').textContent).toBe('true');
+    // Wait for batched dirty state update
+    await waitFor(() => {
+      expect(screen.getByTestId('dirty').textContent).toBe('true');
+    });
 
     await user.tab();
-    expect(screen.getByTestId('touched').textContent).toBe('true');
+    // Wait for batched touched state update
+    await waitFor(() => {
+      expect(screen.getByTestId('touched').textContent).toBe('true');
+    });
   });
 });

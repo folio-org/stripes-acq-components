@@ -28,7 +28,7 @@ export const buildFieldSubscriptions = (name, subscription, validate, dispatch, 
     {
       enabled: subscription.value,
       event: `${FIELD_EVENT_PREFIXES.CHANGE}${name}`,
-      cb: (v) => trackedDispatch({ type: FIELD_ACTIONS.SET_VALUE, payload: v })
+      cb: (v) => trackedDispatch({ type: FIELD_ACTIONS.SET_VALUE, payload: v }),
     },
     {
       enabled: subscription.error,

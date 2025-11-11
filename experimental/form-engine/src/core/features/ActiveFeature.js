@@ -74,4 +74,3 @@ export class ActiveFeature {
     return this.active === path;
   }
 }
-

@@ -14,6 +14,7 @@ describe('SubmittingFeature', () => {
       },
     };
     const sf = new SubmittingFeature(engine);
+
     sf.init();
     expect(sf.isSubmitting()).toBe(false);
     expect(sf.hasSubmitSucceeded()).toBe(false);
@@ -30,6 +31,7 @@ describe('SubmittingFeature', () => {
       },
     };
     const sf = new SubmittingFeature(engine);
+
     sf.init();
     sf.start();
     expect(sf.isSubmitting()).toBe(true);
@@ -47,6 +49,7 @@ describe('SubmittingFeature', () => {
       },
     };
     const sf = new SubmittingFeature(engine);
+
     sf.init();
     sf.start();
     sf.stop();
@@ -64,6 +67,7 @@ describe('SubmittingFeature', () => {
       },
     };
     const sf = new SubmittingFeature(engine);
+
     sf.init();
     sf.setSubmitSucceeded(true);
     expect(sf.hasSubmitSucceeded()).toBe(true);
@@ -80,6 +84,7 @@ describe('SubmittingFeature', () => {
       },
     };
     const sf = new SubmittingFeature(engine);
+
     sf.init();
     sf.setSubmitting(true);
     expect(clearCache).toHaveBeenCalled();
@@ -96,6 +101,7 @@ describe('SubmittingFeature', () => {
       },
     };
     const sf = new SubmittingFeature(engine);
+
     sf.init();
     sf.setSubmitSucceeded(true);
     expect(clearCache).toHaveBeenCalled();
@@ -111,6 +117,7 @@ describe('SubmittingFeature', () => {
       },
     };
     const sf = new SubmittingFeature(engine);
+
     sf.init();
     sf.start();
     sf.setSubmitSucceeded(true);
@@ -130,9 +137,9 @@ describe('SubmittingFeature', () => {
       },
     };
     const sf = new SubmittingFeature(engine);
+
     sf.init();
     sf.setSubmitting(false);
     expect(events.length).toBe(0);
   });
 });
-

@@ -12,6 +12,7 @@ describe('TouchedFeature', () => {
       },
     };
     const tf = new TouchedFeature(engine);
+
     tf.init();
     expect(tf.isTouched('email')).toBe(false);
     expect(tf.getTouchedArray()).toEqual([]);
@@ -25,6 +26,7 @@ describe('TouchedFeature', () => {
       },
     };
     const tf = new TouchedFeature(engine);
+
     tf.init();
     tf.touch('email');
     expect(tf.isTouched('email')).toBe(true);
@@ -39,9 +41,11 @@ describe('TouchedFeature', () => {
       },
     };
     const tf = new TouchedFeature(engine);
+
     tf.init();
     tf.touch('email');
     const eventCount = events.length;
+
     tf.touch('email');
     expect(events.length).toBe(eventCount);
   });
@@ -53,10 +57,12 @@ describe('TouchedFeature', () => {
       },
     };
     const tf = new TouchedFeature(engine);
+
     tf.init();
     tf.touch('email');
     tf.touch('password');
     const touched = tf.getTouchedArray();
+
     expect(touched).toContain('email');
     expect(touched).toContain('password');
   });
@@ -68,10 +74,12 @@ describe('TouchedFeature', () => {
       },
     };
     const tf = new TouchedFeature(engine);
+
     tf.init();
     tf.touch('email');
     const arr1 = tf.getTouchedArray();
     const arr2 = tf.getTouchedArray();
+
     expect(arr1).toBe(arr2); // same reference due to caching
   });
 
@@ -82,11 +90,14 @@ describe('TouchedFeature', () => {
       },
     };
     const tf = new TouchedFeature(engine);
+
     tf.init();
     tf.touch('email');
     const arr1 = tf.getTouchedArray();
+
     tf.touch('password');
     const arr2 = tf.getTouchedArray();
+
     expect(arr1).not.toBe(arr2); // different reference after cache invalidation
   });
 
@@ -97,6 +108,7 @@ describe('TouchedFeature', () => {
       },
     };
     const tf = new TouchedFeature(engine);
+
     tf.init();
     tf.touch('email');
     tf.reset();
@@ -104,4 +116,3 @@ describe('TouchedFeature', () => {
     expect(tf.getTouchedArray()).toEqual([]);
   });
 });
-

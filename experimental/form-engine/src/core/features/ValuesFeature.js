@@ -78,4 +78,3 @@ export class ValuesFeature {
     return { ...this.initialValues };
   }
 }
-

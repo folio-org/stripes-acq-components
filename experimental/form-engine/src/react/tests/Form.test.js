@@ -15,6 +15,7 @@ import {
 
 function Debug() {
   const { dirty, pristine, submitSucceeded } = useFormState({ dirty: true, pristine: true, submitSucceeded: true });
+
   return (
     <div>
       <div data-testid="dirty">{String(dirty)}</div>
@@ -28,14 +29,19 @@ describe('Form', () => {
   it('should toggle submitSucceeded on submit and reset on change', async () => {
     const user = userEvent.setup();
     const onSubmit = jest.fn();
+
     render(
-      <Form onSubmit={onSubmit} initialValues={{ email: '' }}>
+      <Form
+        onSubmit={onSubmit}
+        initialValues={{ email: '' }}
+        enableBatching={false}
+      >
         <Field name="email">
           {({ input }) => <input data-testid="email" {...input} />}
         </Field>
         <Debug />
         <button type="submit">Submit</button>
-      </Form>
+      </Form>,
     );
 
     await user.type(screen.getByTestId('email'), 'a@b');

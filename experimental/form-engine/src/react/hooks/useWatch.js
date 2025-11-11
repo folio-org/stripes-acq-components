@@ -12,6 +12,7 @@ export function useWatch(name, selector = null) {
   const engine = useFormEngine();
 
   const selectorRef = useRef(selector);
+
   selectorRef.current = selector;
 
   const getCurrentValue = useCallback(() => {

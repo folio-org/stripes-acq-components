@@ -14,6 +14,7 @@ import {
 
 function TestComponent({ onSubmit }) {
   const { handleSubmit } = useFormSubmit(onSubmit);
+
   return (
     <form onSubmit={handleSubmit}>
       <button type="submit">Submit</button>
@@ -25,10 +26,11 @@ describe('useFormSubmit', () => {
   it('should handle form submission', async () => {
     const user = userEvent.setup();
     const onSubmit = jest.fn();
+
     render(
       <Form onSubmit={onSubmit} initialValues={{ email: 'test@test.com' }}>
         <TestComponent onSubmit={onSubmit} />
-      </Form>
+      </Form>,
     );
     await user.click(screen.getByText('Submit'));
     await waitFor(() => {
@@ -36,4 +38,3 @@ describe('useFormSubmit', () => {
     });
   });
 });
-

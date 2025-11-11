@@ -29,7 +29,7 @@ describe('FormNavigationModal', () => {
         open
         onConfirm={jest.fn()}
         onCancel={jest.fn()}
-      />
+      />,
     );
     expect(screen.getByTestId('modal')).toBeInTheDocument();
   });
@@ -40,7 +40,7 @@ describe('FormNavigationModal', () => {
         open={false}
         onConfirm={jest.fn()}
         onCancel={jest.fn()}
-      />
+      />,
     );
     expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
   });
@@ -48,12 +48,13 @@ describe('FormNavigationModal', () => {
   it('should call onConfirm when confirm button is clicked', async () => {
     const user = userEvent.setup();
     const onConfirm = jest.fn();
+
     render(
       <FormNavigationModal
         open
         onConfirm={onConfirm}
         onCancel={jest.fn()}
-      />
+      />,
     );
     await user.click(screen.getByTestId('confirm'));
     expect(onConfirm).toHaveBeenCalled();
@@ -62,15 +63,15 @@ describe('FormNavigationModal', () => {
   it('should call onCancel when cancel button is clicked', async () => {
     const user = userEvent.setup();
     const onCancel = jest.fn();
+
     render(
       <FormNavigationModal
         open
         onConfirm={jest.fn()}
         onCancel={onCancel}
-      />
+      />,
     );
     await user.click(screen.getByTestId('cancel'));
     expect(onCancel).toHaveBeenCalled();
   });
 });
-

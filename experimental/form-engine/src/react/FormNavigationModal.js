@@ -5,7 +5,7 @@
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
-import { ConfirmationModal } from '@folio/stripes-components';
+import { ConfirmationModal } from '@folio/stripes/components';
 
 export function FormNavigationModal({
   open,
@@ -39,5 +39,3 @@ FormNavigationModal.propTypes = {
   onConfirm: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
 };
-
-

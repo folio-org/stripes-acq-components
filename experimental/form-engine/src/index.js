@@ -1,4 +1,4 @@
- /**
+/**
   * Form engine - lightweight form state management
  *
  * Exports:
@@ -45,7 +45,7 @@ export {
 } from './react/FormContext';
 
 // Utilities
-export * from './utils/index';
+export * from './utils';
 
 // Default export
 export { default } from './react/Form';

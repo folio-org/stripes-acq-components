@@ -14,23 +14,28 @@ describe('FormContext', () => {
     const engine = new FormEngine().init({});
     const TestComponent = () => {
       const eng = useFormEngine();
+
       expect(eng).toBe(engine);
+
       return <div>Test</div>;
     };
+
     render(
       <FormProvider engine={engine}>
         <TestComponent />
-      </FormProvider>
+      </FormProvider>,
     );
   });
 
   it('should throw error if useFormEngine is used outside provider', () => {
     const TestComponent = () => {
       expect(() => useFormEngine()).toThrow('useFormEngine must be used within a FormProvider');
+
       return null;
     };
     // Suppress console.error for this test
     const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
+
     render(<TestComponent />);
     consoleSpy.mockRestore();
   });
@@ -39,15 +44,17 @@ describe('FormContext', () => {
     const engine = new FormEngine().init({});
     const TestComponent = () => {
       const ctx = useFormContext();
+
       expect(ctx.engine).toBe(engine);
       expect(ctx.defaultValidateOn).toBe('blur');
+
       return <div>Test</div>;
     };
+
     render(
       <FormProvider engine={engine} defaultValidateOn="blur">
         <TestComponent />
-      </FormProvider>
+      </FormProvider>,
     );
   });
 });
-
