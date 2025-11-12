@@ -2,7 +2,7 @@
 
 import {
   isDefined,
-  shallowEqual,
+  isEqual,
   isFunction,
   isNullish,
   isObject,
@@ -23,10 +23,10 @@ describe('checks utilities', () => {
     expect(isNullish('')).toBe(false);
   });
 
-  it('should perform deep equality check with shallowEqual', () => {
-    expect(shallowEqual({ a: [1, 2] }, { a: [1, 2] })).toBe(true);
-    expect(shallowEqual({ a: [1, 2] }, { a: [2, 1] })).toBe(false);
-    expect(shallowEqual({ a: 1 }, { a: 1 })).toBe(true);
+  it('should perform deep equality check with isEqual', () => {
+    expect(isEqual({ a: [1, 2] }, { a: [1, 2] })).toBe(true);
+    expect(isEqual({ a: [1, 2] }, { a: [2, 1] })).toBe(false);
+    expect(isEqual({ a: 1 }, { a: 1 })).toBe(true);
   });
 
   it('should check if value is a function', () => {

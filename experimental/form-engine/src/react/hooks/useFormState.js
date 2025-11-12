@@ -15,7 +15,7 @@ import {
   FORM_ACTIONS,
   FORM_ENGINE_OPTIONS,
 } from '../../constants';
-import { shallowEqual } from '../../utils/checks';
+import { isEqual } from '../../utils/checks';
 import { useFormEngine } from '../FormContext';
 
 // Form state reducer
@@ -68,8 +68,8 @@ function hasSubscribedChanges(prevState, nextState, subscription) {
       continue;
     }
 
-    // Shallow comparison for objects/arrays - deep comparison would be too expensive
-    if (!shallowEqual(prev, next)) {
+    // Comparison for objects/arrays - deep comparison would be too expensive
+    if (!isEqual(prev, next)) {
       return true;
     }
   }

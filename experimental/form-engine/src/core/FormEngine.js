@@ -18,7 +18,7 @@ import {
   FORM_ENGINE_OPTIONS,
   DIRTY_CHECK_STRATEGY,
 } from '../constants';
-import { isFunction, isDefined, shallowEqual } from '../utils/checks';
+import { isFunction, isDefined, isEqual } from '../utils/checks';
 import { ValidationService } from './services/ValidationService';
 import { CacheService } from './services/CacheService';
 import { EventService } from './services/EventService';
@@ -409,7 +409,7 @@ export default class FormEngine {
     const previousErrors = this.errorsFeature.getAll();
 
     // Check if errors object actually changed
-    const errorsChanged = !shallowEqual(previousErrors, errors);
+    const errorsChanged = !isEqual(previousErrors, errors);
 
     if (errorsChanged) {
       this.errorsFeature.setAll(errors);

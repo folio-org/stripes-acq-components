@@ -2,9 +2,17 @@
  * DirtyFeature - Manages form dirty/pristine state
  */
 
+import {
+  DIRTY_CHECK_STRATEGY,
+  EVENTS,
+  FIELD_EVENT_PREFIXES,
+  FORM_ENGINE_OPTIONS,
+} from '../../constants';
+import {
+  isEqual,
+  isFunction,
+} from '../../utils/checks';
 import { getByPath } from '../../utils/path';
-import { EVENTS, DIRTY_CHECK_STRATEGY, FIELD_EVENT_PREFIXES, FORM_ENGINE_OPTIONS } from '../../constants';
-import { isFunction } from '../../utils/checks';
 
 export class DirtyFeature {
   constructor(engine) {
@@ -282,11 +290,8 @@ export class DirtyFeature {
    * @private
    */
   _getIsEqualFunction() {
-    // eslint-disable-next-line global-require
-    const { shallowEqual } = require('../../utils/checks');
-
     return isFunction(this.engine.options.isEqual)
       ? this.engine.options.isEqual
-      : shallowEqual;
+      : isEqual;
   }
 }
