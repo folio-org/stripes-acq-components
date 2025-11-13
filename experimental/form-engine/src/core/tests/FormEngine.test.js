@@ -323,4 +323,210 @@ describe('FormEngine', () => {
 
     expect(() => engine.get('test')).toThrow('FormEngine must be initialized');
   });
+
+  describe('Edge cases and error handling', () => {
+    it('should handle init with null initialValues', () => {
+      const engine = new FormEngine().init(null);
+      const fs = engine.getFormState();
+
+      expect(fs.values).toEqual({});
+      expect(fs.pristine).toBe(true);
+    });
+
+    it('should handle init with undefined initialValues', () => {
+      const engine = new FormEngine().init(undefined);
+      const fs = engine.getFormState();
+
+      expect(fs.values).toEqual({});
+      expect(fs.pristine).toBe(true);
+    });
+
+    it('should filter out undefined values from config', () => {
+      const engine = new FormEngine().init({}, {
+        [FORM_ENGINE_OPTIONS.BATCH_DELAY]: 100,
+        [FORM_ENGINE_OPTIONS.ENABLE_BATCHING]: undefined,
+      });
+
+      expect(engine.getConfig()[FORM_ENGINE_OPTIONS.BATCH_DELAY]).toBe(100);
+      // Should use default value since undefined was filtered out
+      expect(engine.getConfig()[FORM_ENGINE_OPTIONS.ENABLE_BATCHING]).toBe(true);
+    });
+
+    it('should handle set with deeply nested path', () => {
+      const engine = new FormEngine().init({});
+
+      engine.set('a.b.c.d.e', 'deep');
+      expect(engine.get('a.b.c.d.e')).toBe('deep');
+    });
+
+    it('should handle get with non-existent path', () => {
+      const engine = new FormEngine().init({ a: 1 });
+
+      expect(engine.get('b.c.d')).toBeUndefined();
+    });
+
+    it('should handle setMany with empty array', () => {
+      const engine = new FormEngine().init({ a: 1 });
+
+      engine.setMany([]);
+      expect(engine.get('a')).toBe(1);
+    });
+
+    it('should handle array operations with bracket notation', () => {
+      const engine = new FormEngine().init({ items: [{ name: 'a' }, { name: 'b' }] });
+
+      engine.set('items[0].name', 'updated');
+      expect(engine.get('items[0].name')).toBe('updated');
+      expect(engine.get('items[1].name')).toBe('b');
+    });
+
+    it('should handle submit with onSubmit returning promise', async () => {
+      const engine = new FormEngine().init({ email: 'test@test.com' });
+      const onSubmit = jest.fn(() => Promise.resolve());
+      const result = await engine.submit(onSubmit);
+
+      expect(result.success).toBe(true);
+      expect(onSubmit).toHaveBeenCalled();
+    });
+
+    it('should handle submit with onSubmit throwing error', async () => {
+      const engine = new FormEngine().init({ email: 'test@test.com' });
+      const onSubmit = jest.fn(() => {
+        throw new Error('Submit error');
+      });
+      const result = await engine.submit(onSubmit);
+
+      expect(result.success).toBe(false);
+      expect(result.error).toBe('Submit error');
+    });
+
+    it('should handle multiple reset calls', () => {
+      const engine = new FormEngine().init({ a: 1 });
+
+      engine.reset();
+      expect(engine.isInitialized).toBe(false);
+      
+      // Second reset should not throw
+      engine.reset();
+      expect(engine.isInitialized).toBe(false);
+    });
+
+    it('should handle batch callback with error', () => {
+      const engine = new FormEngine().init({});
+
+      expect(() => {
+        engine.batch(() => {
+          engine.set('a', 1);
+          throw new Error('Batch error');
+        });
+      }).toThrow('Batch error');
+      
+      // Value should still be set before error
+      expect(engine.get('a')).toBe(1);
+    });
+
+    it('should handle updateConfig with null', () => {
+      const engine = new FormEngine().init({});
+
+      engine.updateConfig(null);
+      // Should keep existing config
+      expect(engine.getConfig()[FORM_ENGINE_OPTIONS.ENABLE_BATCHING]).toBe(true);
+    });
+
+    it('should handle setError with error message', () => {
+      const engine = new FormEngine().init({ email: '' });
+
+      engine.setError('email', 'Invalid email');
+      const errors = engine.getErrors();
+
+      expect(errors.email).toBe('Invalid email');
+    });
+
+    it('should handle clearError for non-existent field', () => {
+      const engine = new FormEngine().init({});
+
+      // Should not throw
+      engine.clearError('nonexistent');
+      const errors = engine.getErrors();
+
+      expect(errors.nonexistent).toBeUndefined();
+    });
+
+    it('should handle touch for nested field', () => {
+      const engine = new FormEngine().init({ user: { email: '' } });
+
+      engine.touch('user.email');
+      expect(engine.isTouched('user.email')).toBe(true);
+    });
+
+    it('should handle focus and blur for nested field', () => {
+      const engine = new FormEngine().init({ user: { email: '' } });
+
+      engine.focus('user.email');
+      const state1 = engine.getFormState();
+
+      expect(state1.active).toBe('user.email');
+      
+      engine.blur();
+      const state2 = engine.getFormState();
+
+      expect(state2.active).toBeNull();
+    });
+
+    it('should emit events in batch mode', (done) => {
+      const engine = new FormEngine().init({}, {
+        [FORM_ENGINE_OPTIONS.ENABLE_BATCHING]: true,
+      });
+
+      let eventCount = 0;
+
+      engine.on('change:a', () => {
+        eventCount++;
+      });
+
+      engine.batch(() => {
+        engine.set('a', 1);
+        engine.set('a', 2);
+        engine.set('a', 3);
+      });
+
+      // Events should be batched
+      setTimeout(() => {
+        expect(eventCount).toBeGreaterThan(0);
+        done();
+      }, 50);
+    });
+
+    it('should handle complex form state access', () => {
+      const engine = new FormEngine().init({
+        user: {
+          name: 'John',
+          addresses: [
+            { street: '123 Main', city: 'NYC' },
+            { street: '456 Oak', city: 'LA' },
+          ],
+        },
+      });
+
+      const state = engine.getFormState();
+
+      expect(state.values.user.name).toBe('John');
+      expect(state.values.user.addresses[0].city).toBe('NYC');
+      expect(state.pristine).toBe(true);
+      expect(state.submitting).toBe(false);
+    });
+
+    it('should handle reset cleanup', () => {
+      const engine = new FormEngine().init({ a: 1 });
+      const listener = jest.fn();
+
+      engine.on('change:a', listener);
+      engine.set('a', 2);
+      
+      engine.reset();
+      
+      // After reset, engine should not be initialized
+      expect(engine.isInitialized).toBe(false);
+    });
+  });
 });
