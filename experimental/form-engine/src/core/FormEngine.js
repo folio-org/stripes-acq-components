@@ -55,10 +55,6 @@ export default class FormEngine {
     // Initialization state
     this.isInitialized = false;
 
-    // Performance tracking
-    this.operations = 0;
-    this.renderCount = 0;
-
     // Batch callback flag
     this._batchFlushCallbackSet = false;
   }
@@ -168,7 +164,6 @@ export default class FormEngine {
    */
   get(path) {
     this._ensureInitialized();
-    this.operations++;
 
     return this.cacheService.getValue(
       this.cacheService.createValueKey(path, this.valuesFeature.values),
@@ -186,7 +181,6 @@ export default class FormEngine {
    */
   set(path, value, options = {}) {
     this._ensureInitialized();
-    this.operations++;
 
     // Reset submitSucceeded if form was successfully submitted but user makes changes
     // This ensures navigation guard blocks navigation again after successful submit
@@ -494,21 +488,6 @@ export default class FormEngine {
   }
 
   /**
-   * Track React component state update attempt
-   * Should be called from React hooks before dispatch to state update
-   *
-   * Note: This counts dispatch attempts, not actual React re-renders.
-   * React may batch multiple updates into a single re-render, so renderCount
-   * represents the number of state update attempts, which is a useful metric
-   * for understanding form activity and potential performance implications.
-   */
-  trackRender() {
-    if (this.isInitialized) {
-      this.renderCount++;
-    }
-  }
-
-  /**
    * Get current field state snapshot
    * @param {string} path
    */
@@ -563,17 +542,33 @@ export default class FormEngine {
   getDebugInfo() {
     const dirtyFields = this.getDirtyFields();
     const dirtyFieldsList = Object.keys(dirtyFields);
+    const errors = this.getErrors();
+    // Filter out $form from field errors - it's a form-level error marker
+    const errorsList = Object.keys(errors).filter(path => path !== '$form');
+    const fieldErrors = Object.fromEntries(
+      Object.entries(errors).filter(([path]) => path !== '$form'),
+    );
+    // eslint-disable-next-line dot-notation
+    const formError = errors['$form'] != null ? errors['$form'] : null;
 
     return {
+      // Validity information
+      formValid: this.errorsFeature.isValid(),
+      errorsCount: errorsList.length,
+      errorsList,
+      errors: fieldErrors,
+      formError, // Separate form-level error if any
+      // Dirty tracking
       formDirty: this.dirtyFeature.isDirty(),
       dirtyStrategy: this.options[FORM_ENGINE_OPTIONS.DIRTY_CHECK_STRATEGY],
       dirtyFieldsCount: dirtyFieldsList.length,
       dirtyFieldsList,
       dirtyFields,
+      // Form state
       submitting: this.submittingFeature.isSubmitting(),
       submitSucceeded: this.submittingFeature.hasSubmitSucceeded(),
       touchedCount: this.touchedFeature.touched.size,
-      touchedFields: this.touchedFeature.getTouchedArray(),
+      touchedFields: this.touchedFeature.getTouchedArray().filter(path => path !== '$form'),
     };
   }
 
@@ -654,8 +649,6 @@ export default class FormEngine {
       events: this.eventService.getStats(),
       batch: this.batchService.getStats(),
       engine: {
-        operations: this.operations,
-        renderCount: this.renderCount,
         isInitialized: this.isInitialized,
       },
     };
@@ -671,8 +664,6 @@ export default class FormEngine {
    */
   _resetState() {
     // Features are reset in reset() method
-    this.operations = 0;
-    this.renderCount = 0;
     this._batchFlushCallbackSet = false;
   }
 
@@ -734,8 +725,11 @@ export default class FormEngine {
 
       if (!isValid || Object.keys(errors).length > 0) {
         // Mark all fields with errors as touched so errors are displayed
+        // Skip $form (form-level error marker) - it's not an actual field
         Object.keys(errors).forEach(fieldName => {
-          this.touchedFeature.touch(fieldName);
+          if (fieldName !== '$form') {
+            this.touchedFeature.touch(fieldName);
+          }
         });
 
         this.submittingFeature.stop();

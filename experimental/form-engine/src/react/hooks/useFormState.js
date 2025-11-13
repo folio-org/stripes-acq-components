@@ -179,8 +179,6 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
       // This prevents unnecessary re-renders when unsubscribed fields change
       if (hasSubscribedChanges(prevState, nextState, activeSubscription)) {
         prevStateRef.current = nextState;
-        // Track React re-render before dispatch
-        engine.trackRender();
         // When batching is disabled, use synchronous dispatch for deterministic behavior.
         // Otherwise, use startTransition to defer non-urgent updates.
         if (!engine.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING] || typeof startTransition !== 'function') {
@@ -217,8 +215,6 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
         // Only update if subscribed fields actually changed
         if (hasSubscribedChanges(prevState, nextState, activeSubscription)) {
           prevStateRef.current = nextState;
-          // Track React re-render before dispatch
-          engine.trackRender();
           // When batching is disabled, use synchronous dispatch for deterministic behavior.
           // Otherwise, defer to requestAnimationFrame for smooth updates.
           if (!engine.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING]) {

@@ -91,8 +91,15 @@ export function useField(name, options = {}) {
 
   // Set up subscriptions declaratively
   useEffect(() => {
-    const configs = buildFieldSubscriptions(name, subscription, validate, dispatch, engine);
+    const configs = buildFieldSubscriptions(name, subscription, validate, dispatch);
     const unsubscribers = configs.filter(c => c.enabled).map(c => engine.on(c.event, c.cb));
+
+    // Register validator on mount if provided
+    // This ensures validators are available even if onChange hasn't been called yet
+    // (e.g., blur validation on a field that hasn't been modified)
+    if (name && validate && !engine.hasValidator(name)) {
+      engine.registerValidator(name, validate, validateOn);
+    }
 
     // Sync initial value from engine if subscription is enabled
     // This ensures Field displays the correct initial value even if subscription hasn't fired yet
@@ -121,12 +128,9 @@ export function useField(name, options = {}) {
   }, [
     engine,
     name,
-    subscription.value,
-    subscription.error,
-    subscription.touched,
-    subscription.active,
-    subscription.dirty,
+    subscription,
     validate,
+    validateOn,
   ]);
 
   // Field handlers

@@ -47,4 +47,53 @@ describe('useField', () => {
       expect(screen.getByTestId('touched').textContent).toBe('true');
     });
   });
+
+  it('should display field error when validation fails', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <Form
+        onSubmit={() => {}}
+        initialValues={{ email: '' }}
+      >
+        <Field
+          name="email"
+          validate={(value) => (!value ? 'Email is required' : null)}
+          validateOn="blur"
+        >
+          {({ input, meta }) => (
+            <div>
+              <input data-testid="email" {...input} />
+              <span data-testid="error">{meta.error || ''}</span>
+            </div>
+          )}
+        </Field>
+      </Form>,
+    );
+
+    const input = screen.getByTestId('email');
+
+    // Initially no error
+    expect(screen.getByTestId('error').textContent).toBe('');
+
+    // Focus and blur without entering value - should trigger validation
+    await user.click(input);
+    await user.tab();
+
+    // Wait for error to appear
+    await waitFor(() => {
+      expect(screen.getByTestId('error').textContent).toBe('Email is required');
+    });
+
+    // Type valid value
+    await user.type(input, 'test@test.com');
+
+    // Blur to trigger validation again
+    await user.tab();
+
+    // Wait for error to be cleared
+    await waitFor(() => {
+      expect(screen.getByTestId('error').textContent).toBe('');
+    });
+  });
 });

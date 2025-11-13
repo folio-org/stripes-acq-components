@@ -41,7 +41,6 @@ const Field = memo(forwardRef(({
       : (fieldState.value || '');
   }, [fieldState.value, fieldState.active, formatOnBlur, name]);
 
-  // Reuse meta from fieldState to avoid duplication
   const meta = fieldState.meta;
 
   const componentProps = useMemo(() => ({
@@ -60,8 +59,7 @@ const Field = memo(forwardRef(({
     fieldState.onBlur,
     fieldState.onFocus,
     formatValue,
-    fieldState.meta,
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    meta,
     rest,
   ]);
 

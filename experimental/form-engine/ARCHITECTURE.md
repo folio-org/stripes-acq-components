@@ -40,10 +40,6 @@ This form engine is built around a small core with injectable services and featu
 - Debouncing supported per field via ValidationService; form-level validator is registered for `$form`.
 - On submit: validate all, touch fields with errors, emit SUBMIT with result details.
 
-### Performance metrics
-- `operations`: times the engine handled get/set-like operations
-- `renderCount`: number of React state updates attempted via tracked dispatches (see hooks)
-
 ### Navigation guard
 - `FormNavigationGuard` uses `useFormState` for `dirty`, `submitting`, `submitSucceeded`, blocks `history` navigation, and shows `FormNavigationModal`.
 - Optional `cachePreviousUrl` enables integration with `LastVisitedContext` from stripes-core (wired in the `Form` component).

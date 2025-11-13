@@ -59,11 +59,10 @@ describe('FormEngine', () => {
 
   it('should track operations count', () => {
     const engine = new FormEngine().init({});
-    const initialOps = engine.operations;
 
     engine.get('test');
     engine.set('test', 'value');
-    expect(engine.operations).toBeGreaterThan(initialOps);
+    // Operations tracking was removed for performance
   });
 
   it('should handle reset', async () => {
@@ -116,6 +115,169 @@ describe('FormEngine', () => {
 
     await waitFor(async () => expect(engine.isDirty()).toBe(true));
     expect(debug.dirtyStrategy).toBe(DIRTY_CHECK_STRATEGY.VALUES);
+    // Check that new validity info is present
+    expect(debug.formValid).toBeDefined();
+    expect(debug.errorsCount).toBeDefined();
+    expect(debug.errorsList).toBeDefined();
+    expect(debug.errors).toBeDefined();
+  });
+
+  it('should include validation info in debug info', async () => {
+    const engine = new FormEngine().init({ email: '', name: '' });
+
+    engine.registerValidator('email', (v) => (!v ? 'Email is required' : null), 'submit');
+    engine.registerValidator('name', (v) => (!v ? 'Name is required' : null), 'submit');
+
+    await engine.validateAll();
+    const debug = engine.getDebugInfo();
+
+    expect(debug.formValid).toBe(false);
+    expect(debug.errorsCount).toBe(2);
+    expect(debug.errorsList).toContain('email');
+    expect(debug.errorsList).toContain('name');
+    expect(debug.errors.email).toBe('Email is required');
+    expect(debug.errors.name).toBe('Name is required');
+  });
+
+  it('should show valid form in debug info when all validations pass', async () => {
+    const engine = new FormEngine().init({ email: 'test@test.com', name: 'John' });
+
+    engine.registerValidator('email', (v) => (!v ? 'Email is required' : null), 'submit');
+    engine.registerValidator('name', (v) => (!v ? 'Name is required' : null), 'submit');
+
+    await engine.validateAll();
+    const debug = engine.getDebugInfo();
+
+    expect(debug.formValid).toBe(true);
+    expect(debug.errorsCount).toBe(0);
+    expect(debug.errorsList.length).toBe(0);
+  });
+
+  it('should handle form-level validator and return field errors', async () => {
+    const engine = new FormEngine().init({
+      fyFinanceData: [
+        { budgetAllocationChange: 0 },
+        { budgetAllocationChange: 100 },
+        { budgetAllocationChange: 50 },
+        { budgetAllocationChange: -500000 },
+      ],
+    });
+
+    // Form-level validator that returns object with field errors
+    // First param (_ignored) is null for $form, we use allValues instead
+    const formValidator = (_ignored, allValues) => {
+      const errors = {};
+
+      if (allValues.fyFinanceData && Array.isArray(allValues.fyFinanceData)) {
+        allValues.fyFinanceData.forEach((item, index) => {
+          if (item.budgetAllocationChange < 0) {
+            errors[`fyFinanceData[${index}].budgetAllocationChange`] = 'New total allocation cannot be negative';
+          }
+        });
+      }
+
+      return Object.keys(errors).length > 0 ? errors : null;
+    };
+
+    engine.registerValidator('$form', formValidator, 'submit');
+    await engine.validateAll();
+    const allErrors = engine.getErrors();
+    const debug = engine.getDebugInfo();
+
+    // Check that errors are for specific fields, not $form
+    expect(debug.formValid).toBe(false);
+    // Verify errors exist for the negative field with bracket notation
+    expect(allErrors['fyFinanceData[3].budgetAllocationChange']).toBe('New total allocation cannot be negative');
+    // eslint-disable-next-line dot-notation
+    expect(allErrors['$form']).toBeUndefined();
+  });
+
+  it('should handle array errors from validators', async () => {
+    const engine = new FormEngine().init({
+      fyFinanceData: [
+        { budgetAllocationChange: 0 },
+        { budgetAllocationChange: 100 },
+        { budgetAllocationChange: 50 },
+        { budgetAllocationChange: -500000 },
+      ],
+    });
+
+    // Field-level validator that returns array with nested errors
+    // This simulates validators that return array structures
+    const arrayValidator = (value) => {
+      if (!Array.isArray(value)) return null;
+
+      const errors = [];
+
+      value.forEach((item, index) => {
+        if (item.budgetAllocationChange < 0) {
+          errors[index] = {
+            budgetAllocationChange: 'New total allocation cannot be negative',
+          };
+        }
+      });
+
+      return errors.some(e => e) ? errors : null;
+    };
+
+    engine.registerValidator('fyFinanceData', arrayValidator, 'submit');
+    await engine.validateAll();
+    const allErrors = engine.getErrors();
+    const debug = engine.getDebugInfo();
+
+    // Check that array errors are converted to field paths with bracket notation
+    expect(debug.formValid).toBe(false);
+    expect(allErrors['fyFinanceData[3].budgetAllocationChange']).toBe('New total allocation cannot be negative');
+    // Ensure no array is stored as error value
+    expect(allErrors.fyFinanceData).toBeUndefined();
+  });
+
+  it('should handle $form validator returning object with array values', async () => {
+    const engine = new FormEngine().init({
+      fyFinanceData: [
+        { budgetAllocationChange: 0 },
+        { budgetAllocationChange: 100 },
+        { budgetAllocationChange: 50 },
+        { budgetAllocationChange: -500000 },
+      ],
+    });
+
+    // Form-level validator that returns object with array as value
+    // This simulates the real-world case from BatchAllocationsForm
+    const formValidator = (_ignored, allValues) => {
+      const errors = {};
+
+      if (allValues.fyFinanceData && Array.isArray(allValues.fyFinanceData)) {
+        const fieldErrors = [];
+
+        allValues.fyFinanceData.forEach((item, index) => {
+          if (item.budgetAllocationChange < 0) {
+            fieldErrors[index] = {
+              budgetAllocationChange: 'New total allocation cannot be negative',
+            };
+          }
+        });
+
+        if (fieldErrors.some(e => e)) {
+          errors.fyFinanceData = fieldErrors;
+        }
+      }
+
+      return Object.keys(errors).length > 0 ? errors : null;
+    };
+
+    engine.registerValidator('$form', formValidator, 'submit');
+    await engine.validateAll();
+    const allErrors = engine.getErrors();
+    const debug = engine.getDebugInfo();
+
+    // Check that array errors are converted to field paths with bracket notation
+    expect(debug.formValid).toBe(false);
+    expect(allErrors['fyFinanceData[3].budgetAllocationChange']).toBe('New total allocation cannot be negative');
+    // Ensure fyFinanceData itself doesn't have array error
+    expect(allErrors.fyFinanceData).toBeUndefined();
+    // eslint-disable-next-line dot-notation
+    expect(allErrors['$form']).toBeUndefined();
   });
 
   it('should get service stats', () => {

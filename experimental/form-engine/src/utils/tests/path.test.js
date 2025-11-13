@@ -60,4 +60,22 @@ describe('path utilities', () => {
 
     expect(getByPath(updated, 'arr[1][0]')).toBe(99);
   });
+
+  it('should support both dot and bracket notation for arrays', () => {
+    const obj = { items: [{ name: 'first' }, { name: 'second' }] };
+
+    // Both notations work with lodash
+    expect(getByPath(obj, 'items[0].name')).toBe('first');
+    expect(getByPath(obj, 'items.0.name')).toBe('first');
+
+    // Setting with bracket notation
+    const updated1 = setByPath(obj, 'items[1].name', 'updated');
+
+    expect(getByPath(updated1, 'items[1].name')).toBe('updated');
+
+    // Both can read the same path
+    const updated2 = setByPath(obj, 'items.1.name', 'updated2');
+
+    expect(getByPath(updated2, 'items[1].name')).toBe('updated2');
+  });
 });

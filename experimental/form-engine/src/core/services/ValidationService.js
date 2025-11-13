@@ -103,7 +103,53 @@ export class ValidationService {
       const error = await this.validateField(path, value, allValues);
 
       if (error) {
-        errors[path] = error;
+        // If error is from form-level validator ($form) and returns an object
+        // Merge the field errors instead of storing $form error
+        if (path === '$form' && typeof error === 'object' && !Array.isArray(error)) {
+          // Process each field in the error object
+          Object.entries(error).forEach(([fieldPath, fieldError]) => {
+            if (Array.isArray(fieldError)) {
+              // Field error is an array - convert to field-level errors
+              fieldError.forEach((itemError, index) => {
+                if (itemError && typeof itemError === 'object') {
+                  // Nested object with field errors for this array item
+                  Object.keys(itemError).forEach(subFieldName => {
+                    const fullPath = `${fieldPath}[${index}].${subFieldName}`;
+
+                    errors[fullPath] = itemError[subFieldName];
+                  });
+                } else if (itemError) {
+                  // Direct error string for this array item
+                  const fullPath = `${fieldPath}[${index}]`;
+
+                  errors[fullPath] = itemError;
+                }
+              });
+            } else {
+              // Regular field error - merge directly
+              errors[fieldPath] = fieldError;
+            }
+          });
+        } else if (Array.isArray(error)) {
+          // Handle array errors - convert to field-level errors
+          // For each non-empty item in the array, create field path errors
+          error.forEach((itemError, index) => {
+            if (itemError && typeof itemError === 'object') {
+              // Nested object with field errors for this array item
+              Object.keys(itemError).forEach(fieldName => {
+                const fieldPath = `${path}[${index}].${fieldName}`;
+
+                errors[fieldPath] = itemError[fieldName];
+              });
+            } else if (itemError) {
+              // Direct error string for this array item
+              errors[`${path}[${index}]`] = itemError;
+            }
+          });
+        } else {
+          // Regular field error or form-level string error
+          errors[path] = error;
+        }
       }
     }
 
@@ -133,7 +179,9 @@ export class ValidationService {
 
       timeoutId = setTimeout(async () => {
         try {
-          const context = path ? this._getFieldContext(path, value, allValues) : { fieldState: undefined, api: undefined };
+          const context = path
+            ? this._getFieldContext(path, value, allValues)
+            : { fieldState: undefined, api: undefined };
 
           const result = await validator(value, allValues, context.fieldState, context.api);
 

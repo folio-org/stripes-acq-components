@@ -112,4 +112,418 @@ describe('ErrorsFeature', () => {
     expect(ef.isValid()).toBe(true);
     expect(ef._previousFormValid).toBe(null);
   });
+
+  // ============================================
+  // Edge Cases and Bug Prevention Tests
+  // ============================================
+
+  describe('Array error prevention', () => {
+    it('should not set array as error and log warning', () => {
+      const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('items', ['error1', 'error2']);
+
+      expect(ef.get('items')).toBe(null);
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        expect.stringContaining('Attempted to set array as error'),
+        expect.any(Array),
+      );
+      consoleErrorSpy.mockRestore();
+    });
+
+    it('should filter out arrays in setAll', () => {
+      const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.setAll({
+        field1: 'valid error',
+        field2: ['array', 'error'],
+        field3: 'another valid error',
+      });
+
+      expect(ef.get('field1')).toBe('valid error');
+      expect(ef.get('field2')).toBe(null);
+      expect(ef.get('field3')).toBe('another valid error');
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        expect.stringContaining('Found array error'),
+        expect.any(Array),
+      );
+      consoleErrorSpy.mockRestore();
+    });
+
+    it('should filter out empty arrays', () => {
+      const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.setAll({
+        field1: 'valid error',
+        field2: [],
+      });
+
+      expect(ef.get('field1')).toBe('valid error');
+      expect(ef.get('field2')).toBe(null);
+      expect(consoleErrorSpy).toHaveBeenCalled();
+      consoleErrorSpy.mockRestore();
+    });
+  });
+
+  describe('Edge cases with null/undefined/empty', () => {
+    it('should handle null error as clear', () => {
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('email', 'error');
+      ef.set('email', null);
+
+      expect(ef.get('email')).toBe(null);
+      expect(ef.hasError('email')).toBe(false);
+    });
+
+    it('should handle undefined error as clear', () => {
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('email', 'error');
+      ef.set('email', undefined);
+
+      expect(ef.get('email')).toBe(null);
+      expect(ef.hasError('email')).toBe(false);
+    });
+
+    it('should handle empty string error as clear', () => {
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('email', 'error');
+      ef.set('email', '');
+
+      expect(ef.get('email')).toBe(null);
+      expect(ef.hasError('email')).toBe(false);
+    });
+
+    it('should handle setAll with empty object', () => {
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('email', 'error');
+      ef.setAll({});
+
+      expect(ef.getAll()).toEqual({});
+      expect(ef.isValid()).toBe(true);
+    });
+
+    it('should handle setAll with null values', () => {
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.setAll({ field1: null, field2: undefined, field3: '' });
+
+      // setAll sets whatever is passed, including falsy values
+      // But get() returns null for missing fields
+      const all = ef.getAll();
+
+      expect(all.field1).toBe(null);
+      expect(all.field2).toBe(undefined);
+      expect(all.field3).toBe('');
+    });
+  });
+
+  describe('Event emission', () => {
+    it('should emit field-specific error event', () => {
+      const events = [];
+      const engine = {
+        eventService: {
+          emit: (name, payload) => events.push({ name, payload }),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('email', 'error');
+
+      const fieldEvent = events.find(e => e.name === 'error:email');
+
+      expect(fieldEvent).toBeTruthy();
+      expect(fieldEvent.payload).toBe('error');
+    });
+
+    it('should emit valid event only when state changes', () => {
+      const events = [];
+      const engine = {
+        eventService: {
+          emit: (name, payload) => events.push({ name, payload }),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('email', 'error1');
+      const validEvents1 = events.filter(e => e.name === EVENTS.VALID);
+
+      ef.set('email', 'error2'); // still invalid
+      const validEvents2 = events.filter(e => e.name === EVENTS.VALID);
+
+      expect(validEvents1.length).toBe(1);
+      expect(validEvents2.length).toBe(1); // no new event
+    });
+
+    it('should emit valid event when transitioning from invalid to valid', () => {
+      const events = [];
+      const engine = {
+        eventService: {
+          emit: (name, payload) => events.push({ name, payload }),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('email', 'error');
+      events.length = 0; // clear
+      ef.clear('email');
+
+      const validEvent = events.find(e => e.name === EVENTS.VALID && e.payload.valid === true);
+
+      expect(validEvent).toBeTruthy();
+    });
+
+    it('should emit error events for all fields in setAll', () => {
+      const events = [];
+      const engine = {
+        eventService: {
+          emit: (name, payload) => events.push({ name, payload }),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.setAll({ email: 'error1', password: 'error2' });
+
+      expect(events.find(e => e.name === 'error:email')).toBeTruthy();
+      expect(events.find(e => e.name === 'error:password')).toBeTruthy();
+    });
+  });
+
+  describe('Multiple error operations', () => {
+    it('should handle rapid set/clear operations', () => {
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('email', 'error1');
+      ef.set('email', 'error2');
+      ef.clear('email');
+      ef.set('email', 'error3');
+
+      expect(ef.get('email')).toBe('error3');
+    });
+
+    it('should handle errors for multiple fields', () => {
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('field1', 'error1');
+      ef.set('field2', 'error2');
+      ef.set('field3', 'error3');
+
+      expect(ef.getAll()).toEqual({
+        field1: 'error1',
+        field2: 'error2',
+        field3: 'error3',
+      });
+      expect(ef.isValid()).toBe(false);
+    });
+
+    it('should handle clearing some errors', () => {
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.setAll({ field1: 'error1', field2: 'error2', field3: 'error3' });
+      ef.clear('field2');
+
+      expect(ef.get('field1')).toBe('error1');
+      expect(ef.get('field2')).toBe(null);
+      expect(ef.get('field3')).toBe('error3');
+      expect(ef.isValid()).toBe(false);
+    });
+  });
+
+  describe('Path edge cases', () => {
+    it('should handle nested field paths', () => {
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('user.email', 'error');
+
+      expect(ef.get('user.email')).toBe('error');
+      expect(ef.hasError('user.email')).toBe(true);
+    });
+
+    it('should handle array field paths', () => {
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('items[0].name', 'error');
+
+      expect(ef.get('items[0].name')).toBe('error');
+    });
+
+    it('should handle very long paths', () => {
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      const longPath = 'a.b.c.d.e.f.g.h.i.j.k.l.m.n.o.p';
+
+      ef.set(longPath, 'error');
+
+      expect(ef.get(longPath)).toBe('error');
+    });
+
+    it('should handle special characters in paths', () => {
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('field-name', 'error1');
+      ef.set('field_name', 'error2');
+      ef.set('field.name', 'error3');
+
+      expect(ef.get('field-name')).toBe('error1');
+      expect(ef.get('field_name')).toBe('error2');
+      expect(ef.get('field.name')).toBe('error3');
+      expect(Object.keys(ef.getAll()).length).toBe(3);
+    });
+  });
+
+  describe('Form validity tracking', () => {
+    it('should track validity state changes', () => {
+      const events = [];
+      const engine = {
+        eventService: {
+          emit: (name, payload) => events.push({ name, payload }),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      expect(ef._previousFormValid).toBe(true);
+
+      ef.set('email', 'error');
+      expect(ef._previousFormValid).toBe(false);
+
+      ef.clear('email');
+      expect(ef._previousFormValid).toBe(true);
+    });
+
+    it('should not emit valid event if already valid', () => {
+      const events = [];
+      const engine = {
+        eventService: {
+          emit: (name, payload) => events.push({ name, payload }),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      events.length = 0; // clear init events
+
+      ef.set('email', ''); // clears
+
+      const validEvents = events.filter(e => e.name === EVENTS.VALID);
+
+      expect(validEvents.length).toBe(0); // no new valid event
+    });
+
+    it('should reset validity tracking on reset', () => {
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('email', 'error');
+      expect(ef._previousFormValid).toBe(false);
+
+      ef.reset();
+      expect(ef._previousFormValid).toBe(null);
+    });
+  });
 });

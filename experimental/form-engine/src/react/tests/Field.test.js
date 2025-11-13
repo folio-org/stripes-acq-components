@@ -80,4 +80,263 @@ describe('Field', () => {
 
     expect(input).toBeInTheDocument();
   });
+
+  describe('Validation modes', () => {
+    it('should validate on blur when validateOn="blur"', async () => {
+      const user = userEvent.setup();
+      const validator = jest.fn((value) => (!value ? 'Required' : null));
+
+      render(
+        <Form onSubmit={() => {}}>
+          <Field
+            name="email"
+            validate={validator}
+            validateOn="blur"
+          >
+            {({ input, meta }) => (
+              <div>
+                <input data-testid="email" {...input} />
+                {meta.error && <span data-testid="error">{meta.error}</span>}
+              </div>
+            )}
+          </Field>
+        </Form>,
+      );
+
+      const input = screen.getByTestId('email');
+
+      // Focus and blur without typing - should validate
+      await act(async () => {
+        await user.click(input);
+        await user.tab(); // blur
+        await new Promise(resolve => setTimeout(resolve, 100));
+      });
+
+      // Validator should be called on blur
+      expect(validator).toHaveBeenCalled();
+
+      // Error should appear
+      await screen.findByTestId('error');
+      expect(screen.getByTestId('error')).toHaveTextContent('Required');
+    });
+
+    it('should validate on change when validateOn="change"', async () => {
+      const user = userEvent.setup();
+      const validator = jest.fn((value) => (value?.length < 3 ? 'Too short' : null));
+
+      render(
+        <Form onSubmit={() => {}}>
+          <Field
+            name="username"
+            validate={validator}
+            validateOn="change"
+            debounceDelay={0}
+          >
+            {({ input, meta }) => (
+              <div>
+                <input data-testid="username" {...input} />
+                {meta.error && <span data-testid="error">{meta.error}</span>}
+              </div>
+            )}
+          </Field>
+        </Form>,
+      );
+
+      const input = screen.getByTestId('username');
+
+      // Type short value - should validate on each change
+      await act(async () => {
+        await user.type(input, 'a');
+        await new Promise(resolve => setTimeout(resolve, 100));
+      });
+
+      // Validator should be called
+      expect(validator).toHaveBeenCalled();
+
+      // Error should appear for short value
+      await screen.findByTestId('error');
+      expect(screen.getByTestId('error')).toHaveTextContent('Too short');
+
+      validator.mockClear();
+
+      // Type more characters
+      await act(async () => {
+        await user.type(input, 'b');
+        await new Promise(resolve => setTimeout(resolve, 100));
+      });
+
+      // Validator should be called again
+      expect(validator).toHaveBeenCalled();
+    });
+
+    it('should validate on submit when validateOn="submit"', async () => {
+      const user = userEvent.setup();
+      const validator = jest.fn((value) => (!value ? 'Required' : null));
+      const onSubmit = jest.fn();
+
+      render(
+        <Form onSubmit={onSubmit}>
+          <Field
+            name="email"
+            validate={validator}
+            validateOn="submit"
+          >
+            {({ input, meta }) => (
+              <div>
+                <input data-testid="email" {...input} />
+                {meta.error && <span data-testid="error">{meta.error}</span>}
+              </div>
+            )}
+          </Field>
+          <button type="submit" data-testid="submit">Submit</button>
+        </Form>,
+      );
+
+      const input = screen.getByTestId('email');
+      const submit = screen.getByTestId('submit');
+
+      // Type and blur - should NOT validate yet
+      await act(async () => {
+        await user.click(input);
+        await user.tab();
+        await new Promise(resolve => setTimeout(resolve, 100));
+      });
+
+      // No validation should happen yet
+      expect(validator).not.toHaveBeenCalled();
+      expect(screen.queryByTestId('error')).not.toBeInTheDocument();
+
+      // Submit form - should validate
+      await act(async () => {
+        await user.click(submit);
+        await new Promise(resolve => setTimeout(resolve, 100));
+      });
+
+      // Validator should be called on submit
+      expect(validator).toHaveBeenCalled();
+
+      // Error should appear
+      await screen.findByTestId('error');
+      expect(screen.getByTestId('error')).toHaveTextContent('Required');
+
+      // Form should not submit due to error
+      expect(onSubmit).not.toHaveBeenCalled();
+    });
+
+    it('should debounce validation in change mode', async () => {
+      const user = userEvent.setup();
+      const validator = jest.fn((value) => (value?.length < 3 ? 'Too short' : null));
+
+      render(
+        <Form onSubmit={() => {}}>
+          <Field
+            name="search"
+            validate={validator}
+            validateOn="change"
+            debounceDelay={300}
+          >
+            {({ input, meta }) => (
+              <div>
+                <input data-testid="search" {...input} />
+                {meta.error && <span data-testid="error">{meta.error}</span>}
+              </div>
+            )}
+          </Field>
+        </Form>,
+      );
+
+      const input = screen.getByTestId('search');
+
+      // Type quickly - validation should be debounced
+      await act(async () => {
+        await user.type(input, 'ab', { delay: 50 }); // Fast typing
+        // Don't wait - validator should not be called immediately
+      });
+
+      // Validator should not be called immediately
+      expect(validator).not.toHaveBeenCalled();
+
+      // Wait for debounce
+      await act(async () => {
+        await new Promise(resolve => setTimeout(resolve, 400));
+      });
+
+      // Now validator should be called once
+      expect(validator).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not validate on blur when validateOn="submit"', async () => {
+      const user = userEvent.setup();
+      const validator = jest.fn((value) => (!value ? 'Required' : null));
+
+      render(
+        <Form onSubmit={() => {}}>
+          <Field
+            name="email"
+            validate={validator}
+            validateOn="submit"
+          >
+            {({ input }) => <input data-testid="email" {...input} />}
+          </Field>
+        </Form>,
+      );
+
+      const input = screen.getByTestId('email');
+
+      // Focus and blur - should NOT validate
+      await act(async () => {
+        await user.click(input);
+        await user.tab();
+        await new Promise(resolve => setTimeout(resolve, 100));
+      });
+
+      // Validator should not be called
+      expect(validator).not.toHaveBeenCalled();
+    });
+
+    it('should clear error on blur when validateOn="submit" and error exists', async () => {
+      const user = userEvent.setup();
+      const validator = jest.fn((value) => (!value ? 'Required' : null));
+      const onSubmit = jest.fn();
+
+      render(
+        <Form onSubmit={onSubmit}>
+          <Field
+            name="email"
+            validate={validator}
+            validateOn="submit"
+          >
+            {({ input, meta }) => (
+              <div>
+                <input data-testid="email" {...input} />
+                {meta.error && <span data-testid="error">{meta.error}</span>}
+              </div>
+            )}
+          </Field>
+          <button type="submit" data-testid="submit">Submit</button>
+        </Form>,
+      );
+
+      const input = screen.getByTestId('email');
+      const submit = screen.getByTestId('submit');
+
+      // Submit with empty field - should show error
+      await act(async () => {
+        await user.click(submit);
+        await new Promise(resolve => setTimeout(resolve, 100));
+      });
+
+      await screen.findByTestId('error');
+
+      // Now type value and blur - error should clear
+      await act(async () => {
+        await user.type(input, 'test@test.com');
+        await user.tab();
+        await new Promise(resolve => setTimeout(resolve, 100));
+      });
+
+      // Error should be cleared
+      expect(screen.queryByTestId('error')).not.toBeInTheDocument();
+    });
+  });
 });

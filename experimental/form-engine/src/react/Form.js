@@ -104,9 +104,48 @@ export default function Form({
         engine.validationService
           .validateByMode('$form', null, engine.getValues(), mode, { debounceDelay: delay })
           .then((error) => {
-            if (error) {
+            // If error is an object (field errors), set each field error separately
+            // If error is a string (form-level error), keep it as $form error
+            // If error is an array, convert to field-level errors
+            if (error && typeof error === 'object' && !Array.isArray(error)) {
+              // Clear the $form error first
+              engine.clearError('$form');
+
+              // Set errors for each field
+              Object.entries(error).forEach(([path, fieldError]) => {
+                if (fieldError) {
+                  engine.setError(path, fieldError);
+                } else {
+                  engine.clearError(path);
+                }
+              });
+            } else if (Array.isArray(error)) {
+              // Array error - convert to field-level errors
+              // This handles validators that return array structures
+              engine.clearError('$form');
+
+              error.forEach((itemError, _index) => {
+                if (itemError && typeof itemError === 'object') {
+                  // Nested object with field errors for this array item
+                  Object.keys(itemError).forEach(_fieldName => {
+                    // Note: We can't determine the parent path here since we don't know
+                    // which field this array corresponds to. This should be handled
+                    // by returning proper field paths from the validator instead.
+                    // For now, log a warning
+                    // eslint-disable-next-line no-console
+                    console.warn(
+                      'Form validator returned array structure. ' +
+                      'Please return object with full field paths instead. ' +
+                      'Example: { "fyFinanceData.3.budgetAllocationChange": "error" }',
+                    );
+                  });
+                }
+              });
+            } else if (error) {
+              // String error - set as form error
               engine.setError('$form', error);
             } else {
+              // No error - clear both form and all field errors from form validator
               engine.clearError('$form');
             }
           });

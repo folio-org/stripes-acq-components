@@ -43,6 +43,20 @@ export class ErrorsFeature {
    */
   set(path, error) {
     if (error) {
+      // Prevent setting arrays as errors - they should be converted to field paths first
+      if (Array.isArray(error)) {
+        // eslint-disable-next-line no-console
+        console.error(
+          `[ErrorsFeature.set] ERROR: Attempted to set array as error on "${path}". ` +
+          'Arrays should be converted to field-level errors first. ' +
+          'Use ValidationService.validateAll() which handles array conversion.',
+          error,
+        );
+        // Don't set the array error
+
+        return;
+      }
+
       this.errors[path] = error;
     } else {
       delete this.errors[path];
@@ -67,7 +81,29 @@ export class ErrorsFeature {
    * @param {Object} errors - Errors object
    */
   setAll(errors) {
-    this.errors = { ...errors };
+    // Check if any errors are arrays and warn about them
+    Object.entries(errors).forEach(([path, error]) => {
+      if (Array.isArray(error)) {
+        // eslint-disable-next-line no-console
+        console.error(
+          `[ErrorsFeature.setAll] ERROR: Found array error on "${path}". ` +
+          'Arrays should be converted to field-level errors first. ' +
+          'This error will be filtered out.',
+          error,
+        );
+      }
+    });
+
+    // Filter out array errors - only set string/object errors
+    const filteredErrors = {};
+
+    Object.entries(errors).forEach(([path, error]) => {
+      if (!Array.isArray(error)) {
+        filteredErrors[path] = error;
+      }
+    });
+
+    this.errors = { ...filteredErrors };
     this._emitAllErrors();
     this._checkAndEmitFormValidState();
   }

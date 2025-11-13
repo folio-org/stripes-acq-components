@@ -13,47 +13,41 @@ const createErrorHandler = (name, dispatch) => ({ errors }) => {
   }
 };
 
-export const buildFieldSubscriptions = (name, subscription, validate, dispatch, engine) => {
-  // Wrap dispatch to track React re-renders
-  const trackedDispatch = (action) => {
-    if (engine) {
-      engine.trackRender();
-    }
-    dispatch(action);
-  };
-
-  const errorHandler = validate ? createErrorHandler(name, trackedDispatch) : null;
+export const buildFieldSubscriptions = (name, subscription, validate, dispatch) => {
+  const errorHandler = validate ? createErrorHandler(name, dispatch) : null;
 
   return [
     {
       enabled: subscription.value,
       event: `${FIELD_EVENT_PREFIXES.CHANGE}${name}`,
-      cb: (v) => trackedDispatch({ type: FIELD_ACTIONS.SET_VALUE, payload: v }),
+      cb: (v) => dispatch({ type: FIELD_ACTIONS.SET_VALUE, payload: v }),
     },
     {
       enabled: subscription.error,
       event: `${FIELD_EVENT_PREFIXES.ERROR}${name}`,
-      cb: (e) => trackedDispatch({ type: FIELD_ACTIONS.SET_ERROR, payload: e }),
+      cb: (error) => {
+        dispatch({ type: FIELD_ACTIONS.SET_ERROR, payload: error });
+      },
     },
     {
       enabled: subscription.touched,
       event: `${FIELD_EVENT_PREFIXES.TOUCH}${name}`,
-      cb: () => trackedDispatch({ type: FIELD_ACTIONS.SET_TOUCHED, payload: true }),
+      cb: () => dispatch({ type: FIELD_ACTIONS.SET_TOUCHED, payload: true }),
     },
     {
       enabled: subscription.active,
       event: EVENTS.FOCUS,
-      cb: ({ path }) => trackedDispatch({ type: FIELD_ACTIONS.SET_ACTIVE, payload: path === name }),
+      cb: ({ path }) => dispatch({ type: FIELD_ACTIONS.SET_ACTIVE, payload: path === name }),
     },
     {
       enabled: subscription.active,
       event: EVENTS.BLUR,
-      cb: () => trackedDispatch({ type: FIELD_ACTIONS.SET_ACTIVE, payload: false }),
+      cb: () => dispatch({ type: FIELD_ACTIONS.SET_ACTIVE, payload: false }),
     },
     {
       enabled: subscription.dirty ?? true,
       event: `${FIELD_EVENT_PREFIXES.DIRTY}${name}`,
-      cb: ({ dirty }) => trackedDispatch({ type: FIELD_ACTIONS.SET_DIRTY, payload: dirty }),
+      cb: ({ dirty }) => dispatch({ type: FIELD_ACTIONS.SET_DIRTY, payload: dirty }),
     },
     {
       enabled: !!validate,
