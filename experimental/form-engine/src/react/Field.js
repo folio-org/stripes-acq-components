@@ -3,8 +3,9 @@
  */
 
 import React, { memo, useMemo, useRef, forwardRef } from 'react';
+import PropTypes from 'prop-types';
 import { useField } from './hooks';
-import { DEFAULT_SUBSCRIPTION } from '../constants';
+import { DEFAULT_SUBSCRIPTION, VALIDATION_MODES } from '../constants';
 import { isFunction } from '../utils/checks';
 
 const Field = memo(forwardRef(({
@@ -12,7 +13,7 @@ const Field = memo(forwardRef(({
   component: Component,
   children,
   validate,
-  validateOn = 'blur',
+  validateOn = VALIDATION_MODES.BLUR,
   debounceDelay = 0,
   subscription = DEFAULT_SUBSCRIPTION,
   format,
@@ -92,5 +93,21 @@ const Field = memo(forwardRef(({
 }));
 
 Field.displayName = 'Field';
+
+Field.propTypes = {
+  name: PropTypes.string.isRequired,
+  component: PropTypes.elementType,
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.func,
+  ]),
+  validate: PropTypes.func,
+  validateOn: PropTypes.oneOf(Object.values(VALIDATION_MODES)),
+  debounceDelay: PropTypes.number,
+  subscription: PropTypes.object,
+  format: PropTypes.func,
+  formatOnBlur: PropTypes.bool,
+  parse: PropTypes.func,
+};
 
 export default Field;

@@ -240,8 +240,7 @@ describe('FormEngine', () => {
     expect(debug.formValid).toBe(false);
     // Verify errors exist for the negative field with bracket notation
     expect(allErrors['fyFinanceData[3].budgetAllocationChange']).toBe('New total allocation cannot be negative');
-    // eslint-disable-next-line dot-notation
-    expect(allErrors['$form']).toBeUndefined();
+    expect(allErrors.$form).toBeUndefined();
   });
 
   it('should handle array errors from validators', async () => {
@@ -328,8 +327,7 @@ describe('FormEngine', () => {
     expect(allErrors['fyFinanceData[3].budgetAllocationChange']).toBe('New total allocation cannot be negative');
     // Ensure fyFinanceData itself doesn't have array error
     expect(allErrors.fyFinanceData).toBeUndefined();
-    // eslint-disable-next-line dot-notation
-    expect(allErrors['$form']).toBeUndefined();
+    expect(allErrors.$form).toBeUndefined();
   });
 
   it('should get service stats', () => {

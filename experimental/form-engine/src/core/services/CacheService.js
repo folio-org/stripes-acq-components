@@ -52,7 +52,9 @@ export class CacheService {
     if (this.valueCache.size >= this.options.maxCacheSize) {
       const keysToDelete = Array.from(this.valueCache.keys()).slice(0, Math.floor(this.options.maxCacheSize / 2));
 
-      keysToDelete.forEach(cacheKeyToDelete => this.valueCache.delete(cacheKeyToDelete));
+      for (const cacheKeyToDelete of keysToDelete) {
+        this.valueCache.delete(cacheKeyToDelete);
+      }
     }
 
     this.valueCache.set(key, value);
@@ -88,7 +90,9 @@ export class CacheService {
     if (this.formStateCache.size >= this.options.maxCacheSize) {
       const keysToDelete = Array.from(this.formStateCache.keys()).slice(0, Math.floor(this.options.maxCacheSize / 2));
 
-      keysToDelete.forEach(cacheKeyToDelete => this.formStateCache.delete(cacheKeyToDelete));
+      for (const cacheKeyToDelete of keysToDelete) {
+        this.formStateCache.delete(cacheKeyToDelete);
+      }
     }
 
     this.formStateCache.set(cacheKey, computedState);

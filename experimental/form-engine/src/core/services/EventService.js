@@ -98,6 +98,26 @@ export class EventService {
   }
 
   /**
+   * Handle listener error
+   * @param {Error} error - Error object
+   * @param {string} event - Event name
+   * @param {*} data - Event data
+   * @private
+   */
+  _handleListenerError(error, event, data) {
+    if (!this.options.enableErrorHandling) {
+      throw error;
+    }
+
+    if (isFunction(this.options.onListenerError)) {
+      this.options.onListenerError(error, { event, data });
+    } else if (this.options.logErrors) {
+      // eslint-disable-next-line no-console
+      console.error(`Error in event listener for ${event}:`, error);
+    }
+  }
+
+  /**
    * Emit event
    * @param {string} event - Event name
    * @param {*} data - Event data
@@ -107,23 +127,14 @@ export class EventService {
 
     const listeners = this.listeners.get(event);
 
-    if (listeners) {
-      listeners.forEach(listenerData => {
-        try {
-          listenerData.callback(data);
-        } catch (error) {
-          if (!this.options.enableErrorHandling) {
-            throw error;
-          }
+    if (!listeners) return;
 
-          if (isFunction(this.options.onListenerError)) {
-            this.options.onListenerError(error, { event, data });
-          } else if (this.options.logErrors) {
-            // eslint-disable-next-line no-console
-            console.error(`Error in event listener for ${event}:`, error);
-          }
-        }
-      });
+    for (const listenerData of listeners) {
+      try {
+        listenerData.callback(data);
+      } catch (error) {
+        this._handleListenerError(error, event, data);
+      }
     }
   }
 
@@ -131,6 +142,34 @@ export class EventService {
    * Cleanup all listeners registered under a context
    * @param {Object} context - Context object used during subscription
    */
+  /**
+   * Remove listeners for an event
+   * @param {string} event - Event name
+   * @param {Set} callbacks - Callbacks to remove
+   * @returns {number} Number of removed listeners
+   * @private
+   */
+  _removeEventListeners(event, callbacks) {
+    const listeners = this.listeners.get(event);
+
+    if (!listeners) return 0;
+
+    let removed = 0;
+
+    for (const cb of callbacks) {
+      if (listeners.delete(cb)) {
+        removed++;
+        this.stats.totalListeners--;
+      }
+    }
+
+    if (listeners.size === 0) {
+      this.listeners.delete(event);
+    }
+
+    return removed;
+  }
+
   cleanupContext(context) {
     if (!this.options.enableContextTracking || !context) return 0;
 
@@ -140,21 +179,9 @@ export class EventService {
 
     let removed = 0;
 
-    contextMap.forEach((callbacks, event) => {
-      const listeners = this.listeners.get(event);
-
-      if (listeners) {
-        callbacks.forEach(cb => {
-          if (listeners.delete(cb)) {
-            removed++;
-            this.stats.totalListeners--;
-          }
-        });
-        if (listeners.size === 0) {
-          this.listeners.delete(event);
-        }
-      }
-    });
+    for (const [event, callbacks] of contextMap) {
+      removed += this._removeEventListeners(event, callbacks);
+    }
 
     this.contexts.delete(context);
     this.stats.contextsCount = Math.max(0, this.stats.contextsCount - 1);

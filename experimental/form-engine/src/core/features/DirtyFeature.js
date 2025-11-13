@@ -13,39 +13,29 @@ import {
   isFunction,
 } from '../../utils/checks';
 import { getByPath } from '../../utils/path';
+import { BaseFeature } from './BaseFeature';
 
-export class DirtyFeature {
-  constructor(engine) {
-    this.engine = engine;
-    this._previousFormDirty = null;
-    this._previousFieldDirty = new Map(); // Map<path, boolean>
-    this._dirtyCheckScheduled = false;
-    this._pendingFieldDirtyChecks = new Set();
-  }
-
+export class DirtyFeature extends BaseFeature {
   /**
    * Initialize dirty state
    */
   init() {
-    this._clearState();
+    super.init();
+    this._setState('previousFormDirty', false);
+    this._setState('previousFieldDirty', new Map()); // Map<path, boolean>
+    this._setState('dirtyCheckScheduled', false);
+    this._setState('pendingFieldDirtyChecks', new Set());
   }
 
   /**
    * Reset dirty state
    */
   reset() {
-    this._clearState();
-  }
-
-  /**
-   * Clear all dirty state (DRY - shared by init and reset)
-   * @private
-   */
-  _clearState() {
-    this._previousFormDirty = false;
-    this._previousFieldDirty.clear();
-    this._dirtyCheckScheduled = false;
-    this._pendingFieldDirtyChecks.clear();
+    super.reset();
+    this._setState('previousFormDirty', false);
+    this._setState('previousFieldDirty', new Map());
+    this._setState('dirtyCheckScheduled', false);
+    this._setState('pendingFieldDirtyChecks', new Set());
   }
 
   /**
@@ -96,10 +86,11 @@ export class DirtyFeature {
    */
   getAllDirtyFields() {
     const dirtyFields = {};
+    const previousFieldDirty = this._getState('previousFieldDirty');
 
     // Iterate over tracked fields and collect dirty ones
     // Filter out invalid/empty paths
-    for (const [path, isDirty] of this._previousFieldDirty) {
+    for (const [path, isDirty] of previousFieldDirty) {
       if (isDirty && path) {
         dirtyFields[path] = true;
       }
@@ -114,10 +105,12 @@ export class DirtyFeature {
    * @param {boolean} immediate - If true, check immediately instead of queuing
    */
   queueCheck(path, immediate = false) {
-    this._pendingFieldDirtyChecks.add(path);
+    const pendingFieldDirtyChecks = this._getState('pendingFieldDirtyChecks');
+
+    pendingFieldDirtyChecks.add(path);
     if (immediate) {
       this._checkAndEmitFieldDirtyState(path);
-      this._pendingFieldDirtyChecks.delete(path);
+      pendingFieldDirtyChecks.delete(path);
     } else {
       this._scheduleDirtyChecks();
     }
@@ -133,15 +126,17 @@ export class DirtyFeature {
 
     if (strategy === DIRTY_CHECK_STRATEGY.TOUCHED) {
       // Form is dirty if at least one field is touched
-      return this.engine.touchedFeature.touched.size > 0;
+      return this.engine.touchedFeature.getTouchedCount() > 0;
     }
 
     // Default: VALUES strategy - form is dirty if at least one field has different value
-    // We only check tracked fields (_previousFieldDirty) for performance:
+    // We only check tracked fields (previousFieldDirty) for performance:
     // - Untracked fields haven't been changed, so they're pristine by definition
     // - Tracking starts when a field is first checked (via _checkAndEmitFieldDirtyState)
     // - This avoids expensive full-form comparison on every change
-    for (const [, isDirty] of this._previousFieldDirty) {
+    const previousFieldDirty = this._getState('previousFieldDirty');
+
+    for (const [, isDirty] of previousFieldDirty) {
       if (isDirty) {
         return true;
       }
@@ -157,23 +152,17 @@ export class DirtyFeature {
    * @private
    */
   _scheduleDirtyChecks() {
-    if (this._dirtyCheckScheduled) return;
+    const dirtyCheckScheduled = this._getState('dirtyCheckScheduled');
 
-    this._dirtyCheckScheduled = true;
+    if (dirtyCheckScheduled) return;
 
-    // Use queueMicrotask to defer dirty checks until after current synchronous work
-    // This prevents blocking the event loop during rapid input changes
+    this._setState('dirtyCheckScheduled', true);
+
+    // Use SchedulerService for cleaner async handling (KISS + DRY)
     // Dirty checks are expensive (value comparison), so batching is important
-    if (typeof queueMicrotask !== 'undefined') {
-      queueMicrotask(() => {
-        this._flushDirtyChecks();
-      });
-    } else {
-      // Fallback for environments without queueMicrotask (older browsers)
-      Promise.resolve().then(() => {
-        this._flushDirtyChecks();
-      });
-    }
+    this.engine.schedulerService.scheduleMicrotask(() => {
+      this._flushDirtyChecks();
+    });
   }
 
   /**
@@ -181,14 +170,16 @@ export class DirtyFeature {
    * @private
    */
   _flushDirtyChecks() {
-    this._dirtyCheckScheduled = false;
+    this._setState('dirtyCheckScheduled', false);
+
+    const pendingFieldDirtyChecks = this._getState('pendingFieldDirtyChecks');
 
     // Process all pending field dirty checks that were queued during batch
     // This ensures we check each field only once, even if it changed multiple times in a batch
-    this._pendingFieldDirtyChecks.forEach((path) => {
+    for (const path of pendingFieldDirtyChecks) {
       this._checkAndEmitFieldDirtyState(path);
-    });
-    this._pendingFieldDirtyChecks.clear();
+    }
+    pendingFieldDirtyChecks.clear();
 
     // After all field checks, determine form-level dirty state
     // Form is dirty if any field is dirty
@@ -207,12 +198,13 @@ export class DirtyFeature {
     const isEqualFn = this._getIsEqualFunction();
     const currentDirty = !isEqualFn(currentValue, initialValue);
 
-    const previousDirty = this._previousFieldDirty.get(path);
+    const previousFieldDirty = this._getState('previousFieldDirty');
+    const previousDirty = previousFieldDirty.get(path);
 
     // Only emit if state actually changed
     if (previousDirty !== undefined && previousDirty !== currentDirty) {
       // Update tracked state before emitting
-      this._previousFieldDirty.set(path, currentDirty);
+      previousFieldDirty.set(path, currentDirty);
 
       const eventName = `${FIELD_EVENT_PREFIXES.DIRTY}${path}`;
 
@@ -241,7 +233,9 @@ export class DirtyFeature {
       this._checkAndEmitFormDirtyState();
     } else if (previousDirty === undefined) {
       // First time tracking this field - update tracked state
-      this._previousFieldDirty.set(path, currentDirty);
+      const fieldDirtyMap = this._getState('previousFieldDirty');
+
+      fieldDirtyMap.set(path, currentDirty);
 
       const eventName = `${FIELD_EVENT_PREFIXES.DIRTY}${path}`;
 
@@ -266,7 +260,7 @@ export class DirtyFeature {
    */
   _checkAndEmitFormDirtyState() {
     const currentDirty = this._isFormDirty();
-    const previousDirty = this._previousFormDirty;
+    const previousDirty = this._getState('previousFormDirty');
 
     // Only emit if state actually changed
     if (previousDirty !== currentDirty) {
@@ -281,7 +275,7 @@ export class DirtyFeature {
     }
 
     // Always update previous state, even on first check
-    this._previousFormDirty = currentDirty;
+    this._setState('previousFormDirty', currentDirty);
   }
 
   /**

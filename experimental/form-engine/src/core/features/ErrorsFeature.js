@@ -2,29 +2,26 @@
  * ErrorsFeature - Manages form errors and validation state
  */
 
-import { EVENTS, FIELD_EVENT_PREFIXES } from '../../constants';
+import { EVENTS, FIELD_EVENT_PREFIXES, ERROR_SOURCES } from '../../constants';
+import { BaseFeature } from './BaseFeature';
 
-export class ErrorsFeature {
-  constructor(engine) {
-    this.engine = engine;
-    this.errors = Object.create(null); // { path: [{ source, error }] }
-    this._previousFormValid = null;
-  }
-
+export class ErrorsFeature extends BaseFeature {
   /**
    * Initialize errors
    */
   init() {
-    this.errors = Object.create(null);
-    this._previousFormValid = true;
+    super.init();
+    this._setState('errors', Object.create(null));
+    this._setState('previousFormValid', true);
   }
 
   /**
    * Reset errors
    */
   reset() {
-    this.errors = Object.create(null);
-    this._previousFormValid = null;
+    super.reset();
+    this._setState('errors', Object.create(null));
+    this._setState('previousFormValid', null);
   }
 
   /**
@@ -33,7 +30,8 @@ export class ErrorsFeature {
    * @returns {string|null} Error message or null
    */
   get(path) {
-    const errorList = this.errors[path];
+    const errors = this._getState('errors');
+    const errorList = errors[path];
 
     if (!errorList || errorList.length === 0) return null;
 
@@ -46,16 +44,18 @@ export class ErrorsFeature {
    * @returns {Array<{source: string, error: string}>} Array of error objects
    */
   getErrors(path) {
-    return this.errors[path] || [];
+    const errors = this._getState('errors');
+
+    return errors[path] || [];
   }
 
   /**
    * Set error by path with source tracking
    * @param {string} path - Field path
    * @param {string|null} error - Error message or null
-   * @param {string} source - Error source ('field' or 'form')
+   * @param {string} source - Error source (use ERROR_SOURCES constants)
    */
-  set(path, error, source = 'field') {
+  set(path, error, source = ERROR_SOURCES.FIELD) {
     if (error) {
       // Prevent setting arrays as errors - they should be converted to field paths first
       if (Array.isArray(error)) {
@@ -71,8 +71,9 @@ export class ErrorsFeature {
         return;
       }
 
+      const errors = this._getState('errors');
       // Get current error list for this path
-      const errorList = this.errors[path] || [];
+      const errorList = errors[path] || [];
       const previousFirstError = this._getFirstError(errorList);
 
       // Find existing error from this source
@@ -86,7 +87,8 @@ export class ErrorsFeature {
         errorList.push({ source, error });
       }
 
-      this.errors[path] = errorList;
+      errors[path] = errorList;
+      this._setState('errors', errors);
 
       // Only emit if first error changed (for backward compatibility)
       const newFirstError = this._getFirstError(errorList);
@@ -103,7 +105,8 @@ export class ErrorsFeature {
    * @private
    */
   _clearErrorBySource(path, source) {
-    const errorList = this.errors[path];
+    const errors = this._getState('errors');
+    const errorList = errors[path];
 
     if (!errorList || errorList.length === 0) return;
 
@@ -113,10 +116,12 @@ export class ErrorsFeature {
     const updatedList = errorList.filter(e => e.source !== source);
 
     if (updatedList.length === 0) {
-      delete this.errors[path];
+      delete errors[path];
     } else {
-      this.errors[path] = updatedList;
+      errors[path] = updatedList;
     }
+
+    this._setState('errors', errors);
 
     // Only emit if first error changed
     const newFirstError = this._getFirstError(updatedList);
@@ -135,9 +140,11 @@ export class ErrorsFeature {
       this._clearErrorBySource(path, source);
     } else {
       // Clear all errors for this path
-      const hadError = path in this.errors;
+      const errors = this._getState('errors');
+      const hadError = path in errors;
 
-      delete this.errors[path];
+      delete errors[path];
+      this._setState('errors', errors);
 
       // Only emit if error was actually cleared
       if (hadError) {
@@ -150,11 +157,11 @@ export class ErrorsFeature {
   /**
    * Set all errors from validation (used by validateAll)
    * @param {Object} errors - Errors object { path: errorString }
-   * @param {string} source - Source of errors ('field' or 'form')
+   * @param {string} source - Source of errors (use ERROR_SOURCES constants)
    */
-  setAll(errors, source = 'form') {
+  setAll(errors, source = ERROR_SOURCES.FORM) {
     // Check if any errors are arrays and warn about them
-    Object.entries(errors).forEach(([path, error]) => {
+    for (const [path, error] of Object.entries(errors)) {
       if (Array.isArray(error)) {
         // eslint-disable-next-line no-console
         console.error(
@@ -164,19 +171,21 @@ export class ErrorsFeature {
           error,
         );
       }
-    });
+    }
+
+    const currentErrors = this._getState('errors');
 
     // Clear all previous errors from this source
-    Object.keys(this.errors).forEach(path => {
+    for (const path of Object.keys(currentErrors)) {
       this.clear(path, source);
-    });
+    }
 
     // For each path, update or add error from this source
-    Object.entries(errors).forEach(([path, error]) => {
+    for (const [path, error] of Object.entries(errors)) {
       if (!Array.isArray(error) && error) {
         this.set(path, error, source);
       }
-    });
+    }
 
     this._emitAllErrors();
     this._checkAndEmitFormValidState();
@@ -187,10 +196,11 @@ export class ErrorsFeature {
    * @returns {Object} All errors as { path: errorString }
    */
   getAll() {
+    const errors = this._getState('errors');
     const result = {};
 
-    Object.keys(this.errors).forEach(path => {
-      const errorList = this.errors[path];
+    Object.keys(errors).forEach(path => {
+      const errorList = errors[path];
 
       if (errorList && errorList.length > 0) {
         result[path] = errorList[0].error;
@@ -205,10 +215,11 @@ export class ErrorsFeature {
    * @returns {Object} All errors as { path: [{ source, error }] }
    */
   getAllWithSources() {
+    const errors = this._getState('errors');
     const result = {};
 
-    Object.keys(this.errors).forEach(path => {
-      result[path] = [...this.errors[path]];
+    Object.keys(errors).forEach(path => {
+      result[path] = [...errors[path]];
     });
 
     return result;
@@ -219,7 +230,9 @@ export class ErrorsFeature {
    * @returns {boolean} True if form is valid
    */
   isValid() {
-    return Object.keys(this.errors).length === 0;
+    const errors = this._getState('errors');
+
+    return Object.keys(errors).length === 0;
   }
 
   /**
@@ -228,7 +241,9 @@ export class ErrorsFeature {
    * @returns {boolean} True if field has error
    */
   hasError(path) {
-    return path in this.errors;
+    const errors = this._getState('errors');
+
+    return path in errors;
   }
 
   /**
@@ -276,8 +291,10 @@ export class ErrorsFeature {
    * @private
    */
   _emitAllErrors() {
-    Object.keys(this.errors).forEach((path) => {
-      this._emitErrorEvents(path, this.errors[path]);
+    const errors = this._getState('errors');
+
+    Object.keys(errors).forEach((path) => {
+      this._emitErrorEvents(path, errors[path]);
     });
   }
 
@@ -287,9 +304,10 @@ export class ErrorsFeature {
    */
   _checkAndEmitFormValidState() {
     const isValid = this.isValid();
+    const previousFormValid = this._getState('previousFormValid');
 
-    if (this._previousFormValid !== isValid) {
-      this._previousFormValid = isValid;
+    if (previousFormValid !== isValid) {
+      this._setState('previousFormValid', isValid);
       this.engine.eventService.emit(EVENTS.VALID, { valid: isValid });
     }
   }

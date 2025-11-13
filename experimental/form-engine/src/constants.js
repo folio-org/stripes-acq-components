@@ -81,6 +81,12 @@ export const DIRTY_CHECK_STRATEGY = {
   VALUES: 'values',   // dirty = values differ from initial
 };
 
+// Error sources
+export const ERROR_SOURCES = {
+  FIELD: 'field',
+  FORM: 'form',
+};
+
 // Form engine options
 export const FORM_ENGINE_OPTIONS = {
   ENABLE_BATCHING: 'enableBatching',

@@ -20,14 +20,37 @@ import { useFormEngine } from '../FormContext';
 
 // Form state reducer
 const formStateReducer = (state, action) => {
-  switch (action.type) {
-    case FORM_ACTIONS.UPDATE_FORM_STATE: {
-      return action.payload;
-    }
-    default:
-      return state;
+  if (action.type === FORM_ACTIONS.UPDATE_FORM_STATE) {
+    return action.payload;
   }
+
+  return state;
 };
+
+/**
+ * Check if a subscribed key changed between two states
+ */
+function hasKeyChanged(key, prevState, nextState) {
+  const hasPrev = key in prevState;
+  const hasNext = key in nextState;
+
+  // Key appeared or disappeared - this is a change
+  if (hasPrev !== hasNext) {
+    return true;
+  }
+
+  // Only check values if key exists in both states
+  if (hasPrev && hasNext) {
+    const prev = prevState[key];
+    const next = nextState[key];
+
+    // Reference equality check first - same object reference means no change
+    // Comparison for objects/arrays - deep comparison would be too expensive
+    return prev !== next && !isEqual(prev, next);
+  }
+
+  return false;
+}
 
 /**
  * Checks if any subscribed fields changed between two states
@@ -40,36 +63,8 @@ function hasSubscribedChanges(prevState, nextState, subscription) {
 
   // Only check keys that are subscribed to (performance optimization)
   for (const key in subscription) {
-    if (!subscription[key]) {
-      // eslint-disable-next-line no-continue
-      continue;
-    }
-
-    const hasPrev = key in prevState;
-    const hasNext = key in nextState;
-
-    // Key appeared or disappeared - this is a change
-    if (hasPrev !== hasNext) {
-      return true;
-    }
-
-    // Key doesn't exist in either state - no change
-    if (!hasPrev && !hasNext) {
-      // eslint-disable-next-line no-continue
-      continue;
-    }
-
-    const prev = prevState[key];
-    const next = nextState[key];
-
-    // Reference equality - same object reference means no change
-    if (prev === next) {
-      // eslint-disable-next-line no-continue
-      continue;
-    }
-
-    // Comparison for objects/arrays - deep comparison would be too expensive
-    if (!isEqual(prev, next)) {
+    // Skip unsubscribed keys
+    if (subscription[key] && hasKeyChanged(key, prevState, nextState)) {
       return true;
     }
   }
@@ -179,15 +174,15 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
       // This prevents unnecessary re-renders when unsubscribed fields change
       if (hasSubscribedChanges(prevState, nextState, activeSubscription)) {
         prevStateRef.current = nextState;
-        // When batching is disabled, use synchronous dispatch for deterministic behavior.
-        // Otherwise, use startTransition to defer non-urgent updates.
-        if (!engine.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING] || typeof startTransition !== 'function') {
-          dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
-        } else {
+        // When batching is enabled and startTransition is available, use it to defer non-urgent updates.
+        // Otherwise, use synchronous dispatch for deterministic behavior.
+        if (engine.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING] && typeof startTransition === 'function') {
           // Use startTransition to mark this as non-urgent update
           startTransition(() => {
             dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
           });
+        } else {
+          dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
         }
       } else {
         // Update ref even if no subscribed changes detected
@@ -215,14 +210,14 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
         // Only update if subscribed fields actually changed
         if (hasSubscribedChanges(prevState, nextState, activeSubscription)) {
           prevStateRef.current = nextState;
-          // When batching is disabled, use synchronous dispatch for deterministic behavior.
-          // Otherwise, defer to requestAnimationFrame for smooth updates.
-          if (!engine.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING]) {
-            dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
-          } else {
+          // When batching is enabled, defer to startTransition for smooth updates.
+          // Otherwise, use synchronous dispatch for deterministic behavior.
+          if (engine.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING]) {
             startTransition(() => {
               dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
             });
+          } else {
+            dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
           }
         } else {
           // Update ref even if no changes to avoid false positives in future comparisons
@@ -230,15 +225,17 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
         }
       };
 
-      // When batching is disabled, process updates immediately for determinism.
-      // Otherwise, defer to requestAnimationFrame for smooth UI without blocking.
-      if (!engine.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING]) {
-        processUpdate();
-      } else if (typeof requestAnimationFrame !== 'undefined') {
-        requestAnimationFrame(processUpdate);
+      // When batching is enabled, defer to requestAnimationFrame for smooth UI without blocking.
+      // Otherwise, process updates immediately for determinism.
+      if (engine.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING]) {
+        if (typeof requestAnimationFrame !== 'undefined') {
+          requestAnimationFrame(processUpdate);
+        } else {
+          // Fallback: use setTimeout for async but fast update
+          setTimeout(processUpdate, 0);
+        }
       } else {
-        // Fallback: use setTimeout for async but fast update
-        setTimeout(processUpdate, 0);
+        processUpdate();
       }
     };
 
@@ -295,7 +292,10 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
     }
 
     return () => {
-      unsubscribers.forEach(unsubscribe => unsubscribe());
+      for (const unsubscribe of unsubscribers) {
+        unsubscribe();
+      }
+
       if (engine.eventService?.cleanupContext) {
         engine.eventService.cleanupContext(contextRef.current);
       }

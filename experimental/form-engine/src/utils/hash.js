@@ -17,7 +17,8 @@ export const hashObject = (obj) => {
   }
 
   if (!isObject(obj)) {
-    return String(obj);
+    // Convert primitives to string safely
+    return typeof obj === 'string' ? obj : JSON.stringify(obj);
   }
 
   if (Array.isArray(obj)) {
@@ -43,7 +44,8 @@ export const hashObjectShallow = (obj) => {
   }
 
   if (!isObject(obj)) {
-    return String(obj);
+    // Convert primitives to string safely
+    return typeof obj === 'string' ? obj : JSON.stringify(obj);
   }
 
   const keys = Object.keys(obj).sort((a, b) => a.localeCompare(b));

@@ -9,7 +9,7 @@ export function useFormSubmit(onSubmit) {
   const engine = useFormEngine();
 
   const handleSubmit = useCallback(async (e) => {
-    e?.preventDefault?.();
+    e?.preventDefault();
 
     if (onSubmit) {
       const result = await engine.submit(onSubmit);

@@ -3,28 +3,28 @@
  */
 
 import { getByPath, setByPath } from '../../utils/path';
+import { BaseFeature } from './BaseFeature';
 
-export class ValuesFeature {
-  constructor(engine) {
-    this.engine = engine;
-    this.values = Object.create(null);
-    this.initialValues = Object.create(null);
-  }
-
+export class ValuesFeature extends BaseFeature {
   /**
    * Initialize values
    * @param {Object} initialValues - Initial form values
    */
   init(initialValues = Object.create(null)) {
-    this.values = Object.assign(Object.create(null), initialValues);
-    this.initialValues = Object.assign(Object.create(null), initialValues);
+    super.init();
+    this._setState('values', Object.assign(Object.create(null), initialValues));
+    this._setState('initialValues', Object.assign(Object.create(null), initialValues));
   }
 
   /**
    * Reset values to initial state
    */
   reset() {
-    this.values = Object.assign(Object.create(null), this.initialValues);
+    const initialValues = this._getState('initialValues');
+
+    super.reset();
+    this._setState('values', Object.assign(Object.create(null), initialValues));
+    this._setState('initialValues', Object.assign(Object.create(null), initialValues));
   }
 
   /**
@@ -33,7 +33,9 @@ export class ValuesFeature {
    * @returns {*} Field value
    */
   get(path) {
-    return getByPath(this.values, path);
+    const values = this._getState('values');
+
+    return getByPath(values, path);
   }
 
   /**
@@ -42,7 +44,10 @@ export class ValuesFeature {
    * @param {*} value - Field value
    */
   set(path, value) {
-    this.values = setByPath(this.values, path, value);
+    const currentValues = this._getState('values');
+    const newValues = setByPath(currentValues, path, value);
+
+    this._setState('values', newValues);
   }
 
   /**
@@ -50,7 +55,9 @@ export class ValuesFeature {
    * @returns {Object} All form values
    */
   getAll() {
-    return { ...this.values };
+    const values = this._getState('values');
+
+    return { ...values };
   }
 
   /**
@@ -58,7 +65,7 @@ export class ValuesFeature {
    * @param {Object} values - Values to set
    */
   setAll(values) {
-    this.values = Object.assign(Object.create(null), values);
+    this._setState('values', Object.assign(Object.create(null), values));
   }
 
   /**
@@ -67,7 +74,9 @@ export class ValuesFeature {
    * @returns {*} Initial field value
    */
   getInitial(path) {
-    return getByPath(this.initialValues, path);
+    const initialValues = this._getState('initialValues');
+
+    return getByPath(initialValues, path);
   }
 
   /**
@@ -75,6 +84,24 @@ export class ValuesFeature {
    * @returns {Object} All initial form values
    */
   getAllInitial() {
-    return { ...this.initialValues };
+    const initialValues = this._getState('initialValues');
+
+    return { ...initialValues };
+  }
+
+  /**
+   * Get values reference (for internal use)
+   * @returns {Object} Values object
+   */
+  get values() {
+    return this._getState('values');
+  }
+
+  /**
+   * Get initial values reference (for internal use)
+   * @returns {Object} Initial values object
+   */
+  get initialValues() {
+    return this._getState('initialValues');
   }
 }

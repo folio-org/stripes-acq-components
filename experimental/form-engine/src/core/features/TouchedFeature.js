@@ -3,31 +3,27 @@
  */
 
 import { EVENTS } from '../../constants';
+import { BaseFeature } from './BaseFeature';
 
-export class TouchedFeature {
-  constructor(engine) {
-    this.engine = engine;
-    this.touched = new Set();
-    this._touchedArrayCache = null;
-    this._touchedArraySize = 0;
-  }
-
+export class TouchedFeature extends BaseFeature {
   /**
    * Initialize touched state
    */
   init() {
-    this.touched.clear();
-    this._touchedArrayCache = null;
-    this._touchedArraySize = 0;
+    super.init();
+    this._setState('touched', new Set());
+    this._setState('touchedArrayCache', null);
+    this._setState('touchedArraySize', 0);
   }
 
   /**
    * Reset touched state
    */
   reset() {
-    this.touched.clear();
-    this._touchedArrayCache = null;
-    this._touchedArraySize = 0;
+    super.reset();
+    this._setState('touched', new Set());
+    this._setState('touchedArrayCache', null);
+    this._setState('touchedArraySize', 0);
   }
 
   /**
@@ -36,7 +32,9 @@ export class TouchedFeature {
    * @returns {boolean} True if field is touched
    */
   isTouched(path) {
-    return this.touched.has(path);
+    const touched = this._getState('touched');
+
+    return touched.has(path);
   }
 
   /**
@@ -44,13 +42,25 @@ export class TouchedFeature {
    * @param {string} path - Field path
    */
   touch(path) {
+    const touched = this._getState('touched');
+
     // Only emit if field wasn't already touched
-    if (!this.touched.has(path)) {
-      this.touched.add(path);
-      this._invalidateCache();
+    if (!touched.has(path)) {
+      touched.add(path);
+      this._invalidateTouchCache();
       this.engine.eventService.emit(EVENTS.TOUCH, { path });
       this.engine.eventService.emit(`${EVENTS.TOUCH}:${path}`, true);
     }
+  }
+
+  /**
+   * Get count of touched fields
+   * @returns {number} Number of touched fields
+   */
+  getTouchedCount() {
+    const touched = this._getState('touched');
+
+    return touched.size;
   }
 
   /**
@@ -58,21 +68,29 @@ export class TouchedFeature {
    * @returns {Array<string>} Array of touched field paths
    */
   getTouchedArray() {
+    const touched = this._getState('touched');
+    const touchedArrayCache = this._getState('touchedArrayCache');
+    const touchedArraySize = this._getState('touchedArraySize');
+
     // Cache touched array to avoid recreating on every getFormState call
-    if (this._touchedArrayCache === null || this._touchedArraySize !== this.touched.size) {
-      this._touchedArrayCache = Array.from(this.touched);
-      this._touchedArraySize = this.touched.size;
+    if (touchedArrayCache === null || touchedArraySize !== touched.size) {
+      const newCache = Array.from(touched);
+
+      this._setState('touchedArrayCache', newCache);
+      this._setState('touchedArraySize', touched.size);
+
+      return newCache;
     }
 
-    return this._touchedArrayCache;
+    return touchedArrayCache;
   }
 
   /**
    * Invalidate touched array cache
    * @private
    */
-  _invalidateCache() {
-    this._touchedArrayCache = null;
-    this._touchedArraySize = 0;
+  _invalidateTouchCache() {
+    this._setState('touchedArrayCache', null);
+    this._setState('touchedArraySize', 0);
   }
 }

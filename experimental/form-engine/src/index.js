@@ -13,11 +13,22 @@
 // Core
 export { default as FormEngine } from './core/FormEngine';
 
+// Features
+export { BaseFeature } from './core/features/BaseFeature';
+
+// Factories
+export { FeatureFactory } from './core/factories/FeatureFactory';
+
+// Validation
+export { ValidationErrorHandler } from './core/validation/ValidationErrorHandler';
+export { ValidationErrorStrategy } from './core/validation/ValidationErrorStrategy';
+
 // Services
 export { BatchService } from './core/services/BatchService';
 export { CacheService } from './core/services/CacheService';
 export { EventService } from './core/services/EventService';
 export { ValidationService } from './core/services/ValidationService';
+export { SchedulerService } from './core/services/SchedulerService';
 
 // Constants
 export * from './constants';

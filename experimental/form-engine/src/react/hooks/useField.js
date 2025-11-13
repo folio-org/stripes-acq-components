@@ -127,7 +127,9 @@ export function useField(name, options = {}) {
     }
 
     return () => {
-      unsubscribers.forEach(unsub => unsub());
+      for (const unsub of unsubscribers) {
+        unsub();
+      }
     };
   }, [
     engine,
@@ -144,12 +146,16 @@ export function useField(name, options = {}) {
       const newValue = isFunction(parse) ? parse(rawValue, name) : rawValue;
       const commands = buildOnChangeCommands({ engine, name, validate, validateOn, debouncedValidate, newValue });
 
-      commands.forEach(run => run());
+      for (const run of commands) {
+        run();
+      }
     },
     onBlur: () => {
       const commands = buildOnBlurCommands({ engine, name, validate, validateOn });
 
-      commands.forEach(run => run());
+      for (const run of commands) {
+        run();
+      }
     },
     onFocus: () => {
       engine.focus(name);

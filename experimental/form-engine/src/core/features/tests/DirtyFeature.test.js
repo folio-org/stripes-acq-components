@@ -24,7 +24,12 @@ const makeEngine = (values, initialValues, options = {}) => {
         return cur;
       },
     },
-    touchedFeature: { touched: new Set() },
+    touchedFeature: {
+      touched: new Set(),
+      getTouchedCount() {
+        return this.touched.size;
+      },
+    },
     eventService: {
       emit: (name, payload) => events.push({ name, payload }),
       _events: events,

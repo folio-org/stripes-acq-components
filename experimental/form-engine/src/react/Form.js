@@ -8,6 +8,7 @@ import {
   useMemo,
   useRef,
 } from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
 import { LastVisitedContext } from '@folio/stripes/core';
@@ -18,6 +19,7 @@ import {
 } from '../constants';
 import FormEngine from '../core/FormEngine';
 import { isFunction } from '../utils/checks';
+import { handleValidationError, scheduleValidation } from '../utils/validationErrorHandler';
 import { FormProvider } from './FormContext';
 import { FormNavigationGuard } from './FormNavigationGuard';
 
@@ -25,9 +27,9 @@ export default function Form({
   children,
   onSubmit,
   initialValues = {},
-  defaultValidateOn = 'blur',
+  defaultValidateOn = VALIDATION_MODES.BLUR,
   validate, // form-level validator: (allValues) => string | null | Promise<string|null>
-  formValidateOn = 'submit', // 'change' | 'blur' | 'submit' (form-level)
+  formValidateOn = VALIDATION_MODES.SUBMIT,
   debounceDelay = 0,
   dirtyCheckStrategy,
   engine: providedEngine,
@@ -54,7 +56,7 @@ export default function Form({
     const initOptions = {
       dirtyCheckStrategy,
       enableBatching,
-      validateOnBlur: defaultValidateOn === 'blur',
+      validateOnBlur: defaultValidateOn === VALIDATION_MODES.BLUR,
     };
 
     newEngine.init(initialValues, initOptions);
@@ -104,75 +106,11 @@ export default function Form({
         engine.validationService
           .validateByMode('$form', null, engine.getValues(), mode, { debounceDelay: delay })
           .then((error) => {
-            // If error is an object (field errors), set each field error separately
-            // If error is a string (form-level error), keep it as $form error
-            // If error is an array, convert to field-level errors
-            if (error && typeof error === 'object' && !Array.isArray(error)) {
-              // Clear the $form error first
-              engine.clearError('$form');
-
-              // Set errors for each field with 'form' source
-              Object.entries(error).forEach(([path, fieldError]) => {
-                if (fieldError) {
-                  engine.setError(path, fieldError, 'form');
-                } else {
-                  engine.clearError(path, 'form');
-                }
-              });
-            } else if (Array.isArray(error)) {
-              // Array error - convert to field-level errors
-              // This handles validators that return array structures
-              engine.clearError('$form');
-
-              error.forEach((itemError, _index) => {
-                if (itemError && typeof itemError === 'object') {
-                  // Nested object with field errors for this array item
-                  Object.keys(itemError).forEach(_fieldName => {
-                    // Note: We can't determine the parent path here since we don't know
-                    // which field this array corresponds to. This should be handled
-                    // by returning proper field paths from the validator instead.
-                    // For now, log a warning
-                    // eslint-disable-next-line no-console
-                    console.warn(
-                      'Form validator returned array structure. ' +
-                      'Please return object with full field paths instead. ' +
-                      'Example: { "fyFinanceData.3.budgetAllocationChange": "error" }',
-                    );
-                  });
-                }
-              });
-            } else if (error) {
-              // String error - set as form error
-              engine.setError('$form', error);
-            } else {
-              // No error - clear both form and all field errors from form validator
-              engine.clearError('$form');
-            }
+            handleValidationError(error, engine, '$form');
           });
       };
 
-      // Different scheduling strategies per mode for optimal UX
-      if (mode === VALIDATION_MODES.CHANGE) {
-        // CHANGE: Use requestAnimationFrame to align with browser repaint
-        // This ensures validation doesn't block UI during rapid typing
-        if (typeof requestAnimationFrame !== 'undefined') {
-          requestAnimationFrame(doValidate);
-        } else {
-          setTimeout(doValidate, 0);
-        }
-      } else if (mode === VALIDATION_MODES.BLUR) {
-        // BLUR: Use queueMicrotask for immediate but non-blocking execution
-        // User already left the field, so validation can run quickly without blocking
-        if (typeof queueMicrotask !== 'undefined') {
-          queueMicrotask(doValidate);
-        } else {
-          Promise.resolve().then(doValidate);
-        }
-      } else {
-        // SUBMIT: Validate immediately (blocking is acceptable for submit)
-        // User expects immediate feedback on submit
-        doValidate();
-      }
+      scheduleValidation(doValidate, mode);
     };
 
     const strategies = {
@@ -228,3 +166,18 @@ export default function Form({
     </FormProvider>
   );
 }
+
+Form.propTypes = {
+  children: PropTypes.node,
+  onSubmit: PropTypes.func,
+  initialValues: PropTypes.object,
+  defaultValidateOn: PropTypes.oneOf(Object.values(VALIDATION_MODES)),
+  validate: PropTypes.func,
+  formValidateOn: PropTypes.oneOf(Object.values(VALIDATION_MODES)),
+  debounceDelay: PropTypes.number,
+  dirtyCheckStrategy: PropTypes.string,
+  engine: PropTypes.object,
+  enableBatching: PropTypes.bool,
+  navigationCheck: PropTypes.bool,
+  navigationGuardProps: PropTypes.object,
+};

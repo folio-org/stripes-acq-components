@@ -3,6 +3,7 @@
  * Can be injected into FormEngine for custom validation behavior
  */
 
+import { VALIDATION_MODES } from '../../constants';
 import { getByPath } from '../../utils/path';
 import { isFunction, isDefined } from '../../utils/checks';
 import { createValidationModeStrategies } from './strategies/validationModes';
@@ -27,12 +28,12 @@ export class ValidationService {
   }
 
   /**
-   * Register validator for field
+   * Register validator for path
    * @param {string} path - Field path
    * @param {Function} validator - Validation function
-   * @param {string} validateOn - Validation mode ('blur', 'change', 'submit')
+   * @param {string} validateOn - Validation mode (use VALIDATION_MODES constants)
    */
-  registerValidator(path, validator, validateOn = 'blur') {
+  registerValidator(path, validator, validateOn = VALIDATION_MODES.BLUR) {
     this.validators.set(path, { validator, validateOn });
   }
 

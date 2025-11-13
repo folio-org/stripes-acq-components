@@ -17,20 +17,17 @@ import {
   DEBOUNCE_DELAYS,
   FORM_ENGINE_OPTIONS,
   DIRTY_CHECK_STRATEGY,
+  VALIDATION_MODES,
+  ERROR_SOURCES,
 } from '../constants';
 import { isFunction, isDefined, isEqual } from '../utils/checks';
 import { ValidationService } from './services/ValidationService';
 import { CacheService } from './services/CacheService';
 import { EventService } from './services/EventService';
 import { BatchService } from './services/BatchService';
-import {
-  ValuesFeature,
-  ErrorsFeature,
-  TouchedFeature,
-  ActiveFeature,
-  SubmittingFeature,
-  DirtyFeature,
-} from './features';
+import { SchedulerService } from './services/SchedulerService';
+import { FeatureFactory } from './factories/FeatureFactory';
+import { safeCall } from '../utils/helpers';
 
 export default class FormEngine {
   constructor(services = {}) {
@@ -39,15 +36,13 @@ export default class FormEngine {
     this.cacheService = services.cacheService || new CacheService();
     this.eventService = services.eventService || new EventService();
     this.batchService = services.batchService || new BatchService();
+    this.schedulerService = services.schedulerService || new SchedulerService();
 
     // Features (injected dependencies)
-    // Features get reference to engine for accessing services and other features
-    this.valuesFeature = services.valuesFeature || new ValuesFeature(this);
-    this.errorsFeature = services.errorsFeature || new ErrorsFeature(this);
-    this.touchedFeature = services.touchedFeature || new TouchedFeature(this);
-    this.activeFeature = services.activeFeature || new ActiveFeature(this);
-    this.submittingFeature = services.submittingFeature || new SubmittingFeature(this);
-    this.dirtyFeature = services.dirtyFeature || new DirtyFeature(this);
+    // Use factory to create all features in a cleaner way (KISS + DRY)
+    const features = FeatureFactory.createFeatures(this, services);
+
+    Object.assign(this, features);
 
     // Configuration (set via init method)
     this.options = {};
@@ -86,13 +81,17 @@ export default class FormEngine {
       ...cleanConfig,
     };
 
-    // Initialize features
-    this.valuesFeature.init(initialValues);
-    this.errorsFeature.init();
-    this.touchedFeature.init();
-    this.activeFeature.init();
-    this.submittingFeature.init();
-    this.dirtyFeature.init();
+    // Initialize all features using factory
+    const features = {
+      valuesFeature: this.valuesFeature,
+      errorsFeature: this.errorsFeature,
+      touchedFeature: this.touchedFeature,
+      activeFeature: this.activeFeature,
+      submittingFeature: this.submittingFeature,
+      dirtyFeature: this.dirtyFeature,
+    };
+
+    FeatureFactory.initializeFeatures(features, initialValues);
 
     this._configureServices();
 
@@ -107,17 +106,20 @@ export default class FormEngine {
    * Reset form to initial state
    */
   reset() {
-    if (isDefined(this.batchService) && isFunction(this.batchService.dispose)) {
-      this.batchService.dispose();
-    }
+    // Use safeCall for cleaner disposal (DRY principle)
+    safeCall(this.batchService, 'dispose');
 
-    // Reset features
-    this.valuesFeature.reset();
-    this.errorsFeature.reset();
-    this.touchedFeature.reset();
-    this.activeFeature.reset();
-    this.submittingFeature.reset();
-    this.dirtyFeature.reset();
+    // Reset all features using factory method (DRY principle)
+    const features = {
+      valuesFeature: this.valuesFeature,
+      errorsFeature: this.errorsFeature,
+      touchedFeature: this.touchedFeature,
+      activeFeature: this.activeFeature,
+      submittingFeature: this.submittingFeature,
+      dirtyFeature: this.dirtyFeature,
+    };
+
+    FeatureFactory.resetFeatures(features);
 
     this._resetState();
     this.isInitialized = false;
@@ -232,18 +234,18 @@ export default class FormEngine {
 
     if (this.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING]) {
       this.batch(() => {
-        updates.forEach(({ path, value }) => {
+        for (const { path, value } of updates) {
           this.valuesFeature.set(path, value);
           this.cacheService.clearForPath(path);
-        });
+        }
       });
       if (!options.silent) {
         this._emitBatch(updates);
       }
     } else {
-      updates.forEach(({ path, value }) => {
+      for (const { path, value } of updates) {
         this.set(path, value, { immediate: true, silent: options.silent });
-      });
+      }
     }
   }
 
@@ -268,21 +270,111 @@ export default class FormEngine {
   _getParentPaths(path) {
     const parents = [];
     let currentPath = path;
+    let lastSep = -1;
 
-    // eslint-disable-next-line no-constant-condition
-    while (true) {
+    do {
       // Find last separator (. or [)
       const lastDot = currentPath.lastIndexOf('.');
       const lastBracket = currentPath.lastIndexOf('[');
-      const lastSep = Math.max(lastDot, lastBracket);
 
-      if (lastSep === -1) break; // No more separators
+      lastSep = Math.max(lastDot, lastBracket);
 
-      currentPath = currentPath.substring(0, lastSep);
-      parents.push(currentPath);
-    }
+      if (lastSep !== -1) {
+        currentPath = currentPath.substring(0, lastSep);
+        parents.push(currentPath);
+      }
+    } while (lastSep !== -1);
 
     return parents;
+  }
+
+  /**
+   * Touch all fields with errors (excluding form-level errors)
+   * @param {Object} errors - Errors object
+   * @private
+   */
+  _touchFieldsWithErrors(errors) {
+    // Skip $form (form-level error marker) - it's not an actual field
+    for (const fieldName of Object.keys(errors)) {
+      if (fieldName !== '$form') {
+        this.touchedFeature.touch(fieldName);
+      }
+    }
+  }
+
+  /**
+   * Emit field change events including nested and parent events
+   * @param {string} path - Field path
+   * @param {*} value - Field value
+   * @param {Set} nestedPathsEmitted - Tracker for nested paths already emitted
+   * @param {Set} parentPathsEmitted - Tracker for parent paths already emitted
+   * @private
+   */
+  _emitFieldChangeEvents(path, value, nestedPathsEmitted, parentPathsEmitted) {
+    const changeEvent = `${EVENTS.CHANGE}:${path}`;
+
+    // Emit direct event for the changed path
+    this.eventService.emit(changeEvent, value);
+
+    if (!this.eventService.hasListeners()) return;
+
+    // Emit events for nested paths when parent path changes
+    this._emitNestedPathEvents(changeEvent, nestedPathsEmitted);
+
+    // Emit events for parent paths when nested field changes
+    this._emitParentPathEvents(path, parentPathsEmitted);
+  }
+
+  /**
+   * Emit events for nested paths
+   * @param {string} changeEvent - Change event name
+   * @param {Set} nestedPathsEmitted - Tracker for nested paths already emitted
+   * @private
+   */
+  _emitNestedPathEvents(changeEvent, nestedPathsEmitted) {
+    const nestedEvents = this.eventService.getEventsWithPrefix(changeEvent);
+
+    for (const nestedEvent of nestedEvents) {
+      // Extract path from event name: 'change:array[0].field' -> 'array[0].field'
+      const nestedPath = nestedEvent.substring(`${EVENTS.CHANGE}:`.length);
+
+      // Track emitted paths to avoid duplicate events
+      if (!nestedPathsEmitted.has(nestedPath)) {
+        nestedPathsEmitted.add(nestedPath);
+
+        // Get current value and emit
+        const nestedValue = this.get(nestedPath);
+
+        this.eventService.emit(nestedEvent, nestedValue);
+      }
+    }
+  }
+
+  /**
+   * Emit events for parent paths
+   * @param {string} path - Field path
+   * @param {Set} parentPathsEmitted - Tracker for parent paths already emitted
+   * @private
+   */
+  _emitParentPathEvents(path, parentPathsEmitted) {
+    const parentPaths = this._getParentPaths(path);
+
+    for (const parentPath of parentPaths) {
+      const parentEvent = `${EVENTS.CHANGE}:${parentPath}`;
+
+      // Only emit if there are listeners with bubble:true and not already emitted
+      const shouldEmit = !parentPathsEmitted.has(parentPath) &&
+        this.eventService.hasListener(parentEvent, { onlyBubble: true });
+
+      if (shouldEmit) {
+        parentPathsEmitted.add(parentPath);
+
+        // Get current parent value and emit
+        const parentValue = this.get(parentPath);
+
+        this.eventService.emit(parentEvent, parentValue);
+      }
+    }
   }
 
   /**
@@ -297,9 +389,9 @@ export default class FormEngine {
     // This ensures we emit the final state, not intermediate states
     const operationsByPath = {};
 
-    operations.forEach(({ path, value }) => {
+    for (const { path, value } of operations) {
       operationsByPath[path] = { path, value };
-    });
+    }
     const deduplicatedOperations = Object.values(operationsByPath);
 
     // Emit aggregated change event
@@ -312,58 +404,11 @@ export default class FormEngine {
     const parentPathsEmitted = new Set();
 
     // Emit per-field events and queue dirty checks (non-blocking)
-    deduplicatedOperations.forEach(({ path, value }) => {
-      const changeEvent = `${EVENTS.CHANGE}:${path}`;
-
-      // Emit direct event for the changed path
-      this.eventService.emit(changeEvent, value);
-
-      // Emit events for nested paths when parent path changes
-      // Example: when 'calculatedFinanceData' array changes, emit for 'calculatedFinanceData[0].budgetAfterAllocation'
-      // This ensures Field components subscribed to nested paths receive updates
-      // Only check if there are listeners to avoid necessary work
-      if (this.eventService.hasListeners()) {
-        const nestedEvents = this.eventService.getEventsWithPrefix(changeEvent);
-
-        nestedEvents.forEach((nestedEvent) => {
-          // Extract path from event name: 'change:array[0].field' -> 'array[0].field'
-          const nestedPath = nestedEvent.substring(`${EVENTS.CHANGE}:`.length);
-
-          // Track emitted paths to avoid duplicate events when multiple parent changes affect same nested path
-          if (!nestedPathsEmitted.has(nestedPath)) {
-            nestedPathsEmitted.add(nestedPath);
-
-            // Get current value and emit - this ensures subscribers get the latest value after parent change
-            const nestedValue = this.get(nestedPath);
-
-            this.eventService.emit(nestedEvent, nestedValue);
-          }
-        });
-
-        // Emit events for parent paths when nested field changes
-        // Example: when 'foo[0].field' changes, emit for 'foo[0]' and 'foo'
-        // This ensures useWatch('foo', { bubble: true }) updates when any nested field changes
-        const parentPaths = this._getParentPaths(path);
-
-        parentPaths.forEach((parentPath) => {
-          const parentEvent = `${EVENTS.CHANGE}:${parentPath}`;
-
-          // Only emit if there are listeners with bubble:true for this parent path
-          // and we haven't already emitted for this parent in this batch
-          if (!parentPathsEmitted.has(parentPath) && this.eventService.hasListener(parentEvent, { onlyBubble: true })) {
-            parentPathsEmitted.add(parentPath);
-
-            // Get current parent value and emit
-            const parentValue = this.get(parentPath);
-
-            this.eventService.emit(parentEvent, parentValue);
-          }
-        });
-      }
-
+    for (const { path, value } of deduplicatedOperations) {
+      this._emitFieldChangeEvents(path, value, nestedPathsEmitted, parentPathsEmitted);
       // Queue dirty state check to avoid blocking the event loop
       this.dirtyFeature.queueCheck(path);
-    });
+    }
   }
 
   /**
@@ -384,9 +429,9 @@ export default class FormEngine {
    * Set field error
    * @param {string} path - Field path
    * @param {string} error - Error message
-   * @param {string} source - Error source ('field' or 'form')
+   * @param {string} source - Error source (use ERROR_SOURCES constants)
    */
-  setError(path, error, source = 'field') {
+  setError(path, error, source = ERROR_SOURCES.FIELD) {
     this.errorsFeature.set(path, error, source);
   }
 
@@ -412,9 +457,9 @@ export default class FormEngine {
    * Register validator for field
    * @param {string} path - Field path
    * @param {Function} validator - Validation function
-   * @param {string} validateOn - Validation mode ('blur', 'change', 'submit')
+   * @param {string} validateOn - Validation mode (use VALIDATION_MODES constants)
    */
-  registerValidator(path, validator, validateOn = 'blur') {
+  registerValidator(path, validator, validateOn = VALIDATION_MODES.BLUR) {
     this.validationService.registerValidator(path, validator, validateOn);
   }
 
@@ -490,7 +535,7 @@ export default class FormEngine {
       const currentErrorKeys = Object.keys(errors);
       const allErrorKeys = new Set([...previousErrorKeys, ...currentErrorKeys]);
 
-      allErrorKeys.forEach(path => {
+      for (const path of allErrorKeys) {
         const prevError = previousErrors[path];
         const currError = errors[path];
 
@@ -498,7 +543,7 @@ export default class FormEngine {
           this.eventService.emit(EVENTS.ERROR, { path, error: currError || null });
           this.eventService.emit(`${EVENTS.ERROR}:${path}`, currError || null);
         }
-      });
+      }
     }
 
     return this.errorsFeature.isValid();
@@ -626,8 +671,7 @@ export default class FormEngine {
     const fieldErrors = Object.fromEntries(
       Object.entries(errors).filter(([path]) => path !== '$form'),
     );
-    // eslint-disable-next-line dot-notation
-    const formError = errors['$form'] != null ? errors['$form'] : null;
+    const formError = errors.$form != null ? errors.$form : null;
 
     return {
       // Validity information
@@ -645,7 +689,7 @@ export default class FormEngine {
       // Form state
       submitting: this.submittingFeature.isSubmitting(),
       submitSucceeded: this.submittingFeature.hasSubmitSucceeded(),
-      touchedCount: this.touchedFeature.touched.size,
+      touchedCount: this.touchedFeature.getTouchedCount(),
       touchedFields: this.touchedFeature.getTouchedArray().filter(path => path !== '$form'),
     };
   }
@@ -802,14 +846,11 @@ export default class FormEngine {
       const isValid = await this.validateAll();
       const errors = this.getErrors();
 
-      if (!isValid || Object.keys(errors).length > 0) {
+      const hasErrors = !isValid || Object.keys(errors).length > 0;
+
+      if (hasErrors) {
         // Mark all fields with errors as touched so errors are displayed
-        // Skip $form (form-level error marker) - it's not an actual field
-        Object.keys(errors).forEach(fieldName => {
-          if (fieldName !== '$form') {
-            this.touchedFeature.touch(fieldName);
-          }
-        });
+        this._touchFieldsWithErrors(errors);
 
         this.submittingFeature.stop();
         this.submittingFeature.setSubmitSucceeded(false);

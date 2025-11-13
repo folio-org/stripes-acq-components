@@ -61,14 +61,14 @@ export const deleteByPath = (obj, path) => {
   // Check if we're deleting from an array to use splice instead of unset
   // This maintains array indices (shifts elements) like the original implementation
   const pathParts = path.split(/[.[\]]/).filter(Boolean);
-  const lastKey = pathParts[pathParts.length - 1];
+  const lastKey = pathParts.at(-1);
   const parentPath = pathParts.slice(0, -1).join('.');
 
   if (parentPath && !Number.isNaN(lastKey)) {
     const parent = parentPath ? get(result, parentPath) : result;
 
     if (Array.isArray(parent)) {
-      parent.splice(parseInt(lastKey, 10), 1);
+      parent.splice(Number.parseInt(lastKey, 10), 1);
 
       return result;
     }

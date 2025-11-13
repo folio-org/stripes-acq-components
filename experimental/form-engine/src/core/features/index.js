@@ -3,6 +3,7 @@
  * Each feature manages a specific aspect of form state
  */
 
+export { BaseFeature } from './BaseFeature';
 export { ValuesFeature } from './ValuesFeature';
 export { ErrorsFeature } from './ErrorsFeature';
 export { DirtyFeature } from './DirtyFeature';

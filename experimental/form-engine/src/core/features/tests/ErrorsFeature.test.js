@@ -110,7 +110,8 @@ describe('ErrorsFeature', () => {
     ef.set('email', 'Invalid');
     ef.reset();
     expect(ef.isValid()).toBe(true);
-    expect(ef._previousFormValid).toBe(null);
+    // After reset, state should be cleared
+    expect(ef.getAll()).toEqual({});
   });
 
   // ============================================
@@ -671,13 +672,14 @@ describe('ErrorsFeature', () => {
       const ef = new ErrorsFeature(engine);
 
       ef.init();
-      expect(ef._previousFormValid).toBe(true);
+      expect(ef.isValid()).toBe(true);
 
       ef.set('email', 'error');
-      expect(ef._previousFormValid).toBe(false);
+      expect(ef.isValid()).toBe(false);
 
       ef.clear('email');
-      expect(ef._previousFormValid).toBe(true);
+      // After clearing, should be valid again
+      expect(ef.isValid()).toBe(true);
     });
 
     it('should not emit valid event if already valid', () => {
@@ -709,10 +711,11 @@ describe('ErrorsFeature', () => {
 
       ef.init();
       ef.set('email', 'error');
-      expect(ef._previousFormValid).toBe(false);
+      expect(ef.isValid()).toBe(false);
 
       ef.reset();
-      expect(ef._previousFormValid).toBe(null);
+      // After reset, should be valid (no errors)
+      expect(ef.isValid()).toBe(true);
     });
   });
 });

@@ -3,28 +3,25 @@
  */
 
 import { EVENTS } from '../../constants';
+import { BaseFeature } from './BaseFeature';
 
-export class SubmittingFeature {
-  constructor(engine) {
-    this.engine = engine;
-    this.submitting = false;
-    this.submitSucceeded = false;
-  }
-
+export class SubmittingFeature extends BaseFeature {
   /**
    * Initialize submitting state
    */
   init() {
-    this.submitting = false;
-    this.submitSucceeded = false;
+    super.init();
+    this._setState('submitting', false);
+    this._setState('submitSucceeded', false);
   }
 
   /**
    * Reset submitting state
    */
   reset() {
-    this.submitting = false;
-    this.submitSucceeded = false;
+    super.reset();
+    this._setState('submitting', false);
+    this._setState('submitSucceeded', false);
   }
 
   /**
@@ -32,7 +29,7 @@ export class SubmittingFeature {
    * @returns {boolean} True if form is submitting
    */
   isSubmitting() {
-    return this.submitting;
+    return this._getState('submitting');
   }
 
   /**
@@ -40,8 +37,10 @@ export class SubmittingFeature {
    * @param {boolean} submitting - Submitting state
    */
   setSubmitting(submitting) {
-    if (this.submitting !== submitting) {
-      this.submitting = submitting;
+    const currentSubmitting = this._getState('submitting');
+
+    if (currentSubmitting !== submitting) {
+      this._setState('submitting', submitting);
       // Clear cache when submitting state changes to ensure fresh state
       this.engine.cacheService.clearFormStateCache();
       this.engine.eventService.emit(EVENTS.SUBMITTING, { submitting });
@@ -67,13 +66,17 @@ export class SubmittingFeature {
    * @param {boolean} succeeded - Whether submit succeeded
    */
   setSubmitSucceeded(succeeded) {
-    if (this.submitSucceeded !== succeeded) {
-      this.submitSucceeded = succeeded;
+    const currentSubmitSucceeded = this._getState('submitSucceeded');
+
+    if (currentSubmitSucceeded !== succeeded) {
+      this._setState('submitSucceeded', succeeded);
       // Clear cache when submit succeeded state changes
       this.engine.cacheService.clearFormStateCache();
       // Emit submit event so subscribers (useFormState) get updated submitSucceeded state
       if (this.engine && this.engine.eventService) {
-        this.engine.eventService.emit(EVENTS.SUBMIT, { submitting: this.submitting, success: succeeded });
+        const submitting = this._getState('submitting');
+
+        this.engine.eventService.emit(EVENTS.SUBMIT, { submitting, success: succeeded });
       }
     }
   }
@@ -83,6 +86,6 @@ export class SubmittingFeature {
    * @returns {boolean} True if form submit succeeded
    */
   hasSubmitSucceeded() {
-    return this.submitSucceeded;
+    return this._getState('submitSucceeded');
   }
 }
