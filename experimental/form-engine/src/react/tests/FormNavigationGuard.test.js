@@ -1,9 +1,10 @@
 /* Developed collaboratively using AI (Cursor) */
 
-import { createMemoryHistory } from 'history';
 import {
-  Router,
+  MemoryRouter,
   Route,
+  Switch,
+  useHistory,
 } from 'react-router-dom';
 
 import {
@@ -22,60 +23,71 @@ import {
 describe('FormNavigationGuard', () => {
   it('should block navigation when form is dirty', async () => {
     const user = userEvent.setup();
-    const history = createMemoryHistory({ initialEntries: ['/a'] });
 
-    render(
-      <Router history={history}>
-        <Route
-          path="/a"
-          render={() => (
-            <Form
-              onSubmit={() => {}}
-              initialValues={{ name: '' }}
-              navigationCheck
-              navigationGuardProps={{ message: 'Unsaved changes' }}
-              enableBatching={false}
-            >
-              <Field name="name">
-                {({ input }) => <input data-testid="name" {...input} />}
-              </Field>
-              <button type="button" onClick={() => history.push('/b')} data-testid="link-b">Go B</button>
-            </Form>
-          )}
-        />
-        <Route path="/b" render={() => <div>B</div>} />
-      </Router>,
+    const PageA = () => {
+      const history = useHistory();
+
+      return (
+        <Form
+          onSubmit={() => {}}
+          initialValues={{ name: '' }}
+          navigationCheck
+          navigationGuardProps={{ message: 'Unsaved changes' }}
+          enableBatching={false}
+        >
+          <Field name="name">
+            {({ input }) => <input data-testid="name" {...input} />}
+          </Field>
+          <button type="button" onClick={() => history.push('/b')} data-testid="link-b">Go B</button>
+        </Form>
+      );
+    };
+
+    const { container } = render(
+      <MemoryRouter initialEntries={['/a']}>
+        <Switch>
+          <Route path="/a" component={PageA} />
+          <Route path="/b" render={() => <div data-testid="page-b">B</div>} />
+        </Switch>
+      </MemoryRouter>,
     );
 
     await user.type(screen.getByTestId('name'), 'x');
     await user.click(screen.getByTestId('link-b'));
-    expect(history.location.pathname).toBe('/a');
+
+    // Should still be on page A (navigation blocked)
+    expect(screen.queryByTestId('page-b')).not.toBeInTheDocument();
+    expect(container.querySelector('input[data-testid="name"]')).toBeInTheDocument();
   });
 
   it('should allow navigation when form is clean', async () => {
     const user = userEvent.setup();
-    const history = createMemoryHistory({ initialEntries: ['/a'] });
+
+    const PageA = () => {
+      const history = useHistory();
+
+      return (
+        <Form
+          onSubmit={() => {}}
+          initialValues={{ name: '' }}
+          navigationCheck
+          enableBatching={false}
+        >
+          <Field name="name">
+            {({ input }) => <input data-testid="name" {...input} />}
+          </Field>
+          <button type="button" onClick={() => history.push('/b')} data-testid="link-b">Go B</button>
+        </Form>
+      );
+    };
 
     render(
-      <Router history={history}>
-        <Route
-          path="/a"
-          render={() => (
-            <Form
-              onSubmit={() => {}}
-              initialValues={{ name: '' }}
-              navigationCheck
-              enableBatching={false}
-            >
-              <Field name="name">
-                {({ input }) => <input data-testid="name" {...input} />}
-              </Field>
-              <button type="button" onClick={() => history.push('/b')} data-testid="link-b">Go B</button>
-            </Form>
-          )}
-        />
-        <Route path="/b" render={() => <div data-testid="page-b">B</div>} />
-      </Router>,
+      <MemoryRouter initialEntries={['/a']}>
+        <Switch>
+          <Route path="/a" component={PageA} />
+          <Route path="/b" render={() => <div data-testid="page-b">B</div>} />
+        </Switch>
+      </MemoryRouter>,
     );
 
     // Don't modify the form, navigate directly
@@ -88,67 +100,76 @@ describe('FormNavigationGuard', () => {
 
   it('should show confirmation modal when navigating with dirty form', async () => {
     const user = userEvent.setup();
-    const history = createMemoryHistory({ initialEntries: ['/a'] });
 
-    render(
-      <Router history={history}>
-        <Route
-          path="/a"
-          render={() => (
-            <Form
-              onSubmit={() => {}}
-              initialValues={{ name: '' }}
-              navigationCheck
-              navigationGuardProps={{
-                message: 'Custom message',
-                heading: 'Custom heading',
-              }}
-              enableBatching={false}
-            >
-              <Field name="name">
-                {({ input }) => <input data-testid="name" {...input} />}
-              </Field>
-              <button type="button" onClick={() => history.push('/b')} data-testid="link-b">Go B</button>
-            </Form>
-          )}
-        />
-        <Route path="/b" render={() => <div>B</div>} />
-      </Router>,
+    const PageA = () => {
+      const history = useHistory();
+
+      return (
+        <Form
+          onSubmit={() => {}}
+          initialValues={{ name: '' }}
+          navigationCheck
+          navigationGuardProps={{
+            message: 'Custom message',
+            heading: 'Custom heading',
+          }}
+          enableBatching={false}
+        >
+          <Field name="name">
+            {({ input }) => <input data-testid="name" {...input} />}
+          </Field>
+          <button type="button" onClick={() => history.push('/b')} data-testid="link-b">Go B</button>
+        </Form>
+      );
+    };
+
+    const { container } = render(
+      <MemoryRouter initialEntries={['/a']}>
+        <Switch>
+          <Route path="/a" component={PageA} />
+          <Route path="/b" render={() => <div data-testid="page-b">B</div>} />
+        </Switch>
+      </MemoryRouter>,
     );
 
     await user.type(screen.getByTestId('name'), 'x');
     await user.click(screen.getByTestId('link-b'));
 
     // Should still be on page A
-    expect(history.location.pathname).toBe('/a');
+    expect(screen.queryByTestId('page-b')).not.toBeInTheDocument();
+    expect(container.querySelector('input[data-testid="name"]')).toBeInTheDocument();
   });
 
   it('should clear dirty state after successful submit', async () => {
     const user = userEvent.setup();
-    const history = createMemoryHistory({ initialEntries: ['/a'] });
     const onSubmit = jest.fn();
 
+    const PageA = () => {
+      const history = useHistory();
+
+      return (
+        <Form
+          onSubmit={onSubmit}
+          initialValues={{ name: '' }}
+          navigationCheck
+          enableBatching={false}
+        >
+          <Field name="name">
+            {({ input }) => <input data-testid="name" {...input} />}
+          </Field>
+          <button type="submit" data-testid="submit">Submit</button>
+          <button type="button" onClick={() => history.push('/b')} data-testid="link-b">Go B</button>
+        </Form>
+      );
+    };
+
     render(
-      <Router history={history}>
-        <Route
-          path="/a"
-          render={() => (
-            <Form
-              onSubmit={onSubmit}
-              initialValues={{ name: '' }}
-              navigationCheck
-              enableBatching={false}
-            >
-              <Field name="name">
-                {({ input }) => <input data-testid="name" {...input} />}
-              </Field>
-              <button type="submit" data-testid="submit">Submit</button>
-              <button type="button" onClick={() => history.push('/b')} data-testid="link-b">Go B</button>
-            </Form>
-          )}
-        />
-        <Route path="/b" render={() => <div data-testid="page-b">B</div>} />
-      </Router>,
+      <MemoryRouter initialEntries={['/a']}>
+        <Switch>
+          <Route path="/a" component={PageA} />
+          <Route path="/b" render={() => <div data-testid="page-b">B</div>} />
+        </Switch>
+      </MemoryRouter>,
     );
 
     // Make form dirty
@@ -171,117 +192,132 @@ describe('FormNavigationGuard', () => {
 
   it('should work without navigationGuardProps', async () => {
     const user = userEvent.setup();
-    const history = createMemoryHistory({ initialEntries: ['/a'] });
 
-    render(
-      <Router history={history}>
-        <Route
-          path="/a"
-          render={() => (
-            <Form
-              onSubmit={() => {}}
-              initialValues={{ name: '' }}
-              navigationCheck
-              enableBatching={false}
-            >
-              <Field name="name">
-                {({ input }) => <input data-testid="name" {...input} />}
-              </Field>
-              <button type="button" onClick={() => history.push('/b')} data-testid="link-b">Go B</button>
-            </Form>
-          )}
-        />
-        <Route path="/b" render={() => <div>B</div>} />
-      </Router>,
+    const PageA = () => {
+      const history = useHistory();
+
+      return (
+        <Form
+          onSubmit={() => {}}
+          initialValues={{ name: '' }}
+          navigationCheck
+          enableBatching={false}
+        >
+          <Field name="name">
+            {({ input }) => <input data-testid="name" {...input} />}
+          </Field>
+          <button type="button" onClick={() => history.push('/b')} data-testid="link-b">Go B</button>
+        </Form>
+      );
+    };
+
+    const { container } = render(
+      <MemoryRouter initialEntries={['/a']}>
+        <Switch>
+          <Route path="/a" component={PageA} />
+          <Route path="/b" render={() => <div data-testid="page-b">B</div>} />
+        </Switch>
+      </MemoryRouter>,
     );
 
     await user.type(screen.getByTestId('name'), 'x');
     await user.click(screen.getByTestId('link-b'));
 
     // Should still block navigation
-    expect(history.location.pathname).toBe('/a');
+    expect(screen.queryByTestId('page-b')).not.toBeInTheDocument();
+    expect(container.querySelector('input[data-testid="name"]')).toBeInTheDocument();
   });
 
   it('should use custom withPrompt from navigationGuardProps', async () => {
     const user = userEvent.setup();
-    const history = createMemoryHistory({ initialEntries: ['/a'] });
     const customPrompt = jest.fn(() => false); // Return false to block navigation
 
-    render(
-      <Router history={history}>
-        <Route
-          path="/a"
-          render={() => (
-            <Form
-              onSubmit={() => {}}
-              initialValues={{ name: '' }}
-              navigationCheck
-              navigationGuardProps={{
-                withPrompt: customPrompt,
-                message: 'Leave page?',
-              }}
-              enableBatching={false}
-            >
-              <Field name="name">
-                {({ input }) => <input data-testid="name" {...input} />}
-              </Field>
-              <button type="button" onClick={() => history.push('/b')} data-testid="link-b">Go B</button>
-            </Form>
-          )}
-        />
-        <Route path="/b" render={() => <div>B</div>} />
-      </Router>,
+    const PageA = () => {
+      const history = useHistory();
+
+      return (
+        <Form
+          onSubmit={() => {}}
+          initialValues={{ name: '' }}
+          navigationCheck
+          navigationGuardProps={{
+            withPrompt: customPrompt,
+            message: 'Leave page?',
+          }}
+          enableBatching={false}
+        >
+          <Field name="name">
+            {({ input }) => <input data-testid="name" {...input} />}
+          </Field>
+          <button type="button" onClick={() => history.push('/b')} data-testid="link-b">Go B</button>
+        </Form>
+      );
+    };
+
+    const { container } = render(
+      <MemoryRouter initialEntries={['/a']}>
+        <Switch>
+          <Route path="/a" component={PageA} />
+          <Route path="/b" render={() => <div data-testid="page-b">B</div>} />
+        </Switch>
+      </MemoryRouter>,
     );
 
     await user.type(screen.getByTestId('name'), 'x');
     await user.click(screen.getByTestId('link-b'));
 
     // Should still be on page A
-    expect(history.location.pathname).toBe('/a');
+    expect(screen.queryByTestId('page-b')).not.toBeInTheDocument();
+    expect(container.querySelector('input[data-testid="name"]')).toBeInTheDocument();
   });
 
   it('should handle multiple navigation attempts', async () => {
     const user = userEvent.setup();
-    const history = createMemoryHistory({ initialEntries: ['/a'] });
 
-    render(
-      <Router history={history}>
-        <Route
-          path="/a"
-          render={() => (
-            <Form
-              onSubmit={() => {}}
-              initialValues={{ name: '' }}
-              navigationCheck
-              enableBatching={false}
-            >
-              <Field name="name">
-                {({ input }) => <input data-testid="name" {...input} />}
-              </Field>
-              <button type="button" onClick={() => history.push('/b')} data-testid="link-b">Go B</button>
-              <button type="button" onClick={() => history.push('/c')} data-testid="link-c">Go C</button>
-            </Form>
-          )}
-        />
-        <Route path="/b" render={() => <div>B</div>} />
-        <Route path="/c" render={() => <div>C</div>} />
-      </Router>,
+    const PageA = () => {
+      const history = useHistory();
+
+      return (
+        <Form
+          onSubmit={() => {}}
+          initialValues={{ name: '' }}
+          navigationCheck
+          enableBatching={false}
+        >
+          <Field name="name">
+            {({ input }) => <input data-testid="name" {...input} />}
+          </Field>
+          <button type="button" onClick={() => history.push('/b')} data-testid="link-b">Go B</button>
+          <button type="button" onClick={() => history.push('/c')} data-testid="link-c">Go C</button>
+        </Form>
+      );
+    };
+
+    const { container } = render(
+      <MemoryRouter initialEntries={['/a']}>
+        <Switch>
+          <Route path="/a" component={PageA} />
+          <Route path="/b" render={() => <div data-testid="page-b">B</div>} />
+          <Route path="/c" render={() => <div data-testid="page-c">C</div>} />
+        </Switch>
+      </MemoryRouter>,
     );
 
     await user.type(screen.getByTestId('name'), 'x');
 
     // Try navigating to B - should block
     await user.click(screen.getByTestId('link-b'));
-    expect(history.location.pathname).toBe('/a');
+    expect(screen.queryByTestId('page-b')).not.toBeInTheDocument();
+    expect(container.querySelector('input[data-testid="name"]')).toBeInTheDocument();
 
     // Try navigating to C - should also block
     await user.click(screen.getByTestId('link-c'));
-    expect(history.location.pathname).toBe('/a');
+    expect(screen.queryByTestId('page-c')).not.toBeInTheDocument();
+    expect(container.querySelector('input[data-testid="name"]')).toBeInTheDocument();
   });
 
   it('should track dirty state correctly', async () => {
     const user = userEvent.setup();
-    const history = createMemoryHistory({ initialEntries: ['/a'] });
 
     function DirtyStatus() {
       const { dirty } = useFormState({ dirty: true });
@@ -289,27 +325,32 @@ describe('FormNavigationGuard', () => {
       return <div data-testid="dirty-status">{String(dirty)}</div>;
     }
 
+    const PageA = () => {
+      const history = useHistory();
+
+      return (
+        <Form
+          onSubmit={() => {}}
+          initialValues={{ name: 'initial' }}
+          navigationCheck
+          enableBatching={false}
+        >
+          <Field name="name">
+            {({ input }) => <input data-testid="name" {...input} />}
+          </Field>
+          <DirtyStatus />
+          <button type="button" onClick={() => history.push('/b')} data-testid="link-b">Go B</button>
+        </Form>
+      );
+    };
+
     render(
-      <Router history={history}>
-        <Route
-          path="/a"
-          render={() => (
-            <Form
-              onSubmit={() => {}}
-              initialValues={{ name: 'initial' }}
-              navigationCheck
-              enableBatching={false}
-            >
-              <Field name="name">
-                {({ input }) => <input data-testid="name" {...input} />}
-              </Field>
-              <DirtyStatus />
-              <button type="button" onClick={() => history.push('/b')} data-testid="link-b">Go B</button>
-            </Form>
-          )}
-        />
-        <Route path="/b" render={() => <div data-testid="page-b">B</div>} />
-      </Router>,
+      <MemoryRouter initialEntries={['/a']}>
+        <Switch>
+          <Route path="/a" component={PageA} />
+          <Route path="/b" render={() => <div data-testid="page-b">B</div>} />
+        </Switch>
+      </MemoryRouter>,
     );
 
     // Initially clean
@@ -325,7 +366,7 @@ describe('FormNavigationGuard', () => {
 
     // Try to navigate - should block
     await user.click(screen.getByTestId('link-b'));
-    expect(history.location.pathname).toBe('/a');
+    expect(screen.queryByTestId('page-b')).not.toBeInTheDocument();
 
     // Reset to initial value
     await user.clear(screen.getByTestId('name'));
@@ -345,28 +386,32 @@ describe('FormNavigationGuard', () => {
 
   it('should not block navigation when navigationCheck is false', async () => {
     const user = userEvent.setup();
-    const history = createMemoryHistory({ initialEntries: ['/a'] });
+
+    const PageA = () => {
+      const history = useHistory();
+
+      return (
+        <Form
+          onSubmit={() => {}}
+          initialValues={{ name: '' }}
+          navigationCheck={false}
+          enableBatching={false}
+        >
+          <Field name="name">
+            {({ input }) => <input data-testid="name" {...input} />}
+          </Field>
+          <button type="button" onClick={() => history.push('/b')} data-testid="link-b">Go B</button>
+        </Form>
+      );
+    };
 
     render(
-      <Router history={history}>
-        <Route
-          path="/a"
-          render={() => (
-            <Form
-              onSubmit={() => {}}
-              initialValues={{ name: '' }}
-              navigationCheck={false}
-              enableBatching={false}
-            >
-              <Field name="name">
-                {({ input }) => <input data-testid="name" {...input} />}
-              </Field>
-              <button type="button" onClick={() => history.push('/b')} data-testid="link-b">Go B</button>
-            </Form>
-          )}
-        />
-        <Route path="/b" render={() => <div data-testid="page-b">B</div>} />
-      </Router>,
+      <MemoryRouter initialEntries={['/a']}>
+        <Switch>
+          <Route path="/a" component={PageA} />
+          <Route path="/b" render={() => <div data-testid="page-b">B</div>} />
+        </Switch>
+      </MemoryRouter>,
     );
 
     await user.type(screen.getByTestId('name'), 'x');
@@ -379,30 +424,29 @@ describe('FormNavigationGuard', () => {
   });
 
   it('should handle form unmount during navigation block', () => {
-    const history = createMemoryHistory({ initialEntries: ['/a'] });
+    const PageA = () => {
+      return (
+        <Form
+          onSubmit={() => {}}
+          initialValues={{ name: '' }}
+          navigationCheck
+        >
+          <Field name="name">
+            {({ input }) => <input data-testid="name" {...input} />}
+          </Field>
+        </Form>
+      );
+    };
 
     const { unmount } = render(
-      <Router history={history}>
-        <Route
-          path="/a"
-          render={() => (
-            <Form
-              onSubmit={() => {}}
-              initialValues={{ name: '' }}
-              navigationCheck
-            >
-              <Field name="name">
-                {({ input }) => <input data-testid="name" {...input} />}
-              </Field>
-            </Form>
-          )}
-        />
-      </Router>,
+      <MemoryRouter initialEntries={['/a']}>
+        <Switch>
+          <Route path="/a" component={PageA} />
+        </Switch>
+      </MemoryRouter>,
     );
 
-    unmount();
-
-    // Should not throw errors
-    expect(true).toBe(true);
+    // Should not throw when unmounting
+    expect(() => unmount()).not.toThrow();
   });
 });
