@@ -25,7 +25,7 @@ export const hashObject = (obj) => {
   }
 
   // For objects, create a deterministic hash
-  const keys = Object.keys(obj).sort();
+  const keys = Object.keys(obj).sort((a, b) => a.localeCompare(b));
   const hashParts = keys.map(key => `${key}:${hashObject(obj[key])}`);
 
   return `{${hashParts.join(',')}}`;
@@ -46,7 +46,7 @@ export const hashObjectShallow = (obj) => {
     return String(obj);
   }
 
-  const keys = Object.keys(obj).sort();
+  const keys = Object.keys(obj).sort((a, b) => a.localeCompare(b));
   const hashParts = keys.map(key => `${key}:${obj[key]}`);
 
   return `{${hashParts.join(',')}}`;
