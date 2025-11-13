@@ -111,12 +111,12 @@ export default function Form({
               // Clear the $form error first
               engine.clearError('$form');
 
-              // Set errors for each field
+              // Set errors for each field with 'form' source
               Object.entries(error).forEach(([path, fieldError]) => {
                 if (fieldError) {
-                  engine.setError(path, fieldError);
+                  engine.setError(path, fieldError, 'form');
                 } else {
-                  engine.clearError(path);
+                  engine.clearError(path, 'form');
                 }
               });
             } else if (Array.isArray(error)) {

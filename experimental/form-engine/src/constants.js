@@ -2,6 +2,7 @@
 export const FIELD_ACTIONS = {
   SET_VALUE: 'SET_VALUE',
   SET_ERROR: 'SET_ERROR',
+  SET_ERRORS: 'SET_ERRORS',
   SET_TOUCHED: 'SET_TOUCHED',
   SET_ACTIVE: 'SET_ACTIVE',
   SET_DIRTY: 'SET_DIRTY',
@@ -24,6 +25,7 @@ export const VALIDATION_MODES = {
 export const DEFAULT_SUBSCRIPTION = {
   value: true,
   error: true,
+  errors: true,
   touched: true,
   active: false,
   dirty: true,
@@ -60,6 +62,7 @@ export const EVENTS = {
 export const FIELD_EVENT_PREFIXES = {
   CHANGE: 'change:',
   ERROR: 'error:',
+  ERRORS: 'errors:',
   TOUCH: 'touch:',
   DIRTY: 'dirty:',
   PRISTINE: 'pristine:',

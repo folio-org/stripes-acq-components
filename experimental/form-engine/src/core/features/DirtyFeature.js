@@ -84,9 +84,9 @@ export class DirtyFeature {
    */
   isFieldDirty(path) {
     const { currentValue, initialValue } = this._getFieldValues(path);
-    const isEqual = this._getIsEqualFunction();
+    const isEqualFn = this._getIsEqualFunction();
 
-    return !isEqual(currentValue, initialValue);
+    return !isEqualFn(currentValue, initialValue);
   }
 
   /**
@@ -204,8 +204,8 @@ export class DirtyFeature {
     if (!path) return;
 
     const { currentValue, initialValue } = this._getFieldValues(path);
-    const isEqual = this._getIsEqualFunction();
-    const currentDirty = !isEqual(currentValue, initialValue);
+    const isEqualFn = this._getIsEqualFunction();
+    const currentDirty = !isEqualFn(currentValue, initialValue);
 
     const previousDirty = this._previousFieldDirty.get(path);
 

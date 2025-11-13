@@ -244,8 +244,8 @@ describe('ErrorsFeature', () => {
       const ef = new ErrorsFeature(engine);
 
       ef.init();
-      ef.set('email', 'error');
-      ef.setAll({});
+      ef.set('email', 'error', 'form'); // Use 'form' source
+      ef.setAll({}, 'form'); // Clear errors from 'form' source
 
       expect(ef.getAll()).toEqual({});
       expect(ef.isValid()).toBe(true);
@@ -262,13 +262,148 @@ describe('ErrorsFeature', () => {
       ef.init();
       ef.setAll({ field1: null, field2: undefined, field3: '' });
 
-      // setAll sets whatever is passed, including falsy values
-      // But get() returns null for missing fields
+      // setAll ignores falsy values (null, undefined, '')
+      // Only truthy error messages are set
       const all = ef.getAll();
 
-      expect(all.field1).toBe(null);
+      expect(all.field1).toBe(undefined);
       expect(all.field2).toBe(undefined);
-      expect(all.field3).toBe('');
+      expect(all.field3).toBe(undefined);
+      expect(ef.isValid()).toBe(true);
+    });
+  });
+
+  describe('Multiple error sources', () => {
+    it('should accumulate errors from different sources', () => {
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('email', 'Field: Invalid format', 'field');
+      ef.set('email', 'Form: Domain not allowed', 'form');
+
+      // get() returns first error
+      expect(ef.get('email')).toBe('Field: Invalid format');
+
+      // getErrors() returns all errors with sources
+      const errors = ef.getErrors('email');
+
+      expect(errors).toEqual([
+        { source: 'field', error: 'Field: Invalid format' },
+        { source: 'form', error: 'Form: Domain not allowed' },
+      ]);
+
+      // getAll() returns first error for each path
+      expect(ef.getAll()).toEqual({
+        email: 'Field: Invalid format',
+      });
+    });
+
+    it('should update error from same source', () => {
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('email', 'Field: Error 1', 'field');
+      ef.set('email', 'Form: Error 2', 'form');
+      ef.set('email', 'Field: Error 1 Updated', 'field');
+
+      const errors = ef.getErrors('email');
+
+      expect(errors).toEqual([
+        { source: 'field', error: 'Field: Error 1 Updated' },
+        { source: 'form', error: 'Form: Error 2' },
+      ]);
+    });
+
+    it('should clear error from specific source', () => {
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('email', 'Field: Error', 'field');
+      ef.set('email', 'Form: Error', 'form');
+
+      // Clear field error
+      ef.clear('email', 'field');
+
+      // Form error should remain
+      expect(ef.get('email')).toBe('Form: Error');
+      expect(ef.getErrors('email')).toEqual([
+        { source: 'form', error: 'Form: Error' },
+      ]);
+
+      // Clear form error
+      ef.clear('email', 'form');
+
+      expect(ef.get('email')).toBe(null);
+      expect(ef.getErrors('email')).toEqual([]);
+    });
+
+    it('should clear all errors when source not specified', () => {
+      const engine = {
+        eventService: {
+          emit: jest.fn(),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('email', 'Field: Error', 'field');
+      ef.set('email', 'Form: Error', 'form');
+
+      // Clear all errors
+      ef.clear('email');
+
+      expect(ef.get('email')).toBe(null);
+      expect(ef.getErrors('email')).toEqual([]);
+      expect(ef.isValid()).toBe(true);
+    });
+
+    it('should only emit when first error changes', () => {
+      const events = [];
+      const engine = {
+        eventService: {
+          emit: (name, payload) => events.push({ name, payload }),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      events.length = 0; // Clear init events
+
+      // Set first error from field source
+      ef.set('email', 'Field: Error', 'field');
+
+      expect(events.filter(e => e.name === 'error:email').length).toBe(1);
+      events.length = 0;
+
+      // Add second error from form source (first error doesn't change)
+      ef.set('email', 'Form: Error', 'form');
+
+      // Should NOT emit because first error is still 'Field: Error'
+      expect(events.filter(e => e.name === 'error:email').length).toBe(0);
+
+      events.length = 0;
+
+      // Clear field error (now form error becomes first)
+      ef.clear('email', 'field');
+
+      // Should emit because first error changed from 'Field: Error' to 'Form: Error'
+      expect(events.filter(e => e.name === 'error:email').length).toBe(1);
+      expect(events.find(e => e.name === 'error:email').payload).toBe('Form: Error');
     });
   });
 
@@ -328,6 +463,60 @@ describe('ErrorsFeature', () => {
       const validEvent = events.find(e => e.name === EVENTS.VALID && e.payload.valid === true);
 
       expect(validEvent).toBeTruthy();
+    });
+
+    it('should not emit events when clearing non-existent error', () => {
+      const events = [];
+      const engine = {
+        eventService: {
+          emit: (name, payload) => events.push({ name, payload }),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      events.length = 0; // clear init events
+
+      ef.clear('email'); // clearing non-existent error
+
+      expect(events.length).toBe(0); // no events emitted
+    });
+
+    it('should not emit events when setting same error value', () => {
+      const events = [];
+      const engine = {
+        eventService: {
+          emit: (name, payload) => events.push({ name, payload }),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('email', 'Invalid email');
+      events.length = 0; // clear previous events
+
+      ef.set('email', 'Invalid email'); // setting same error
+
+      expect(events.length).toBe(0); // no events emitted
+    });
+
+    it('should not emit events when setting null/undefined on non-existent error', () => {
+      const events = [];
+      const engine = {
+        eventService: {
+          emit: (name, payload) => events.push({ name, payload }),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      events.length = 0; // clear init events
+
+      ef.set('email', null);
+      ef.set('name', undefined);
+      ef.set('phone', '');
+
+      expect(events.length).toBe(0); // no events emitted for any
     });
 
     it('should emit error events for all fields in setAll', () => {

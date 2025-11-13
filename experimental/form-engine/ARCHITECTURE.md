@@ -26,8 +26,12 @@ This form engine is built around a small core with injectable services and featu
 
 ### Events
 - Form-level: INIT, RESET, CHANGE, VALUES, ERROR, VALIDATION, SUBMIT, CONFIG_UPDATE
-- Field-level: `${CHANGE}:${path}`, `${ERROR}:${path}`
+- Field-level: `${CHANGE}:${path}`, `${ERROR}:${path}`, `${ERRORS}:${path}`
 - Event handlers are wrapped with optional error handling and context tracking for safe cleanup.
+- **Bubble support**: Listeners can subscribe with `{ bubble: true }` to receive events from nested field changes
+  - Example: `engine.on('change:orders', callback, null, { bubble: true })` fires when `orders[0].amount` changes
+  - Used by `useWatch(name, { bubble: true })` for efficient array/object watching
+  - Only emits to bubble listeners when nested fields change (optimization via `hasListener(event, { onlyBubble: true })`)
 
 ### Dirty detection
 - Strategies:

@@ -256,6 +256,36 @@ export default class FormEngine {
   }
 
   /**
+   * Get parent paths for a given path
+   * Examples:
+   *   'foo[0].field' -> ['foo[0]', 'foo']
+   *   'foo.bar.baz' -> ['foo.bar', 'foo']
+   *   'foo' -> []
+   * @param {string} path - Field path
+   * @returns {Array<string>} Array of parent paths from immediate to root
+   * @private
+   */
+  _getParentPaths(path) {
+    const parents = [];
+    let currentPath = path;
+
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      // Find last separator (. or [)
+      const lastDot = currentPath.lastIndexOf('.');
+      const lastBracket = currentPath.lastIndexOf('[');
+      const lastSep = Math.max(lastDot, lastBracket);
+
+      if (lastSep === -1) break; // No more separators
+
+      currentPath = currentPath.substring(0, lastSep);
+      parents.push(currentPath);
+    }
+
+    return parents;
+  }
+
+  /**
    * Emit batch and per-field change events consistently
    * @param {Array<{path: string, value: any}>} operations
    * @private
@@ -279,6 +309,7 @@ export default class FormEngine {
 
     // Track nested paths already emitted to avoid duplicates
     const nestedPathsEmitted = new Set();
+    const parentPathsEmitted = new Set();
 
     // Emit per-field events and queue dirty checks (non-blocking)
     deduplicatedOperations.forEach(({ path, value }) => {
@@ -308,6 +339,26 @@ export default class FormEngine {
             this.eventService.emit(nestedEvent, nestedValue);
           }
         });
+
+        // Emit events for parent paths when nested field changes
+        // Example: when 'foo[0].field' changes, emit for 'foo[0]' and 'foo'
+        // This ensures useWatch('foo', { bubble: true }) updates when any nested field changes
+        const parentPaths = this._getParentPaths(path);
+
+        parentPaths.forEach((parentPath) => {
+          const parentEvent = `${EVENTS.CHANGE}:${parentPath}`;
+
+          // Only emit if there are listeners with bubble:true for this parent path
+          // and we haven't already emitted for this parent in this batch
+          if (!parentPathsEmitted.has(parentPath) && this.eventService.hasListener(parentEvent, { onlyBubble: true })) {
+            parentPathsEmitted.add(parentPath);
+
+            // Get current parent value and emit
+            const parentValue = this.get(parentPath);
+
+            this.eventService.emit(parentEvent, parentValue);
+          }
+        });
       }
 
       // Queue dirty state check to avoid blocking the event loop
@@ -333,17 +384,28 @@ export default class FormEngine {
    * Set field error
    * @param {string} path - Field path
    * @param {string} error - Error message
+   * @param {string} source - Error source ('field' or 'form')
    */
-  setError(path, error) {
-    this.errorsFeature.set(path, error);
+  setError(path, error, source = 'field') {
+    this.errorsFeature.set(path, error, source);
   }
 
   /**
    * Clear field error
    * @param {string} path - Field path
+   * @param {string} source - Optional: clear only errors from specific source
    */
-  clearError(path) {
-    this.errorsFeature.clear(path);
+  clearError(path, source = null) {
+    this.errorsFeature.clear(path, source);
+  }
+
+  /**
+   * Get all errors for a specific field (with sources)
+   * @param {string} path - Field path
+   * @returns {Array<{source: string, error: string}>} Array of error objects
+   */
+  getFieldErrors(path) {
+    return this.errorsFeature.getErrors(path);
   }
 
   /**
@@ -380,9 +442,10 @@ export default class FormEngine {
   }
 
   /**
-   * Validate field
+   * Internal method to validate a single field
    * @param {string} path - Field path
    * @param {*} value - Field value
+   * @returns {Promise<string|null>} Error message or null if valid
    * @private
    */
   async _validateField(path, value) {
@@ -393,6 +456,20 @@ export default class FormEngine {
     } else {
       this.clearError(path);
     }
+
+    return error;
+  }
+
+  /**
+   * Validate a specific field programmatically
+   * @param {string} path - Field path
+   * @returns {Promise<string|null>} Error message or null if valid
+   */
+  async validateField(path) {
+    this._ensureInitialized();
+    const value = this.get(path);
+
+    return this._validateField(path, value);
   }
 
   /**
@@ -501,7 +578,8 @@ export default class FormEngine {
       value: currentValue,
       initialValue,
       dirty: isDirty,
-      error: this.errorsFeature.get(path),
+      error: this.errorsFeature.get(path), // First error (backward compatible)
+      errors: this.errorsFeature.getErrors(path), // All errors with sources
       touched: this.touchedFeature.isTouched(path),
       active: this.activeFeature.isActive(path),
       pristine: !isDirty,
@@ -587,13 +665,14 @@ export default class FormEngine {
         touch: (p) => this.touch(p),
         focus: (p) => this.focus(p),
         blur: () => this.blur(),
+        validateField: (p) => this.validateField(p),
         validateAll: () => this.validateAll(),
         getFormState: () => this.getFormState(),
         getFieldState: (p) => this.getFieldState(p),
         getDirtyFields: () => this.getDirtyFields(),
         getDirtyFieldsList: () => this.getDirtyFieldsList(),
         getDebugInfo: () => this.getDebugInfo(),
-        on: (event, cb, ctx) => this.on(event, cb, ctx),
+        on: (event, cb, ctx, options) => this.on(event, cb, ctx, options),
       };
     }
 
@@ -769,9 +848,11 @@ export default class FormEngine {
    * @param {string} event - Event name
    * @param {Function} callback - Callback function
    * @param {Object} context - Context for cleanup (optional)
+   * @param {Object} options - Listener options (optional)
+   * @param {boolean} options.bubble - If true, listener wants parent path events
    * @returns {Function} Unsubscribe function
    */
-  on(event, callback, context = null) {
-    return this.eventService.on(event, callback, context);
+  on(event, callback, context = null, options = {}) {
+    return this.eventService.on(event, callback, context, options);
   }
 }

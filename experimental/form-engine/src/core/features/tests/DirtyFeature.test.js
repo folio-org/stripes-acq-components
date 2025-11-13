@@ -61,7 +61,11 @@ describe('DirtyFeature', () => {
   });
 
   it('should use TOUCHED strategy when configured', () => {
-    const engine = makeEngine({ a: 1 }, { a: 1 }, { [FORM_ENGINE_OPTIONS.DIRTY_CHECK_STRATEGY]: DIRTY_CHECK_STRATEGY.TOUCHED });
+    const engine = makeEngine(
+      { a: 1 },
+      { a: 1 },
+      { [FORM_ENGINE_OPTIONS.DIRTY_CHECK_STRATEGY]: DIRTY_CHECK_STRATEGY.TOUCHED },
+    );
 
     engine.touchedFeature.touched.add('a');
     const df = new DirtyFeature(engine);

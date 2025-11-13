@@ -16,6 +16,8 @@ const fieldStateReducer = (state, action) => {
       return { ...state, value: action.payload };
     case FIELD_ACTIONS.SET_ERROR:
       return { ...state, error: action.payload };
+    case FIELD_ACTIONS.SET_ERRORS:
+      return { ...state, errors: action.payload };
     case FIELD_ACTIONS.SET_TOUCHED:
       return { ...state, touched: action.payload };
     case FIELD_ACTIONS.SET_ACTIVE:
@@ -50,6 +52,7 @@ export function useField(name, options = {}) {
       return {
         value: undefined,
         error: undefined,
+        errors: [],
         touched: false,
         active: false,
         dirty: false,
@@ -62,6 +65,7 @@ export function useField(name, options = {}) {
     return {
       value: engineState.value,
       error: engineState.error,
+      errors: engineState.errors || [],
       touched: engineState.touched,
       active: engineState.active,
       dirty: engineState.dirty,
@@ -167,12 +171,13 @@ export function useField(name, options = {}) {
 
     return {
       error: fieldState.error,
+      errors: fieldState.errors || [],
       touched: fieldState.touched || false,
       active: fieldState.active,
       dirty,
       pristine: !dirty,
     };
-  }, [fieldState.error, fieldState.touched, fieldState.active, fieldState.dirty]);
+  }, [fieldState.error, fieldState.errors, fieldState.touched, fieldState.active, fieldState.dirty]);
 
   return {
     ...input,

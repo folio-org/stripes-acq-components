@@ -241,8 +241,36 @@ engine.init({ items: [] }, {
 
 - `useField(name, options)` - Field state and handlers
 - `useFormState(subscription)` - Form state
-- `useWatch(name, selector)` - Watch specific field
+- `useWatch(name, options)` - Watch specific field with optional selector and bubble support
 - `useFormSubmit(onSubmit)` - Form submission
+
+#### useWatch Options
+
+```jsx
+// Watch specific field
+const email = useWatch('email');
+
+// Watch with selector (transform value)
+const emailLength = useWatch('email', { 
+  selector: (value) => value?.length || 0 
+});
+
+// Watch with bubble (receive nested field changes)
+const orders = useWatch('orders', { bubble: true });
+// Now updates when orders[0].amount, orders[1].status, etc. change
+
+// Combine selector and bubble
+const orderCount = useWatch('orders', { 
+  selector: (arr) => arr?.length || 0,
+  bubble: true 
+});
+```
+
+**Bubble behavior:**
+- `bubble: false` (default) - Only updates when exact field changes
+- `bubble: true` - Updates when any nested field changes
+  - Example: `useWatch('foo', { bubble: true })` receives events from `foo[0].field`, `foo.bar`, etc.
+  - Useful for watching arrays/objects and updating when ANY nested value changes
 
 ### FormEngine
 
@@ -256,12 +284,87 @@ engine.set(path, value);
 engine.validateAll();
 engine.submit(onSubmit);
 
+// Event subscription with bubble support
+engine.on(event, callback, context, options);
+// options.bubble - if true, listener receives parent path events
+
 // Service management
 engine.setValidationService(service);
 engine.setCacheService(service);
 engine.setEventService(service);
 engine.setBatchService(service);
 engine.getServiceStats();
+```
+
+#### Event Subscription Examples
+
+```jsx
+// Direct field changes only
+engine.on('change:email', (value) => console.log(value));
+
+// Parent path with bubble - receives nested field changes
+engine.on('change:orders', (orders) => {
+  console.log('Orders changed:', orders);
+}, null, { bubble: true });
+// Fires when orders[0].amount, orders[1].status, etc. change
+```
+
+## Validation
+
+The form engine supports two levels of validation:
+
+### Field-level Validation
+```jsx
+<Field 
+  name="email" 
+  validate={(value) => !value.includes('@') ? 'Invalid email' : null}
+  validateOn="blur" // 'blur' | 'change' | 'submit'
+>
+  {({ input, meta }) => (
+    <>
+      <input {...input} />
+      {meta.error && <span>{meta.error}</span>}
+    </>
+  )}
+</Field>
+```
+
+### Form-level Validation
+```jsx
+<Form
+  validate={(values) => {
+    // Check cross-field business rules
+    if (values.email?.endsWith('@banned.com')) {
+      return { email: 'This domain is not allowed' };
+    }
+    return null;
+  }}
+  formValidateOn="submit" // 'change' | 'blur' | 'submit'
+>
+  {/* fields */}
+</Form>
+```
+
+### Validation Behavior
+
+**When both validations are used:**
+- Both validators run independently on their configured events
+- Field-level validators run first (format, type, required checks)
+- Form-level validators run and can set field errors by returning `{ fieldName: error }`
+- **Form-level errors OVERWRITE field-level errors** (no merging - last write wins)
+
+**Recommended pattern:**
+- **Field-level**: Basic validation (format, type, required)
+- **Form-level**: Business logic and cross-field validation
+
+**For multiple errors on one field**, combine them in a single validator:
+```jsx
+validate={(values) => {
+  const errors = [];
+  if (values.password.length < 8) errors.push('Min 8 characters');
+  if (values.password !== values.confirm) errors.push('Must match');
+  return errors.length ? { password: errors.join('. ') } : null;
+}}
 ```
 
 ## Performance

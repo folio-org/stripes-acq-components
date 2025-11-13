@@ -153,6 +153,58 @@ describe('FormEngine', () => {
     expect(debug.errorsList.length).toBe(0);
   });
 
+  it('should validate a single field programmatically', async () => {
+    const engine = new FormEngine().init({ email: '', name: 'John' });
+
+    engine.registerValidator('email', (v) => (!v ? 'Email is required' : null), 'submit');
+    engine.registerValidator('name', (v) => (!v ? 'Name is required' : null), 'submit');
+
+    const error = await engine.validateField('email');
+
+    expect(error).toBe('Email is required');
+    expect(engine.getErrors()).toEqual({ email: 'Email is required' });
+    expect(engine.getFieldState('email').error).toBe('Email is required');
+  });
+
+  it('should return null when field is valid', async () => {
+    const engine = new FormEngine().init({ email: 'test@example.com' });
+
+    engine.registerValidator('email', (v) => (!v ? 'Email is required' : null), 'submit');
+
+    const error = await engine.validateField('email');
+
+    expect(error).toBeNull();
+    expect(engine.getErrors()).toEqual({});
+    expect(engine.getFieldState('email').error).toBeNull();
+  });
+
+  it('should validate field through formApi', async () => {
+    const engine = new FormEngine().init({ email: '' });
+
+    engine.registerValidator('email', (v) => (!v ? 'Email is required' : null), 'submit');
+
+    const formApi = engine.getFormApi();
+    const error = await formApi.validateField('email');
+
+    expect(error).toBe('Email is required');
+    expect(formApi.getErrors()).toEqual({ email: 'Email is required' });
+  });
+
+  it('should clear previous error when field becomes valid', async () => {
+    const engine = new FormEngine().init({ email: '' });
+
+    engine.registerValidator('email', (v) => (!v ? 'Email is required' : null), 'submit');
+
+    await engine.validateField('email');
+    expect(engine.getErrors()).toEqual({ email: 'Email is required' });
+
+    engine.set('email', 'test@example.com');
+    await engine.validateField('email');
+
+    expect(engine.getErrors()).toEqual({});
+    expect(engine.getFieldState('email').error).toBeNull();
+  });
+
   it('should handle form-level validator and return field errors', async () => {
     const engine = new FormEngine().init({
       fyFinanceData: [
@@ -405,7 +457,7 @@ describe('FormEngine', () => {
 
       engine.reset();
       expect(engine.isInitialized).toBe(false);
-      
+
       // Second reset should not throw
       engine.reset();
       expect(engine.isInitialized).toBe(false);
@@ -420,7 +472,7 @@ describe('FormEngine', () => {
           throw new Error('Batch error');
         });
       }).toThrow('Batch error');
-      
+
       // Value should still be set before error
       expect(engine.get('a')).toBe(1);
     });
@@ -466,7 +518,7 @@ describe('FormEngine', () => {
       const state1 = engine.getFormState();
 
       expect(state1.active).toBe('user.email');
-      
+
       engine.blur();
       const state2 = engine.getFormState();
 
@@ -522,9 +574,9 @@ describe('FormEngine', () => {
 
       engine.on('change:a', listener);
       engine.set('a', 2);
-      
+
       engine.reset();
-      
+
       // After reset, engine should not be initialized
       expect(engine.isInitialized).toBe(false);
     });

@@ -25,9 +25,12 @@ export const buildFieldSubscriptions = (name, subscription, validate, dispatch) 
     {
       enabled: subscription.error,
       event: `${FIELD_EVENT_PREFIXES.ERROR}${name}`,
-      cb: (error) => {
-        dispatch({ type: FIELD_ACTIONS.SET_ERROR, payload: error });
-      },
+      cb: (error) => dispatch({ type: FIELD_ACTIONS.SET_ERROR, payload: error }),
+    },
+    {
+      enabled: subscription.errors ?? true,
+      event: `${FIELD_EVENT_PREFIXES.ERRORS}${name}`,
+      cb: (errors) => dispatch({ type: FIELD_ACTIONS.SET_ERRORS, payload: errors }),
     },
     {
       enabled: subscription.touched,

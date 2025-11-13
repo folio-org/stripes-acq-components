@@ -41,14 +41,26 @@ function MyForm() {
 ### Field API
 `<Field name validate validateOn debounceDelay subscription>{({ input, meta }) => JSX}</Field>`
 - `input`: `{ name, value, onChange, onBlur, onFocus }`
-- `meta`: `{ error, touched, active, dirty, pristine, initial }`
+- `meta`: 
+  - `error`: First error message (for backward compatibility)
+  - `errors`: Array of all errors from different sources `[{ source: 'field'|'form', error: string }]`
+  - `touched`, `active`, `dirty`, `pristine`, `initial`
 - `subscription`: select which parts of state to subscribe to for performance
+
+**Error handling:**
+- `meta.error` - Returns the first error (field-level or form-level)
+- `meta.errors` - Returns all errors with their sources
+- When both field-level and form-level validation set errors, both are stored
+- Form-level errors can overwrite field-level errors depending on validation order
 
 ### Hooks
 - `useField(name, options)`
 - `useFormState(subscription)`:
   - subscription keys: `values`, `errors`, `touched`, `active`, `submitting`, `submitSucceeded`, `dirty`, `pristine`, `valid`
-- `useWatch(name, selector?)`
+- `useWatch(name, options)`:
+  - `options.selector`: Transform value before returning
+  - `options.bubble`: If true, receive nested field change events
+  - Example: `useWatch('orders', { bubble: true })` updates when any nested field changes
 - `useFormSubmit(onSubmit)`
 
 ### Engine API (selected)

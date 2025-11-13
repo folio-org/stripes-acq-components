@@ -15,8 +15,8 @@ jest.mock('@folio/stripes-components', () => ({
       <div data-testid="modal">
         <div data-testid="message">{message}</div>
         <div data-testid="heading">{heading}</div>
-        <button data-testid="confirm" onClick={onConfirm}>{confirmLabel}</button>
-        <button data-testid="cancel" onClick={onCancel}>{cancelLabel}</button>
+        <button type="button" data-testid="confirm" onClick={onConfirm}>{confirmLabel}</button>
+        <button type="button" data-testid="cancel" onClick={onCancel}>{cancelLabel}</button>
       </div>
     ) : null
   ),

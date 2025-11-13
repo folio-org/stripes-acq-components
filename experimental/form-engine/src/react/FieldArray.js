@@ -13,8 +13,8 @@ const FieldArray = memo(({ name, children }) => {
   // Stabilize selector function using useRef
   const arraySelectorRef = useRef((value) => value || []);
 
-  // Watch array changes
-  const array = useWatch(name, arraySelectorRef.current);
+  // Watch array changes with selector
+  const array = useWatch(name, { selector: arraySelectorRef.current });
 
   // Generate field descriptors with stable IDs
   const fields = useMemo(() => {

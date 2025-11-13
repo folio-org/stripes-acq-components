@@ -509,7 +509,7 @@ describe('ValidationService', () => {
       debounced('test', {}, onResult, 'email');
       jest.runAllTimers();
       expect(validator).toHaveBeenCalledTimes(1);
-      
+
       // Call with same value - should not trigger validation again
       debounced('test', {}, onResult, 'email');
       jest.runAllTimers();

@@ -34,14 +34,23 @@ export class EventService {
    * @param {string} event - Event name
    * @param {Function} callback - Callback function
    * @param {Object} context - Context for cleanup (optional)
+   * @param {Object} options - Listener options (optional)
+   * @param {boolean} options.bubble - If true, listener wants parent path events
    * @returns {Function} Unsubscribe function
    */
-  on(event, callback, context = null) {
+  on(event, callback, context = null, options = {}) {
+    const listenerData = {
+      callback,
+      options: {
+        bubble: options.bubble === true,
+      },
+    };
+
     // Store listener in Map for event emission
     if (!this.listeners.has(event)) {
       this.listeners.set(event, new Set());
     }
-    this.listeners.get(event).add(callback);
+    this.listeners.get(event).add(listenerData);
     this.stats.totalListeners++;
 
     // Track context for cleanup if enabled
@@ -49,7 +58,7 @@ export class EventService {
       let contextMap = this.contexts.get(context);
 
       if (!contextMap) {
-        contextMap = new Map(); // Map<event, Set<callback>>
+        contextMap = new Map(); // Map<event, Set<listenerData>>
         this.contexts.set(context, contextMap);
         this.stats.contextsCount++;
       }
@@ -58,7 +67,7 @@ export class EventService {
         contextMap.set(event, new Set());
       }
 
-      contextMap.get(event).add(callback);
+      contextMap.get(event).add(listenerData);
     }
 
     return () => {
@@ -66,7 +75,7 @@ export class EventService {
       const listeners = this.listeners.get(event);
 
       if (listeners) {
-        listeners.delete(callback);
+        listeners.delete(listenerData);
         this.stats.totalListeners--;
       }
 
@@ -80,7 +89,7 @@ export class EventService {
 
         if (!setForEvent) return;
 
-        setForEvent.delete(callback);
+        setForEvent.delete(listenerData);
         if (setForEvent.size === 0) {
           contextMap.delete(event);
         }
@@ -99,9 +108,9 @@ export class EventService {
     const listeners = this.listeners.get(event);
 
     if (listeners) {
-      listeners.forEach(callback => {
+      listeners.forEach(listenerData => {
         try {
-          callback(data);
+          listenerData.callback(data);
         } catch (error) {
           if (!this.options.enableErrorHandling) {
             throw error;
@@ -178,6 +187,32 @@ export class EventService {
    */
   hasListeners() {
     return this.listeners.size > 0;
+  }
+
+  /**
+   * Check if there are listeners for a specific event
+   * @param {string} eventName - Event name
+   * @param {Object} options - Check options
+   * @param {boolean} options.onlyBubble - If true, only check for listeners with bubble:true
+   * @returns {boolean} True if there are listeners for this event
+   */
+  hasListener(eventName, options = {}) {
+    const listeners = this.listeners.get(eventName);
+
+    if (!listeners || listeners.size === 0) return false;
+
+    // If checking for bubble listeners, filter by bubble option
+    if (options.onlyBubble) {
+      for (const listenerData of listeners) {
+        if (listenerData.options.bubble) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    return true;
   }
 
   /**
