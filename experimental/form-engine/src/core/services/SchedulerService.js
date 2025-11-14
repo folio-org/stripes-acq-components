@@ -38,10 +38,10 @@ export class SchedulerService {
    * @param {number} id - Request ID returned from scheduleAnimationFrame
    */
   cancelAnimationFrame(id) {
-    if (typeof cancelAnimationFrame !== 'undefined') {
-      cancelAnimationFrame(id);
-    } else {
+    if (typeof cancelAnimationFrame === 'undefined') {
       clearTimeout(id);
+    } else {
+      cancelAnimationFrame(id);
     }
   }
 

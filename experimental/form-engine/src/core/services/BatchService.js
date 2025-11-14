@@ -109,21 +109,23 @@ export class BatchService {
     // Use requestAnimationFrame when batchDelay is 0 (immediate batching)
     // This allows multiple rapid input events in the same frame to be batched together
     // Better than queueMicrotask for UI events as it aligns with browser repaint cycle
-    if (typeof requestAnimationFrame !== 'undefined') {
+    if (typeof requestAnimationFrame === 'undefined') {
+      if (typeof queueMicrotask === 'undefined') {
+        setTimeout(() => {
+          this.batchScheduled = false;
+          this._flushBatch();
+        }, 0);
+      } else {
+        queueMicrotask(() => {
+          this.batchScheduled = false;
+          this._flushBatch();
+        });
+      }
+    } else {
       requestAnimationFrame(() => {
         this.batchScheduled = false;
         this._flushBatch();
       });
-    } else if (typeof queueMicrotask !== 'undefined') {
-      queueMicrotask(() => {
-        this.batchScheduled = false;
-        this._flushBatch();
-      });
-    } else {
-      setTimeout(() => {
-        this.batchScheduled = false;
-        this._flushBatch();
-      }, 0);
     }
   }
 

@@ -101,16 +101,16 @@ export default function Form({
       engine.registerValidator('$form', (_ignored, allValues) => currentValidate(allValues), formValidateOn);
     }
 
-    const runValidation = (mode, delay = 0) => {
-      const doValidate = () => {
-        engine.validationService
-          .validateByMode('$form', null, engine.getValues(), mode, { debounceDelay: delay })
-          .then((error) => {
-            handleValidationError(error, engine, '$form');
-          });
-      };
+    const performValidation = (mode, delay) => {
+      engine.validationService
+        .validateByMode('$form', null, engine.getValues(), mode, { debounceDelay: delay })
+        .then((error) => {
+          handleValidationError(error, engine, '$form');
+        });
+    };
 
-      scheduleValidation(doValidate, mode);
+    const runValidation = (mode, delay = 0) => {
+      scheduleValidation(() => performValidation(mode, delay), mode);
     };
 
     const strategies = {

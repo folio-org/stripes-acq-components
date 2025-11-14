@@ -92,6 +92,70 @@ export class ValidationService {
   }
 
   /**
+   * Process array field errors and add them to errors object
+   * @param {Array} fieldError - Array of field errors
+   * @param {string} fieldPath - Base field path
+   * @param {Object} errors - Errors object to populate
+   * @private
+   */
+  _processArrayFieldError(fieldError, fieldPath, errors) {
+    for (const [index, itemError] of fieldError.entries()) {
+      if (itemError && typeof itemError === 'object') {
+        // Nested object with field errors for this array item
+        for (const subFieldName of Object.keys(itemError)) {
+          const fullPath = `${fieldPath}[${index}].${subFieldName}`;
+
+          errors[fullPath] = itemError[subFieldName];
+        }
+      } else if (itemError) {
+        // Direct error string for this array item
+        errors[`${fieldPath}[${index}]`] = itemError;
+      }
+    }
+  }
+
+  /**
+   * Process form-level errors object and merge into errors
+   * @param {Object} error - Error object from form validator
+   * @param {Object} errors - Errors object to populate
+   * @private
+   */
+  _processFormLevelErrors(error, errors) {
+    for (const [fieldPath, fieldError] of Object.entries(error)) {
+      if (Array.isArray(fieldError)) {
+        // Field error is an array - convert to field-level errors
+        this._processArrayFieldError(fieldError, fieldPath, errors);
+      } else {
+        // Regular field error - merge directly
+        errors[fieldPath] = fieldError;
+      }
+    }
+  }
+
+  /**
+   * Process array errors and convert to field-level errors
+   * @param {Array} error - Array error from validator
+   * @param {string} path - Field path
+   * @param {Object} errors - Errors object to populate
+   * @private
+   */
+  _processArrayError(error, path, errors) {
+    for (const [index, itemError] of error.entries()) {
+      if (itemError && typeof itemError === 'object') {
+        // Nested object with field errors for this array item
+        for (const fieldName of Object.keys(itemError)) {
+          const fieldPath = `${path}[${index}].${fieldName}`;
+
+          errors[fieldPath] = itemError[fieldName];
+        }
+      } else if (itemError) {
+        // Direct error string for this array item
+        errors[`${path}[${index}]`] = itemError;
+      }
+    }
+  }
+
+  /**
    * Validate all fields
    * @param {*} allValues - All form values
    * @returns {Promise<Object>} Errors object
@@ -107,46 +171,10 @@ export class ValidationService {
         // If error is from form-level validator ($form) and returns an object
         // Merge the field errors instead of storing $form error
         if (path === '$form' && typeof error === 'object' && !Array.isArray(error)) {
-          // Process each field in the error object
-          Object.entries(error).forEach(([fieldPath, fieldError]) => {
-            if (Array.isArray(fieldError)) {
-              // Field error is an array - convert to field-level errors
-              fieldError.forEach((itemError, index) => {
-                if (itemError && typeof itemError === 'object') {
-                  // Nested object with field errors for this array item
-                  Object.keys(itemError).forEach(subFieldName => {
-                    const fullPath = `${fieldPath}[${index}].${subFieldName}`;
-
-                    errors[fullPath] = itemError[subFieldName];
-                  });
-                } else if (itemError) {
-                  // Direct error string for this array item
-                  const fullPath = `${fieldPath}[${index}]`;
-
-                  errors[fullPath] = itemError;
-                }
-              });
-            } else {
-              // Regular field error - merge directly
-              errors[fieldPath] = fieldError;
-            }
-          });
+          this._processFormLevelErrors(error, errors);
         } else if (Array.isArray(error)) {
           // Handle array errors - convert to field-level errors
-          // For each non-empty item in the array, create field path errors
-          error.forEach((itemError, index) => {
-            if (itemError && typeof itemError === 'object') {
-              // Nested object with field errors for this array item
-              Object.keys(itemError).forEach(fieldName => {
-                const fieldPath = `${path}[${index}].${fieldName}`;
-
-                errors[fieldPath] = itemError[fieldName];
-              });
-            } else if (itemError) {
-              // Direct error string for this array item
-              errors[`${path}[${index}]`] = itemError;
-            }
-          });
+          this._processArrayError(error, path, errors);
         } else {
           // Regular field error or form-level string error
           errors[path] = error;

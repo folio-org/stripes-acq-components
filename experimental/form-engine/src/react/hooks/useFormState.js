@@ -192,6 +192,26 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
     };
 
     // Low-priority handler for non-critical updates (dirty, pristine, valid)
+    // Helper to process state updates with subscription check
+    const processStateUpdate = (prevState, nextState, activeSubscription) => {
+      // Only update if subscribed fields actually changed
+      if (hasSubscribedChanges(prevState, nextState, activeSubscription)) {
+        prevStateRef.current = nextState;
+        // When batching is enabled, defer to startTransition for smooth updates.
+        // Otherwise, use synchronous dispatch for deterministic behavior.
+        if (engine.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING]) {
+          startTransition(() => {
+            dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
+          });
+        } else {
+          dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
+        }
+      } else {
+        // Update ref even if no changes to avoid false positives in future comparisons
+        prevStateRef.current = nextState;
+      }
+    };
+
     // These updates are deferred using requestAnimationFrame to avoid blocking UI
     // Combined with startTransition for smooth async updates
     const lowPriorityHandler = () => {
@@ -206,28 +226,11 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
       // Use current subscription from ref
       const activeSubscription = stableSubscriptionRef.current;
 
-      const processUpdate = () => {
-        // Only update if subscribed fields actually changed
-        if (hasSubscribedChanges(prevState, nextState, activeSubscription)) {
-          prevStateRef.current = nextState;
-          // When batching is enabled, defer to startTransition for smooth updates.
-          // Otherwise, use synchronous dispatch for deterministic behavior.
-          if (engine.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING]) {
-            startTransition(() => {
-              dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
-            });
-          } else {
-            dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
-          }
-        } else {
-          // Update ref even if no changes to avoid false positives in future comparisons
-          prevStateRef.current = nextState;
-        }
-      };
-
       // When batching is enabled, defer to requestAnimationFrame for smooth UI without blocking.
       // Otherwise, process updates immediately for determinism.
       if (engine.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING]) {
+        const processUpdate = () => processStateUpdate(prevState, nextState, activeSubscription);
+
         if (typeof requestAnimationFrame === 'undefined') {
           // Fallback: use setTimeout for async but fast update
           setTimeout(processUpdate, 0);
@@ -235,7 +238,7 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
           requestAnimationFrame(processUpdate);
         }
       } else {
-        processUpdate();
+        processStateUpdate(prevState, nextState, activeSubscription);
       }
     };
 
