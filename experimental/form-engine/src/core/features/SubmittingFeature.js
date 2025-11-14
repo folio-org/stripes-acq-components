@@ -73,7 +73,7 @@ export class SubmittingFeature extends BaseFeature {
       // Clear cache when submit succeeded state changes
       this.engine.cacheService.clearFormStateCache();
       // Emit submit event so subscribers (useFormState) get updated submitSucceeded state
-      if (this.engine && this.engine.eventService) {
+      if (this.engine?.eventService) {
         const submitting = this._getState('submitting');
 
         this.engine.eventService.emit(EVENTS.SUBMIT, { submitting, success: succeeded });

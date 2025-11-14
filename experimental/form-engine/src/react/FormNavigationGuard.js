@@ -70,7 +70,7 @@ export function FormNavigationGuard({
 
   // Set up navigation blocking
   useEffect(() => {
-    if (!enabled || !history || !history.block) {
+    if (!enabled || !history?.block) {
       return undefined;
     }
 
@@ -136,7 +136,9 @@ export function FormNavigationGuard({
       try {
         cachePreviousUrl();
       } catch (e) {
-        // noop
+        // Ignore cache errors - not critical for navigation
+        // eslint-disable-next-line no-console
+        console.debug('Failed to cache previous URL:', e);
       }
     }
 

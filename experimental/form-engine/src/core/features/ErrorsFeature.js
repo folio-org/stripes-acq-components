@@ -199,13 +199,13 @@ export class ErrorsFeature extends BaseFeature {
     const errors = this._getState('errors');
     const result = {};
 
-    Object.keys(errors).forEach(path => {
+    for (const path of Object.keys(errors)) {
       const errorList = errors[path];
 
       if (errorList && errorList.length > 0) {
         result[path] = errorList[0].error;
       }
-    });
+    }
 
     return result;
   }
@@ -218,9 +218,9 @@ export class ErrorsFeature extends BaseFeature {
     const errors = this._getState('errors');
     const result = {};
 
-    Object.keys(errors).forEach(path => {
+    for (const path of Object.keys(errors)) {
       result[path] = [...errors[path]];
-    });
+    }
 
     return result;
   }
@@ -293,9 +293,9 @@ export class ErrorsFeature extends BaseFeature {
   _emitAllErrors() {
     const errors = this._getState('errors');
 
-    Object.keys(errors).forEach((path) => {
+    for (const path of Object.keys(errors)) {
       this._emitErrorEvents(path, errors[path]);
-    });
+    }
   }
 
   /**

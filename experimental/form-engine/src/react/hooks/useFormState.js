@@ -228,11 +228,11 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
       // When batching is enabled, defer to requestAnimationFrame for smooth UI without blocking.
       // Otherwise, process updates immediately for determinism.
       if (engine.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING]) {
-        if (typeof requestAnimationFrame !== 'undefined') {
-          requestAnimationFrame(processUpdate);
-        } else {
+        if (typeof requestAnimationFrame === 'undefined') {
           // Fallback: use setTimeout for async but fast update
           setTimeout(processUpdate, 0);
+        } else {
+          requestAnimationFrame(processUpdate);
         }
       } else {
         processUpdate();

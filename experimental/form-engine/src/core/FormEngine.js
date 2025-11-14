@@ -671,7 +671,7 @@ export default class FormEngine {
     const fieldErrors = Object.fromEntries(
       Object.entries(errors).filter(([path]) => path !== '$form'),
     );
-    const formError = errors.$form != null ? errors.$form : null;
+    const formError = errors.$form == null ? null : errors.$form;
 
     return {
       // Validity information

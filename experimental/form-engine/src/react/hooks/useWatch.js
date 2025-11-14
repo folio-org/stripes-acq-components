@@ -67,7 +67,7 @@ export function useWatch(name, options = {}) {
       contextRef.current = {};
     }
 
-    if (!engine || !engine.on) {
+    if (engine?.on === undefined) {
       return undefined;
     }
 
@@ -88,9 +88,9 @@ export function useWatch(name, options = {}) {
       );
     };
 
-    const engineNotReady = typeof engine.isReady === 'function' && !engine.isReady();
+    const engineReady = typeof engine.isReady !== 'function' || engine.isReady();
 
-    if (!engineNotReady) {
+    if (engineReady) {
       subscribeToChanges();
     } else {
       const initUnsubscribe = engine.on(
@@ -106,18 +106,14 @@ export function useWatch(name, options = {}) {
         if (initUnsubscribe) initUnsubscribe();
         if (unsubscribeChange) unsubscribeChange();
 
-        if (engine.eventService && engine.eventService.cleanupContext) {
-          engine.eventService.cleanupContext(contextRef.current);
-        }
+        engine.eventService?.cleanupContext?.(contextRef.current);
       };
     }
 
     return () => {
       if (unsubscribeChange) unsubscribeChange();
 
-      if (engine.eventService && engine.eventService.cleanupContext) {
-        engine.eventService.cleanupContext(contextRef.current);
-      }
+      engine.eventService?.cleanupContext?.(contextRef.current);
     };
   }, [engine, name, getCurrentValue, bubble]);
 
