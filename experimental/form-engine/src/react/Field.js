@@ -2,22 +2,32 @@
  * Field component - High-performance field with debouncing and selective subscriptions
  */
 
-import React, { memo, useMemo, useRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { useField } from './hooks';
-import { DEFAULT_SUBSCRIPTION, VALIDATION_MODES } from '../constants';
+import {
+  forwardRef,
+  memo,
+  useMemo,
+  useRef,
+} from 'react';
+
+import {
+  DEFAULT_SUBSCRIPTION,
+  VALIDATION_MODES,
+} from '../constants';
 import { isFunction } from '../utils/checks';
+import { useField } from './hooks';
 
 const Field = memo(forwardRef(({
-  name,
-  component: Component,
   children,
-  validate,
-  validateOn = VALIDATION_MODES.BLUR,
+  component: Component,
   debounceDelay = 0,
-  subscription = DEFAULT_SUBSCRIPTION,
   format,
   formatOnBlur = false,
+  name,
+  parse,
+  subscription = DEFAULT_SUBSCRIPTION,
+  validate,
+  validateOn = VALIDATION_MODES.BLUR,
   ...rest
 }, ref) => {
   // Use optimized field hook with selective subscriptions and debouncing
@@ -26,7 +36,7 @@ const Field = memo(forwardRef(({
     validateOn,
     debounceDelay,
     subscription,
-    parse: rest.parse,
+    parse,
   });
 
   // Stabilize format function using ref
@@ -39,7 +49,7 @@ const Field = memo(forwardRef(({
 
     return isFunction(currentFormat) && (!fieldState.active || !formatOnBlur)
       ? currentFormat(fieldState.value, name)
-      : (fieldState.value || '');
+      : (fieldState.value ?? '');
   }, [fieldState.value, fieldState.active, formatOnBlur, name]);
 
   const meta = fieldState.meta;
@@ -104,7 +114,7 @@ Field.propTypes = {
   validate: PropTypes.func,
   validateOn: PropTypes.oneOf(Object.values(VALIDATION_MODES)),
   debounceDelay: PropTypes.number,
-  subscription: PropTypes.object,
+  subscription: PropTypes.oneOf(Object.values(DEFAULT_SUBSCRIPTION)),
   format: PropTypes.func,
   formatOnBlur: PropTypes.bool,
   parse: PropTypes.func,

@@ -4,9 +4,17 @@
 
 import { useEffect, useCallback, useMemo, useReducer } from 'react';
 import { useFormEngine } from '../FormContext';
-import { FIELD_ACTIONS, VALIDATION_MODES, DEFAULT_SUBSCRIPTION, DEBOUNCE_DELAYS } from '../../constants';
+import {
+  DEBOUNCE_DELAYS,
+  DEFAULT_SUBSCRIPTION,
+  FIELD_ACTIONS,
+  VALIDATION_MODES,
+} from '../../constants';
 import { buildFieldSubscriptions } from '../strategies/fieldSubscriptions';
-import { buildOnBlurCommands, buildOnChangeCommands } from '../strategies/fieldHandlers';
+import {
+  buildOnBlurCommands,
+  buildOnChangeCommands,
+} from '../strategies/fieldHandlers';
 import { isFunction } from '../../utils/checks';
 
 // Field state reducer
@@ -35,6 +43,24 @@ const fieldStateReducer = (state, action) => {
   }
 };
 
+const getInitialFieldState = (initialArg) => {
+  const { name: fieldName, engine: formEngine } = initialArg;
+
+  if (!fieldName) {
+    return {
+      value: undefined,
+      error: undefined,
+      errors: [],
+      touched: false,
+      active: false,
+      dirty: false,
+      pristine: true,
+    };
+  }
+
+  return formEngine.getFieldState(fieldName);
+};
+
 export function useField(name, options = {}) {
   const engine = useFormEngine();
   const {
@@ -45,33 +71,11 @@ export function useField(name, options = {}) {
     parse,
   } = options;
 
-  // Get initial state with useReducer
-  // Use getFieldState for consistent state initialization from single source of truth
-  const [fieldState, dispatch] = useReducer(fieldStateReducer, () => {
-    if (!name) {
-      return {
-        value: undefined,
-        error: undefined,
-        errors: [],
-        touched: false,
-        active: false,
-        dirty: false,
-        pristine: true,
-      };
-    }
-
-    const engineState = engine.getFieldState(name);
-
-    return {
-      value: engineState.value,
-      error: engineState.error,
-      errors: engineState.errors || [],
-      touched: engineState.touched,
-      active: engineState.active,
-      dirty: engineState.dirty,
-      pristine: engineState.pristine,
-    };
-  });
+  const [fieldState, dispatch] = useReducer(
+    fieldStateReducer,
+    { name, engine },
+    getInitialFieldState,
+  );
 
   // Debounced validation function
   const debouncedValidate = useCallback(
@@ -95,7 +99,19 @@ export function useField(name, options = {}) {
 
   // Set up subscriptions declaratively
   useEffect(() => {
-    const configs = buildFieldSubscriptions(name, subscription, validate, dispatch);
+    const configs = buildFieldSubscriptions(
+      name,
+      {
+        active: subscription.active,
+        dirty: subscription.dirty,
+        error: subscription.error,
+        errors: subscription.errors,
+        touched: subscription.touched,
+        value: subscription.value,
+      },
+      validate,
+      dispatch,
+    );
     const unsubscribers = configs.filter(c => c.enabled).map(c => engine.on(c.event, c.cb));
 
     // Register validator on mount if provided
@@ -103,16 +119,6 @@ export function useField(name, options = {}) {
     // (e.g., blur validation on a field that hasn't been modified)
     if (name && validate && !engine.hasValidator(name)) {
       engine.registerValidator(name, validate, validateOn);
-    }
-
-    // Sync initial value from engine if subscription is enabled
-    // This ensures Field displays the correct initial value even if subscription hasn't fired yet
-    if (name && subscription.value) {
-      const currentValue = engine.get(name);
-
-      if (currentValue !== undefined) {
-        dispatch({ type: FIELD_ACTIONS.SET_VALUE, payload: currentValue });
-      }
     }
 
     // Initialize dirty tracking for this field if subscription is enabled
@@ -134,7 +140,13 @@ export function useField(name, options = {}) {
   }, [
     engine,
     name,
-    subscription,
+    /* To it stable the hook depends only on primitive values */
+    subscription.active,
+    subscription.dirty,
+    subscription.error,
+    subscription.errors,
+    subscription.touched,
+    subscription.value,
     validate,
     validateOn,
   ]);
@@ -165,7 +177,7 @@ export function useField(name, options = {}) {
   // Input props
   const input = useMemo(() => ({
     name,
-    value: fieldState.value || '',
+    value: fieldState.value ?? '',
     onChange: handlers.onChange,
     onBlur: handlers.onBlur,
     onFocus: handlers.onFocus,
