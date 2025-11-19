@@ -64,11 +64,16 @@ export const deleteByPath = (obj, path) => {
   const lastKey = pathParts.at(-1);
   const parentPath = pathParts.slice(0, -1).join('.');
 
-  if (parentPath && !Number.isNaN(lastKey)) {
+  // Check if lastKey is a valid array index (numeric string)
+  if (parentPath && lastKey && /^\d+$/.test(lastKey)) {
     const parent = parentPath ? get(result, parentPath) : result;
 
     if (Array.isArray(parent)) {
-      parent.splice(Number.parseInt(lastKey, 10), 1);
+      const index = Number.parseInt(lastKey, 10);
+
+      if (!Number.isNaN(index) && index >= 0 && index < parent.length) {
+        parent.splice(index, 1);
+      }
 
       return result;
     }

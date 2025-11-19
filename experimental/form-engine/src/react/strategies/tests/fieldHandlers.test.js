@@ -47,18 +47,19 @@ describe('fieldHandlers', () => {
       validateOn: VALIDATION_MODES.BLUR,
     });
 
-    expect(commands.length).toBe(4);
+    expect(commands.length).toBe(3);
     commands.forEach(cmd => cmd());
     expect(engine.touch).toHaveBeenCalledWith('email');
     expect(engine.blur).toHaveBeenCalled();
   });
 
-  it('should clear error on blur for submit validation mode', () => {
+  it('should not validate on blur for submit mode - errors persist until explicit validation', () => {
     const engine = {
       touch: jest.fn(),
       blur: jest.fn(),
-      getErrors: jest.fn(() => ({ email: 'Error' })),
+      getErrors: jest.fn(() => ({ email: 'Error from validateAll' })),
       clearError: jest.fn(),
+      setError: jest.fn(),
       get: jest.fn(() => 'test'),
       getValues: jest.fn(() => ({})),
       validationService: {
@@ -72,7 +73,12 @@ describe('fieldHandlers', () => {
       validateOn: VALIDATION_MODES.SUBMIT,
     });
 
-    commands.forEach(cmd => cmd());
-    expect(engine.clearError).toHaveBeenCalledWith('email');
+    for (const cmd of commands) cmd();
+
+    // Validation should NOT happen on blur for SUBMIT mode
+    expect(engine.validationService.validateByMode).not.toHaveBeenCalled();
+    // Errors should NOT be cleared or changed on blur
+    expect(engine.clearError).not.toHaveBeenCalled();
+    expect(engine.setError).not.toHaveBeenCalled();
   });
 });

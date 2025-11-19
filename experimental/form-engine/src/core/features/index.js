@@ -3,10 +3,10 @@
  * Each feature manages a specific aspect of form state
  */
 
-export { BaseFeature } from './BaseFeature';
-export { ValuesFeature } from './ValuesFeature';
-export { ErrorsFeature } from './ErrorsFeature';
-export { DirtyFeature } from './DirtyFeature';
-export { TouchedFeature } from './TouchedFeature';
 export { ActiveFeature } from './ActiveFeature';
+export { BaseFeature } from './BaseFeature';
+export { DirtyFeature } from './DirtyFeature';
+export { ErrorsFeature } from './ErrorsFeature';
 export { SubmittingFeature } from './SubmittingFeature';
+export { TouchedFeature } from './TouchedFeature';
+export { ValuesFeature } from './ValuesFeature';

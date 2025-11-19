@@ -2,7 +2,10 @@
  * ValuesFeature - Manages form values and initial values
  */
 
-import { getByPath, setByPath } from '../../utils/path';
+import {
+  getByPath,
+  setByPath,
+} from '../../utils/path';
 import { BaseFeature } from './BaseFeature';
 
 export class ValuesFeature extends BaseFeature {

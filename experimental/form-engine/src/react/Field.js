@@ -105,19 +105,26 @@ const Field = memo(forwardRef(({
 Field.displayName = 'Field';
 
 Field.propTypes = {
-  name: PropTypes.string.isRequired,
-  component: PropTypes.elementType,
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.func,
   ]),
-  validate: PropTypes.func,
-  validateOn: PropTypes.oneOf(Object.values(VALIDATION_MODES)),
+  component: PropTypes.elementType,
   debounceDelay: PropTypes.number,
-  subscription: PropTypes.oneOf(Object.values(DEFAULT_SUBSCRIPTION)),
   format: PropTypes.func,
   formatOnBlur: PropTypes.bool,
+  name: PropTypes.string.isRequired,
   parse: PropTypes.func,
+  subscription: PropTypes.shape({
+    active: PropTypes.bool,
+    dirty: PropTypes.bool,
+    error: PropTypes.bool,
+    errors: PropTypes.bool,
+    touched: PropTypes.bool,
+    value: PropTypes.bool,
+  }),
+  validate: PropTypes.func,
+  validateOn: PropTypes.oneOf(Object.values(VALIDATION_MODES)),
 };
 
 export default Field;

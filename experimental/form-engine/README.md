@@ -36,7 +36,7 @@ Lightweight form state management library for React with clean, maintainable arc
 - **KISS** - Simple, clear design with Factory and Strategy patterns
 
 **⚡ High Performance**
-- WeakMap caching with automatic memory cleanup
+- Efficient caching with automatic cleanup
 - Centralized SchedulerService for all async operations
 - Selective event subscriptions with bubble support
 - Component and computation memoization
@@ -53,7 +53,7 @@ Lightweight form state management library for React with clean, maintainable arc
 - Easy addition of custom services and strategies
 
 **💾 Memory Efficiency**
-- Automatic cleanup via WeakMap
+- Automatic cleanup via WeakMap for event contexts
 - No memory leaks
 - Optimized subscription management
 - Minimal footprint
@@ -84,11 +84,11 @@ This form engine focuses on:
 - **Template Method Pattern** - BaseFeature provides shared functionality
 - **Service Injection** - Modular, testable, and extensible services
 - **Zero Dependencies** - No external dependencies
-- **High Performance** - SchedulerService, WeakMap caching, and microtask batching
+- **High Performance** - SchedulerService, efficient caching, and microtask batching
 - **React Hooks** - Modern React patterns with bubble support
 - **Debounced Validation** - Built-in validation with configurable debouncing
-- **Memory Efficient** - Automatic cleanup with WeakMap
-- **100% Test Coverage** - 411 comprehensive tests
+- **Memory Efficient** - Automatic cleanup with WeakMap for event contexts
+- **>80% Test Coverage** - >1100 comprehensive tests
 
 ## Quick Start
 
@@ -213,8 +213,8 @@ engine.init({ email: '', name: '' }, { validateOnBlur: true });
 
 - **SchedulerService** - Centralized async task scheduling (microtask, animationFrame, timeout, immediate)
 - **ValidationService** - Field validation with debouncing and mode control
-- **CacheService** - WeakMap-based caching for performance
-- **EventService** - Event system with bubble support and automatic cleanup
+- **CacheService** - Map-based caching for performance with automatic size management
+- **EventService** - Event system with bubble support and WeakMap-based context cleanup
 - **BatchService** - Batches operations for optimal performance
 
 ### Core Features
@@ -447,7 +447,8 @@ validate={(values) => {
 ## Performance
 
 - **SchedulerService** - Centralized async scheduling eliminates duplication
-- **WeakMap Caching** - Automatic memory management
+- **Efficient Caching** - Map-based caching with automatic size management
+- **WeakMap Contexts** - Automatic cleanup of event listeners when components unmount
 - **Microtask Batching** - Efficient update batching
 - **Selective Subscriptions** - Only subscribe to needed state with bubble support
 - **Debounced Validation** - Reduces validation calls
@@ -457,11 +458,10 @@ validate={(values) => {
 
 ## Testing
 
-- **411 comprehensive tests** covering all functionality
-- **35 test suites** for all components
-- **100% coverage** of core services and features
+- **1100+ comprehensive tests** covering all functionality
+- **280+ test suites** for all components
+- **>80%% coverage** of core services and features
 - **Mock-friendly** - All services independently testable
-- **Fast execution** - ~4 seconds for full test suite
 
 ## Documentation
 

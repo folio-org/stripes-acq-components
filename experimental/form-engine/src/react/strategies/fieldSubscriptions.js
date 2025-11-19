@@ -1,4 +1,8 @@
-import { EVENTS, FIELD_EVENT_PREFIXES, FIELD_ACTIONS } from '../../constants';
+import {
+  EVENTS,
+  FIELD_ACTIONS,
+  FIELD_EVENT_PREFIXES,
+} from '../../constants';
 import { isDefined } from '../../utils/checks';
 
 /**

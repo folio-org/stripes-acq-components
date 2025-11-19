@@ -3,7 +3,10 @@
  * Replaces slow JSON.stringify for better performance
  */
 
-import { isNullish, isObject } from './checks';
+import {
+  isNullish,
+  isObject,
+} from './checks';
 
 /**
  * Create a fast hash of an object

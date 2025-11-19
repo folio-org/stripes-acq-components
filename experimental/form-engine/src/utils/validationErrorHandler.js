@@ -4,8 +4,8 @@
  * Now uses Strategy Pattern for extensibility
  */
 
-import { ValidationErrorHandler } from '../core/validation/ValidationErrorHandler';
 import { SchedulerService } from '../core/services/SchedulerService';
+import { ValidationErrorHandler } from '../core/validation/ValidationErrorHandler';
 
 // Create singleton instances
 const errorHandler = new ValidationErrorHandler();

@@ -129,12 +129,38 @@ export class EventService {
 
     if (!listeners) return;
 
+    // Track listeners to remove if they repeatedly fail
+    const listenersToRemove = [];
+
     for (const listenerData of listeners) {
       try {
         listenerData.callback(data);
+        // Reset error count on successful execution
+        if (listenerData.errorCount) {
+          listenerData.errorCount = 0;
+        }
       } catch (error) {
         this._handleListenerError(error, event, data);
+
+        // Track consecutive errors
+        listenerData.errorCount = (listenerData.errorCount || 0) + 1;
+
+        // Remove listener after 3 consecutive errors to prevent memory leaks from broken listeners
+        if (listenerData.errorCount >= 3) {
+          listenersToRemove.push(listenerData);
+        }
       }
+    }
+
+    // Clean up broken listeners
+    for (const listenerData of listenersToRemove) {
+      listeners.delete(listenerData);
+      this.stats.totalListeners--;
+    }
+
+    // Clean up event entry if no more listeners
+    if (listeners.size === 0) {
+      this.listeners.delete(event);
     }
   }
 

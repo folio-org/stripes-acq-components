@@ -130,7 +130,8 @@ const engine = new FormEngine({
 - **Single source of truth** - FormEngine coordinates all state
 - **Immutable updates** - State changes create new objects
 - **Selective subscriptions** - Only subscribe to needed state with bubble support
-- **WeakMap-based caching** - Automatic memory management
+- **Efficient caching** - Map-based caching with automatic size management
+- **WeakMap contexts** - Automatic cleanup of event listeners
 - **Explicit service boundaries** - Each service independently mockable
 - **Factory-based creation** - Consistent feature initialization
 - **Strategy-based handling** - Extensible error processing
@@ -305,13 +306,6 @@ FeatureFactory.resetFeatures(features);
   {/* fields */}
 </Form>
 ```
-
-### Testing
-
-**Test Coverage:**
-- 411 comprehensive tests across 35 test suites
-- 100% coverage of core services and features
-- Fast execution (~4 seconds for full suite)
 
 **Test Structure:**
 - Service tests: SchedulerService, ValidationService, CacheService, etc.

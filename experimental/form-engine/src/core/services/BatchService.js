@@ -17,6 +17,7 @@ export class BatchService {
     this.batchScheduled = false;
     this.batchTimeout = null;
     this.onFlushCallback = null; // Callback for flush operations
+    this._disposed = false; // Track if service has been disposed
 
     // Statistics
     this.stats = {
@@ -70,6 +71,11 @@ export class BatchService {
    */
   queueOperation(operation) {
     if (!this.options.enableBatching) {
+      return;
+    }
+
+    // Check if service has been disposed
+    if (this._disposed) {
       return;
     }
 
@@ -168,6 +174,7 @@ export class BatchService {
    * Dispose and reset internal state
    */
   dispose() {
+    this._disposed = true;
     this.clear();
     this.stats = {
       totalBatches: 0,

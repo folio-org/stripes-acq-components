@@ -18,24 +18,24 @@ export function FormNavigationModal({
 }) {
   return (
     <ConfirmationModal
-      id="form-engine-navigation-guard-confirmation"
-      open={open}
-      message={message}
-      heading={heading}
-      onConfirm={onConfirm}
-      onCancel={onCancel}
-      confirmLabel={confirmLabel}
       cancelLabel={cancelLabel}
+      confirmLabel={confirmLabel}
+      heading={heading}
+      id="form-engine-navigation-guard-confirmation"
+      message={message}
+      onCancel={onCancel}
+      onConfirm={onConfirm}
+      open={open}
     />
   );
 }
 
 FormNavigationModal.propTypes = {
-  open: PropTypes.bool.isRequired,
-  message: PropTypes.node,
-  heading: PropTypes.node,
-  confirmLabel: PropTypes.node,
   cancelLabel: PropTypes.node,
-  onConfirm: PropTypes.func.isRequired,
+  confirmLabel: PropTypes.node,
+  heading: PropTypes.node,
+  message: PropTypes.node,
   onCancel: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
 };

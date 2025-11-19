@@ -1,9 +1,13 @@
 /**
- * FormContext - React context for FormEngine
+ * FormContext - React Context for form engine
  */
 
-import React, { createContext, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import {
+  createContext,
+  useContext,
+  useMemo,
+} from 'react';
 
 import { VALIDATION_MODES } from '../constants';
 
@@ -21,8 +25,8 @@ export const FormProvider = ({ children, engine, defaultValidateOn = VALIDATION_
 
 FormProvider.propTypes = {
   children: PropTypes.node,
-  engine: PropTypes.object.isRequired,
   defaultValidateOn: PropTypes.oneOf([VALIDATION_MODES.BLUR, VALIDATION_MODES.CHANGE, VALIDATION_MODES.SUBMIT]),
+  engine: PropTypes.object.isRequired,
 };
 
 export const useFormEngine = () => {

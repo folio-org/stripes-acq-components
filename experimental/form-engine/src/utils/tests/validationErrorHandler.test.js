@@ -1,6 +1,9 @@
 /* Developed collaboratively using AI (Cursor) */
 
-import { handleValidationError, scheduleValidation } from '../validationErrorHandler';
+import {
+  handleValidationError,
+  scheduleValidation,
+} from '../validationErrorHandler';
 
 describe('validationErrorHandler', () => {
   describe('handleValidationError', () => {

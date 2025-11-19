@@ -2,11 +2,16 @@
  * FieldArray component - For managing arrays of fields with optimizations
  */
 
-import React, { useMemo, memo, useRef } from 'react';
 import PropTypes from 'prop-types';
+import {
+  memo,
+  useMemo,
+  useRef,
+} from 'react';
+
+import { isFunction } from '../utils/checks';
 import { useFormEngine } from './FormContext';
 import { useWatch } from './hooks';
-import { isFunction } from '../utils/checks';
 
 const FieldArray = memo(({ name, children }) => {
   const engine = useFormEngine();
@@ -91,11 +96,11 @@ const FieldArray = memo(({ name, children }) => {
 FieldArray.displayName = 'FieldArray';
 
 FieldArray.propTypes = {
-  name: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.func,
   ]).isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default FieldArray;

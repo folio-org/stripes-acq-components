@@ -118,6 +118,9 @@ export class DirtyFeature extends BaseFeature {
 
   /**
    * Check if form is dirty (internal)
+   * Supports two strategies:
+   * - TOUCHED: Form is dirty if at least one field is touched
+   * - VALUES: Form is dirty if at least one field value differs from initial (default)
    * @returns {boolean} True if form is dirty
    * @private
    */
@@ -125,11 +128,11 @@ export class DirtyFeature extends BaseFeature {
     const strategy = this.engine.options[FORM_ENGINE_OPTIONS.DIRTY_CHECK_STRATEGY];
 
     if (strategy === DIRTY_CHECK_STRATEGY.TOUCHED) {
-      // Form is dirty if at least one field is touched
+      // TOUCHED strategy: form is dirty if at least one field is touched
       return this.engine.touchedFeature.getTouchedCount() > 0;
     }
 
-    // Default: VALUES strategy - form is dirty if at least one field has different value
+    // VALUES strategy (default): form is dirty if at least one field has different value from initial
     // We only check tracked fields (previousFieldDirty) for performance:
     // - Untracked fields haven't been changed, so they're pristine by definition
     // - Tracking starts when a field is first checked (via _checkAndEmitFieldDirtyState)
@@ -287,5 +290,20 @@ export class DirtyFeature extends BaseFeature {
     return isFunction(this.engine.options.isEqual)
       ? this.engine.options.isEqual
       : isEqual;
+  }
+
+  /**
+   * Remove field from dirty tracking (useful when field is removed from form)
+   * @param {string} path - Field path to stop tracking
+   */
+  removeFieldTracking(path) {
+    const previousFieldDirty = this._getState('previousFieldDirty');
+    const pendingFieldDirtyChecks = this._getState('pendingFieldDirtyChecks');
+
+    previousFieldDirty.delete(path);
+    pendingFieldDirtyChecks.delete(path);
+
+    // Recheck form dirty state after removing field tracking
+    this._checkAndEmitFormDirtyState();
   }
 }

@@ -1,6 +1,10 @@
 /* Developed collaboratively using AI (Cursor) */
 
-import { safeCall, safeGet, createCleanObject } from '../helpers';
+import {
+  createCleanObject,
+  safeCall,
+  safeGet,
+} from '../helpers';
 
 describe('helpers', () => {
   describe('safeCall', () => {

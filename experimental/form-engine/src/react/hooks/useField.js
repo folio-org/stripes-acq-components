@@ -2,20 +2,26 @@
  * useField - Hook for field state management
  */
 
-import { useEffect, useCallback, useMemo, useReducer } from 'react';
-import { useFormEngine } from '../FormContext';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+} from 'react';
+
 import {
   DEBOUNCE_DELAYS,
   DEFAULT_SUBSCRIPTION,
   FIELD_ACTIONS,
   VALIDATION_MODES,
 } from '../../constants';
-import { buildFieldSubscriptions } from '../strategies/fieldSubscriptions';
+import { isFunction } from '../../utils/checks';
+import { useFormEngine } from '../FormContext';
 import {
   buildOnBlurCommands,
   buildOnChangeCommands,
 } from '../strategies/fieldHandlers';
-import { isFunction } from '../../utils/checks';
+import { buildFieldSubscriptions } from '../strategies/fieldSubscriptions';
 
 // Field state reducer
 const fieldStateReducer = (state, action) => {
@@ -97,6 +103,18 @@ export function useField(name, options = {}) {
     [validate, debounceDelay, engine, name],
   );
 
+  // Sync field state when engine changes (e.g., when Form reinitializes with new initialValues)
+  useEffect(() => {
+    if (name) {
+      const newFieldState = engine.getFieldState(name);
+
+      dispatch({
+        type: FIELD_ACTIONS.UPDATE_MULTIPLE,
+        payload: newFieldState,
+      });
+    }
+  }, [engine, name]);
+
   // Set up subscriptions declaratively
   useEffect(() => {
     const configs = buildFieldSubscriptions(
@@ -135,6 +153,16 @@ export function useField(name, options = {}) {
     return () => {
       for (const unsub of unsubscribers) {
         unsub();
+      }
+
+      // Unregister validator to prevent memory leaks and validation on unmounted fields
+      if (name && validate && engine.hasValidator(name)) {
+        engine.unregisterValidator(name);
+      }
+
+      // Remove dirty tracking for this field to prevent memory leaks
+      if (name && (subscription.dirty ?? true)) {
+        engine.dirtyFeature.removeFieldTracking(name);
       }
     };
   }, [

@@ -3,12 +3,12 @@
  * Follows Factory Pattern and simplifies initialization (KISS)
  */
 
-import { ValuesFeature } from '../features/ValuesFeature';
-import { ErrorsFeature } from '../features/ErrorsFeature';
-import { TouchedFeature } from '../features/TouchedFeature';
 import { ActiveFeature } from '../features/ActiveFeature';
-import { SubmittingFeature } from '../features/SubmittingFeature';
 import { DirtyFeature } from '../features/DirtyFeature';
+import { ErrorsFeature } from '../features/ErrorsFeature';
+import { SubmittingFeature } from '../features/SubmittingFeature';
+import { TouchedFeature } from '../features/TouchedFeature';
+import { ValuesFeature } from '../features/ValuesFeature';
 
 export class FeatureFactory {
   /**

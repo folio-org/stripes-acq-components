@@ -3,7 +3,10 @@
  * Can be injected into FormEngine for custom caching behavior
  */
 
-import { hashFormState, hashObject } from '../../utils/hash';
+import {
+  hashFormState,
+  hashObject,
+} from '../../utils/hash';
 import { getByPath } from '../../utils/path';
 
 export class CacheService {

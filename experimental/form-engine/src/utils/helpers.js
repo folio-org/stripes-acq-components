@@ -3,7 +3,10 @@
  * Follows DRY principle
  */
 
-import { isDefined, isFunction } from './checks';
+import {
+  isDefined,
+  isFunction,
+} from './checks';
 
 /**
  * Safely call a method on an object if it exists and is a function

@@ -3,9 +3,9 @@
  * Follows Strategy Pattern (SOLID)
  */
 
+import { ArrayErrorStrategy } from './strategies/ArrayErrorStrategy';
 import { NullErrorStrategy } from './strategies/NullErrorStrategy';
 import { ObjectErrorStrategy } from './strategies/ObjectErrorStrategy';
-import { ArrayErrorStrategy } from './strategies/ArrayErrorStrategy';
 import { StringErrorStrategy } from './strategies/StringErrorStrategy';
 
 /**

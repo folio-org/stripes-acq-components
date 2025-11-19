@@ -1,11 +1,14 @@
 import {
-  useState,
+  useCallback,
   useEffect,
   useRef,
-  useCallback,
+  useState,
 } from 'react';
 
-import { FIELD_EVENT_PREFIXES, EVENTS } from '../../constants';
+import {
+  EVENTS,
+  FIELD_EVENT_PREFIXES,
+} from '../../constants';
 import { useFormEngine } from '../FormContext';
 
 /**

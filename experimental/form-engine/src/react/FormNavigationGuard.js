@@ -168,6 +168,26 @@ export function FormNavigationGuard({
 
 FormNavigationGuard.propTypes = {
   /**
+   * Optional callback to cache previous URL (integrates with LastVisitedContext.cachePreviousUrl)
+   */
+  cachePreviousUrl: PropTypes.func,
+  /**
+   * Label for cancel button - navigates away (default: "Close Without Saving")
+   */
+  cancelLabel: PropTypes.node,
+  /**
+   * Label for confirm button - stays on page (default: "Keep Editing")
+   */
+  confirmLabel: PropTypes.node,
+  /**
+   * Enable or disable navigation guard
+   */
+  enabled: PropTypes.bool,
+  /**
+   * Heading for confirmation modal
+   */
+  heading: PropTypes.node,
+  /**
    * History object from react-router (must have block and push methods)
    */
   history: PropTypes.shape({
@@ -175,29 +195,18 @@ FormNavigationGuard.propTypes = {
     push: PropTypes.func.isRequired,
   }),
   /**
-   * Enable or disable navigation guard
+   * Paths to ignore when blocking navigation (e.g., ['/logout'])
    */
-  enabled: PropTypes.bool,
+  ignorePaths: PropTypes.arrayOf(PropTypes.string),
   /**
    * Message to display in confirmation modal
    */
   message: PropTypes.node,
   /**
-   * Heading for confirmation modal
+   * Callback called when user cancels (navigates away)
+   * @param {Object} location - The location being navigated to (if available)
    */
-  heading: PropTypes.node,
-  /**
-   * Label for confirm button (e.g., "Keep Editing")
-   */
-  confirmLabel: PropTypes.node,
-  /**
-   * Label for cancel button (e.g., "Close Without Saving")
-   */
-  cancelLabel: PropTypes.node,
-  /**
-   * Paths to ignore when blocking navigation (e.g., ['/logout'])
-   */
-  ignorePaths: PropTypes.arrayOf(PropTypes.string),
+  onCancel: PropTypes.func,
   /**
    * Callback called before blocking navigation
    * @param {Object} location - The location that would be navigated to
@@ -207,13 +216,4 @@ FormNavigationGuard.propTypes = {
    * Callback called when user confirms (stays on page)
    */
   onConfirm: PropTypes.func,
-  /**
-   * Callback called when user cancels (navigates away)
-   * @param {Object} location - The location being navigated to (if available)
-   */
-  onCancel: PropTypes.func,
-  /**
-   * Optional callback to cache previous URL (integrates with LastVisitedContext.cachePreviousUrl)
-   */
-  cachePreviousUrl: PropTypes.func,
 };

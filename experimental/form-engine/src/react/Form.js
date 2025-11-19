@@ -2,13 +2,13 @@
  * Form component - Main form wrapper
  */
 
+import PropTypes from 'prop-types';
 import {
   useCallback,
   useEffect,
   useMemo,
   useRef,
 } from 'react';
-import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
 import { LastVisitedContext } from '@folio/stripes/core';
@@ -17,9 +17,12 @@ import {
   EVENTS,
   VALIDATION_MODES,
 } from '../constants';
-import FormEngine from '../core/FormEngine';
 import { isFunction } from '../utils/checks';
-import { handleValidationError, scheduleValidation } from '../utils/validationErrorHandler';
+import {
+  handleValidationError,
+  scheduleValidation,
+} from '../utils/validationErrorHandler';
+import FormEngine from '../core/FormEngine';
 import { FormProvider } from './FormContext';
 import { FormNavigationGuard } from './FormNavigationGuard';
 
@@ -97,10 +100,6 @@ export default function Form({
 
     if (!currentValidate) return undefined;
 
-    if (!engine.hasValidator('$form')) {
-      engine.registerValidator('$form', (_ignored, allValues) => currentValidate(allValues), formValidateOn);
-    }
-
     const performValidation = (mode, delay) => {
       engine.validationService
         .validateByMode('$form', null, engine.getValues(), mode, { debounceDelay: delay })
@@ -169,15 +168,15 @@ export default function Form({
 
 Form.propTypes = {
   children: PropTypes.node,
-  onSubmit: PropTypes.func,
-  initialValues: PropTypes.object,
-  defaultValidateOn: PropTypes.oneOf(Object.values(VALIDATION_MODES)),
-  validate: PropTypes.func,
-  formValidateOn: PropTypes.oneOf(Object.values(VALIDATION_MODES)),
   debounceDelay: PropTypes.number,
+  defaultValidateOn: PropTypes.oneOf(Object.values(VALIDATION_MODES)),
   dirtyCheckStrategy: PropTypes.string,
-  engine: PropTypes.object,
   enableBatching: PropTypes.bool,
+  engine: PropTypes.object,
+  formValidateOn: PropTypes.oneOf(Object.values(VALIDATION_MODES)),
+  initialValues: PropTypes.object,
   navigationCheck: PropTypes.bool,
   navigationGuardProps: PropTypes.object,
+  onSubmit: PropTypes.func,
+  validate: PropTypes.func,
 };

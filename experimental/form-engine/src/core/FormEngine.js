@@ -8,26 +8,30 @@
  * - Optimized for performance
  * - Simple and maintainable
  * - Batched updates
- * - Proper WeakMap caching
+ * - Efficient caching with automatic cleanup
  */
 /* eslint-disable max-lines */
 
 import {
-  EVENTS,
   DEBOUNCE_DELAYS,
-  FORM_ENGINE_OPTIONS,
   DIRTY_CHECK_STRATEGY,
-  VALIDATION_MODES,
   ERROR_SOURCES,
+  EVENTS,
+  FORM_ENGINE_OPTIONS,
+  VALIDATION_MODES,
 } from '../constants';
-import { isFunction, isDefined, isEqual } from '../utils/checks';
-import { ValidationService } from './services/ValidationService';
+import {
+  isDefined,
+  isEqual,
+  isFunction,
+} from '../utils/checks';
+import { safeCall } from '../utils/helpers';
+import { BatchService } from './services/BatchService';
 import { CacheService } from './services/CacheService';
 import { EventService } from './services/EventService';
-import { BatchService } from './services/BatchService';
 import { SchedulerService } from './services/SchedulerService';
+import { ValidationService } from './services/ValidationService';
 import { FeatureFactory } from './factories/FeatureFactory';
-import { safeCall } from '../utils/helpers';
 
 export default class FormEngine {
   constructor(services = {}) {
@@ -334,6 +338,9 @@ export default class FormEngine {
   _emitNestedPathEvents(changeEvent, nestedPathsEmitted) {
     const nestedEvents = this.eventService.getEventsWithPrefix(changeEvent);
 
+    // Cache values in batch to avoid multiple get() calls
+    const valuesToEmit = [];
+
     for (const nestedEvent of nestedEvents) {
       // Extract path from event name: 'change:array[0].field' -> 'array[0].field'
       const nestedPath = nestedEvent.substring(`${EVENTS.CHANGE}:`.length);
@@ -341,12 +348,15 @@ export default class FormEngine {
       // Track emitted paths to avoid duplicate events
       if (!nestedPathsEmitted.has(nestedPath)) {
         nestedPathsEmitted.add(nestedPath);
-
-        // Get current value and emit
-        const nestedValue = this.get(nestedPath);
-
-        this.eventService.emit(nestedEvent, nestedValue);
+        valuesToEmit.push({ event: nestedEvent, path: nestedPath });
       }
+    }
+
+    // Emit all events with cached values
+    for (const { event, path } of valuesToEmit) {
+      const nestedValue = this.get(path);
+
+      this.eventService.emit(event, nestedValue);
     }
   }
 
@@ -588,7 +598,7 @@ export default class FormEngine {
   }
 
   /**
-   * Get form state with improved WeakMap caching
+   * Get form state with efficient caching
    */
   getFormState() {
     this._ensureInitialized();
@@ -831,6 +841,11 @@ export default class FormEngine {
    */
   async submit(onSubmit = null) {
     this._ensureInitialized();
+
+    // Prevent concurrent submissions - only one submit at a time
+    if (this.submittingFeature.isSubmitting()) {
+      return { success: false, error: 'Form is already being submitted' };
+    }
 
     // Clear cache before starting submit to ensure fresh state
     this.cacheService.clearFormStateCache();

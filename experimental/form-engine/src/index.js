@@ -44,8 +44,8 @@ export { FormNavigationModal } from './react/FormNavigationModal';
 export {
   useField,
   useFormState,
-  useWatch,
   useFormSubmit,
+  useWatch,
 } from './react/hooks';
 
 // React context

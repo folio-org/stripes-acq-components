@@ -2,7 +2,11 @@
  * ErrorsFeature - Manages form errors and validation state
  */
 
-import { EVENTS, FIELD_EVENT_PREFIXES, ERROR_SOURCES } from '../../constants';
+import {
+  ERROR_SOURCES,
+  EVENTS,
+  FIELD_EVENT_PREFIXES,
+} from '../../constants';
 import { BaseFeature } from './BaseFeature';
 
 export class ErrorsFeature extends BaseFeature {

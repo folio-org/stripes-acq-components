@@ -294,7 +294,7 @@ describe('Field', () => {
       expect(validator).not.toHaveBeenCalled();
     });
 
-    it('should clear error on blur when validateOn="submit" and error exists', async () => {
+    it('should keep error on blur when validateOn="submit" until next explicit validation', async () => {
       const user = userEvent.setup();
       const validator = jest.fn((value) => (!value ? 'Required' : null));
       const onSubmit = jest.fn();
@@ -328,14 +328,22 @@ describe('Field', () => {
 
       await screen.findByTestId('error');
 
-      // Now type value and blur - error should clear
+      // Now type value and blur - error should REMAIN (not cleared on blur)
       await act(async () => {
         await user.type(input, 'test@test.com');
         await user.tab();
         await new Promise(resolve => setTimeout(resolve, 100));
       });
 
-      // Error should be cleared
+      // Error should still be visible after blur
+      expect(screen.queryByTestId('error')).toBeInTheDocument();
+
+      // Error should clear only after next submit
+      await act(async () => {
+        await user.click(submit);
+        await new Promise(resolve => setTimeout(resolve, 100));
+      });
+
       expect(screen.queryByTestId('error')).not.toBeInTheDocument();
     });
   });

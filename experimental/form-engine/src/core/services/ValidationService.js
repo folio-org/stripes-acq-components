@@ -4,8 +4,11 @@
  */
 
 import { VALIDATION_MODES } from '../../constants';
+import {
+  isDefined,
+  isFunction,
+} from '../../utils/checks';
 import { getByPath } from '../../utils/path';
-import { isFunction, isDefined } from '../../utils/checks';
 import { createValidationModeStrategies } from './strategies/validationModes';
 
 export class ValidationService {
@@ -85,9 +88,11 @@ export class ValidationService {
 
       const result = await validator(value, allValues, context.fieldState, context.api);
 
-      return result || null;
+      // Only return null if result is explicitly null/undefined, preserve falsy values like 0, false, ''
+      return result === undefined || result === null ? null : result;
     } catch (error) {
-      return error.message;
+      // Safely extract error message, fallback to string conversion
+      return error?.message || String(error);
     }
   }
 
@@ -295,9 +300,11 @@ export class ValidationService {
     try {
       const result = await validator(value, allValues, context.fieldState, context.api);
 
-      return result || null;
+      // Only return null if result is explicitly null/undefined, preserve falsy values like 0, false, ''
+      return result === undefined || result === null ? null : result;
     } catch (error) {
-      return error.message;
+      // Safely extract error message, fallback to string conversion
+      return error?.message || String(error);
     }
   }
 }

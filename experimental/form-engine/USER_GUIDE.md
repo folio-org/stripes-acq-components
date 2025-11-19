@@ -2,7 +2,7 @@
 
 ### Installation
 
-This module lives under `@folio/stripes-acq-components/experimental/form-engine`. Import directly from its `src` index in this experimental area when consuming inside this repo.
+This module lives under `@folio/stripes-acq-components/experimental/form-engine`.
 
 ### Architecture Overview
 
@@ -785,7 +785,8 @@ engine.validationErrorHandler.addStrategy(new JSONErrorStrategy(), 0);
 
 #### Memory Management
 
-- **WeakMap caching** - Automatic memory cleanup
+- **Map-based caching** - Efficient value caching with automatic size management
+- **WeakMap contexts** - Automatic cleanup of event listeners when components unmount
 - **Event cleanup** - Listeners removed when context unmounts
 - **Selective subscriptions** - Only re-render on needed state changes
 - **Immutable updates** - No memory leaks from shared references
@@ -801,8 +802,8 @@ engine.validationErrorHandler.addStrategy(new JSONErrorStrategy(), 0);
 
 #### Test Coverage
 
-- **411 comprehensive tests** across 35 test suites
-- **100% coverage** of core services and features
+- **1100+ comprehensive tests** across 280+ test suites
+- **>80% coverage** of core services and features
 - **Fast execution** - ~4 seconds for full test suite
 
 #### Testing Your Forms
