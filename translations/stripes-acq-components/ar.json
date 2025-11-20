@@ -255,5 +255,7 @@
     "claiming.modal.sendClaim.field.externalNote": "ملاحظة خارجية",
     "validation.dateAfter": "يجب أن يكون التاريخ المحدد بعد التاريخ الحالي",
     "button.credentials.show": "إظهار بيانات الدخول",
-    "button.credentials.hide": "إخفاء بيانات الدخول"
+    "button.credentials.hide": "إخفاء بيانات الدخول",
+    "versionHistory.card.showAll": "Show all",
+    "versionHistory.card.showLess": "Show less"
 }

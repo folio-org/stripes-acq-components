@@ -127,7 +127,7 @@
     "invalidReference": "Ungültige Referenz",
     "acquisition_method.approvalPlan": "Approval Plan",
     "acquisition_method.dda": "Demand driven acquisitions (DDA)",
-    "acquisition_method.depository": "Pflichtexemplar",
+    "acquisition_method.depository": "Pflicht",
     "acquisition_method.eba": "Evidence based acquisitions (EBA)",
     "acquisition_method.exchange": "Tausch",
     "acquisition_method.free": "Kostenlos",
@@ -255,5 +255,7 @@
     "claiming.modal.sendClaim.field.externalNote": "External note",
     "validation.dateAfter": "Selected date must be later than the current date",
     "button.credentials.show": "Show credentials",
-    "button.credentials.hide": "Hide credentials"
+    "button.credentials.hide": "Hide credentials",
+    "versionHistory.card.showAll": "Show all",
+    "versionHistory.card.showLess": "Show less"
 }
