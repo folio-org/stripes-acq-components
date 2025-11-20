@@ -255,5 +255,7 @@
     "claiming.modal.sendClaim.field.externalNote": "Зовнішня примітка",
     "validation.dateAfter": "Вибрана дата має бути пізнішою за поточну дату",
     "button.credentials.show": "Показати облікові дані",
-    "button.credentials.hide": "Приховати облікові дані"
+    "button.credentials.hide": "Приховати облікові дані",
+    "versionHistory.card.showAll": "Show all",
+    "versionHistory.card.showLess": "Show less"
 }
