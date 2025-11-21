@@ -6,7 +6,7 @@ export const buildMirageModules = context => (
     const moduleType = moduleParts[1];
     const moduleName = moduleParts[2];
 
-    if (moduleType === 'configs') return acc;
+    if (moduleType === 'settings') return acc;
 
     if (moduleName && moduleName !== 'index.js') {
       const moduleKey = camelCase(moduleName.replace('.js', ''));
