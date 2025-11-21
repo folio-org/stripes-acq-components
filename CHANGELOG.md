@@ -21,6 +21,7 @@
 * `useLocationFilters` hook - clear unused filters when submitting a new search. Refs UISACQCOMP-285.
 * Update `useSorting` hook to return `undefined` for sorting field and direction by default. Refs UISACQCOMP-287.
 * Add a toggle to expand the list of changed fields in the version card. Refs UISACQCOMP-280.
+* React v19: Refactor away from default props for functional components. Refs UISACQCOMP-188.
 * Implement custom form manager for extra-large forms to improve UX. Refs UISACQCOMP-283.
 
 ## [7.0.5](https://github.com/folio-org/stripes-acq-components/tree/v7.0.5) (2025-05-06)
