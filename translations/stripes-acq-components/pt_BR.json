@@ -255,5 +255,7 @@
     "claiming.modal.sendClaim.field.externalNote": "Nota externa",
     "validation.dateAfter": "A data selecionada deve ser posterior à data atual",
     "button.credentials.show": "Mostrar credenciais",
-    "button.credentials.hide": "Ocultar credenciais"
+    "button.credentials.hide": "Ocultar credenciais",
+    "versionHistory.card.showAll": "Mostrar tudo",
+    "versionHistory.card.showLess": "Mostrar menos"
 }
