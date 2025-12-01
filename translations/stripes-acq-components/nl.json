@@ -256,6 +256,6 @@
     "validation.dateAfter": "Geselecteerde datum moet later zijn dan de Huidige datum",
     "button.credentials.show": "Referenties tonen",
     "button.credentials.hide": "Verberg referenties",
-    "versionHistory.card.showAll": "Show all",
-    "versionHistory.card.showLess": "Show less"
+    "versionHistory.card.showAll": "Alles weergeven",
+    "versionHistory.card.showLess": "Minder tonen"
 }

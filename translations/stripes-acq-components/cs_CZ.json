@@ -256,6 +256,6 @@
     "validation.dateAfter": "Vybrané datum musí být pozdější než aktuální datum",
     "button.credentials.show": "Zobrazit přihlašovací údaje",
     "button.credentials.hide": "Skrýt přihlašovací údaje",
-    "versionHistory.card.showAll": "Show all",
-    "versionHistory.card.showLess": "Show less"
+    "versionHistory.card.showAll": "Zobrazit vše",
+    "versionHistory.card.showLess": "Zobrazit méně"
 }

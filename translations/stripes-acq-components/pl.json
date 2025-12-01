@@ -199,7 +199,7 @@
     "find-location.results.column.status.active": "Aktywny",
     "find-location.results.column.status.inactive": "Nieaktywny",
     "find-location.results.heading": "Lokalizacje",
-    "piece.pieceStatus.late": "Spóźnione",
+    "piece.pieceStatus.late": "Spóźniony",
     "piece.pieceStatus.claimDelayed": "Monit opóźniony",
     "piece.pieceStatus.claimSent": "Monit wysłany",
     "piece.pieceStatus.unreceivable": "Nie do odebrania",
