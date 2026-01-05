@@ -84,24 +84,21 @@ export function useField(name, options = {}) {
   );
 
   // Debounced validation function
-  const debouncedValidate = useCallback(
-    (value, allValues) => {
-      if (!validate) return;
+  const debouncedValidate = useCallback((value, allValues) => {
+    if (!validate) return;
 
-      const mode = VALIDATION_MODES.CHANGE;
+    const mode = VALIDATION_MODES.CHANGE;
 
-      engine.validationService
-        .validateByMode(name, value, allValues, mode, { debounceDelay })
-        .then(error => {
-          if (error) {
-            engine.setError(name, error);
-          } else {
-            engine.clearError(name);
-          }
-        });
-    },
-    [validate, debounceDelay, engine, name],
-  );
+    engine.validationService
+      .validateByMode(name, value, allValues, mode, { debounceDelay })
+      .then(error => {
+        if (error) {
+          engine.setError(name, error);
+        } else {
+          engine.clearError(name);
+        }
+      });
+  }, [validate, debounceDelay, engine, name]);
 
   // Sync field state when engine changes (e.g., when Form reinitializes with new initialValues)
   useEffect(() => {

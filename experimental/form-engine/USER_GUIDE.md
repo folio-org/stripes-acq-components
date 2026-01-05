@@ -149,7 +149,7 @@ The form engine uses **ValidationErrorHandler with Strategy pattern** for flexib
 
 **useField(name, options)**
 
-Subscribe to specific field state.
+Register field in the form
 
 ```jsx
 const { input, meta } = useField('email', {
@@ -348,19 +348,6 @@ engine.init({ email: '', items: [] }, {
 // - dirty: true when any value differs from initial
 // - dirty: false when all values equal initial
 // - Correctly handles "undo" scenarios (value changed back to initial)
-```
-
-**Custom Equality Function**
-
-For complex value comparisons (objects, arrays), provide custom equality:
-
-```js
-import { isEqual } from 'lodash';
-
-engine.init({ items: [] }, {
-  dirtyCheckStrategy: DIRTY_CHECK_STRATEGY.VALUES,
-  isEqual: (a, b) => isEqual(a, b), // Deep equality
-});
 ```
 
 **TOUCHED Strategy (Legacy)**
@@ -571,31 +558,6 @@ engine.schedulerService.scheduleImmediate(() => {
 - Easy to test with mock scheduler
 - Single point for scheduling optimizations
 
-#### Helper Utilities
-
-Safe operations for common tasks.
-
-```js
-import { safeCall, safeGet, createCleanObject } from '@folio/stripes-acq-components/experimental';
-
-// Safe method call (handles null/undefined objects)
-const result = safeCall(obj, 'methodName', arg1, arg2);
-// Returns: method result or undefined
-
-// Safe property get with default value
-const value = safeGet(obj, 'propertyName', 'default');
-// Returns: property value or default
-
-// Create clean object (no prototype)
-const clean = createCleanObject({ a: 1, b: 2 });
-// Returns: object with null prototype (no inherited properties)
-```
-
-**Benefits:**
-- Eliminates null-checking boilerplate
-- Reduces code verbosity
-- Consistent error handling
-
 #### BaseFeature
 
 Base class for all features using Template Method Pattern.
@@ -722,7 +684,7 @@ engine.validationErrorHandler.addStrategy(new JSONErrorStrategy(), 0);
 #### Memory Management
 
 - **Map-based caching** - Efficient value caching with automatic size management
-- **WeakMap contexts** - Automatic cleanup of event listeners when components unmount
+- **WeakMap contexts** - Automatic cleanup of event contexts when components unmount
 - **Event cleanup** - Listeners removed when context unmounts
 - **Selective subscriptions** - Only re-render on needed state changes
 - **Immutable updates** - No memory leaks from shared references
@@ -741,155 +703,6 @@ engine.validationErrorHandler.addStrategy(new JSONErrorStrategy(), 0);
 - **1100+ comprehensive tests** across 280+ test suites
 - **>80% coverage** of core services and features
 - **Fast execution** - ~4 seconds for full test suite
-
-#### Testing Your Forms
-
-**Unit Testing Fields:**
-
-```js
-import { render, fireEvent } from '@testing-library/react';
-import { Form, Field } from '@folio/stripes-acq-components/experimental';
-
-test('validates email field', () => {
-  const { getByPlaceholderText, getByText } = render(
-    <Form onSubmit={jest.fn()}>
-      <Field 
-        name="email" 
-        validate={(v) => !v?.includes('@') ? 'Invalid email' : undefined}
-      >
-        {({ input, meta }) => (
-          <>
-            <input {...input} placeholder="Email" />
-            {meta.error && <span>{meta.error}</span>}
-          </>
-        )}
-      </Field>
-    </Form>
-  );
-
-  const input = getByPlaceholderText('Email');
-  fireEvent.change(input, { target: { value: 'invalid' } });
-  fireEvent.blur(input);
-
-  expect(getByText('Invalid email')).toBeInTheDocument();
-});
-```
-
-**Mocking Services:**
-
-```js
-import { FormEngine, SchedulerService, ValidationService } from '@folio/stripes-acq-components/experimental';
-
-// Create mock services
-const mockScheduler = {
-  scheduleMicrotask: jest.fn((cb) => cb()),
-  scheduleAnimationFrame: jest.fn(),
-  // ... other methods
-};
-
-const mockValidator = {
-  validate: jest.fn(),
-  debounce: jest.fn(),
-  // ... other methods
-};
-
-// Create engine with mocks
-const engine = new FormEngine({
-  schedulerService: mockScheduler,
-  validationService: mockValidator,
-});
-
-// Test with mocked services
-engine.init({ email: '' });
-expect(mockScheduler.scheduleMicrotask).toHaveBeenCalled();
-```
-
-### Best Practices
-
-#### Form Organization
-
-```jsx
-// ✅ Good: Organized, readable
-<Form onSubmit={handleSubmit} initialValues={initialValues}>
-  <Section title="Personal Info">
-    <Field name="firstName" validate={required}>
-      {renderTextField}
-    </Field>
-    <Field name="lastName" validate={required}>
-      {renderTextField}
-    </Field>
-  </Section>
-  
-  <Section title="Contact">
-    <Field name="email" validate={emailValidator}>
-      {renderTextField}
-    </Field>
-  </Section>
-</Form>
-
-// ❌ Bad: Flat structure, hard to maintain
-<Form onSubmit={handleSubmit}>
-  <Field name="firstName">{renderTextField}</Field>
-  <Field name="lastName">{renderTextField}</Field>
-  <Field name="email">{renderTextField}</Field>
-  <Field name="phone">{renderTextField}</Field>
-  {/* 20 more fields... */}
-</Form>
-```
-
-#### Validation Strategy
-
-```jsx
-// ✅ Good: Separate concerns
-<Field 
-  name="email"
-  validate={emailFormatValidator} // Field-level: format
-/>
-
-<Form
-  validate={businessRulesValidator} // Form-level: business logic
->
-
-// ❌ Bad: Mixed concerns
-<Field 
-  name="email"
-  validate={(value, allValues) => {
-    // Format check
-    if (!value.includes('@')) return 'Invalid format';
-    // Business logic (belongs in form-level validator)
-    if (allValues.otherField === 'x' && value.endsWith('@banned.com')) {
-      return 'Complex business rule violation';
-    }
-  }}
-/>
-```
-
-#### Performance Optimization
-
-```jsx
-// ✅ Good: Selective subscription
-const { input, meta } = useField('email', {
-  subscription: { value: true, error: true }, // Only subscribe to needed state
-});
-
-// ❌ Bad: Full subscription (default)
-const { input, meta } = useField('email'); // Subscribes to all field state
-
-// ✅ Good: Debounced validation for expensive operations
-<Field 
-  name="username"
-  validate={checkUsernameAvailability} // API call
-  validateOn="change"
-  debounceDelay={500} // Wait 500ms after typing stops
-/>
-
-// ❌ Bad: No debouncing for expensive operations
-<Field 
-  name="username"
-  validate={checkUsernameAvailability} // API call on every keystroke
-  validateOn="change"
-/>
-```
 
 ### Troubleshooting
 
@@ -919,21 +732,3 @@ console.log('Active listeners:', engine.eventService.getActiveListeners());
 const { input } = useField('email');
 console.log('Input value:', input.value);
 ```
-
-#### Performance Issues
-
-```js
-// Check service stats
-const stats = engine.getServiceStats();
-console.log('Cache hits:', stats.cache.hits);
-console.log('Cache misses:', stats.cache.misses);
-console.log('Total validations:', stats.validation.totalValidations);
-
-// Optimize subscriptions
-const formState = useFormState({
-  dirty: true, // Only subscribe to dirty state
-  // Don't subscribe to everything
-});
-```
-
-
