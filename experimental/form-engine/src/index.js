@@ -6,7 +6,7 @@
  * - Form: Main form component
  * - Field: High-performance field with debouncing and selective subscriptions
  * - FieldArray: Array field component with enhanced methods
- * - Hooks: useField, useFormState, useWatch, useFormSubmit, useDebouncedValidation
+ * - Hooks: useField, useFormState, useWatch, useSubmit, useDebouncedValidation
  * - Context: FormProvider, useFormEngine, useFormContext
  */
 
@@ -44,7 +44,7 @@ export { FormNavigationModal } from './react/FormNavigationModal';
 export {
   useField,
   useFormState,
-  useFormSubmit,
+  useSubmit,
   useWatch,
 } from './react/hooks';
 

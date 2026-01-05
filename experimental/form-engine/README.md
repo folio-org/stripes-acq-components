@@ -319,7 +319,7 @@ engine.init({ items: [] }, {
 - `useField(name, options)` - Field state and handlers
 - `useFormState(subscription)` - Form state
 - `useWatch(name, options)` - Watch specific field with optional selector and bubble support
-- `useFormSubmit(onSubmit)` - Form submission
+- `useSubmit(onSubmit)` - Form submission
 
 #### useWatch Options
 
@@ -358,7 +358,7 @@ const engine = new FormEngine(services);
 engine.init(initialValues, config);
 engine.get(path);
 engine.set(path, value);
-engine.validateAll();
+engine.validate();
 engine.submit(onSubmit);
 
 // Event subscription with bubble support
@@ -440,7 +440,7 @@ validate={(values) => {
   const errors = [];
   if (values.password.length < 8) errors.push('Min 8 characters');
   if (values.password !== values.confirm) errors.push('Must match');
-  return errors.length ? { password: errors.join('. ') } : null;
+  return errors.length ? { password: errors.join('. ') } : undefined;
 }}
 ```
 

@@ -9,11 +9,11 @@ import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
 import {
   Form,
-  useFormSubmit,
+  useSubmit,
 } from '../../../index';
 
 function TestComponent({ onSubmit }) {
-  const { handleSubmit } = useFormSubmit(onSubmit);
+  const { handleSubmit } = useSubmit(onSubmit);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -22,7 +22,7 @@ function TestComponent({ onSubmit }) {
   );
 }
 
-describe('useFormSubmit', () => {
+describe('useSubmit', () => {
   it('should handle form submission', async () => {
     const user = userEvent.setup();
     const onSubmit = jest.fn();

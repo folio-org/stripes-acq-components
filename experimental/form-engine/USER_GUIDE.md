@@ -209,12 +209,12 @@ const orderCount = useWatch('orders', {
   - Useful for watching arrays/objects and updating when ANY nested value changes
   - Performance optimized - only emits to bubble listeners when nested fields change
 
-**useFormSubmit(onSubmit)**
+**useSubmit(onSubmit)**
 
 Handle form submission.
 
 ```jsx
-const handleSubmit = useFormSubmit(async (values) => {
+const handleSubmit = useSubmit(async (values) => {
   await api.save(values);
 });
 
@@ -261,7 +261,7 @@ engine.setError(path, error);        // Set field error
 engine.clearError(path);             // Clear field error
 
 // Validation
-engine.validateAll();                // Validate all fields
+engine.validate();                // Validate all fields
 engine.validateField(path);          // Validate specific field
 
 // Submission
@@ -479,7 +479,7 @@ validate={(values) => {
   
   return errors.length 
     ? { password: errors.join('. ') } 
-    : null;
+    : undefined;
 }}
 ```
 
@@ -531,70 +531,6 @@ console.log(debug);
   hasErrors: false,
   // ... more debug info
 }
-```
-
-**Service Statistics**
-
-Use `engine.getServiceStats()` to inspect service performance:
-
-```js
-const stats = engine.getServiceStats();
-console.log(stats);
-
-// Output:
-{
-  validation: {
-    totalValidations: 45,
-    fieldValidations: 40,
-    formValidations: 5,
-    // ... more stats
-  },
-  cache: {
-    hits: 120,
-    misses: 30,
-    size: 25,
-    // ... more stats
-  },
-  event: {
-    totalEvents: 200,
-    activeListeners: 15,
-    // ... more stats
-  },
-  batch: {
-    totalBatches: 10,
-    batchedOperations: 50,
-    // ... more stats
-  },
-}
-```
-
-**React DevTools**
-
-Enable form state inspection in React DevTools:
-
-```jsx
-<Form
-  onSubmit={handleSubmit}
-  initialValues={{ email: '' }}
-  debug // Add debug prop
->
-  {/* fields */}
-</Form>
-```
-
-**Console Logging**
-
-Enable detailed console logging:
-
-```js
-// Enable all logs
-engine.setLogLevel('debug');
-
-// Available levels: 'error', 'warn', 'info', 'debug'
-engine.setLogLevel('info');
-
-// Disable logging
-engine.setLogLevel('error');
 ```
 
 ### Advanced Features

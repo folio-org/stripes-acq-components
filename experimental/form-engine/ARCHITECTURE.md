@@ -146,7 +146,7 @@ const engine = new FormEngine({
 - `ERROR` - Validation error occurred
 - `VALIDATION` - Validation completed
 - `SUBMIT` - Form submission
-- `CONFIG_UPDATE` - Configuration changed
+- `CONFIG` - Configuration changed
 
 **Field-level Events:**
 - `change:${path}` - Specific field value changed
@@ -170,14 +170,6 @@ const engine = new FormEngine({
 
 **Usage:**
 ```javascript
-// Before: Manual scheduling with fallbacks everywhere
-if (typeof queueMicrotask !== 'undefined') {
-  queueMicrotask(callback);
-} else {
-  Promise.resolve().then(callback);
-}
-
-// After: Centralized scheduling
 engine.schedulerService.scheduleMicrotask(callback);
 ```
 

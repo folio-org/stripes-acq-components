@@ -165,7 +165,7 @@ export class ValidationService {
    * @param {*} allValues - All form values
    * @returns {Promise<Object>} Errors object
    */
-  async validateAll(allValues) {
+  async validate(allValues) {
     const errors = {};
 
     for (const [path] of this.validators) {

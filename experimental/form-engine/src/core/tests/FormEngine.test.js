@@ -128,7 +128,7 @@ describe('FormEngine', () => {
     engine.registerValidator('email', (v) => (!v ? 'Email is required' : null), 'submit');
     engine.registerValidator('name', (v) => (!v ? 'Name is required' : null), 'submit');
 
-    await engine.validateAll();
+    await engine.validate();
     const debug = engine.getDebugInfo();
 
     expect(debug.formValid).toBe(false);
@@ -145,7 +145,7 @@ describe('FormEngine', () => {
     engine.registerValidator('email', (v) => (!v ? 'Email is required' : null), 'submit');
     engine.registerValidator('name', (v) => (!v ? 'Name is required' : null), 'submit');
 
-    await engine.validateAll();
+    await engine.validate();
     const debug = engine.getDebugInfo();
 
     expect(debug.formValid).toBe(true);
@@ -232,7 +232,7 @@ describe('FormEngine', () => {
     };
 
     engine.registerValidator('$form', formValidator, 'submit');
-    await engine.validateAll();
+    await engine.validate();
     const allErrors = engine.getErrors();
     const debug = engine.getDebugInfo();
 
@@ -272,7 +272,7 @@ describe('FormEngine', () => {
     };
 
     engine.registerValidator('fyFinanceData', arrayValidator, 'submit');
-    await engine.validateAll();
+    await engine.validate();
     const allErrors = engine.getErrors();
     const debug = engine.getDebugInfo();
 
@@ -318,7 +318,7 @@ describe('FormEngine', () => {
     };
 
     engine.registerValidator('$form', formValidator, 'submit');
-    await engine.validateAll();
+    await engine.validate();
     const allErrors = engine.getErrors();
     const debug = engine.getDebugInfo();
 

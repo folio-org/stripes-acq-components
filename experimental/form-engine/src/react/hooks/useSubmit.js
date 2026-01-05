@@ -1,11 +1,11 @@
 /**
- * useFormSubmit - Hook for form submission
+ * useSubmit - Hook for form submission
  */
 
 import { useCallback } from 'react';
 import { useFormEngine } from '../FormContext';
 
-export function useFormSubmit(onSubmit) {
+export function useSubmit(onSubmit) {
   const engine = useFormEngine();
 
   const handleSubmit = useCallback(async (e) => {

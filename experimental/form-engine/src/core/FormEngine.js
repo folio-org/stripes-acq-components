@@ -155,7 +155,7 @@ export default class FormEngine {
   updateConfig(newConfig) {
     this.options = { ...this.options, ...newConfig };
     this._configureServices();
-    this.eventService.emit(EVENTS.CONFIG_UPDATE, { config: this.options });
+    this.eventService.emit(EVENTS.CONFIG, { config: this.options });
 
     return this;
   }
@@ -530,8 +530,8 @@ export default class FormEngine {
   /**
    * Validate all fields
    */
-  async validateAll() {
-    const errors = await this.validationService.validateAll(this.valuesFeature.values);
+  async validate() {
+    const errors = await this.validationService.validate(this.valuesFeature.values);
     const previousErrors = this.errorsFeature.getAll();
 
     // Check if errors object actually changed
@@ -720,7 +720,7 @@ export default class FormEngine {
         focus: (p) => this.focus(p),
         blur: () => this.blur(),
         validateField: (p) => this.validateField(p),
-        validateAll: () => this.validateAll(),
+        validate: () => this.validate(),
         getFormState: () => this.getFormState(),
         getFieldState: (p) => this.getFieldState(p),
         getDirtyFields: () => this.getDirtyFields(),
@@ -858,7 +858,7 @@ export default class FormEngine {
       const values = this.getValues();
 
       // Run validation for all fields before submit
-      const isValid = await this.validateAll();
+      const isValid = await this.validate();
       const errors = this.getErrors();
 
       const hasErrors = !isValid || Object.keys(errors).length > 0;

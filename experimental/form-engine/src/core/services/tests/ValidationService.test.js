@@ -38,7 +38,7 @@ describe('ValidationService', () => {
 
     service.registerValidator('email', (v) => (!v ? 'Required' : null), 'submit');
     service.registerValidator('password', (v) => (!v ? 'Required' : null), 'submit');
-    const errors = await service.validateAll({ email: '', password: '' });
+    const errors = await service.validate({ email: '', password: '' });
 
     expect(errors.email).toBe('Required');
     expect(errors.password).toBe('Required');
@@ -118,12 +118,12 @@ describe('ValidationService', () => {
   // Edge Cases and Bug Prevention Tests
   // ============================================
 
-  describe('validateAll() - edge cases', () => {
+  describe('validate() - edge cases', () => {
     it('should handle null validator result', async () => {
       const service = new ValidationService();
 
       service.registerValidator('field1', () => null);
-      const errors = await service.validateAll({ field1: 'value' });
+      const errors = await service.validate({ field1: 'value' });
 
       expect(errors).toEqual({});
     });
@@ -132,7 +132,7 @@ describe('ValidationService', () => {
       const service = new ValidationService();
 
       service.registerValidator('field1', () => undefined);
-      const errors = await service.validateAll({ field1: 'value' });
+      const errors = await service.validate({ field1: 'value' });
 
       expect(errors).toEqual({});
     });
@@ -141,7 +141,7 @@ describe('ValidationService', () => {
       const service = new ValidationService();
 
       service.registerValidator('field1', () => '');
-      const errors = await service.validateAll({ field1: 'value' });
+      const errors = await service.validate({ field1: 'value' });
 
       expect(errors).toEqual({});
     });
@@ -150,7 +150,7 @@ describe('ValidationService', () => {
       const service = new ValidationService();
 
       service.registerValidator('items', () => []);
-      const errors = await service.validateAll({ items: [] });
+      const errors = await service.validate({ items: [] });
 
       expect(errors).toEqual({});
     });
@@ -159,7 +159,7 @@ describe('ValidationService', () => {
       const service = new ValidationService();
 
       service.registerValidator('items', () => [null, undefined, null]);
-      const errors = await service.validateAll({ items: [1, 2, 3] });
+      const errors = await service.validate({ items: [1, 2, 3] });
 
       expect(errors).toEqual({});
     });
@@ -169,7 +169,7 @@ describe('ValidationService', () => {
 
       // eslint-disable-next-line no-sparse-arrays
       service.registerValidator('items', () => [, , { field: 'error' }]);
-      const errors = await service.validateAll({ items: [1, 2, 3] });
+      const errors = await service.validate({ items: [1, 2, 3] });
 
       expect(errors['items[2].field']).toBe('error');
       expect(errors['items[0]']).toBeUndefined();
@@ -186,7 +186,7 @@ describe('ValidationService', () => {
           },
         },
       ]);
-      const errors = await service.validateAll({ items: [{}] });
+      const errors = await service.validate({ items: [{}] });
 
       // Note: Current implementation only handles one level of nesting
       // This test documents current behavior
@@ -202,7 +202,7 @@ describe('ValidationService', () => {
         null,
         'error3',
       ]);
-      const errors = await service.validateAll({ items: [1, 2, 3, 4] });
+      const errors = await service.validate({ items: [1, 2, 3, 4] });
 
       expect(errors['items[0]']).toBe('error1');
       expect(errors['items[1].field']).toBe('error2');
@@ -216,7 +216,7 @@ describe('ValidationService', () => {
       const service = new ValidationService();
 
       service.registerValidator('$form', () => null);
-      const errors = await service.validateAll({ field: 'value' });
+      const errors = await service.validate({ field: 'value' });
 
       expect(errors).toEqual({});
       expect(errors.$form).toBeUndefined();
@@ -226,7 +226,7 @@ describe('ValidationService', () => {
       const service = new ValidationService();
 
       service.registerValidator('$form', () => ({}));
-      const errors = await service.validateAll({ field: 'value' });
+      const errors = await service.validate({ field: 'value' });
 
       expect(errors).toEqual({});
     });
@@ -239,7 +239,7 @@ describe('ValidationService', () => {
         field2: [null, null],
         field3: 'actual error',
       }));
-      const errors = await service.validateAll({ field1: [], field2: [], field3: '' });
+      const errors = await service.validate({ field1: [], field2: [], field3: '' });
 
       expect(errors.field1).toBeUndefined();
       expect(errors.field2).toBeUndefined();
@@ -254,7 +254,7 @@ describe('ValidationService', () => {
         items2: [null, { field: 'error2' }],
         regularField: 'error3',
       }));
-      const errors = await service.validateAll({ items1: [{}], items2: [{}, {}], regularField: '' });
+      const errors = await service.validate({ items1: [{}], items2: [{}, {}], regularField: '' });
 
       expect(errors['items1[0].field']).toBe('error1');
       expect(errors['items2[1].field']).toBe('error2');
@@ -269,7 +269,7 @@ describe('ValidationService', () => {
       service.registerValidator('$form', () => {
         throw new Error('Validation failed');
       });
-      const errors = await service.validateAll({ field: 'value' });
+      const errors = await service.validate({ field: 'value' });
 
       expect(errors.$form).toBe('Validation failed');
     });
@@ -280,7 +280,7 @@ describe('ValidationService', () => {
       service.registerValidator('$form', () => ({
         items: [{ field: 'error' }],
       }));
-      const errors = await service.validateAll({ items: [{}] });
+      const errors = await service.validate({ items: [{}] });
 
       expect(errors.$form).toBeUndefined();
       expect(errors['items[0].field']).toBe('error');
@@ -292,7 +292,7 @@ describe('ValidationService', () => {
       const service = new ValidationService();
 
       service.registerValidator('items', () => [null, undefined, null]);
-      const errors = await service.validateAll({ items: [] });
+      const errors = await service.validate({ items: [] });
 
       expect(Object.keys(errors)).toHaveLength(0);
     });
@@ -308,7 +308,7 @@ describe('ValidationService', () => {
 
         return errors;
       });
-      const errors = await service.validateAll({ items: [] });
+      const errors = await service.validate({ items: [] });
 
       expect(errors['items[3]']).toBe('error at index 3');
       expect(errors['items[5]']).toBe('error at index 5');
@@ -325,7 +325,7 @@ describe('ValidationService', () => {
           field3: 'error3',
         },
       ]);
-      const errors = await service.validateAll({ items: [{}] });
+      const errors = await service.validate({ items: [{}] });
 
       expect(errors['items[0].field1']).toBe('error1');
       expect(errors['items[0].field2']).toBe('error2');
@@ -345,7 +345,7 @@ describe('ValidationService', () => {
 
         return errors;
       });
-      const errors = await service.validateAll({ items: new Array(100) });
+      const errors = await service.validate({ items: new Array(100) });
 
       expect(errors['items[10].field']).toBe('error10');
       expect(errors['items[50].field']).toBe('error50');
@@ -368,7 +368,7 @@ describe('ValidationService', () => {
           },
         ],
       }));
-      const errors = await service.validateAll({ level1: [[{}]] });
+      const errors = await service.validate({ level1: [[{}]] });
 
       // Current implementation handles one level of array conversion
       // level2 will be assigned as an array (then filtered by ErrorsFeature)
@@ -385,7 +385,7 @@ describe('ValidationService', () => {
         { field: undefined },
         { field: '' },
       ]);
-      const errors = await service.validateAll({ items: [] });
+      const errors = await service.validate({ items: [] });
 
       // Empty objects still loop through Object.keys() but create no entries
       // because the keys array is empty. However, objects with null/undefined/''

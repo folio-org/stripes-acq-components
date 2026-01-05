@@ -57,7 +57,7 @@ describe('fieldHandlers', () => {
     const engine = {
       touch: jest.fn(),
       blur: jest.fn(),
-      getErrors: jest.fn(() => ({ email: 'Error from validateAll' })),
+      getErrors: jest.fn(() => ({ email: 'Error from validate' })),
       clearError: jest.fn(),
       setError: jest.fn(),
       get: jest.fn(() => 'test'),

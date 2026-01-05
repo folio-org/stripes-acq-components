@@ -46,7 +46,7 @@ export const EVENTS = {
   ACTIVE: 'active',
   BLUR: 'blur',
   CHANGE: 'change',
-  CONFIG_UPDATE: 'config_update',
+  CONFIG: 'config',
   DIRTY: 'dirty',
   ERROR: 'error',
   FOCUS: 'focus',

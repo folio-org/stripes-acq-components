@@ -67,7 +67,7 @@ export class ErrorsFeature extends BaseFeature {
         console.error(
           `[ErrorsFeature.set] ERROR: Attempted to set array as error on "${path}". ` +
           'Arrays should be converted to field-level errors first. ' +
-          'Use ValidationService.validateAll() which handles array conversion.',
+          'Use ValidationService.validate() which handles array conversion.',
           error,
         );
         // Don't set the array error
@@ -159,7 +159,7 @@ export class ErrorsFeature extends BaseFeature {
   }
 
   /**
-   * Set all errors from validation (used by validateAll)
+   * Set all errors from validation (used by validate)
    * @param {Object} errors - Errors object { path: errorString }
    * @param {string} source - Source of errors (use ERROR_SOURCES constants)
    */

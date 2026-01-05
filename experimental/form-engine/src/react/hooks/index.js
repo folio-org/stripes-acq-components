@@ -1,4 +1,4 @@
 export { useField } from './useField';
 export { useFormState } from './useFormState';
-export { useFormSubmit } from './useFormSubmit';
+export { useSubmit } from './useSubmit';
 export { useWatch } from './useWatch';
