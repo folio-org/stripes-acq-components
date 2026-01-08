@@ -256,6 +256,6 @@
     "validation.dateAfter": "所选日期必须晚于当前日期",
     "button.credentials.show": "显示凭证",
     "button.credentials.hide": "隐藏凭证",
-    "versionHistory.card.showAll": "Show all",
-    "versionHistory.card.showLess": "Show less"
+    "versionHistory.card.showAll": "显示全部",
+    "versionHistory.card.showLess": "显示更少"
 }

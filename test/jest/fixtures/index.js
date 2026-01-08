@@ -11,4 +11,5 @@ export * from './orderLine';
 export * from './orderLineAuditEvent';
 export * from './publishCoordinator';
 export * from './tenants';
+export * from './timezone';
 export * from './vendor';
