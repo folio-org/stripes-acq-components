@@ -3,7 +3,6 @@
 import {
   createCleanObject,
   safeCall,
-  safeGet,
 } from '../helpers';
 
 describe('helpers', () => {
@@ -53,48 +52,6 @@ describe('helpers', () => {
       const result = safeCall(obj, 'sum', 1, 2, 3);
 
       expect(result).toBe(6);
-    });
-  });
-
-  describe('safeGet', () => {
-    it('should return property value if it exists', () => {
-      const obj = { prop: 'value' };
-      const result = safeGet(obj, 'prop');
-
-      expect(result).toBe('value');
-    });
-
-    it('should return default value if object is null', () => {
-      const result = safeGet(null, 'prop', 'default');
-
-      expect(result).toBe('default');
-    });
-
-    it('should return default value if object is undefined', () => {
-      const result = safeGet(undefined, 'prop', 'default');
-
-      expect(result).toBe('default');
-    });
-
-    it('should return default value if property does not exist', () => {
-      const obj = {};
-      const result = safeGet(obj, 'nonExistent', 'default');
-
-      expect(result).toBe('default');
-    });
-
-    it('should return undefined as default if not specified', () => {
-      const obj = {};
-      const result = safeGet(obj, 'nonExistent');
-
-      expect(result).toBeUndefined();
-    });
-
-    it('should return property even if it is falsy', () => {
-      const obj = { prop: 0 };
-      const result = safeGet(obj, 'prop', 'default');
-
-      expect(result).toBe(0);
     });
   });
 

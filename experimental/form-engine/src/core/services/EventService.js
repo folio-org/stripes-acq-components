@@ -35,7 +35,7 @@ export class EventService {
    * @param {Function} callback - Callback function
    * @param {Object} context - Context for cleanup (optional)
    * @param {Object} options - Listener options (optional)
-   * @param {boolean} options.bubble - If true, listener wants parent path events
+   * @param {boolean} options.bubble - If true, listener receives events from nested fields (e.g., 'foo' receives 'foo.bar' changes)
    * @returns {Function} Unsubscribe function
    */
   on(event, callback, context = null, options = {}) {
@@ -270,7 +270,7 @@ export class EventService {
 
   /**
    * Get all event names that start with the given prefix
-   * Used for cascading events when parent path changes
+   * Used for cascading events to ancestor field listeners (bubble support)
    * @param {string} prefix - Event name prefix
    * @returns {Array<string>} Array of event names matching the prefix
    */

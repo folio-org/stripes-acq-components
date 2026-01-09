@@ -293,7 +293,7 @@ engine.on(event, callback, context, options);
 // Direct field changes only
 engine.on('change:email', (value) => console.log(value));
 
-// Parent path with bubble - receives nested field changes
+// Watch with bubble - receives nested field events
 engine.on('change:orders', (orders) => {
   console.log('Orders changed:', orders);
 }, null, { bubble: true });

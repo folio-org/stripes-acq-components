@@ -3,10 +3,7 @@
  * Follows DRY principle
  */
 
-import {
-  isDefined,
-  isFunction,
-} from './checks';
+import invoke from 'lodash/invoke';
 
 /**
  * Safely call a method on an object if it exists and is a function
@@ -16,26 +13,7 @@ import {
  * @returns {*} Method return value or undefined
  */
 export const safeCall = (obj, method, ...args) => {
-  if (isDefined(obj) && isFunction(obj[method])) {
-    return obj[method](...args);
-  }
-
-  return undefined;
-};
-
-/**
- * Safely get a property from an object
- * @param {Object} obj - Object to get property from
- * @param {string} property - Property name
- * @param {*} defaultValue - Default value if property doesn't exist
- * @returns {*} Property value or default value
- */
-export const safeGet = (obj, property, defaultValue = undefined) => {
-  if (isDefined(obj) && property in obj) {
-    return obj[property];
-  }
-
-  return defaultValue;
+  return invoke(obj, method, ...args);
 };
 
 /**

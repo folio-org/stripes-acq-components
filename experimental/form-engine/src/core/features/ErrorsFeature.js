@@ -159,6 +159,28 @@ export class ErrorsFeature extends BaseFeature {
   }
 
   /**
+   * Clear all errors in the form
+   * Clears all field errors and form-level errors from all sources
+   */
+  clearAll() {
+    const errors = this._getState('errors');
+    const hadErrors = Object.keys(errors).length > 0;
+
+    // Clear all errors
+    this._setState('errors', Object.create(null));
+
+    // Only emit if there were actually errors to clear
+    if (hadErrors) {
+      // Emit clear events for all previously errored paths
+      for (const path of Object.keys(errors)) {
+        this._emitErrorEvents(path, null);
+      }
+
+      this._checkAndEmitFormValidState();
+    }
+  }
+
+  /**
    * Set all errors from validation (used by validate)
    * @param {Object} errors - Errors object { path: errorString }
    * @param {string} source - Source of errors (use ERROR_SOURCES constants)

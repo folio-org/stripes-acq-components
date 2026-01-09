@@ -307,14 +307,14 @@ export default class FormEngine {
   }
 
   /**
-   * Emit field change events including nested and parent events
+   * Emit field change events including nested field events and ancestor field events
    * @param {string} path - Field path
    * @param {*} value - Field value
-   * @param {Set} nestedPathsEmitted - Tracker for nested paths already emitted
-   * @param {Set} parentPathsEmitted - Tracker for parent paths already emitted
+   * @param {Set} nestedPathsEmitted - Tracker for nested field paths already emitted
+   * @param {Set} ancestorPathsEmitted - Tracker for ancestor paths already emitted
    * @private
    */
-  _emitFieldChangeEvents(path, value, nestedPathsEmitted, parentPathsEmitted) {
+  _emitFieldChangeEvents(path, value, nestedPathsEmitted, ancestorPathsEmitted) {
     const changeEvent = `${EVENTS.CHANGE}:${path}`;
 
     // Emit direct event for the changed path
@@ -322,17 +322,18 @@ export default class FormEngine {
 
     if (!this.eventService.hasListeners()) return;
 
-    // Emit events for nested paths when parent path changes
+    // Emit events for nested fields when parent field changes
     this._emitNestedPathEvents(changeEvent, nestedPathsEmitted);
 
-    // Emit events for parent paths when nested field changes
-    this._emitParentPathEvents(path, parentPathsEmitted);
+    // Emit events for ancestor fields when nested field changes (bubble support)
+    this._emitAncestorPathEvents(path, ancestorPathsEmitted);
   }
 
   /**
-   * Emit events for nested paths
+   * Emit events for nested field paths
+   * When a parent field changes, notify all nested field listeners
    * @param {string} changeEvent - Change event name
-   * @param {Set} nestedPathsEmitted - Tracker for nested paths already emitted
+   * @param {Set} nestedPathsEmitted - Tracker for nested field paths already emitted
    * @private
    */
   _emitNestedPathEvents(changeEvent, nestedPathsEmitted) {
@@ -361,28 +362,30 @@ export default class FormEngine {
   }
 
   /**
-   * Emit events for parent paths
+   * Emit events for ancestor field paths
+   * When a nested field changes, notify all ancestor field listeners (with bubble:true)
+   * Example: changing 'orders[0].amount' emits events to listeners on 'orders[0]' and 'orders'
    * @param {string} path - Field path
-   * @param {Set} parentPathsEmitted - Tracker for parent paths already emitted
+   * @param {Set} ancestorPathsEmitted - Tracker for ancestor paths already emitted
    * @private
    */
-  _emitParentPathEvents(path, parentPathsEmitted) {
-    const parentPaths = this._getParentPaths(path);
+  _emitAncestorPathEvents(path, ancestorPathsEmitted) {
+    const ancestorPaths = this._getParentPaths(path);
 
-    for (const parentPath of parentPaths) {
-      const parentEvent = `${EVENTS.CHANGE}:${parentPath}`;
+    for (const ancestorPath of ancestorPaths) {
+      const ancestorEvent = `${EVENTS.CHANGE}:${ancestorPath}`;
 
       // Only emit if there are listeners with bubble:true and not already emitted
-      const shouldEmit = !parentPathsEmitted.has(parentPath) &&
-        this.eventService.hasListener(parentEvent, { onlyBubble: true });
+      const shouldEmit = !ancestorPathsEmitted.has(ancestorPath) &&
+        this.eventService.hasListener(ancestorEvent, { onlyBubble: true });
 
       if (shouldEmit) {
-        parentPathsEmitted.add(parentPath);
+        ancestorPathsEmitted.add(ancestorPath);
 
-        // Get current parent value and emit
-        const parentValue = this.get(parentPath);
+        // Get current ancestor value and emit
+        const ancestorValue = this.get(ancestorPath);
 
-        this.eventService.emit(parentEvent, parentValue);
+        this.eventService.emit(ancestorEvent, ancestorValue);
       }
     }
   }
@@ -411,11 +414,11 @@ export default class FormEngine {
 
     // Track nested paths already emitted to avoid duplicates
     const nestedPathsEmitted = new Set();
-    const parentPathsEmitted = new Set();
+    const ancestorPathsEmitted = new Set();
 
     // Emit per-field events and queue dirty checks (non-blocking)
     for (const { path, value } of deduplicatedOperations) {
-      this._emitFieldChangeEvents(path, value, nestedPathsEmitted, parentPathsEmitted);
+      this._emitFieldChangeEvents(path, value, nestedPathsEmitted, ancestorPathsEmitted);
       // Queue dirty state check to avoid blocking the event loop
       this.dirtyFeature.queueCheck(path);
     }
@@ -461,6 +464,15 @@ export default class FormEngine {
    */
   getFieldErrors(path) {
     return this.errorsFeature.getErrors(path);
+  }
+
+  /**
+   * Clear all errors in the form
+   * Clears all field errors and form-level errors from all sources
+   */
+  clearErrors() {
+    this._ensureInitialized();
+    this.errorsFeature.clearAll();
   }
 
   /**
@@ -716,6 +728,7 @@ export default class FormEngine {
         getInitialValues: () => this.getInitialValues(),
         setMany: (updates, options) => this.setMany(updates, options),
         getErrors: () => this.getErrors(),
+        clearErrors: () => this.clearErrors(),
         touch: (p) => this.touch(p),
         focus: (p) => this.focus(p),
         blur: () => this.blur(),
@@ -905,7 +918,7 @@ export default class FormEngine {
    * @param {Function} callback - Callback function
    * @param {Object} context - Context for cleanup (optional)
    * @param {Object} options - Listener options (optional)
-   * @param {boolean} options.bubble - If true, listener wants parent path events
+   * @param {boolean} options.bubble - If true, listener receives events from nested fields (e.g., 'foo' receives 'foo.bar' changes)
    * @returns {Function} Unsubscribe function
    */
   on(event, callback, context = null, options = {}) {

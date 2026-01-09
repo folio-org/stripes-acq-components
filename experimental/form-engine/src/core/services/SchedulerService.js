@@ -10,12 +10,7 @@ export class SchedulerService {
    * @param {Function} callback - Function to execute
    */
   scheduleMicrotask(callback) {
-    if (typeof queueMicrotask === 'undefined') {
-      // Fallback for older browsers
-      Promise.resolve().then(callback);
-    } else {
-      queueMicrotask(callback);
-    }
+    queueMicrotask(callback);
   }
 
   /**
@@ -25,11 +20,6 @@ export class SchedulerService {
    * @returns {number} Request ID that can be used to cancel
    */
   scheduleAnimationFrame(callback) {
-    if (typeof requestAnimationFrame === 'undefined') {
-      // Fallback for environments without requestAnimationFrame
-      return setTimeout(callback, 0);
-    }
-
     return requestAnimationFrame(callback);
   }
 
@@ -38,11 +28,7 @@ export class SchedulerService {
    * @param {number} id - Request ID returned from scheduleAnimationFrame
    */
   cancelAnimationFrame(id) {
-    if (typeof cancelAnimationFrame === 'undefined') {
-      clearTimeout(id);
-    } else {
-      cancelAnimationFrame(id);
-    }
+    cancelAnimationFrame(id);
   }
 
   /**

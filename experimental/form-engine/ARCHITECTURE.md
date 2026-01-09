@@ -34,7 +34,7 @@ This form engine is built around clean architecture principles with injectable s
   - **StringErrorStrategy** - Handles form-level errors (string format)
 
 **Utilities**
-  - **helpers.js** - Safe operations: `safeCall()`, `safeGet()`, `createCleanObject()`
+  - **helpers.js** - Safe operations: `createCleanObject()`
   - **validationErrorHandler.js** - Uses ValidationErrorHandler
   - **path.js** - Path manipulation
   - **checks.js** - Type checking
@@ -122,7 +122,6 @@ const engine = new FormEngine({
 **Simplified Complex Code:**
 - FeatureFactory replaces verbose feature instantiation
 - ValidationErrorHandler replaces 80+ lines of if/else chains with 20 lines
-- Helper utilities (`safeCall`, `safeGet`) simplify common operations
 - BaseFeature provides clear template for feature development
 
 ### Key Principles

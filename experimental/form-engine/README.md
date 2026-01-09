@@ -231,7 +231,7 @@ All features extend BaseFeature for consistent state management.
 
 ### Utilities
 
-- **helpers.js** - Safe operations: `safeCall()`, `safeGet()`, `createCleanObject()`
+- **helpers.js** - Safe operations: `createCleanObject()`
 - **validationErrorHandler.js** - Uses ValidationErrorHandler with Strategy pattern
 - **path.js** - Path manipulation utilities
 - **checks.js** - Type checking utilities
@@ -332,7 +332,7 @@ const emailLength = useWatch('email', {
   selector: (value) => value?.length || 0 
 });
 
-// Watch with bubble (receive nested field changes)
+// Watch with bubble - receives nested field events
 const orders = useWatch('orders', { bubble: true });
 // Now updates when orders[0].amount, orders[1].status, etc. change
 
@@ -363,7 +363,7 @@ engine.submit(onSubmit);
 
 // Event subscription with bubble support
 engine.on(event, callback, context, options);
-// options.bubble - if true, listener receives parent path events
+// options.bubble - if true, listener receives nested field events
 
 // Service management
 engine.setValidationService(service);
@@ -379,7 +379,7 @@ engine.getServiceStats();
 // Direct field changes only
 engine.on('change:email', (value) => console.log(value));
 
-// Parent path with bubble - receives nested field changes
+// Watch with bubble - receives nested field events
 engine.on('change:orders', (orders) => {
   console.log('Orders changed:', orders);
 }, null, { bubble: true });
