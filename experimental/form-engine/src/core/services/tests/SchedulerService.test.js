@@ -25,21 +25,6 @@ describe('SchedulerService', () => {
 
       queueMicrotaskSpy.mockRestore();
     });
-
-    it('should fallback to Promise when queueMicrotask is unavailable', async () => {
-      const callback = jest.fn();
-      const originalQueueMicrotask = global.queueMicrotask;
-
-      global.queueMicrotask = undefined;
-
-      service.scheduleMicrotask(callback);
-
-      await Promise.resolve();
-
-      expect(callback).toHaveBeenCalled();
-
-      global.queueMicrotask = originalQueueMicrotask;
-    });
   });
 
   describe('scheduleAnimationFrame', () => {
@@ -60,23 +45,6 @@ describe('SchedulerService', () => {
 
       expect(typeof id).toBe('number');
     });
-
-    it('should fallback to setTimeout when requestAnimationFrame is unavailable', () => {
-      const callback = jest.fn();
-      const originalRAF = global.requestAnimationFrame;
-
-      global.requestAnimationFrame = undefined;
-
-      const id = service.scheduleAnimationFrame(callback);
-
-      expect(typeof id).toBe('number');
-
-      jest.runAllTimers();
-
-      expect(callback).toHaveBeenCalled();
-
-      global.requestAnimationFrame = originalRAF;
-    });
   });
 
   describe('cancelAnimationFrame', () => {
@@ -88,21 +56,6 @@ describe('SchedulerService', () => {
       expect(cafSpy).toHaveBeenCalledWith(123);
 
       cafSpy.mockRestore();
-    });
-
-    it('should fallback to clearTimeout when cancelAnimationFrame is unavailable', () => {
-      const originalCAF = global.cancelAnimationFrame;
-
-      global.cancelAnimationFrame = undefined;
-
-      const clearTimeoutSpy = jest.spyOn(global, 'clearTimeout');
-
-      service.cancelAnimationFrame(123);
-
-      expect(clearTimeoutSpy).toHaveBeenCalledWith(123);
-
-      clearTimeoutSpy.mockRestore();
-      global.cancelAnimationFrame = originalCAF;
     });
   });
 

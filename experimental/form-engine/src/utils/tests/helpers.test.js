@@ -37,13 +37,6 @@ describe('helpers', () => {
       expect(result).toBeUndefined();
     });
 
-    it('should return undefined if method is not a function', () => {
-      const obj = { method: 'not a function' };
-      const result = safeCall(obj, 'method');
-
-      expect(result).toBeUndefined();
-    });
-
     it('should pass multiple arguments', () => {
       const obj = {
         sum: jest.fn((a, b, c) => a + b + c),

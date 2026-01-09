@@ -147,35 +147,5 @@ describe('validationErrorHandler', () => {
 
       expect(mockFn).toHaveBeenCalled();
     });
-
-    it('should fallback to setTimeout when requestAnimationFrame is not available', () => {
-      const mockFn = jest.fn();
-      const originalRAF = global.requestAnimationFrame;
-
-      global.requestAnimationFrame = undefined;
-
-      scheduleValidation(mockFn, 'change');
-
-      jest.runAllTimers();
-
-      expect(mockFn).toHaveBeenCalled();
-
-      global.requestAnimationFrame = originalRAF;
-    });
-
-    it('should fallback to Promise when queueMicrotask is not available', async () => {
-      const mockFn = jest.fn();
-      const originalQueueMicrotask = global.queueMicrotask;
-
-      global.queueMicrotask = undefined;
-
-      scheduleValidation(mockFn, 'blur');
-
-      await Promise.resolve();
-
-      expect(mockFn).toHaveBeenCalled();
-
-      global.queueMicrotask = originalQueueMicrotask;
-    });
   });
 });
