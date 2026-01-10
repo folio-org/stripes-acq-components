@@ -25,6 +25,7 @@
 * Refactor addresses from the `mod-configurations` usage. Refs UISACQCOMP-274.
 * Refactor tags from the `mod-configurations` usage. Refs UISACQCOMP-288.
 * Replace `moment` with `day.js`. Refs UISACQCOMP-254.
+* Implement custom form manager for extra-large forms to improve UX. Refs UISACQCOMP-283.
 
 ## [7.0.5](https://github.com/folio-org/stripes-acq-components/tree/v7.0.5) (2025-05-06)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.4...v7.0.5)
