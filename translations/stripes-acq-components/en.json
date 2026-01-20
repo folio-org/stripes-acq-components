@@ -36,7 +36,7 @@
   "filter.assignment.unassigned": "Unassigned",
 
   "holdings.deleteModal.heading": "Delete Holdings",
-  "holdings.deleteModal.message": "This piece is connected to records in inventory. After this edit there will be no other pieces OR items connected to the related Holdings record(s). After making this change would you like FOLIO to delete the Holdings record(s)?",
+  "holdings.deleteModal.message": "This piece is connected to records in inventory. After this edit there will be no other purchase order lines, pieces OR items connected to the related Holdings record(s). After making this change would you like FOLIO to delete the Holdings record(s)?",
   "holdings.deleteModal.keepHoldings": "Keep Holdings",
 
   "label.emptyValue": " ",
