@@ -2,6 +2,7 @@ export * from './acqUnit';
 export * from './address';
 export * from './affiliations';
 export * from './batchGroup';
+export * from './holdingsRelatedEntities';
 export * from './invoice';
 export * from './invoiceExportReport';
 export * from './invoiceLine';
