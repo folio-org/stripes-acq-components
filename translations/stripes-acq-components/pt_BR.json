@@ -149,7 +149,7 @@
     "filter.numberRange.max": "Para",
     "filter.numberRange.min": "De",
     "holdings.deleteModal.heading": "Excluir acervo",
-    "holdings.deleteModal.message": "Esta parte está conectada aos registros na app Inventário. Após esta edição não haverá outras partes OU itens ligados ao(s) registro(s) de acervo relacionado(s). Após esta mudança, você gostaria que o FOLIO apagasse o(s) registro(s) de acervo?",
+    "holdings.deleteModal.message": "Esta parte está conectada a registros no inventário. Após essa edição, não haverá outras linhas de pedido de compra, partes OU itens conectados ao(s) registro(s) de Acervo relacionado(s). Depois de fazer essa alteração, você gostaria que o FOLIO excluísse o(s) registro(s) de Acervo?",
     "holdings.deleteModal.keepHoldings": "Manter acervos",
     "filter.dynamic.emptyMessage": "Comece a digitar para carregar as opções",
     "validation.cantBeNegative": "Não pode ser negativo",

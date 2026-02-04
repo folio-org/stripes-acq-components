@@ -149,7 +149,7 @@
     "filter.numberRange.max": "To",
     "filter.numberRange.min": "From",
     "holdings.deleteModal.heading": "所蔵の削除",
-    "holdings.deleteModal.message": "This piece is connected to records in inventory. After this edit there will be no other pieces OR items connected to the related Holdings record(s). After making this change would you like FOLIO to delete the Holdings record(s)?",
+    "holdings.deleteModal.message": "This piece is connected to records in inventory. After this edit there will be no other purchase order lines, pieces OR items connected to the related Holdings record(s). After making this change would you like FOLIO to delete the Holdings record(s)?",
     "holdings.deleteModal.keepHoldings": "所蔵を維持する",
     "filter.dynamic.emptyMessage": "Start typing to load options",
     "validation.cantBeNegative": "負の値にはできません",
