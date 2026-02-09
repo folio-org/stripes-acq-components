@@ -663,7 +663,27 @@ const results = analyzer.analyze({
 //   abandoned: false,
 //   explain: {
 //     related: { pieces: [...], items: [...], poLines: [...] },
+//     cleared: { pieces: [...], items: [...] },
 //     remaining: { pieces: [...], items: [...], poLines: [...] }
 //   }
 // }
+```
+
+### With Incoming Pieces (Swap/Move Operations)
+```javascript
+// When pieces are moved between holdings
+const results = analyzer.analyze({
+  strategy: 'PIECE',
+  ids: ['piece-1', 'piece-3'],        // pieces being removed from current holdings
+  holdingIds: ['holding-1', 'holding-2'],
+  incoming: {                          // pieces being added to each holding
+    'holding-1': ['piece-3'],         // H1 receives piece-3
+    'holding-2': ['piece-1']          // H2 receives piece-1
+  }
+});
+
+// Correctly analyzes swap operations:
+// H1: removes piece-1, receives piece-3 → NOT ABANDONED (if piece-3 remains)
+// H2: removes piece-3, receives piece-1 → NOT ABANDONED (if piece-1 remains)
+
 ```
