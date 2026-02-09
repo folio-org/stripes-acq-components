@@ -311,4 +311,42 @@ export const holdingsRelatedEntities = {
       ],
     },
   },
+  // Holding with tenantId in pieces (multi-tenant scenario)
+  'holding-tenant-1': {
+    pieces_detail_collection: {
+      pieces_detail: [
+        { id: 'piece-tenant-1', poLineId: 'po-line-tenant-1', itemId: 'item-tenant-1', tenantId: 'consortium' },
+        { id: 'piece-tenant-2', poLineId: 'po-line-tenant-1', itemId: 'item-tenant-2', tenantId: 'consortium' },
+      ],
+    },
+    items_detail_collection: {
+      items_detail: [
+        { id: 'item-tenant-1', tenantId: 'consortium' },
+        { id: 'item-tenant-2', tenantId: 'consortium' },
+      ],
+    },
+    poLines_detail_collection: {
+      poLines_detail: [
+        { id: 'po-line-tenant-1', checkinItems: false },
+      ],
+    },
+  },
+  // Holding with tenantId in items only
+  'holding-tenant-2': {
+    pieces_detail_collection: {
+      pieces_detail: [
+        { id: 'piece-tenant-3', poLineId: 'po-line-tenant-2', itemId: 'item-tenant-3' }, // no tenantId in piece
+      ],
+    },
+    items_detail_collection: {
+      items_detail: [
+        { id: 'item-tenant-3', tenantId: 'university' }, // tenantId only in item
+      ],
+    },
+    poLines_detail_collection: {
+      poLines_detail: [
+        { id: 'po-line-tenant-2', checkinItems: true }, // independent
+      ],
+    },
+  },
 };
