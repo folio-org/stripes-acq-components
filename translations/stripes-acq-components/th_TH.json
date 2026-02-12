@@ -159,7 +159,7 @@
     "versionHistory.pane.sub": "{count, plural, one {# version} other {# versions}}",
     "versionHistory.card.changed": "Changed",
     "versionHistory.card.select.tooltip": "View this version",
-    "versionHistory.card.version.current": "Current version",
+    "versionHistory.card.version.current": "เวอร์ชั่นปัจจุบัน",
     "versionHistory.card.version.original": "Original version",
     "versionHistory.deletedRecord": "Record deleted",
     "donors.button.addDonor": "Add donor",
