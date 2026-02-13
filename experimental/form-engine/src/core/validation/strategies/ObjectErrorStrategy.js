@@ -13,7 +13,7 @@ import { ValidationErrorStrategy } from '../ValidationErrorStrategy';
 
 export class ObjectErrorStrategy extends ValidationErrorStrategy {
   canHandle(error) {
-    return error && typeof error === 'object' && !Array.isArray(error);
+    return Boolean(error && typeof error === 'object' && !Array.isArray(error));
   }
 
   /**
