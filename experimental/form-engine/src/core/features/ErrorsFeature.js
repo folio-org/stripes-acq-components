@@ -213,7 +213,7 @@ export class ErrorsFeature extends BaseFeature {
       }
     }
 
-    this._emitAllErrors();
+    this._emitAllErrorEvents();
     this._checkAndEmitFormValidState();
   }
 
@@ -316,11 +316,15 @@ export class ErrorsFeature extends BaseFeature {
    * Emit all error events
    * @private
    */
-  _emitAllErrors() {
+  // Emit error events for every errored field path.
+  // ERROR carries the first error string; ERRORS carries full source list.
+  _emitAllErrorEvents() {
     const errors = this._getState('errors');
 
     for (const path of Object.keys(errors)) {
-      this._emitErrorEvents(path, errors[path]);
+      const firstError = this._getFirstError(errors[path]);
+
+      this._emitErrorEvents(path, firstError);
     }
   }
 
