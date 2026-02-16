@@ -718,4 +718,159 @@ describe('ErrorsFeature', () => {
       expect(ef.isValid()).toBe(true);
     });
   });
+
+  describe('_emitAllErrorEvents', () => {
+    it('should emit error events for all error paths', () => {
+      const events = [];
+      const engine = {
+        eventService: {
+          emit: (name, payload) => events.push({ name, payload }),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+
+      // Manually set errors without emitting (to test _emitAllErrorEvents)
+      ef.set('email', 'invalid email');
+      ef.set('password', 'too short');
+
+      events.length = 0; // Clear previous events
+
+      // Call _emitAllErrorEvents directly
+      ef._emitAllErrorEvents();
+
+      // Should emit ERROR event with first error string (not array)
+      const emailErrorEvents = events.filter(e => e.name === `${EVENTS.ERROR}:email`);
+
+      expect(emailErrorEvents.length).toBeGreaterThan(0);
+      expect(emailErrorEvents[0].payload).toBe('invalid email'); // string, not array
+
+      // Should also emit ERRORS event with full error list
+      const emailErrorsEvents = events.filter(e => e.name.endsWith('errors:email'));
+
+      expect(emailErrorsEvents.length).toBeGreaterThan(0);
+      expect(Array.isArray(emailErrorsEvents[0].payload)).toBe(true); // array with sources
+    });
+
+    it('should emit both ERROR (string) and ERRORS (array) events', () => {
+      const events = [];
+      const engine = {
+        eventService: {
+          emit: (name, payload) => events.push({ name, payload }),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+      ef.set('field', 'error text', 'field');
+      ef.set('field', 'validation error', 'form');
+
+      events.length = 0; // Reset
+
+      ef._emitAllErrorEvents();
+
+      // ERROR event should contain the first error string
+      const errorEvent = events.find(e => e.name === `${EVENTS.ERROR}:field`);
+
+      expect(typeof errorEvent.payload).toBe('string');
+
+      // ERRORS event should contain array of {source, error}
+      const errorsEvent = events.find(e => e.name.endsWith('errors:field'));
+
+      expect(Array.isArray(errorsEvent.payload)).toBe(true);
+      expect(errorsEvent.payload).toHaveLength(2); // both errors
+      expect(errorsEvent.payload.every(e => e.source && e.error)).toBe(true);
+    });
+  });
+
+  describe('setAll with array field values', () => {
+    it('should handle array field errors (form validator output)', () => {
+      const events = [];
+      const engine = {
+        eventService: {
+          emit: (name, payload) => events.push({ name, payload }),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+
+      // Simulating form validator returning array errors that were already
+      // processed by ObjectErrorStrategy into flat paths
+      const errors = {
+        'fyFinanceData[0].fundStatus': 'fundStatus is required',
+        'fyFinanceData[1].fundStatus': 'fundStatus is required',
+        'description': 'description is too short',
+      };
+
+      ef.setAll(errors);
+
+      // All should be set as strings (first error)
+      expect(ef.get('fyFinanceData[0].fundStatus')).toBe('fundStatus is required');
+      expect(ef.get('fyFinanceData[1].fundStatus')).toBe('fundStatus is required');
+      expect(ef.get('description')).toBe('description is too short');
+      expect(ef.isValid()).toBe(false);
+
+      // Should emit events for all fields
+      const allErrorEvents = events.filter(e => e.name === EVENTS.ERROR);
+
+      expect(allErrorEvents.length).toBeGreaterThan(0);
+
+      // ERROR event payload should always be string (first error)
+      allErrorEvents.forEach(event => {
+        expect(typeof event.payload.error).toBe('string');
+      });
+    });
+
+    it('should not allow raw arrays to be set as errors', () => {
+      const events = [];
+      const engine = {
+        eventService: {
+          emit: (name, payload) => events.push({ name, payload }),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+
+      // Attempting to set array directly (should warn and skip)
+      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
+
+      ef.set('field', ['error1', 'error2'], 'form');
+
+      // Should log error warning
+      expect(consoleSpy).toHaveBeenCalledWith(
+        expect.stringContaining('Attempted to set array as error'),
+        expect.anything(),
+      );
+
+      // Error should not be set
+      expect(ef.get('field')).toBe(null);
+      expect(ef.isValid()).toBe(true);
+
+      consoleSpy.mockRestore();
+    });
+
+    it('should replace previous errors when setAll is called', () => {
+      const events = [];
+      const engine = {
+        eventService: {
+          emit: (name, payload) => events.push({ name, payload }),
+        },
+      };
+      const ef = new ErrorsFeature(engine);
+
+      ef.init();
+
+      // Set initial errors
+      ef.setAll({ 'email': 'invalid' });
+      expect(ef.getAll()).toEqual({ 'email': 'invalid' });
+
+      // Set new errors (should replace old ones)
+      ef.setAll({ 'name': 'required', 'age': 'invalid' });
+      expect(ef.getAll()).toEqual({ 'name': 'required', 'age': 'invalid' });
+      expect(ef.get('email')).toBe(null); // old error gone
+    });
+  });
 });
