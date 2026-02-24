@@ -149,7 +149,7 @@
     "filter.numberRange.max": "Na",
     "filter.numberRange.min": "Z",
     "holdings.deleteModal.heading": "Smazat holdingy",
-    "holdings.deleteModal.message": "Tento kus je spojen se záznamy v katalogu. Po této úpravě nebudou žádné další kusy NEBO jednotky spojené se souvisejícím záznamem holdingu. Chcete po provedení této změny, aby FOLIO smazal záznam(y) holdingů?",
+    "holdings.deleteModal.message": "Tato položka je propojena se záznamy v inventáři. Po této úpravě nebudou k souvisejícím záznamům o zásobách propojeny žádné další řádky objednávek, jednotky ANI kusy. Chcete, aby FOLIO po provedení této změny záznamy o zásobách smazal?",
     "holdings.deleteModal.keepHoldings": "Ponechat holdingy",
     "filter.dynamic.emptyMessage": "Pro načtení možností začněte psát",
     "validation.cantBeNegative": "Nemůže být negativní",
