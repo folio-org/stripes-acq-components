@@ -28,6 +28,7 @@
 * Implement custom form manager for extra-large forms to improve UX. Refs UISACQCOMP-283.
 * Switch tenant addresses settings to `/tenant-addresses` API. Refs UISACQCOMP-290.
 * Fix invoice fund distribution export. Refs UISACQCOMP-293.
+* Handle `options.escapeCQL` param in the CQL query builder methods. Refs UISACQCOMP-295.
 
 ## [7.0.5](https://github.com/folio-org/stripes-acq-components/tree/v7.0.5) (2025-05-06)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.4...v7.0.5)
