@@ -149,7 +149,7 @@
     "filter.numberRange.max": "至",
     "filter.numberRange.min": "从",
     "holdings.deleteModal.heading": "删除馆藏",
-    "holdings.deleteModal.message": "此件与典藏中的记录连接。在此编辑之后，将没有其他件或单件连接到相关馆藏记录。作此更改后，是否希望 FOLIO删除此馆藏记录？",
+    "holdings.deleteModal.message": "此件与典藏中记录关联。修改后，将不再有其他采购订单行、件或单件与相关的馆藏记录关联。更改完成后，是否希望FOLIO删除馆藏记录？",
     "holdings.deleteModal.keepHoldings": "保持馆藏",
     "filter.dynamic.emptyMessage": "开始输入以加载选项",
     "validation.cantBeNegative": "不能为负数",
