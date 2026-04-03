@@ -4,9 +4,11 @@
 
 import { useCallback } from 'react';
 import { useFormEngine } from '../FormContext';
+import { useFormState } from './useFormState';
 
 export function useSubmit(onSubmit) {
   const engine = useFormEngine();
+  const { submitting } = useFormState({ submitting: true }); // Subscribe to submitting state to trigger re-render on changes
 
   const handleSubmit = useCallback(async (e) => {
     e?.preventDefault();
@@ -23,6 +25,6 @@ export function useSubmit(onSubmit) {
 
   return {
     handleSubmit,
-    submitting: engine.submitting,
+    submitting,
   };
 }
