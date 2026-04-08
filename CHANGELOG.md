@@ -30,6 +30,7 @@
 * Fix invoice fund distribution export. Refs UISACQCOMP-293.
 * Handle `options.escapeCQL` param in the CQL query builder methods. Refs UISACQCOMP-295.
 * Add a new query string param when calling GET `/finance/calculate-exchange`. Refs UISACQCOMP-294.
+* Include initial holding ID in options only for the initial instance. Refs UISACQCOMP-298.
 * Handle affiliation changes based on events rather than relying on prop change effects. Refs UISACQCOMP-296.
 
 ## [7.0.5](https://github.com/folio-org/stripes-acq-components/tree/v7.0.5) (2025-05-06)
