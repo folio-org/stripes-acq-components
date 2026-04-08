@@ -1,5 +1,11 @@
 /**
- * useFormState - Hook for form state management
+ * useFormState - Hook for subscribing to form-level state changes.
+ *
+ * Design contract:
+ *  - The engine is a persistent, non-React object that never triggers re-renders on its own.
+ *  - This hook bridges the gap: it listens to engine events and translates them into React
+ *    state updates only for the slice of state the caller has declared interest in.
+ *  - Re-renders are suppressed when the event fires but none of the subscribed keys changed.
  */
 
 import {
@@ -18,7 +24,15 @@ import {
 import { isEqual } from '../../utils/checks';
 import { useFormEngine } from '../FormContext';
 
-// Form state reducer
+// ---------------------------------------------------------------------------
+// Reducer
+// ---------------------------------------------------------------------------
+
+/**
+ * Minimal reducer — the entire form state snapshot is replaced atomically.
+ * Individual keys are never merged; the engine is the single source of truth
+ * and `getFormState()` always returns a complete snapshot.
+ */
 const formStateReducer = (state, action) => {
   if (action.type === FORM_ACTIONS.UPDATE_FORM_STATE) {
     return action.payload;
@@ -27,25 +41,33 @@ const formStateReducer = (state, action) => {
   return state;
 };
 
+// ---------------------------------------------------------------------------
+// Change-detection helpers
+// ---------------------------------------------------------------------------
+
 /**
- * Check if a subscribed key changed between two states
+ * Returns true if `key` has a different value between the two state snapshots.
+ *
+ * Fast path: reference equality (`===`) handles primitives and the common case
+ * where the engine returns a cached snapshot (same object reference → no change).
+ *
+ * Slow path: deep equality via `isEqual` handles the case where the engine
+ * produced a structurally-equal but differently-referenced object (e.g. after a
+ * shallow-clone in ValuesFeature.setByPath).
  */
 function hasKeyChanged(key, prevState, nextState) {
   const hasPrev = key in prevState;
   const hasNext = key in nextState;
 
-  // Key appeared or disappeared - this is a change
+  // Key appeared or disappeared — always a change
   if (hasPrev !== hasNext) {
     return true;
   }
 
-  // Only check values if key exists in both states
   if (hasPrev && hasNext) {
     const prev = prevState[key];
     const next = nextState[key];
 
-    // Reference equality check first - same object reference means no change
-    // Comparison for objects/arrays - deep comparison would be too expensive
     return prev !== next && !isEqual(prev, next);
   }
 
@@ -53,17 +75,20 @@ function hasKeyChanged(key, prevState, nextState) {
 }
 
 /**
- * Checks if any subscribed fields changed between two states
+ * Returns true if at least one key that the caller subscribed to (`subscription[key] === true`)
+ * has a different value between the two snapshots.
+ *
+ * This is the primary guard against unnecessary re-renders:
+ * a VALUES event may fire because field "address.city" changed, but a component
+ * that only subscribed to `{ dirty: true }` should not re-render.
  */
 function hasSubscribedChanges(prevState, nextState, subscription) {
-  // Quick reference equality check - if same object, no changes
+  // CacheService may return the same object reference when nothing changed.
   if (prevState === nextState) {
     return false;
   }
 
-  // Only check keys that are subscribed to (performance optimization)
   for (const key in subscription) {
-    // Skip unsubscribed keys
     if (subscription[key] && hasKeyChanged(key, prevState, nextState)) {
       return true;
     }
@@ -72,68 +97,161 @@ function hasSubscribedChanges(prevState, nextState, subscription) {
   return false;
 }
 
+// ---------------------------------------------------------------------------
+// Hook
+// ---------------------------------------------------------------------------
+
 /**
- * useFormState - Subscribe to form state updates
+ * useFormState — Subscribe to form state updates.
  *
- * @param {Object} subscription - Fields to subscribe to (e.g., { values: true, dirty: true })
- * @returns {Object} - Full form state; updates only when subscribed fields change
+ * The subscription object is a plain map of `{ [stateKey]: boolean }`.
+ * Only keys set to `true` are watched; events that don't affect a watched key
+ * will not cause a re-render.
+ *
+ * Subscription changes are handled correctly: each key is listed individually
+ * in the effect dep array (as a primitive boolean), so React re-runs the effect
+ * — tearing down old listeners and registering new ones — whenever the set of
+ * subscribed keys changes.
+ *
+ * @param {Object} subscription - Fields to subscribe to (e.g. `{ values: true, dirty: true }`)
+ * @returns {Object} Full form state snapshot; only updates when subscribed fields change
+ *
+ * @example
+ * // Only re-renders when form becomes dirty or pristine
+ * const { dirty } = useFormState({ dirty: true });
  */
 export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
   const engine = useFormEngine();
-  const initialState = engine.getFormState();
-  const [formState, dispatch] = useReducer(formStateReducer, initialState);
 
-  // Stabilize subscription using ref to avoid recreating on every render
+  // prevStateRef tracks the last state snapshot we compared against.
+  // Initialized inside the lazy-init function below so it shares the exact
+  // same object reference as the reducer's initial state — no double call to
+  // getFormState() and no risk of a stale baseline on the very first render.
+  const prevStateRef = useRef(null);
+  const [formState, dispatch] = useReducer(formStateReducer, null, () => {
+    const state = engine.getFormState();
+
+    prevStateRef.current = state;
+
+    return state;
+  });
+
+  // Write the current subscription to a ref during the render phase — this is
+  // a plain object mutation, not a state update, so it never causes a re-render
+  // and is always synchronously up to date when any event handler reads it.
+  // Using a ref (rather than the subscription object directly in the closure)
+  // avoids stale closures without needing to re-register event listeners on
+  // every render.
   const subscriptionRef = useRef(subscription);
 
   subscriptionRef.current = subscription;
 
-  // Use ref for stable subscription to avoid useEffect dependency on subscription object
-  const stableSubscriptionRef = useRef({
-    values: subscription.values,
-    errors: subscription.errors,
-    touched: subscription.touched,
-    active: subscription.active,
-    submitting: subscription.submitting,
-    submitSucceeded: subscription.submitSucceeded,
-    dirty: subscription.dirty,
-    pristine: subscription.pristine,
-    valid: subscription.valid,
-  });
-
-  // Update ref in useEffect to avoid blocking render
-  // Update stable subscription ref when subscription changes
-  // This ref is used in event handlers to avoid recreating subscriptions on every render
-  // Moving ref update to useEffect ensures it doesn't block render phase
+  // ---------------------------------------------------------------------------
+  // Effect 1: sync state when engine reference changes
+  //
+  // The engine object is recreated by <Form> only when its core props change
+  // (e.g. initialValues identity changes). When that happens the old subscriptions
+  // are torn down by Effect 2's cleanup, so we also need to pull a fresh snapshot
+  // from the new engine and update both the reducer state and the baseline ref.
+  // ---------------------------------------------------------------------------
   useEffect(() => {
-    const currentSubscription = subscriptionRef.current;
+    const nextState = engine.getFormState();
 
-    // Only update if subscription actually changed (reference equality check)
-    // This prevents unnecessary ref updates and potential subscription recreation
-    if (
-      currentSubscription.values !== stableSubscriptionRef.current.values ||
-      currentSubscription.errors !== stableSubscriptionRef.current.errors ||
-      currentSubscription.touched !== stableSubscriptionRef.current.touched ||
-      currentSubscription.active !== stableSubscriptionRef.current.active ||
-      currentSubscription.submitting !== stableSubscriptionRef.current.submitting ||
-      currentSubscription.submitSucceeded !== stableSubscriptionRef.current.submitSucceeded ||
-      currentSubscription.dirty !== stableSubscriptionRef.current.dirty ||
-      currentSubscription.pristine !== stableSubscriptionRef.current.pristine ||
-      currentSubscription.valid !== stableSubscriptionRef.current.valid
-    ) {
-      stableSubscriptionRef.current = {
-        values: currentSubscription.values,
-        errors: currentSubscription.errors,
-        touched: currentSubscription.touched,
-        active: currentSubscription.active,
-        submitting: currentSubscription.submitting,
-        submitSucceeded: currentSubscription.submitSucceeded,
-        dirty: currentSubscription.dirty,
-        pristine: currentSubscription.pristine,
-        valid: currentSubscription.valid,
-      };
+    prevStateRef.current = nextState;
+    dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
+  }, [engine]);
+
+  // ---------------------------------------------------------------------------
+  // Effect 2: register event listeners based on the current subscription
+  //
+  // The dep array contains the engine plus every subscription key as a primitive
+  // boolean. React therefore re-runs this effect (and re-registers listeners)
+  // whenever any of those values changes — matching the behavior of useField,
+  // which uses the same pattern.
+  //
+  // A single `handleChange` handler is used for all events.  Priority splitting
+  // (criticalHandler vs lowPriorityHandler + rAF) was the previous approach and
+  // introduced a stale-closure bug where prevState was captured synchronously but
+  // compared asynchronously after the ref had already moved forward.
+  // DIRTY/PRISTINE/VALID events are already deferred naturally (emitted after a
+  // microtask by DirtyFeature._flushDirtyChecks), so rAF deferral is redundant.
+  // ---------------------------------------------------------------------------
+  useEffect(() => {
+    const handleChange = () => {
+      const nextState = engine.getFormState();
+      const prevState = prevStateRef.current;
+
+      // CacheService returns the same object reference when nothing has changed.
+      // Skip all further work in that case.
+      if (prevState === nextState) {
+        return;
+      }
+
+      // Always advance the baseline BEFORE dispatching (or deciding not to).
+      // This ensures that a subsequent event fired synchronously in the same tick
+      // compares against the latest engine state, not a stale snapshot.
+      prevStateRef.current = nextState;
+
+      // Bail out early if none of the keys this consumer subscribed to changed.
+      // This is the main re-render suppression mechanism.
+      if (!hasSubscribedChanges(prevState, nextState, subscriptionRef.current)) {
+        return;
+      }
+
+      // When React 18 batching is enabled, wrap in startTransition to mark the
+      // update as low-priority (deferrable), keeping the UI responsive during
+      // rapid typing.  Fall back to a synchronous dispatch on React 17 or when
+      // batching is disabled (e.g. in tests).
+      if (engine.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING] && typeof startTransition === 'function') {
+        startTransition(() => dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState }));
+      } else {
+        dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
+      }
+    };
+
+    // Read the current subscription snapshot once to decide which events to
+    // register. If a key is false/undefined we skip registration entirely —
+    // it's cheaper than registering a no-op handler that hasSubscribedChanges
+    // would filter out anyway.
+    const sub = subscriptionRef.current;
+    const cleanups = [];
+
+    // Critical updates — drive visible form content; dispatch synchronously
+    if (sub.values) cleanups.push(engine.on(EVENTS.VALUES, handleChange));
+    if (sub.errors) cleanups.push(engine.on(EVENTS.ERROR, handleChange));
+    if (sub.touched) cleanups.push(engine.on(EVENTS.TOUCH, handleChange));
+    if (sub.active) cleanups.push(engine.on(EVENTS.ACTIVE, handleChange));
+
+    // Submit state — a single SUBMIT event carries both submitting and submitSucceeded
+    if (sub.submitting || sub.submitSucceeded) {
+      cleanups.push(engine.on(EVENTS.SUBMIT, handleChange));
     }
+
+    // Dirty/pristine — emitted after a microtask (DirtyFeature._flushDirtyChecks),
+    // so they arrive asynchronously relative to the triggering field change.
+    // Both events share a single handler; hasSubscribedChanges will filter by
+    // which key (dirty vs pristine) the caller actually cares about.
+    if (sub.dirty || sub.pristine) {
+      cleanups.push(
+        engine.on(EVENTS.DIRTY, handleChange),
+        engine.on(EVENTS.PRISTINE, handleChange),
+      );
+    }
+
+    // Valid state — emitted by ErrorsFeature after all field errors are cleared
+    if (sub.valid) cleanups.push(engine.on(EVENTS.VALID, handleChange));
+
+    // Unregister all listeners when the effect re-runs or the component unmounts.
+    // Each entry is the unsubscribe function returned by EventService.on().
+    return () => {
+      for (const cleanup of cleanups) {
+        cleanup();
+      }
+    };
   }, [
+    engine,
+    /* Each key is a primitive boolean — React can compare them cheaply and
+       re-runs the effect only when the set of active subscriptions changes. */
     subscription.values,
     subscription.errors,
     subscription.touched,
@@ -144,166 +262,6 @@ export function useFormState(subscription = DEFAULT_FORM_SUBSCRIPTION) {
     subscription.pristine,
     subscription.valid,
   ]);
-
-  const prevStateRef = useRef(initialState);
-  const contextRef = useRef();
-
-  useEffect(() => {
-    if (!contextRef.current) {
-      contextRef.current = {};
-    }
-
-    const unsubscribers = [];
-
-    // Separate handlers for critical vs low-priority updates
-    // Critical updates (values, errors) need immediate UI feedback
-    // Low-priority updates (dirty, pristine, valid) can be deferred
-    const criticalHandler = () => {
-      const nextState = engine.getFormState();
-      const prevState = prevStateRef.current;
-
-      // Skip if states are the same reference (cached form state)
-      if (prevState === nextState) {
-        return;
-      }
-
-      // Use current subscription from ref (subscription may change without recreating effect)
-      const activeSubscription = stableSubscriptionRef.current;
-
-      // Only update if subscribed fields actually changed
-      // This prevents unnecessary re-renders when unsubscribed fields change
-      if (hasSubscribedChanges(prevState, nextState, activeSubscription)) {
-        prevStateRef.current = nextState;
-        // When batching is enabled and startTransition is available, use it to defer non-urgent updates.
-        // Otherwise, use synchronous dispatch for deterministic behavior.
-        if (engine.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING] && typeof startTransition === 'function') {
-          // Use startTransition to mark this as non-urgent update
-          startTransition(() => {
-            dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
-          });
-        } else {
-          dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
-        }
-      } else {
-        // Update ref even if no subscribed changes detected
-        // This ensures future comparisons use correct baseline
-        prevStateRef.current = nextState;
-      }
-    };
-
-    // Low-priority handler for non-critical updates (dirty, pristine, valid)
-    // Helper to process state updates with subscription check
-    const processStateUpdate = (prevState, nextState, activeSubscription) => {
-      // Only update if subscribed fields actually changed
-      if (hasSubscribedChanges(prevState, nextState, activeSubscription)) {
-        prevStateRef.current = nextState;
-        // When batching is enabled, defer to startTransition for smooth updates.
-        // Otherwise, use synchronous dispatch for deterministic behavior.
-        if (engine.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING]) {
-          startTransition(() => {
-            dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
-          });
-        } else {
-          dispatch({ type: FORM_ACTIONS.UPDATE_FORM_STATE, payload: nextState });
-        }
-      } else {
-        // Update ref even if no changes to avoid false positives in future comparisons
-        prevStateRef.current = nextState;
-      }
-    };
-
-    // These updates are deferred using requestAnimationFrame to avoid blocking UI
-    // Combined with startTransition for smooth async updates
-    const lowPriorityHandler = () => {
-      const nextState = engine.getFormState();
-      const prevState = prevStateRef.current;
-
-      // Skip if states are the same reference
-      if (prevState === nextState) {
-        return;
-      }
-
-      // Use current subscription from ref
-      const activeSubscription = stableSubscriptionRef.current;
-
-      // When batching is enabled, defer to requestAnimationFrame for smooth UI without blocking.
-      // Otherwise, process updates immediately for determinism.
-      if (engine.options[FORM_ENGINE_OPTIONS.ENABLE_BATCHING]) {
-        const processUpdate = () => processStateUpdate(prevState, nextState, activeSubscription);
-
-        if (typeof requestAnimationFrame === 'undefined') {
-          // Fallback: use setTimeout for async but fast update
-          setTimeout(processUpdate, 0);
-        } else {
-          requestAnimationFrame(processUpdate);
-        }
-      } else {
-        processStateUpdate(prevState, nextState, activeSubscription);
-      }
-    };
-
-    // Get current subscription from ref for subscriptions setup
-    const activeSubscription = stableSubscriptionRef.current;
-
-    // Subscribe to events based on subscription - use different handlers for critical vs low-priority
-    // Critical updates (values, errors) - synchronous for immediate UI feedback
-    if (activeSubscription.values) {
-      unsubscribers.push(
-        engine.on(EVENTS.VALUES, criticalHandler, contextRef.current),
-      );
-    }
-
-    if (activeSubscription.errors) {
-      unsubscribers.push(
-        engine.on(EVENTS.ERROR, criticalHandler, contextRef.current),
-      );
-    }
-
-    // Medium priority (touched, active, submitting) - synchronous but less critical
-    if (activeSubscription.touched) {
-      unsubscribers.push(
-        engine.on(EVENTS.TOUCH, criticalHandler, contextRef.current),
-      );
-    }
-
-    if (activeSubscription.active) {
-      unsubscribers.push(
-        engine.on(EVENTS.ACTIVE, criticalHandler, contextRef.current),
-      );
-    }
-
-    // Subscribe to SUBMIT event if submitting or submitSucceeded state is needed
-    // SUBMIT event contains submitting and success state in payload
-    if (activeSubscription.submitting || activeSubscription.submitSucceeded) {
-      unsubscribers.push(
-        engine.on(EVENTS.SUBMIT, criticalHandler, contextRef.current),
-      );
-    }
-
-    // Low priority (dirty, pristine, valid) - async to avoid blocking
-    if (activeSubscription.dirty || activeSubscription.pristine) {
-      unsubscribers.push(
-        engine.on(EVENTS.DIRTY, lowPriorityHandler, contextRef.current),
-        engine.on(EVENTS.PRISTINE, lowPriorityHandler, contextRef.current),
-      );
-    }
-
-    if (activeSubscription.valid) {
-      unsubscribers.push(
-        engine.on(EVENTS.VALID, lowPriorityHandler, contextRef.current),
-      );
-    }
-
-    return () => {
-      for (const unsubscribe of unsubscribers) {
-        unsubscribe();
-      }
-
-      if (engine.eventService?.cleanupContext) {
-        engine.eventService.cleanupContext(contextRef.current);
-      }
-    };
-  }, [engine]); // Only engine as dependency - subscription handled via ref
 
   return formState;
 }

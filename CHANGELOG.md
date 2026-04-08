@@ -32,6 +32,7 @@
 * Add a new query string param when calling GET `/finance/calculate-exchange`. Refs UISACQCOMP-294.
 * Include initial holding ID in options only for the initial instance. Refs UISACQCOMP-298.
 * Handle affiliation changes based on events rather than relying on prop change effects. Refs UISACQCOMP-296.
+* Improve state synchronization in `useFormState` (experimental). Refs UISACQCOMP-292.
 
 ## [7.0.5](https://github.com/folio-org/stripes-acq-components/tree/v7.0.5) (2025-05-06)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.4...v7.0.5)
