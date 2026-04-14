@@ -29,7 +29,7 @@ describe('FormContext', () => {
 
   it('should throw error if useFormEngine is used outside provider', () => {
     const TestComponent = () => {
-      expect(() => useFormEngine()).toThrow('useFormEngine must be used within a FormProvider');
+      expect(useFormEngine.bind(null, undefined)).toThrow('useFormEngine must be used within a FormProvider');
 
       return null;
     };
