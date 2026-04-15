@@ -1,6 +1,9 @@
 # Change history for stripes-acq-components
 
-## [7.1.0](IN PROGRESS)
+## [7.2.0](IN PROGRESS)
+
+## [7.1.0](https://github.com/folio-org/stripes-acq-components/tree/v7.1.0) (2026-04-15)
+[Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.5...v7.1.0)
 
 * Create components to support exchange rate source feature. Refs UISACQCOMP-259.
 * Enhance shared components to support expense class change handling. Refs UISACQCOMP-264.
@@ -26,6 +29,7 @@
 * Refactor tags from the `mod-configurations` usage. Refs UISACQCOMP-288.
 * Replace `moment` with `day.js`. Refs UISACQCOMP-254.
 * Implement custom form manager for extra-large forms to improve UX. Refs UISACQCOMP-283.
+* Implement common utilities to analyze holdings abandonment. Refs UISACQCOMP-289.
 * Switch tenant addresses settings to `/tenant-addresses` API. Refs UISACQCOMP-290.
 * Fix invoice fund distribution export. Refs UISACQCOMP-293.
 * Handle `options.escapeCQL` param in the CQL query builder methods. Refs UISACQCOMP-295.
@@ -258,7 +262,6 @@
 * Add new component for dynamic data loading and filtering. Refs UISACQCOMP-103.
 * Create common component `OptimisticLockingBanner`. Refs UISACQCOMP-104.
 * Remove encumbrance when fund is changed. Refs UISACQCOMP-106.
-* Implement common utilities to analyze holdings abandonment. Refs UISACQCOMP-289.
 
 ## [3.1.1](https://github.com/folio-org/stripes-acq-components/tree/v3.1.1) (2022-03-24)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v3.1.0...v3.1.1)
