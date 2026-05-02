@@ -72,7 +72,7 @@
     "tagWasAdded": "Etykieta została dodana",
     "tagWasNotAdded": "Etykieta nie została dodana",
     "newTagWasNotCreated": "Nowa etykieta nie została utworzona",
-    "receiving.itemStatus.In process": "W toku",
+    "receiving.itemStatus.In process": "W trakcie opracowania",
     "receiving.itemStatus.On order": "Na zamówienie",
     "receiving.itemStatus.Available": "Dostępny",
     "receiving.itemStatus.In transit": "W drodze",
