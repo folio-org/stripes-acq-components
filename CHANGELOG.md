@@ -3,6 +3,7 @@
 ## [7.2.0](IN PROGRESS)
 
 * Update CQL Builder to support new indices. Refs UISACQCOMP-300.
+* Support deprecated acquisition methods in `useAcqMethodsOptions` and add `getAcqMethodLabel`. Refs UISACQCOMP-301.
 
 ## [7.1.0](https://github.com/folio-org/stripes-acq-components/tree/v7.1.0) (2026-04-15)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.5...v7.1.0)
