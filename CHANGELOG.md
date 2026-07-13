@@ -1,6 +1,6 @@
 # Change history for stripes-acq-components
 
-## [7.2.0](IN PROGRESS)
+* Unable to print pending order with po line when CO enabled. Refs UISACQCOMP-302.
 
 ## [7.1.0](https://github.com/folio-org/stripes-acq-components/tree/v7.1.0) (2026-04-15)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.5...v7.1.0)
