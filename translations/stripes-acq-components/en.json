@@ -244,6 +244,7 @@
   "acquisition_method.approvalPlan": "Approval plan",
   "acquisition_method.dda": "Demand driven acquisitions (DDA)",
   "acquisition_method.depository": "Depository",
+  "acquisition_method.deprecatedSuffix": "{name} (deprecated)",
   "acquisition_method.eba": "Evidence based acquisitions (EBA)",
   "acquisition_method.exchange": "Exchange",
   "acquisition_method.free": "Free",
