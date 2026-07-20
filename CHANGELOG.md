@@ -6,6 +6,7 @@
 * Unable to print pending order with po line when CO enabled. Refs UISACQCOMP-302.
 * Support deprecated acquisition methods in `useAcqMethodsOptions` and add `getAcqMethodLabel`. Refs UISACQCOMP-301.
 * Do not trigger refetch after search index changed in `FindRecordsModal`. Refs UISACQCOMP-304.
+* Update fund distribution components to support multi-year payments. Refs UISACQCOMP-303.
 
 ## [7.1.0](https://github.com/folio-org/stripes-acq-components/tree/v7.1.0) (2026-04-15)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.0.5...v7.1.0)
