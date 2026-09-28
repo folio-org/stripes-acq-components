@@ -6,6 +6,7 @@
 * Support deprecated acquisition methods in `useAcqMethodsOptions` and add `getAcqMethodLabel`. Refs UISACQCOMP-301.
 * Do not trigger refetch after search index changed in `FindRecordsModal`. Refs UISACQCOMP-304.
 * Update fund distribution components to support multi-year payments. Refs UISACQCOMP-303.
+* Fix unstable field visibility during asynchronous validation. Refs UISACQCOMP-307.
 
 ## [7.1.1](https://github.com/folio-org/stripes-acq-components/tree/v7.1.1) (2026-07-20)
 [Full Changelog](https://github.com/folio-org/stripes-acq-components/compare/v7.1.0...v7.1.1)
