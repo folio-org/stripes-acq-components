@@ -235,6 +235,7 @@
   "validation.customLink.linkTextTooLong": "Link text cannot be more than 40 characters.",
   "validation.customLink.linkRequired": "Link is required.",
   "validation.customLink.linkTooLong": "Link cannot be more than 1000 characters.",
+  "validation.customLink.linkInvalid": "Link uses invalid parameter syntax. Use double curly brackets to frame a valid parameter.",
   "validation.customLink.linkProtocol": "Link must be HTTP or HTTPS.",
   "validation.customLink.linkParameter": "Link must contain a valid parameter when provided.",
 
